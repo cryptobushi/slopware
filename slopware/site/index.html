@@ -184,10 +184,15 @@ async function registry(releases) {
   if (!total) return;
   const reg = $('reg');
   const newestShown = reg.firstChild ? Number(reg.firstChild.dataset.id) : 0;
-  // new releases since the last refresh go on top; on first load rows are appended newest-first
-  for (let n = total; n > newestShown; n--) await addRow(n, newestShown > 0);
-  if (shown === 0) { shown = Math.min(total, 40); for (let n = total - (newestShown ? total - newestShown : 0) - 1; n >= total - shown + 1 && n >= 1; n--) if (!reg.querySelector(`[data-id="${n}"]`)) await addRow(n, false); }
-  else shown = Math.max(shown, total - newestShown + shown);
+  if (!newestShown) {
+    // first load: the newest forty, appended in order
+    shown = Math.min(total, 40);
+    for (let n = total; n > total - shown; n--) await addRow(n, false);
+  } else {
+    // later: only what arrived since, each placed on top, oldest first so the newest ends up first
+    for (let n = newestShown + 1; n <= total; n++) await addRow(n, true);
+    shown += total - newestShown;
+  }
   $('more').classList.toggle('hide', shown >= total);
 }
 async function addRow(n, prepend) {

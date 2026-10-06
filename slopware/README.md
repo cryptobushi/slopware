@@ -50,7 +50,7 @@ About 1 in 256 bytecodes begins with `0xEF`, which Ethereum refuses to install (
 
 | | gas |
 |---|---:|
-| `install()` | 160,379 (first ever); ~110k thereafter |
+| `install()` | 160,356 (first ever); ~110k thereafter |
 | `complete()` → installed | 174,020 |
 | `complete()` → rejected | 269,037 |
 
