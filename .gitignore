@@ -1,0 +1,6 @@
+node_modules/
+results/
+.DS_Store
+slopware/contracts/out/
+slopware/contracts/cache/
+slopware/contracts/broadcast/

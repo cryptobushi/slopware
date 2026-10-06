@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SLOPWARE</title>
+<meta name="description" content="Software nobody wrote. Sixty-four random bytes become a program on the world computer.">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:none;text-size-adjust:none}
+html,body{margin:0;padding:0;background:#fff;color:#000}
+html,body,pre,button,input{font-family:"Courier New",Courier,monospace;font-size:15px;line-height:1.3}
+h1,h2,h3{margin:0;font-size:inherit;font-weight:inherit}
+p{margin:0 0 1em}
+a{color:inherit;text-decoration:underline}
+.c{max-width:860px;margin:0 auto;padding:0 20px}
+.c.essay{max-width:620px}
+.w{min-height:100vh;display:flex;align-items:center;padding:6em 0}
+.s{width:100%}
+pre{margin:0;white-space:pre;overflow-x:auto}
+.gen{font-size:15px;line-height:1.3;letter-spacing:0;margin:0;white-space:pre;overflow:hidden}
+@media (max-width:700px){.gen{font-size:12px}}
+button{background:none;border:0;padding:0;margin:0;color:inherit;cursor:pointer;text-decoration:underline}
+button:disabled{text-decoration:none;color:#777;cursor:default}
+.big{font-size:1.4em}
+hr{border:0;border-top:1px solid #000;margin:3em 0}
+.row{display:block;text-decoration:none;white-space:pre}
+.row:hover{text-decoration:underline}
+.mute{color:#777}
+.hide{display:none}
+table{border-collapse:collapse}
+td,th{text-align:left;padding:0 1.6em 0 0;font-weight:inherit;white-space:pre}
+.err{color:#900}
+</style>
+</head>
+<body>
+
+<div id="home">
+
+<!-- ------------------------------------------------------------- opening -->
+<div class="w"><div class="s c">
+<h1>SLOPWARE</h1>
+<p>software nobody wrote</p>
+<pre id="gen" class="gen" aria-hidden="true" style="margin:2em 0 0"></pre>
+<p style="margin-top:3em">sixty-four uniformly random bytes become a program on the world computer</p>
+<p style="margin-top:3em"><button class="big" id="install" disabled>[ install ]</button></p>
+<p class="mute"><span id="price">—</span> ETH + gas · <span id="count">—</span> installed</p>
+<pre id="state" class="mute"></pre>
+<pre id="result" class="hide"></pre>
+</div></div>
+
+<!-- ------------------------------------------------------------- the installer -->
+<div class="w"><div class="s c essay">
+<pre>
+entropy
+  ↓
+sixty-four bytes
+  ↓
+EVM bytecode
+  ↓
+a program at an address
+  ↓
+?
+</pre>
+<p style="margin-top:3em">One program was written. It installs programs nobody wrote.</p>
+<p>Software is written: someone decides what it should do and writes it, and it does that, more or less. Slopware is installed before it exists. You press install; your request is recorded in a block; the hash of the next block — which did not exist when you pressed — fixes sixty-four bytes. The installer places those bytes, unchanged, as the whole of a new program at an address of its own, and never speaks to it again.</p>
+<p>Nothing reads the bytes first. Nothing repairs them. Nothing tries again. If Ethereum refuses to install them, the refusal is recorded, the bytes are kept, and the release is yours anyway.</p>
+<p>The program is the sculpture. A transferable token records who installed it and who holds it. The program itself has no owner, no interface, no name — only an address, and whatever those bytes do when someone calls.</p>
+<p class="mute">Most of it will not run. Some of it will. Nobody knows which.</p>
+</div></div>
+
+<!-- ------------------------------------------------------------- releases -->
+<div class="w"><div class="s c">
+<h2>installed sculptures</h2>
+<p class="mute" id="releases-note"></p>
+<div id="reg" style="margin-top:1.3em"></div>
+<p style="margin-top:1.3em"><button id="more" class="hide">earlier</button></p>
+</div></div>
+
+<!-- ------------------------------------------------------------- lab -->
+<div class="w"><div class="s c essay" id="lab">
+<h2>lab · 2026</h2>
+<p style="margin-top:1.3em">Before the installer was deployed, <span id="lab-n">—</span> uniformly random programs were installed on a local chain and watched.</p>
+<pre id="lab-lines"></pre>
+<div id="lab-notes"></div>
+</div></div>
+
+<div class="c essay" style="padding-bottom:6em">
+<hr>
+<pre id="colophon" class="mute"></pre>
+</div>
+
+</div>
+
+<!-- ------------------------------------------------------------- release record -->
+<div id="rel" class="hide">
+<div class="w"><div class="s c essay">
+<p><a href="#" id="back">← slopware</a></p>
+<pre id="rel-body" style="margin-top:2em"></pre>
+</div></div>
+</div>
+
+<script>
+(function () {
+'use strict';
+const q = new URLSearchParams(location.search);
+const ADDR = q.get('contract') || '__SLOPWARE__';
+const RPC_FALLBACK = q.get('rpc') || null;
+const SEL = { install:'0x175a0061', complete:'0x971d852f', releases:'0x913e10e9', installed:'0x00bdfbcd', rejected:'0xd13b0e64', price:'0xa035b1fe',
+  software:'0x8ab1a894', bytecodeOf:'0xb7bc96e7', ownerOf:'0x6352211e', statusOf:'0xad35efd4' };
+const TOPIC_INSTALLING = '0x8457fc83c9b3ebc3e5dd4aec24c20a39dc83abe0a942209e2c2982ec18e0920c';
+const STATUS = ['', 'installing', 'installed', 'rejected', 'abandoned'];
+
+// ---------------------------------------------------------------- client
+let id = 0;
+async function rpcAt(url, method, params) {
+  const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: ++id, method, params }) });
+  const j = await r.json(); if (j.error) throw new Error(j.error.message || JSON.stringify(j.error)); return j.result;
+}
+function rpc(method, params) {
+  if (window.ethereum && !RPC_FALLBACK) return window.ethereum.request({ method, params });
+  if (!RPC_FALLBACK) return Promise.reject(new Error('no ethereum client — open in a wallet browser, or add ?rpc='));
+  return rpcAt(RPC_FALLBACK, method, params);
+}
+const pad = (h) => h.replace(/^0x/, '').padStart(64, '0');
+const words = (hex) => { const h = hex.replace(/^0x/, ''); const o = []; for (let i = 0; i < h.length; i += 64) o.push('0x' + h.slice(i, i + 64)); return o; };
+const call = (sel, args = []) => rpc('eth_call', [{ to: ADDR, data: SEL[sel] + args.map((a) => pad(a.toString(16))).join('') }, 'latest']);
+const u = async (sel, args) => BigInt(await call(sel, args));
+const addr = (w) => '0x' + w.slice(26);
+let _scan;
+async function scanHost() {
+  if (_scan) return _scan;
+  let c = 1; try { c = Number(await rpc('eth_chainId', [])); } catch (e) {}
+  return (_scan = c === 11155111 ? 'https://sepolia.etherscan.io' : 'https://etherscan.io');
+}
+async function software(n) {
+  const w = words(await call('software', [n]));
+  return { installer: addr(w[0]), requestedAt: Number(BigInt(w[1])), installedAt: Number(BigInt(w[2])), status: Number(BigInt(w[3])), program: addr(w[5]), checksum: w[6] };
+}
+async function bytecodeOf(n) { const r = await call('bytecodeOf', [n]); const w = words(r); const len = Number(BigInt(w[1])); return len ? '0x' + r.slice(2 + 128, 2 + 128 + len * 2) : ''; }
+async function ownerOf(n) { try { return addr(await call('ownerOf', [n])); } catch { return null; } }
+
+// ---------------------------------------------------------------- text helpers
+const $ = (i) => document.getElementById(i);
+const fmt = (n) => Number(n).toLocaleString('en-US');
+const six = (n) => String(n).padStart(6, '0');
+const eth = (wei) => { const s = (Number(wei) / 1e18).toFixed(6).replace(/0+$/, '').replace(/\.$/, ''); return s || '0'; };
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+let price = 0n;
+
+// ---------------------------------------------------------------- the generator
+// the identity of the work: bytecode that never settles. these bytes are never installed.
+(function generator() {
+  const el = $('gen'); if (!el) return;
+  const buf = new Uint8Array(64);
+  const hex = (b) => Array.from(b, (x) => x.toString(16).padStart(2, '0')).join('');
+  let last = 0;
+  function frame(t) {
+    if (!document.hidden && t - last > 80) {
+      last = t;
+      crypto.getRandomValues(buf);
+      const h = hex(buf);
+      el.textContent = h.slice(0, 64) + '\n' + h.slice(64);
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+// ---------------------------------------------------------------- state
+async function refresh() {
+  try {
+    const [p, releases, installed] = await Promise.all([u('price'), u('releases'), u('installed')]);
+    price = p; $('price').textContent = eth(price); $('count').textContent = fmt(installed);
+    $('install').disabled = false;
+    const rejected = await u('rejected');
+    const link = /^0x[0-9a-fA-F]{40}$/.test(ADDR) ? `<a href="${await scanHost()}/address/${ADDR}" target="_blank" rel="noopener">${ADDR}</a>` : ADDR.replace(/[<>&]/g, '');
+    $('colophon').innerHTML = `installer   ${link}\nreleases    ${fmt(releases)}\ninstalled   ${fmt(installed)}\nrejected    ${fmt(rejected)}\n\nthis page reads the installer directly and will change block by block.`;
+    await registry(releases);
+  } catch (e) { $('state').innerHTML = `<span class="err">${String(e.message || e).slice(0, 160)}</span>`; }
+}
+
+let shown = 0, total = 0;
+async function registry(releases) {
+  total = Number(releases);
+  $('releases-note').textContent = total ? `${fmt(total)} so far, newest first` : 'none yet';
+  if (!total) return;
+  const reg = $('reg');
+  const newestShown = reg.firstChild ? Number(reg.firstChild.dataset.id) : 0;
+  // new releases since the last refresh go on top; on first load rows are appended newest-first
+  for (let n = total; n > newestShown; n--) await addRow(n, newestShown > 0);
+  if (shown === 0) { shown = Math.min(total, 40); for (let n = total - (newestShown ? total - newestShown : 0) - 1; n >= total - shown + 1 && n >= 1; n--) if (!reg.querySelector(`[data-id="${n}"]`)) await addRow(n, false); }
+  else shown = Math.max(shown, total - newestShown + shown);
+  $('more').classList.toggle('hide', shown >= total);
+}
+async function addRow(n, prepend) {
+  const s = await software(n);
+  const a = document.createElement('a'); a.className = 'row'; a.href = `#/${n}`; a.dataset.id = n;
+  a.textContent = `${six(n)}  ${s.status === 2 ? s.program : '—'.padEnd(42)}  ${STATUS[s.status]}`;
+  const reg = $('reg'); prepend && reg.firstChild ? reg.insertBefore(a, reg.firstChild) : reg.appendChild(a);
+}
+$('more').onclick = async () => { const from = total - shown; shown = Math.min(total, shown + 40); for (let n = from; n >= total - shown + 1 && n >= 1; n--) await addRow(n, false); $('more').classList.toggle('hide', shown >= total); };
+
+// ---------------------------------------------------------------- install
+$('install').onclick = async () => {
+  const btn = $('install'); btn.disabled = true; $('result').classList.add('hide'); $('state').textContent = 'requesting…';
+  try {
+    if (!window.ethereum) throw new Error('a wallet is needed to install; reading needs none');
+    const [from] = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const hash = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to: ADDR, value: '0x' + price.toString(16), data: SEL.install, gas: '0x' + (220_000).toString(16) }] });
+    const rc = await receipt(hash);
+    if (rc.status !== '0x1') throw new Error('the request failed');
+    const log = rc.logs.find((l) => l.topics[0] === TOPIC_INSTALLING);
+    const n = Number(BigInt(log.topics[1]));
+    const requestedAt = Number(BigInt(rc.blockNumber));
+    $('state').textContent = `SLOPWARE ${six(n)}\ninstalling…`;
+    for (;;) { const bn = Number(BigInt(await rpc('eth_blockNumber', []))); if (bn > requestedAt + 1) break; await sleep(1500); }
+    let s = await software(n);
+    if (s.status === 1) {
+      try { const h2 = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to: ADDR, data: SEL.complete + pad(n.toString(16)), gas: '0x' + (320_000).toString(16) }] }); await receipt(h2); }
+      catch (e) { /* the keeper may have completed it first */ }
+      for (let i = 0; i < 20 && s.status === 1; i++) { await sleep(1500); s = await software(n); }
+    }
+    $('state').textContent = '';
+    const r = $('result'); r.classList.remove('hide');
+    r.textContent = s.status === 2 ? `SLOPWARE ${six(n)}\ninstalled.\n\n${s.program}\n\nbehavior unknown.`
+      : s.status === 3 ? `SLOPWARE ${six(n)}\nrejected.\n\nEthereum refused to install this bytecode.\nit is kept.`
+      : `SLOPWARE ${six(n)}\nstill installing. the record will update.`;
+    r.innerHTML += `\n\n<a href="#/${n}">record</a>`;
+    await refresh();
+  } catch (e) { $('state').innerHTML = `<span class="err">${String(e.message || e).slice(0, 160)}</span>`; }
+  finally { btn.disabled = false; }
+};
+async function receipt(hash) { for (;;) { const r = await rpc('eth_getTransactionReceipt', [hash]); if (r) return r; await sleep(1500); } }
+
+// ---------------------------------------------------------------- record
+async function record(n) {
+  $('home').classList.add('hide'); $('rel').classList.remove('hide'); window.scrollTo(0, 0);
+  const body = $('rel-body'); body.textContent = `SLOPWARE ${six(n)}\nreading…`;
+  try {
+    const [s, owner, code] = await Promise.all([software(n), ownerOf(n), bytecodeOf(n)]);
+    const L = [];
+    L.push(`SLOPWARE ${six(n)}`, '');
+    if (s.status === 2) L.push(s.program, '');
+    if (s.status === 2) L.push(`installed in block   ${fmt(s.installedAt)}`);
+    if (s.status === 3) L.push(`rejected in block    ${fmt(s.installedAt)}`);
+    L.push(`requested in block   ${fmt(s.requestedAt)}`);
+    L.push(`installed by         ${s.installer}`);
+    if (owner) L.push(`held by              ${owner}`);
+    L.push(`status               ${s.status === 2 ? 'unknown' : STATUS[s.status]}`, '');
+    if (code) {
+      L.push('bytecode');
+      const hex = code.slice(2);
+      for (let i = 0; i < hex.length; i += 32) L.push('  ' + hex.slice(i, i + 32));
+      L.push(`  keccak ${s.checksum}`, '');
+    }
+    if (s.status === 2) L.push('observations', '', '  No behavior has been recorded.', '', '  The program exists.', '  What it can do remains unknown.');
+    if (s.status === 3) L.push('observations', '', '  Ethereum refused to install this bytecode: its first', '  byte is 0xEF, which the protocol does not allow at the', '  start of a program (EIP-3541). No program exists.', '  The bytecode is kept.');
+    if (s.status === 4) L.push('  The deciding block left the EVM before anyone completed', '  this installation. No bytecode was produced. The price', '  is refundable to the installer.');
+    if (s.status === 1) L.push(`  Installing. Block ${fmt(s.requestedAt + 1)} decides the bytecode;`, '  anyone may complete the installation after it.');
+    body.textContent = L.join('\n');
+  } catch (e) { body.textContent += `\n${String(e.message || e).slice(0, 160)}`; }
+}
+function route() {
+  const m = location.hash.match(/^#\/(\d+)$/);
+  if (m) record(Number(m[1])); else { $('rel').classList.add('hide'); $('home').classList.remove('hide'); }
+}
+window.addEventListener('hashchange', route);
+$('back').onclick = (e) => { e.preventDefault(); location.hash = ''; };
+
+// ---------------------------------------------------------------- lab
+// numbers come from lab.json beside this page (written from the repository's runs)
+fetch('lab.json').then((r) => r.json()).then((lab) => {
+  $('lab-n').textContent = fmt(lab.observed);
+  $('lab-lines').textContent = lab.lines.join('\n');
+  $('lab-notes').innerHTML = lab.notes.map((p) => `<p>${p}</p>`).join('');
+}).catch(() => { $('lab-lines').textContent = '(lab data unavailable)'; });
+
+route();
+refresh();
+setInterval(() => { if (!location.hash || location.hash === '#') refresh(); }, 12_000);
+})();
+</script>
+</body>
+</html>

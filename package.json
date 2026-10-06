@@ -1,0 +1,22 @@
+{
+  "name": "slopware",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "SLOPWARE: software nobody wrote. The installer (slopware/) and the lab that sampled random EVM program space before it was built.",
+  "scripts": {
+    "chain": "anvil --port 8546 --chain-id 31337 --silent",
+    "explore": "NODE_OPTIONS=--max-old-space-size=8192 tsx src/cli.ts explore",
+    "inspect": "tsx src/cli.ts inspect",
+    "replay": "tsx src/cli.ts replay",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
