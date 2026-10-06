@@ -8,7 +8,7 @@ Nothing here deploys to mainnet by itself. The final command is at the bottom, t
 - [ ] `forge test --gas-report` consistent with README (install ~160k first / ~110k after, complete ~174k, rejection ~270k).
 - [ ] Read `Slopware.sol` once more, top to bottom. Nothing in it should surprise you.
 - [ ] Independent review arranged, or consciously waived.
-- [ ] `python3 scripts/lab_json.py deep-1m-64b` run after the 1M study completes; `site/lab.json` committed.
+- [x] `python3 scripts/lab_json.py deep-1m-64b` run after the 1M study completed (2026-10-06); `site/lab.json` committed.
 
 ## Local rehearsal
 
@@ -58,4 +58,3 @@ Then start the keeper, replace `__SLOPWARE__`, publish, and install release 0000
 3. **Proposer influence on entropy** — disclosed, not eliminated (RANDOMNESS.md).
 4. **Keeper liveness is operational.** Down 51 minutes with no one else completing → abandonment (refundable).
 5. **`setPrice` trades away full immutability** for a dollar target in a moving ETH price.
-6. **The 1M lab run** replaces the 100k numbers on the site when it finishes; `lab.json` must be regenerated and committed.
