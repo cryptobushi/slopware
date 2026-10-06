@@ -29,10 +29,13 @@ for L in LENGTHS:
     lives = sorted(p["instructionCount"] for p in probes)
     q = lambda f: lives[min(len(lives) - 1, int(f * len(lives)))]
     fm = collections.Counter(p["outcome"] for p in probes)
-    refused = [r for r in rows if r["birth"]["status"] != "deployed"]
+    notplaced = [r for r in rows if r["birth"]["status"] != "deployed"]
+    refused = [r for r in notplaced if r["birth"]["status"] != "error"]
+    lost = [r for r in notplaced if r["birth"]["status"] == "error"]
     c = {
         "installed": pct(len(inst), len(rows)),
         "refused": f"{len(refused)}",
+        "lost": f"{len(lost)}",
         "refused_all_ef": all(r["bytecode"][2:4] == "ef" for r in refused),
         "probes": fmt(len(probes)),
         "success": pct(fm["success"], len(probes)),
@@ -107,6 +110,8 @@ A("| | 16 bytes | 32 bytes | 64 bytes | 128 bytes |")
 A("|---|---:|---:|---:|---:|")
 A(row("installed", "installed"))
 A(row("refused (leading `0xEF`, EIP-3541)" if all(cols[L]["refused_all_ef"] for L in LENGTHS) else "refused", "refused"))
+total_lost = sum(int(cols[L]["lost"]) for L in LENGTHS)
+if total_lost: A(row("lost to the instrument (placement timed out)", "lost"))
 A(row("probes run", "probes"))
 A(row("execution success", "success", bold=True))
 A(row("instructions: mean / median", "mean_median"))
@@ -174,6 +179,18 @@ for L, r in (tst_live + sst_live)[:2]:
 for L, r in branches[:1]:
     A(f"**{ref(L, r)} — the one that branched.** `{trace(r)}`. A `JUMP` or `JUMPI` executed; where it would have gone depended on what was on the stack. Our probes all called from the same address and chain, so the branch looked input-independent. It may not be.")
     A("")
+for L, r in deps[:2]:
+    byname = {p["name"][0]: p for p in r["probes"]}
+    a, e = byname.get("A"), byname.get("E")
+    if a and e and (a["outcome"], a["instructionCount"]) != (e["outcome"], e["instructionCount"]):
+        A(f"**{ref(L, r)} — responds to money.** `{trace(r, 8)}`. Called with nothing: {a['outcome'].replace('_', ' ')} after {a['instructionCount']} instructions. Called with one wei: {e['outcome'].replace('_', ' ')} after {e['instructionCount']}. The value it was sent is on its stack, and the program does something different with it.")
+    else:
+        A(f"**{ref(L, r)} — responds to calldata.** `{trace(r, 8)}`. Its outcome changed with what it was called with.")
+    A("")
+for L, r in creates[:2]:
+    p = longest_probe(r)
+    A(f"**{ref(L, r)} — executed CREATE.** `{trace(r, 10)}`. A creation ran, with whatever happened to be on the stack as value, offset and length; the program then died ({p['outcome'].replace('_', ' ')}), and the exceptional halt undid the child. No child program exists on the chain.")
+    A("")
 LL, lr = longest
 A(f"**{ref(LL, lr)} — the longest life.** {longest_probe(lr)['instructionCount']} instructions: `{trace(lr, 14)}`. It touched more of the machine than anything else in {fmt(total_inst)}.")
 A("")
@@ -186,15 +203,16 @@ A("- Tracer: `debug_traceCall` struct logs, stack dumps off (depth tracked from 
 A("- Gas sweep for OOG at 100k / 1M via struct logs and 10M via `callTracer` (a looping program at 10M would emit millions of log entries).")
 A("- Receipt polling at 25 ms; viem's 4 s default made each placement wait a full poll.")
 A("- Everything local: Anvil on 127.0.0.1, chain 31337, Anvil's published test keys only.")
+if total_lost: A(f"- These four runs shared the machine with a 1,000,000-specimen study. {total_lost} placements timed out at 30 s and are recorded as instrument failures, not as refusals; the bytecode of every specimen is reproducible from the seed, the timeouts are not.")
 A("")
 A("## What the baseline says")
 A("")
-A(f"Random EVM program space at 16–128 bytes is overwhelmingly death within two instructions, by two causes in roughly equal measure: bytes that are not instructions, and instructions that reach for operands that do not exist. Among the few that live longer, almost all are pushes that fall off the end of the code. Real behavior — a storage read, a hash, a branch, a return, a write that survives — occurs at rates of 1 in 500 to 1 in {fmt(total_inst)}, and loops{', external calls and creation' if not calls and not creates else ''} did not occur at all.")
+A(f"Random EVM program space at 16–128 bytes is overwhelmingly death within two instructions, by two causes in roughly equal measure: bytes that are not instructions, and instructions that reach for operands that do not exist. Among the few that live longer, almost all are pushes that fall off the end of the code. Real behavior — a storage read, a hash, a branch, a return, a write that survives — occurs at rates of 1 in 500 to 1 in {fmt(total_inst)}{', and loops' + (' and external calls' if not calls else '') + ' did not occur at all' if not loops else ''}.")
 A("")
 A("That is the honest shape of the space. If slopware is interesting, it is because of how little is there, and how specific the few exceptions are.")
 A("")
 A("## Not done, by design")
 A("")
-A("No weighted generation, mutation, reproduction, selection, or AI. The 100k and 1M studies at 64 bytes (`deep-100k-64b`, `deep-1m-64b`) went looking for the first persistent write, the first executed call, the first program that listened; their numbers are on the site.")
+A("No weighted generation, mutation, reproduction, selection, or AI. The 100k and 1M studies at 64 bytes (`deep-100k-64b`, `deep-1m-64b`) went looking for more of what is rare here — persistent writes, executed calls and creations, programs that listen; their numbers are on the site.")
 open("BASELINE.md", "w").write("\n".join(lines) + "\n")
 print(f"BASELINE.md written: {total_inst:,} installed · {len(oogs)} OOG · {len(loops)} loops · {len(rets)} returns · {len(sst_live)} persistent writes · {len(tst_live)} transient · {len(branches)} branches · {len(deps)} input-dependent · top {top_score}")
