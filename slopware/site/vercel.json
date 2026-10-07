@@ -3,5 +3,11 @@
   "buildCommand": "node build.mjs",
   "outputDirectory": "dist",
   "framework": null,
-  "crons": [{ "path": "/api/keeper", "schedule": "* * * * *" }]
+  "crons": [
+    {
+      "path": "/api/keeper",
+      "schedule": "* * * * *"
+    }
+  ],
+  "cleanUrls": true
 }
