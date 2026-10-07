@@ -329,7 +329,11 @@ contract Slopware is ERC721 {
                 lines = abi.encodePacked(lines, "<text x='40' y='", LibString.toString(220 + i * 20), "' font-size='11'>", row, "</text>");
             }
         }
-        lines = abi.encodePacked(lines, "<text x='40' y='330' font-size='11'>installed by ", LibString.toHexStringChecksummed(s.installer), "</text>");
+        lines = abi.encodePacked(
+            lines,
+            "<text x='40' y='330' font-size='11'>installed by</text>",
+            "<text x='40' y='350' font-size='11'>", LibString.toHexStringChecksummed(s.installer), "</text>"
+        );
         return abi.encodePacked(
             "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' font-family='Courier New,monospace' fill='#000'>",
             "<rect width='400' height='400' fill='#fff'/>",
