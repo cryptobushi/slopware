@@ -78,9 +78,23 @@ a program at an address
 <!-- ------------------------------------------------------------- lab -->
 <div class="w"><div class="s c essay" id="lab">
 <h2>lab · 2026</h2>
-<p style="margin-top:1.3em">Before the installer was deployed, <span id="lab-n">—</span> uniformly random programs were installed on a local chain and watched.</p>
-<pre id="lab-lines"></pre>
-<div id="lab-notes"></div>
+<p style="margin-top:1.3em">Before this installer existed we asked a plain question: what does random bytecode do? One million programs of sixty-four random bytes were installed on a private copy of Ethereum and called, with every instruction traced. Nothing was filtered, weighted or retried.</p>
+<pre id="lab-table">
+  <span data-k="observed">—</span>   programs of sixty-four random bytes
+  <span data-k="rejected">—</span>   refused by Ethereum (first byte 0xEF)
+  <span data-k="installed">—</span>   installed
+  <span data-k="first_pct">—</span>   halted on their first instruction
+  <span data-k="longest_life">—</span>   instructions, the longest any program ran
+  <span data-k="listened">—</span>   answered differently to what they were sent
+  <span data-k="remembered">—</span>   wrote something to storage that survived
+  <span data-k="returned">—</span>   returned data
+  <span data-k="out_of_gas">—</span>   ran out of gas, by appetite, never by looping
+  <span data-k="external_calls">—</span>   called another contract
+</pre>
+<p>Nearly every random program dies at once, for one of two reasons: the byte is not an instruction, or the instruction reaches for something that is not on the stack. About one in five survives its first instruction, and one in five of those survives the next. The odds of a long life shrink by that factor at every step, whatever the length of the program.</p>
+<p>The rare ones are the point. A handful answered differently when sent money or data. Five remembered something. Seventeen tried to create another contract, and none succeeded. Roughly one program in ten thousand does anything a person would call behavior, and nobody can tell which from the bytes.</p>
+<p>Every program on this page is drawn from that same distribution. Most of it will not run. Some of it will. Nobody knows which.</p>
+<p class="mute">Method: random bytes placed by CREATE behind the same eleven-byte loader the installer uses, code verified byte for byte, then called five ways under a one-million-gas ceiling. The harness and its records are in the repository.</p>
 </div></div>
 
 <div class="c essay" style="padding-bottom:6em">
@@ -321,12 +335,18 @@ window.addEventListener('hashchange', route);
 $('back').onclick = (e) => { e.preventDefault(); location.hash = ''; };
 
 // ---------------------------------------------------------------- lab
-// numbers come from lab.json beside this page (written from the repository's runs)
+// numbers come from lab.json beside this page (written from the repository's runs); the words are here
 fetch('lab.json').then((r) => r.json()).then((lab) => {
-  $('lab-n').textContent = fmt(lab.observed);
-  $('lab-lines').textContent = lab.lines.join('\n');
-  $('lab-notes').innerHTML = lab.notes.map((p) => `<p>${p}</p>`).join('');
-}).catch(() => { $('lab-lines').textContent = '(lab data unavailable)'; });
+  const n = lab.numbers || {};
+  const w = (k) => String(k).padStart(9, ' ');
+  const vals = {
+    observed: w(fmt(lab.observed)), rejected: w(fmt(lab.rejected)), installed: w(fmt(lab.installed)),
+    first_pct: w((100 * n.first_instruction_deaths / lab.installed).toFixed(1) + '%'),
+    longest_life: w(n.longest_life), listened: w(n.listened), remembered: w(n.remembered), returned: w(n.returned),
+    out_of_gas: w(n.out_of_gas), external_calls: w(n.external_calls ?? 0),
+  };
+  document.querySelectorAll('#lab-table [data-k]').forEach((el) => { if (vals[el.dataset.k] !== undefined) el.textContent = vals[el.dataset.k]; });
+}).catch(() => { $('lab-table').textContent = '(lab data unavailable)'; });
 
 route();
 refresh();

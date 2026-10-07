@@ -3,18 +3,6 @@
  "run": "deep-1m-64b",
  "installed": 995936,
  "rejected": 4064,
- "lines": [
-  "78.4% died on their first instruction.",
-  "107 listened.",
-  "5 remembered.",
-  "17 attempted reproduction."
- ],
- "notes": [
-  "Those sentences, precisely. Of 1,000,000 programs of sixty-four random bytes, 4,064 were refused by Ethereum before they existed (their first byte was 0xEF; the protocol forbids it) \u2014 0.4%, against a predicted 1 in 256. Of the 995,936 installed, 78.4% halted on their very first instruction. The longest life was 12 instructions. Across 4,979,680 calls, 0.8% ended cleanly; 54.1% on a byte that is not an instruction; 44.9% reaching for an operand that was not there.",
-  "\u201cListened\u201d: 107 programs behaved differently depending on what they were called with \u2014 the data, or the money. \u201cRemembered\u201d: 5 wrote to persistent storage and then halted cleanly, so the write survived. \u201cAttempted reproduction\u201d: 17 executed CREATE or CREATE2; none produced a child. Either the creation itself failed — the value it tried to send was a random constant larger than any balance — or the parent halted exceptionally moments later and undid it. No child program ever existed on the chain. 25 returned data. 251 ran out of gas \u2014 every one by asking a single instruction for more memory than any gas can buy; none by looping.",
-  "Lifespan is geometric: about 22% of programs survive each instruction, and the next, and the next. Of 256 possible byte values, 55 are instructions that need no operands; a random first byte is one of them with probability 0.215. Everything else follows from that.",
-  "Method: random bytes placed by CREATE behind a fixed eleven-byte loader on a local chain, code verified byte for byte, then called five ways under a 1,000,000-gas ceiling with every opcode traced. Nothing was filtered, weighted or retried. The harness and the write-ups are in the repository."
- ],
  "numbers": {
   "first_instruction_deaths": 780989,
   "listened": 107,
@@ -47,6 +35,7 @@
    "10": 18,
    "11": 10,
    "12": 2
-  }
+  },
+  "external_calls": 0
  }
 }
