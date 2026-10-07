@@ -24,7 +24,7 @@ html,body,pre,button{font-family:"Courier New",Courier,monospace;font-size:15px;
 h1,h2,h3{margin:0;font-size:inherit;font-weight:inherit}
 p{margin:0 0 1em}
 a{color:inherit;text-decoration:underline}
-.c{max-width:860px;margin:0 auto;padding:4em 20px;box-sizing:border-box}
+.c{max-width:860px;margin:0 auto;padding:4em 20px 1.5em;box-sizing:border-box}
 .essay{max-width:620px}
 pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
 .mute{color:#666}
@@ -32,13 +32,17 @@ pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
 .tbl .n{text-align:right;white-space:nowrap}
 .r{margin:2.6em 0 0;padding-top:1.3em;border-top:1px solid #000}
 .r h3{display:flex;gap:1.5em;flex-wrap:wrap}
+.r h3 .short{display:none}
+#generated{overflow-wrap:anywhere}
+#list{padding-top:0}
+#list .r:first-child{margin-top:1em}
 .r .verdict{margin:0.6em 0 0}
 .r .trace{margin:0.6em 0 0;color:#000}
 button{background:none;border:0;padding:0;margin:0.6em 0 0;color:inherit;cursor:pointer;text-decoration:underline}
 .more{display:none;margin-top:1em}
 .open .more{display:block}
 .dis{columns:2;column-gap:2em}
-@media (max-width:700px){.dis{columns:1}.tbl{column-gap:1em}}
+@media (max-width:700px){.dis{columns:1}.tbl{column-gap:1em}.r h3{gap:0.6em 1.2em}.r h3 .full{display:none}.r h3 .short{display:inline}.r{margin-top:2em}}
 .hide{display:none}
 </style>
 </head>
@@ -170,7 +174,8 @@ function render(data) {
     [fmt(s.withFutureOpcodes), 'carry an instruction from the future'],
   ];
   $('summary').innerHTML = rows.map(([n, l]) => `<span class="n">${n}</span><span>${l}</span>`).join('');
-  $('generated').textContent = `read ${new Date(data.generatedAt).toISOString().slice(0, 16).replace('T', ' ')} UTC · installer ${data.installer}`;
+  $('generated').textContent = `read ${new Date(data.generatedAt).toISOString().slice(0, 16).replace('T', ' ')} UTC\ninstaller ${data.installer}`;
+  $('generated').style.whiteSpace = 'pre-wrap';
   const scan = SCAN[data.chainId];
   const list = [...data.readings].sort((x, y) => y.id - x.id);
   $('list').innerHTML = list.map((r) => {
@@ -179,7 +184,7 @@ function render(data) {
     const dis = r.disassembly.map((i) => `${i.pc.toString(16).padStart(2, '0')}  ${esc(instr(i))}`).join('\n');
     const probes = r.probes.map((p) => `${p.name.padEnd(18)} ${p.outcome.replace('_', ' ').padEnd(16)} ${String(p.instructions).padStart(2)} instr${p.returnDataLength ? `  returns ${p.returnDataLength} B` : ''}`).join('\n');
     return `<div class="r" id="r${r.id}">
-<h3><span>SLOPWARE ${six(r.id)}</span><span class="mute">${r.status}</span>${r.program ? `<span class="mute">${scan ? `<a href="${scan}/address/${r.program}">${r.program}</a>` : r.program}</span>` : ''}</h3>
+<h3><span>SLOPWARE ${six(r.id)}</span><span class="mute">${r.status}</span>${r.program ? `<span class="mute">${scan ? `<a href="${scan}/address/${r.program}"><span class="full">${r.program}</span><span class="short">${r.program.slice(0, 8)}…${r.program.slice(-6)}</span></a>` : r.program}</span>` : ''}</h3>
 <p class="verdict">${esc(verdict(r))}${wouldHaveBeen(r) ? ` <span class="mute">${esc(wouldHaveBeen(r))}</span>` : ''}</p>
 ${trace ? `<pre class="trace mute">${esc(trace)}</pre>` : ''}
 <button data-open="${r.id}">[ the bytes ]</button>
