@@ -10,11 +10,11 @@ SLOPWARE places arbitrary, untrusted programs on purpose. The model is: **the in
 
 ## Specific concerns
 
-**Refused bytecode burns gas.** An EIP-3541 refusal is an exceptional halt in the creation frame: it consumes *all* gas forwarded to CREATE — by EIP-150, 63/64 of the caller's. Unbounded, a rejection would burn nearly the completer's entire gas limit. CREATE therefore runs inside `placeProgram`, a self-call with a fixed `DEPLOY_GAS` stipend (120,000; a successful placement needs ~50,000). A rejection costs ~270k gas total.
+**Refused bytecode never reaches CREATE.** An EIP-3541 refusal is an exceptional halt in the creation frame: it consumes *all* gas forwarded to CREATE — by EIP-150, 63/64 of the caller's. The first design bounded CREATE in a self-call with a fixed 120,000-gas stipend. Sepolia, under Amsterdam pricing, showed the flaw: a placement there costs ~311k, so every completion reverted and the deployment was dead. A fixed stipend is a bet on gas prices the contract cannot revise. Now the refusal rule (first byte `0xEF`) is applied by the contract itself and recorded as `Rejected` without running CREATE, and CREATE receives every unit of gas the completer sent. A rejection costs under 100k gas.
 
-**A gas-starved placement must never be recorded as a rejection.** If `placeProgram` returns `address(0)` and the bytecode does *not* begin with `0xEF`, the only cause is insufficient gas in the frame. `complete` reverts with `OutOfGasNotRejection()`; the release stays `Installing` and can be completed with more gas. Only a genuine protocol refusal (`0xEF`) is recorded `Rejected`. Tested.
+**A gas-starved placement must never be recorded as a rejection.** For bytecode Ethereum does not refuse, CREATE returning nothing can only mean too little gas. `_place` reverts (`PlacementFailed`, or the EVM's own out-of-gas), the whole completion unwinds, the release stays `Installing` and can be completed with more gas. Only bytecode beginning with `0xEF` is recorded `Rejected`. Tested.
 
-**Reentrancy.** `install` makes no external calls; `_mint` (not `_safeMint`), so no receiver callback runs during an installation. `complete` makes one external call — to itself, bounded — whose only effect is `CREATE` of the loader. Refunds and the artist's withdrawal are pull-based and run after state updates. A contract installer that re-enters from `receive()` or `onERC721Received` is tested and cannot.
+**Reentrancy.** `install` makes no external calls; `_mint` (not `_safeMint`), so no receiver callback runs during an installation. `complete` makes no external call except `CREATE` of the loader, which runs eleven fixed bytes and returns. Refunds and the artist's withdrawal are pull-based and run after state updates. A contract installer that re-enters from `receive()` or `onERC721Received` is tested and cannot.
 
 **Callbacks.** None. No oracle callback, no receiver hook.
 
@@ -45,4 +45,4 @@ SLOPWARE places arbitrary, untrusted programs on purpose. The model is: **the in
 
 ## Audit status
 
-Unaudited. The test suite (`contracts/test/Slopware.t.sol`, 22 tests including fuzzing and a 3,000-bytecode corpus) encodes the properties above. An independent review of `Slopware.sol` is recommended before mainnet.
+Unaudited. The test suite (`contracts/test/Slopware.t.sol`, 21 tests including fuzzing and a 3,000-bytecode corpus) encodes the properties above. An independent review of `Slopware.sol` is recommended before mainnet.

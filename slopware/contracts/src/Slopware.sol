@@ -32,10 +32,10 @@ contract Slopware is ERC721 {
     /// PUSH1 0x40 · DUP1 · PUSH1 0x0b · PUSH1 0 · CODECOPY · PUSH1 0 · RETURN
     bytes internal constant LOADER = hex"604080600b6000396000f3";
 
-    /// Gas allowed for placing a program. Ethereum refuses some bytecode (EIP-3541) by
-    /// burning everything the attempt was given; so the attempt is given this much and no more.
-    /// A successful placement needs about fifty thousand.
-    uint256 public constant DEPLOY_GAS = 120_000;
+    /// Ethereum refuses to install any program whose first byte is this (EIP-3541). The refusal
+    /// is Ethereum's rule, not ours; recording it directly rather than paying CREATE to fail
+    /// keeps a rejection cheap, and lets a placement have every unit of gas the completer sent.
+    bytes1 internal constant REFUSED_FIRST_BYTE = 0xef;
 
     /// The most releases one transaction may install. A hundred installs cost about eleven
     /// million gas; Ethereum caps a transaction at 2^24 (EIP-7825). Each release still gets its
@@ -89,11 +89,10 @@ contract Slopware is ERC721 {
     error NotArtist();
     error NothingToRefund();
     error NoSuchRelease();
-    error NotSelf();
     error BadCount();
-    /// The placement ran out of gas, which is not Ethereum's opinion of the bytecode.
-    /// Nothing is recorded. Complete again with more gas.
-    error OutOfGasNotRejection();
+    /// CREATE returned nothing for bytecode Ethereum does not refuse. The only cause is too little
+    /// gas. Nothing is recorded; complete again with more.
+    error PlacementFailed();
 
     constructor(address artist_, uint256 price_) {
         artist = artist_;
@@ -181,7 +180,7 @@ contract Slopware is ERC721 {
 
         address program = _place(bytecode);
         if (program == address(0)) {
-            if (bytecode[0] != 0xef) revert OutOfGasNotRejection();
+            // only refused bytecode comes back empty; _place reverts rather than return empty for anything else
             s.status = Status.Rejected;
             _rejectedBytecode[release] = bytecode;
             rejected++;
@@ -206,22 +205,16 @@ contract Slopware is ERC721 {
         return true;
     }
 
-    /// Place the bytecode at an address, with bounded gas, and never speak to it again.
+    /// Place the bytecode at an address and never speak to it again. Returns the zero address
+    /// only for bytecode Ethereum refuses; for anything else, a failed CREATE means the completer
+    /// sent too little gas, and the whole completion reverts so nothing false is recorded.
     function _place(bytes memory bytecode) internal returns (address program) {
-        try this.placeProgram{gas: DEPLOY_GAS}(bytecode) returns (address a) {
-            program = a;
-        } catch {
-            program = address(0);
-        }
-    }
-
-    /// A step of `complete`, callable only by this contract so its gas can be bounded.
-    function placeProgram(bytes calldata bytecode) external returns (address program) {
-        if (msg.sender != address(this)) revert NotSelf();
+        if (bytecode[0] == REFUSED_FIRST_BYTE) return address(0);
         bytes memory init = abi.encodePacked(LOADER, bytecode);
         assembly ("memory-safe") {
             program := create(0, add(init, 0x20), mload(init))
         }
+        if (program == address(0)) revert PlacementFailed();
     }
 
     // ---------------------------------------------------------------- read

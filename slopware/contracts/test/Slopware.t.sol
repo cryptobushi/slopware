@@ -190,22 +190,18 @@ contract SlopwareTest is Test {
         w.complete(id);
         uint256 used = g0 - gasleft();
         emit log_named_uint("rejection gas", used);
-        assertLt(used, 400_000, "a refused bytecode must not burn the finalizer's gas budget");
+        assertLt(used, 200_000, "a refusal is recorded, not paid for: no CREATE runs for refused bytecode");
         assertEq(uint8(w.software(id).status), uint8(Slopware.Status.Rejected));
     }
 
-    function test_placeProgram_onlySelf() public {
-        vm.expectRevert(Slopware.NotSelf.selector);
-        w.placeProgram(new bytes(64));
-    }
 
     function test_gasStarvedPlacement_revertsInsteadOfRejection() public {
         uint256 id = _request(alice);
         vm.roll(w.software(id).requestedAt + 2);
-        // not enough gas for the creation frame: must revert, not record a false rejection
-        (bool ok, bytes memory ret) = address(w).call{gas: 90_000}(abi.encodeWithSelector(w.complete.selector, id));
+        // not enough gas to place the program: the completion must revert, not record a false rejection.
+        // CREATE is given all remaining gas, so a shortfall surfaces as an out-of-gas revert (or PlacementFailed)
+        (bool ok,) = address(w).call{gas: 60_000}(abi.encodeWithSelector(w.complete.selector, id));
         assertFalse(ok);
-        if (ret.length >= 4) assertEq(bytes4(ret), Slopware.OutOfGasNotRejection.selector);
         assertEq(uint8(w.software(id).status), uint8(Slopware.Status.Installing), "still requested; can be retried");
         w.complete(id);
         assertEq(uint8(w.software(id).status), uint8(Slopware.Status.Installed));

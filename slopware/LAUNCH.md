@@ -4,8 +4,8 @@ Nothing here deploys to mainnet by itself. The final command is at the bottom, t
 
 ## Before anything
 
-- [ ] `cd slopware/contracts && forge test` — 22/22 green.
-- [ ] `forge test --gas-report` consistent with README (install ~160k first / ~110k after, complete ~174k, rejection ~270k).
+- [ ] `cd slopware/contracts && forge test` — 21/21 green.
+- [ ] `forge test --gas-report` consistent with README (install ~160k first / ~110k after, complete ~174k, rejection under 100k — mainnet pricing; Sepolia runs Amsterdam and costs ~4× on storage).
 - [ ] Read `Slopware.sol` once more, top to bottom. Nothing in it should surprise you.
 - [ ] Independent review arranged, or consciously waived.
 - [x] `python3 scripts/lab_json.py deep-1m-64b` run after the 1M study completed (2026-10-06); `site/lab.json` committed.

@@ -28,7 +28,7 @@ The program carries no ownership logic, no interface, no metadata. Ownership liv
 |---|---|
 | `install()` payable | pay the price; the release is numbered and minted to you; the request block recorded. No bytecode exists yet. |
 | `installMany(count)` payable | up to 100 at once, `count × price`; each release numbered, minted and later decided on its own. They share a transaction and a deciding block, nothing more. |
-| `complete(release)` · `completeMany(releases[])` | anyone, once the deciding block (request block + 1) is final: bytecode = `keccak(blockhash, release, 0) ‖ keccak(blockhash, release, 1)`; placed by CREATE behind an 11-byte loader inside a 120k-gas self-call; recorded `Installed`, `Rejected` (Ethereum refused the bytecode, EIP-3541) or `Abandoned` (deciding block older than 256 blocks; refundable). |
+| `complete(release)` · `completeMany(releases[])` | anyone, once the deciding block (request block + 1) is final: bytecode = `keccak(blockhash, release, 0) ‖ keccak(blockhash, release, 1)`; placed by CREATE behind an 11-byte loader with every unit of gas the completer sent; recorded `Installed`, `Rejected` (bytecode Ethereum refuses, EIP-3541) or `Abandoned` (deciding block older than 256 blocks; refundable). |
 | `software(release)` | installer, request/completion block, status, price paid, program address, checksum |
 | `bytecodeOf(release)` | installed → the program's own code; rejected → kept here |
 | `tokenURI(release)` | on-chain utf8 JSON + a plain Courier SVG: facts only |
@@ -45,20 +45,20 @@ Two steps, next-block entropy, permissionless completion. The collector commits 
 
 ## Rejections
 
-About 1 in 256 bytecodes begins with `0xEF`, which Ethereum refuses to install (EIP-3541). The release is recorded — number, installer, bytecode, reason — and the collector keeps it. Nothing is substituted. Building this taught us one thing worth writing down: a refusal inside CREATE is an exceptional halt that consumes *all* gas forwarded to the frame, 63/64 of the caller's. So CREATE runs in a bounded self-call, and a placement that merely ran out of gas reverts (`OutOfGasNotRejection`) rather than being recorded as Ethereum's verdict. A rejection costs ~270k gas, bounded, and is always genuine.
+About 1 in 256 bytecodes begins with `0xEF`, which Ethereum refuses to install (EIP-3541). The release is recorded — number, installer, bytecode, reason — and the collector keeps it. Nothing is substituted. Building this taught us two things worth writing down. First, a refusal inside CREATE is an exceptional halt that consumes *all* gas forwarded to the frame, 63/64 of the caller's. Second, any fixed gas allowance for CREATE is a bet on the chain's pricing: Sepolia's Amsterdam rules made a 64-byte placement cost 311k where it had cost 61k, and a 120k allowance would have frozen every completion. So the installer does neither. The refusal rule is one byte, and the contract applies it itself and records the rejection without running CREATE; for everything else CREATE gets all remaining gas, and a placement that falls short reverts (`PlacementFailed`) so nothing false is recorded. Rejections are cheap and always genuine.
 
-## Gas (Foundry, optimizer 5000 runs)
+## Gas (Foundry, optimizer 5000 runs; today's mainnet pricing — Amsterdam roughly quadruples storage costs)
 
 | | gas |
 |---|---:|
 | `install()` | 160,356 (first ever); ~110k thereafter |
 | `complete()` → installed | 174,020 |
-| `complete()` → rejected | 269,037 |
+| `complete()` → rejected | under 100k (no CREATE runs) |
 | `installMany(100)` | ~7.7M (about 77k per release) |
 
 ## Tests
 
-`cd contracts && forge test` — 22 tests: code == bytecode (bytes, hash, length); a 3,000-bytecode deterministic corpus with zero silent mutation; fuzz over bytecode and over entropy; rejection recorded, not rerolled; rejection gas bounded; gas-starved placement reverts instead of recording; sequential releases; installer immutable through transfer; completion once and not early; same-block installs differ; abandonment → refund; price accounting and authorization; the installer never calls the program (a program that is `INVALID` at its first byte installs fine); contract installers and re-entrancy attempts; no receiver callback; factual `tokenURI`; gas; batches: numbering, per-release events and payment, exact price and bounds, a hundred under the per-transaction gas cap, batch completion that settles what is ready and passes over the rest.
+`cd contracts && forge test` — 21 tests: code == bytecode (bytes, hash, length); a 3,000-bytecode deterministic corpus with zero silent mutation; fuzz over bytecode and over entropy; rejection recorded, not rerolled; rejection gas bounded; gas-starved placement reverts instead of recording; sequential releases; installer immutable through transfer; completion once and not early; same-block installs differ; abandonment → refund; price accounting and authorization; the installer never calls the program (a program that is `INVALID` at its first byte installs fine); contract installers and re-entrancy attempts; no receiver callback; factual `tokenURI`; gas; batches: numbering, per-release events and payment, exact price and bounds, a hundred under the per-transaction gas cap, batch completion that settles what is ready and passes over the rest.
 
 ## Running locally
 
