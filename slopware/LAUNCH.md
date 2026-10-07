@@ -19,12 +19,12 @@ Nothing here deploys to mainnet by itself. The final command is at the bottom, t
 
 ## Sepolia
 
-Deployed 2026-10-06 from the artist's wallet: `0x5ae269871454c536ead7aa07052eeee0b0194f13` (artist `0x29104975057C20062596FB755047c1C9fb59daaE`, price 0.0004 ETH). Sourcify: exact match. Earlier deployments: `0xadc3c5cfe9c44d6b77236c3a5c941b83531817d6` (bounded 120k-gas placement; could not complete anything under Sepolia's Amsterdam pricing; its one release refundable) and `0xb8e9ef6e0859bfe4aba6b3e93530636de0c7f225` (utf8 metadata whose `#` broke the image; six releases installed and visible there with a blank card). Keeper `0xB847754313D6320f43396F885d168b0B433b913f`, funded 0.05 Sepolia ETH, running from the Vercel cron. Site: https://slopware.vercel.app
+Deployed 2026-10-06 from the artist's wallet: `0x5ae269871454c536ead7aa07052eeee0b0194f13` (artist `0x29104975057C20062596FB755047c1C9fb59daaE`, price 0.0004 ETH). Sourcify: exact match. Earlier deployments: `0xadc3c5cfe9c44d6b77236c3a5c941b83531817d6` (bounded 120k-gas placement; could not complete anything under Sepolia's Amsterdam pricing; its one release refundable) and `0xb8e9ef6e0859bfe4aba6b3e93530636de0c7f225` (utf8 metadata whose `#` broke the image; six releases installed and visible there with a blank card). Keeper `0xB847754313D6320f43396F885d168b0B433b913f`, funded 0.05 Sepolia ETH, running from the Vercel cron. Site: https://slopware.fun (also slopware.vercel.app)
 
 - [ ] Deploy from your own wallet: `node slopware/deploy/make.mjs && (cd slopware/deploy && python3 -m http.server 8002)`, open http://127.0.0.1:8002, connect, set artist and price, confirm the network, deploy. (Or from a keystore: `cast wallet import slopware-sepolia --interactive`, then `ARTIST=<artist> PRICE=300000000000000 forge script script/Deploy.s.sol --rpc-url https://ethereum-sepolia-rpc.publicnode.com --account slopware-sepolia --broadcast -vv` in `slopware/contracts`.)
 - [ ] `forge verify-contract <addr> src/Slopware.sol:Slopware --chain sepolia --constructor-args $(cast abi-encode "constructor(address,uint256)" <artist> 300000000000000)`
 - [ ] Keeper: on Vercel, set `SLOPWARE=<addr>` in the project's production environment and redeploy; the cron at `/api/keeper` runs every minute. (The always-on `keeper/keeper.ts` remains for running one by hand.)
-- [ ] Site: the same `SLOPWARE` variable fills the page at build time on Vercel (https://slopware.vercel.app); install a handful from different wallets; confirm records on Etherscan and that wallets render `tokenURI` (base64 JSON and SVG — the first utf8 version broke on the `#` in a color).
+- [ ] Site: the same `SLOPWARE` variable fills the page at build time on Vercel (https://slopware.fun (also slopware.vercel.app)); install a handful from different wallets; confirm records on Etherscan and that wallets render `tokenURI` (base64 JSON and SVG — the first utf8 version broke on the `#` in a color).
 - [ ] Leave it a day with the keeper running. Nothing should be abandoned.
 
 ## Mainnet decisions (write the answers here)
@@ -49,7 +49,7 @@ forge verify-contract <addr> src/Slopware.sol:Slopware --chain mainnet --constru
 
 Then start the keeper, replace `__SLOPWARE__`, publish, and install release 000001 yourself.
 
-Done 2026-10-06. Release 000001: requested in block 26137572, completed by the keeper in block 26137582 (168,027 gas at 0.8 gwei, 0.000134 ETH), program `0xD6D3783A160EB03c1DE81773768e4471184FaEf6`, code equals bytecode. Site live at https://slopware.vercel.app reading mainnet. Sourcify: exact match. Etherscan: pending.
+Done 2026-10-06. Release 000001: requested in block 26137572, completed by the keeper in block 26137582 (168,027 gas at 0.8 gwei, 0.000134 ETH), program `0xD6D3783A160EB03c1DE81773768e4471184FaEf6`, code equals bytecode. Site live at https://slopware.fun (also slopware.vercel.app) reading mainnet. Sourcify: exact match. Etherscan: pending.
 
 ## Open items
 
