@@ -19,16 +19,10 @@ Nothing here deploys to mainnet by itself. The final command is at the bottom, t
 
 ## Sepolia
 
-- [ ] `cast wallet import slopware-sepolia --interactive`
-- [ ] Deploy:
-  ```sh
-  cd slopware/contracts
-  ARTIST=<artist> PRICE=300000000000000 \
-  forge script script/Deploy.s.sol --rpc-url https://ethereum-sepolia-rpc.publicnode.com --account slopware-sepolia --broadcast -vv
-  ```
+- [ ] Deploy from your own wallet: `node slopware/deploy/make.mjs && (cd slopware/deploy && python3 -m http.server 8002)`, open http://127.0.0.1:8002, connect, set artist and price, confirm the network, deploy. (Or from a keystore: `cast wallet import slopware-sepolia --interactive`, then `ARTIST=<artist> PRICE=300000000000000 forge script script/Deploy.s.sol --rpc-url https://ethereum-sepolia-rpc.publicnode.com --account slopware-sepolia --broadcast -vv` in `slopware/contracts`.)
 - [ ] `forge verify-contract <addr> src/Slopware.sol:Slopware --chain sepolia --constructor-args $(cast abi-encode "constructor(address,uint256)" <artist> 300000000000000)`
-- [ ] Keeper against Sepolia: `RPC=… SLOPWARE=<addr> KEEPER_KEY=<key> npx tsx slopware/keeper/keeper.ts`
-- [ ] Site pointed at it (`?contract=<addr>` or `__SLOPWARE__` replaced), hosted statically; install a handful from different wallets; confirm records on Etherscan and that marketplace testnet views render `tokenURI` (utf8 JSON + utf8 SVG — watch for ones that need base64).
+- [ ] Keeper: on Vercel, set `SLOPWARE=<addr>` in the project's production environment and redeploy; the cron at `/api/keeper` runs every minute. (The always-on `keeper/keeper.ts` remains for running one by hand.)
+- [ ] Site: the same `SLOPWARE` variable fills the page at build time on Vercel (https://slopware.vercel.app); install a handful from different wallets; confirm records on Etherscan and that marketplace testnet views render `tokenURI` (utf8 JSON + utf8 SVG — watch for ones that need base64).
 - [ ] Leave it a day with the keeper running. Nothing should be abandoned.
 
 ## Mainnet decisions (write the answers here)
