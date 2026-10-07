@@ -122,6 +122,14 @@ function rpc(method, params) {
   return Promise.reject(new Error('no ethereum client — open in a wallet browser, or add ?rpc='));
 }
 const CHAIN_NAMES = { 1: 'Ethereum mainnet', 11155111: 'Sepolia', 31337: 'the local chain' };
+const TX_GAS_CAP = 16_777_216; // EIP-7825: no transaction may use more
+// gas is priced by the chain, not by this page: estimate on the installer's chain and add a fifth
+async function gasFor(tx) {
+  const est = BigInt(await rpc('eth_estimateGas', [tx]));
+  const withMargin = est + est / 5n;
+  if (withMargin > BigInt(TX_GAS_CAP)) throw new Error(`that many will not fit in one transaction here (about ${Number(est).toLocaleString('en-US')} gas); try fewer`);
+  return '0x' + withMargin.toString(16);
+}
 let expectedChain = null;
 // before signing: the wallet must be on the installer's chain; ask it to switch if not
 async function ensureChain() {
@@ -229,7 +237,8 @@ $('install').onclick = async () => {
     const q = qty();
     const data = q === 1 ? SEL.install : SEL.installMany + pad(q.toString(16));
     const value = '0x' + (price * BigInt(q)).toString(16);
-    const hash = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to: ADDR, value, data, gas: '0x' + (120_000 * q + 100_000).toString(16) }] });
+    const gas = await gasFor({ from, to: ADDR, value, data });
+    const hash = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to: ADDR, value, data, gas }] });
     const rc = await receipt(hash);
     if (rc.status !== '0x1') throw new Error('the request failed');
     const ids = rc.logs.filter((l) => l.topics[0] === TOPIC_INSTALLING).map((l) => Number(BigInt(l.topics[1])));
@@ -242,12 +251,17 @@ $('install').onclick = async () => {
     const pending = ids.filter((_, i) => recs[i].status === 1);
     if (pending.length) {
       try {
-        // one transaction settles the batch; fifty at a time stays well under the per-transaction gas cap
-        for (let i = 0; i < pending.length; i += 50) {
-          const chunk = pending.slice(i, i + 50);
+        // one transaction settles as many as fit under the gas cap; the rest follow
+        let i = 0, size = pending.length;
+        while (i < pending.length) {
+          const chunk = pending.slice(i, i + size);
           const d = chunk.length === 1 ? SEL.complete + pad(chunk[0].toString(16)) : SEL.completeMany + encodeIds(chunk);
-          const h2 = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to: ADDR, data: d, gas: '0x' + (200_000 * chunk.length + 100_000).toString(16) }] });
+          let gas;
+          try { gas = await gasFor({ from, to: ADDR, data: d }); }
+          catch (e) { if (size > 1) { size = Math.ceil(size / 2); continue; } throw e; }
+          const h2 = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to: ADDR, data: d, gas }] });
           await receipt(h2);
+          i += chunk.length;
         }
       } catch (e) { /* the keeper may have completed them first */ }
       for (let i = 0; i < 20; i++) { recs = await Promise.all(ids.map(software)); if (!recs.some((r) => r.status === 1)) break; await sleep(1500); }

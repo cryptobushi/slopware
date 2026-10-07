@@ -46,7 +46,8 @@ const abi = parseAbi([
   'function complete(uint256)',
   'function completeMany(uint256[]) returns (uint256)',
 ]);
-const BATCH = 40; // releases per completeMany; 40 × ~175k gas stays far under the 2^24 per-transaction cap
+const BATCH = 40; // most releases per completeMany before estimating; split further if the estimate is over the cap
+const TX_GAS_CAP = 16_777_216n; // EIP-7825
 const installing = parseAbiItem('event Installing(uint256 indexed release, address indexed installer, uint256 requestedAt, uint256 paid)');
 const STATUS = ['none', 'installing', 'installed', 'rejected', 'abandoned'];
 
@@ -107,12 +108,25 @@ export async function runKeeper(env: KeeperEnv): Promise<KeeperReport> {
     if (baseFee > maxBaseFeeWei && !soon) { report.deferred.push(id.toString()); continue; }
     ready.push(id);
   }
-  for (let i = 0; i < ready.length; i += BATCH) {
-    const chunk = ready.slice(i, i + BATCH);
+  // gas is priced by the chain, not by this file: estimate each batch, add a fifth, and split a batch that
+  // would not fit under the per-transaction cap (EIP-7825, 2^24)
+  let i = 0, size = Math.min(BATCH, ready.length || 1);
+  while (i < ready.length) {
+    const chunk = ready.slice(i, i + size);
+    const call = chunk.length === 1
+      ? { address, abi, functionName: 'complete' as const, args: [chunk[0]] as const }
+      : { address, abi, functionName: 'completeMany' as const, args: [chunk] as const };
+    let gas: bigint;
     try {
-      const hash = chunk.length === 1
-        ? await wallet.writeContract({ address, abi, functionName: 'complete', args: [chunk[0]], chain: null, gas: 320_000n })
-        : await wallet.writeContract({ address, abi, functionName: 'completeMany', args: [chunk], chain: null, gas: 300_000n * BigInt(chunk.length) + 100_000n });
+      const est = await pub.estimateContractGas({ ...call, account: account.address } as any);
+      gas = est + est / 5n;
+      if (gas > TX_GAS_CAP) { if (size > 1) { size = Math.ceil(size / 2); continue; } throw new Error(`one completion needs ${est} gas, over the transaction cap`); }
+    } catch (e: any) {
+      if (size > 1) { size = Math.ceil(size / 2); continue; }
+      report.errors.push(`estimate ${chunk[0]}: ${String(e.shortMessage ?? e.message ?? e).slice(0, 160)}`); report.ok = false; i += 1; continue;
+    }
+    try {
+      const hash = await wallet.writeContract({ ...call, chain: null, gas } as any);
       const rc = await pub.waitForTransactionReceipt({ hash, pollingInterval: 500, timeout: 45_000 });
       for (const id of chunk) {
         const after = await pub.readContract({ address, abi, functionName: 'statusOf', args: [id] });
@@ -122,6 +136,7 @@ export async function runKeeper(env: KeeperEnv): Promise<KeeperReport> {
       const m = String(e.shortMessage ?? e.message ?? e);
       if (!/NotInstalling/.test(m)) { report.errors.push(`complete ${chunk.length === 1 ? chunk[0] : `${chunk[0]}…${chunk[chunk.length - 1]}`}: ${m.slice(0, 160)}`); report.ok = false; }
     }
+    i += chunk.length;
   }
   return report;
 }

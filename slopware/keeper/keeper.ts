@@ -36,7 +36,7 @@ async function tick() {
     settledRun = 0;
     if (block <= BigInt(s.requestedAt) + 1n) continue; // entropy block not final yet
     try {
-      const hash = await wallet.writeContract({ address: SLOPWARE, abi, functionName: 'complete', args: [id], chain: null, gas: 300_000n });
+      const hash = await wallet.writeContract({ address: SLOPWARE, abi, functionName: 'complete', args: [id], chain: null });
       const rc = await pub.waitForTransactionReceipt({ hash, pollingInterval: 500, timeout: 60_000 });
       const after = await pub.readContract({ address: SLOPWARE, abi, functionName: 'statusOf', args: [id] });
       console.log(`${new Date().toISOString()} complete(${id}) ${rc.status} → ${['none', 'installing', 'INSTALLED', 'REJECTED', 'ABANDONED'][after]} gas ${rc.gasUsed}`);
