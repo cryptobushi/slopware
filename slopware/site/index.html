@@ -103,7 +103,8 @@ a program at an address
 'use strict';
 const q = new URLSearchParams(location.search);
 const ADDR = q.get('contract') || '__SLOPWARE__';
-const RPC_FALLBACK = q.get('rpc') || null;
+// reads go to the chain the installer lives on; the wallet is only asked to sign
+const RPC_FALLBACK = q.get('rpc') || ('__RPC__'.startsWith('http') ? '__RPC__' : null);
 const SEL = { installMany:'0xcaf0b2ee', completeMany:'0xacf468ab', install:'0x175a0061', complete:'0x971d852f', releases:'0x913e10e9', installed:'0x00bdfbcd', rejected:'0xd13b0e64', price:'0xa035b1fe',
   software:'0x8ab1a894', bytecodeOf:'0xb7bc96e7', ownerOf:'0x6352211e', statusOf:'0xad35efd4' };
 const TOPIC_INSTALLING = '0x8457fc83c9b3ebc3e5dd4aec24c20a39dc83abe0a942209e2c2982ec18e0920c';
@@ -116,9 +117,20 @@ async function rpcAt(url, method, params) {
   const j = await r.json(); if (j.error) throw new Error(j.error.message || JSON.stringify(j.error)); return j.result;
 }
 function rpc(method, params) {
-  if (window.ethereum && !RPC_FALLBACK) return window.ethereum.request({ method, params });
-  if (!RPC_FALLBACK) return Promise.reject(new Error('no ethereum client — open in a wallet browser, or add ?rpc='));
-  return rpcAt(RPC_FALLBACK, method, params);
+  if (RPC_FALLBACK) return rpcAt(RPC_FALLBACK, method, params);
+  if (window.ethereum) return window.ethereum.request({ method, params });
+  return Promise.reject(new Error('no ethereum client — open in a wallet browser, or add ?rpc='));
+}
+const CHAIN_NAMES = { 1: 'Ethereum mainnet', 11155111: 'Sepolia', 31337: 'the local chain' };
+let expectedChain = null;
+// before signing: the wallet must be on the installer's chain; ask it to switch if not
+async function ensureChain() {
+  if (!RPC_FALLBACK) return;
+  if (expectedChain === null) expectedChain = Number(BigInt(await rpcAt(RPC_FALLBACK, 'eth_chainId', [])));
+  const have = Number(BigInt(await window.ethereum.request({ method: 'eth_chainId', params: [] })));
+  if (have === expectedChain) return;
+  try { await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x' + expectedChain.toString(16) }] }); }
+  catch (e) { throw new Error(`the installer is on ${CHAIN_NAMES[expectedChain] || 'chain ' + expectedChain}; switch your wallet to it`); }
 }
 const pad = (h) => h.replace(/^0x/, '').padStart(64, '0');
 const words = (hex) => { const h = hex.replace(/^0x/, ''); const o = []; for (let i = 0; i < h.length; i += 64) o.push('0x' + h.slice(i, i + 64)); return o; };
@@ -213,6 +225,7 @@ $('install').onclick = async () => {
   try {
     if (!window.ethereum) throw new Error('a wallet is needed to install; reading needs none');
     const [from] = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    await ensureChain();
     const q = qty();
     const data = q === 1 ? SEL.install : SEL.installMany + pad(q.toString(16));
     const value = '0x' + (price * BigInt(q)).toString(16);

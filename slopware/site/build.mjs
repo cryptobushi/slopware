@@ -5,6 +5,8 @@ const addr = process.env.SLOPWARE ?? '';
 mkdirSync('dist', { recursive: true });
 let html = readFileSync('index.html', 'utf8');
 if (/^0x[0-9a-fA-F]{40}$/.test(addr)) html = html.replaceAll('__SLOPWARE__', addr);
+const rpc = process.env.RPC_URL ?? '';
+if (/^https?:\/\//.test(rpc)) html = html.replaceAll('__RPC__', rpc);
 writeFileSync('dist/index.html', html);
 copyFileSync('lab.json', 'dist/lab.json');
 console.log(`built dist/ · installer ${addr || '(placeholder; pass ?contract=)'}`);
