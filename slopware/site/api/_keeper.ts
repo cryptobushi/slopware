@@ -22,6 +22,7 @@ export interface KeeperEnv {
   SLOPWARE?: string;
   KEEPER_KEY?: string;
   MAX_BASE_FEE_GWEI?: string;
+  MIN_BALANCE_ETH?: string;
 }
 
 export interface KeeperReport {
@@ -82,6 +83,9 @@ export async function runKeeper(env: KeeperEnv): Promise<KeeperReport> {
   report.baseFeeGwei = (Number(baseFee) / 1e9).toFixed(3);
   report.balanceEth = formatEther(balance);
   report.releases = releases.toString();
+  // the one quiet failure this design has is an empty wallet: make it loud (a failing cron) well before it happens
+  const minBalanceWei = BigInt(Math.round(Number(env.MIN_BALANCE_ETH ?? '0.01') * 1e6)) * 10n ** 12n;
+  if (balance < minBalanceWei) { report.errors.push(`keeper balance ${formatEther(balance)} ETH is below ${env.MIN_BALANCE_ETH ?? '0.01'}; top up ${account.address}`); report.ok = false; }
 
   // candidates: releases requested in the recent past, plus the newest few by number
   const ids = new Set<bigint>();
