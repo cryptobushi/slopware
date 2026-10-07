@@ -19,7 +19,7 @@ contract Deploy is Script {
         console.log("SLOPWARE       ", address(s));
         console.log("artist         ", artist);
         console.log("price (wei)    ", fee);
-        console.log("DEPLOY_GAS     ", s.DEPLOY_GAS());
+        console.log("max per install", s.MAX_PER_INSTALL());
         console.log("chain id       ", block.chainid);
     }
 }
