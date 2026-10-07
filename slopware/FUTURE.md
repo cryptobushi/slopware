@@ -11,7 +11,7 @@ Ideas that came up and were deliberately not built. The work is one installer, o
 - **ERC-2981 royalties.** Trivial to add; left out to keep the contract to its one job. A v1.1 if marketplaces matter.
 - **Chainlink VRF.** The correct randomness if price or chain ever allow it; only the entropy source would change.
 - **USD peg, bonding curves, staking, protocol token, DAO, treasury.** No.
-- **Batch installs.** One button, one install.
+- ~~**Batch installs.**~~ Reconsidered before launch: `installMany` installs up to a hundred in one transaction, because the work wants a large population. Each release is still decided on its own; the batch shares nothing but a block.
 - **Marketplace.** Standard ERC-721; existing infrastructure handles transfers.
 - **AI observers or agents.** If AI ever enters, it observes programs; it does not generate them. Not v1.
 - **Naming programs, galleries, "run" buttons that call the program.** Calling an arbitrary program is the caller's business; the site stays a catalogue.

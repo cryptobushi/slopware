@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-import {Test} from "forge-std/Test.sol";
+import {Test, Vm} from "forge-std/Test.sol";
 import {Slopware} from "../src/Slopware.sol";
 
 /// @dev Exposes the deployment primitive so a large corpus can be pushed through it directly.
@@ -374,6 +374,78 @@ contract SlopwareTest is Test {
         emit log_named_uint("installation gas", installationGas);
         assertLt(reqGas, 200_000);
         assertLt(installationGas, 200_000);
+    }
+
+    // ------------------------------------------------------------ batches
+
+    function test_installMany_numbersMintsAndEmitsEach() public {
+        vm.recordLogs();
+        vm.prank(alice);
+        (uint256 first, uint256 last) = w.installMany{value: FEE * 5}(5);
+        assertEq(first, 1);
+        assertEq(last, 5);
+        assertEq(w.releases(), 5);
+        uint256 installingEvents;
+        Vm.Log[] memory logs = vm.getRecordedLogs();
+        for (uint256 i = 0; i < logs.length; i++) {
+            if (logs[i].topics[0] == keccak256("Installing(uint256,address,uint256,uint256)")) installingEvents++;
+        }
+        assertEq(installingEvents, 5);
+        for (uint256 id = 1; id <= 5; id++) {
+            assertEq(w.ownerOf(id), alice);
+            assertEq(uint8(w.statusOf(id)), uint8(Slopware.Status.Installing));
+            assertEq(w.software(id).paid, FEE);
+        }
+        // the next single install continues the numbering
+        assertEq(_request(bob), 6);
+    }
+
+    function test_installMany_exactPriceAndBounds() public {
+        vm.startPrank(alice);
+        vm.expectRevert(Slopware.WrongPrice.selector);
+        w.installMany{value: FEE * 3 - 1}(3);
+        vm.expectRevert(Slopware.WrongPrice.selector);
+        w.installMany{value: FEE * 4}(3);
+        vm.expectRevert(Slopware.BadCount.selector);
+        w.installMany{value: 0}(0);
+        vm.expectRevert(Slopware.BadCount.selector);
+        w.installMany{value: FEE * 101}(101);
+        vm.stopPrank();
+    }
+
+    function test_installMany_hundredFitsInOneTransaction() public {
+        vm.prank(alice);
+        uint256 g = gasleft();
+        w.installMany{value: FEE * 100}(100);
+        uint256 used = g - gasleft();
+        assertLt(used, 16_777_216, "a full batch must fit under the per-transaction gas cap");
+        assertEq(w.releases(), 100);
+    }
+
+    function test_completeMany_completesDistinctAndSkipsTheRest() public {
+        vm.prank(alice);
+        w.installMany{value: FEE * 3}(3);
+        vm.roll(block.number + 2);
+        vm.prank(bob);
+        uint256 four = w.install{value: FEE}(); // requested now: not ready yet
+        uint256[] memory ids = new uint256[](6);
+        ids[0] = 1; ids[1] = 2; ids[2] = 3; ids[3] = 3; ids[4] = four; ids[5] = 999; // a repeat, a too-soon one, a nonexistent one
+        uint256 done = w.completeMany(ids);
+        assertEq(done, 3, "three settled; repeat, too-soon and nonexistent passed over");
+        for (uint256 id = 1; id <= 3; id++) {
+            assertTrue(w.statusOf(id) == Slopware.Status.Installed || w.statusOf(id) == Slopware.Status.Rejected);
+            assertEq(w.bytecodeOf(id), _expectedBytecode(id));
+        }
+        assertEq(uint8(w.statusOf(four)), uint8(Slopware.Status.Installing));
+        assertTrue(keccak256(w.bytecodeOf(1)) != keccak256(w.bytecodeOf(2)), "same block, different bytecode");
+        assertTrue(keccak256(w.bytecodeOf(2)) != keccak256(w.bytecodeOf(3)));
+        // completing again changes nothing and does not revert
+        assertEq(w.completeMany(ids), 0);
+        // the strict path still refuses
+        vm.expectRevert(Slopware.NotInstalling.selector);
+        w.complete(1);
+        vm.expectRevert(Slopware.TooSoon.selector);
+        w.complete(four);
     }
 
     function _contains(string memory hay, string memory needle) internal pure returns (bool) {

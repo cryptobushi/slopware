@@ -22,7 +22,9 @@ SLOPWARE places arbitrary, untrusted programs on purpose. The model is: **the in
 
 **Entropy reuse.** `blockhash(R+1)` is mixed with the release number; two installs in one block yield different bytecode. Tested.
 
-**Numbering.** `releases` increments once per `install`; numbers are sequential and never skipped, including rejections and abandonments.
+**Numbering.** `releases` advances once per release, whether installed singly or in a batch; numbers are sequential and never skipped, including rejections and abandonments.
+
+**Batches.** `installMany` is bounded at 100 (about 7.7M gas; the per-transaction cap is 2^24). `completeMany` passes over releases that are not ready or already settled instead of reverting, so a keeper's batch cannot be made to fail by a collector completing one of its releases first. Each release in a batch has its own bytecode because the release number is mixed into the hash.
 
 **Rejection accounting.** `installed + rejected + abandoned + installing == releases` always; rejected bytecode is stored because no program exists to read it from.
 
@@ -43,4 +45,4 @@ SLOPWARE places arbitrary, untrusted programs on purpose. The model is: **the in
 
 ## Audit status
 
-Unaudited. The test suite (`contracts/test/Slopware.t.sol`, 18 tests including fuzzing and a 3,000-bytecode corpus) encodes the properties above. An independent review of `Slopware.sol` is recommended before mainnet.
+Unaudited. The test suite (`contracts/test/Slopware.t.sol`, 22 tests including fuzzing and a 3,000-bytecode corpus) encodes the properties above. An independent review of `Slopware.sol` is recommended before mainnet.

@@ -44,7 +44,9 @@ const abi = parseAbi([
   'function statusOf(uint256) view returns (uint8)',
   'function software(uint256) view returns ((address installer,uint64 requestedAt,uint64 installedAt,uint8 status,uint96 paid,address program,bytes32 checksum))',
   'function complete(uint256)',
+  'function completeMany(uint256[]) returns (uint256)',
 ]);
+const BATCH = 40; // releases per completeMany; 40 × ~175k gas stays far under the 2^24 per-transaction cap
 const installing = parseAbiItem('event Installing(uint256 indexed release, address indexed installer, uint256 requestedAt, uint256 paid)');
 const STATUS = ['none', 'installing', 'installed', 'rejected', 'abandoned'];
 
@@ -91,6 +93,8 @@ export async function runKeeper(env: KeeperEnv): Promise<KeeperReport> {
   for (let id = releases; id >= 1n && id > releases - RECENT; id--) ids.add(id);
   report.candidates = ids.size;
 
+  // decide what is ready; then settle it in batches so a hundred releases cost one transaction's base fee, not a hundred
+  const ready: bigint[] = [];
   for (const id of [...ids].sort((a, b) => (a < b ? -1 : 1))) {
     let s;
     try { s = await pub.readContract({ address, abi, functionName: 'software', args: [id] }); }
@@ -101,14 +105,22 @@ export async function runKeeper(env: KeeperEnv): Promise<KeeperReport> {
     const expiresAt = deciding + ENTROPY_WINDOW;
     const soon = block + SOON >= expiresAt;
     if (baseFee > maxBaseFeeWei && !soon) { report.deferred.push(id.toString()); continue; }
+    ready.push(id);
+  }
+  for (let i = 0; i < ready.length; i += BATCH) {
+    const chunk = ready.slice(i, i + BATCH);
     try {
-      const hash = await wallet.writeContract({ address, abi, functionName: 'complete', args: [id], chain: null, gas: 320_000n });
+      const hash = chunk.length === 1
+        ? await wallet.writeContract({ address, abi, functionName: 'complete', args: [chunk[0]], chain: null, gas: 320_000n })
+        : await wallet.writeContract({ address, abi, functionName: 'completeMany', args: [chunk], chain: null, gas: 300_000n * BigInt(chunk.length) + 100_000n });
       const rc = await pub.waitForTransactionReceipt({ hash, pollingInterval: 500, timeout: 45_000 });
-      const after = await pub.readContract({ address, abi, functionName: 'statusOf', args: [id] });
-      report.completed.push({ release: id.toString(), status: STATUS[after] ?? String(after), gasUsed: rc.gasUsed.toString(), hash });
+      for (const id of chunk) {
+        const after = await pub.readContract({ address, abi, functionName: 'statusOf', args: [id] });
+        report.completed.push({ release: id.toString(), status: STATUS[after] ?? String(after), gasUsed: chunk.length === 1 ? rc.gasUsed.toString() : `${rc.gasUsed} shared by ${chunk.length}`, hash });
+      }
     } catch (e: any) {
       const m = String(e.shortMessage ?? e.message ?? e);
-      if (!/NotInstalling/.test(m)) { report.errors.push(`complete(${id}): ${m.slice(0, 160)}`); report.ok = false; }
+      if (!/NotInstalling/.test(m)) { report.errors.push(`complete ${chunk.length === 1 ? chunk[0] : `${chunk[0]}…${chunk[chunk.length - 1]}`}: ${m.slice(0, 160)}`); report.ok = false; }
     }
   }
   return report;

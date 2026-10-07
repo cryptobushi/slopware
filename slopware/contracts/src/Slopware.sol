@@ -37,6 +37,12 @@ contract Slopware is ERC721 {
     /// A successful placement needs about fifty thousand.
     uint256 public constant DEPLOY_GAS = 120_000;
 
+    /// The most releases one transaction may install. A hundred installs cost about eleven
+    /// million gas; Ethereum caps a transaction at 2^24 (EIP-7825). Each release still gets its
+    /// own bytecode: the release number is mixed into the hash, so a batch shares a deciding
+    /// block and nothing else.
+    uint256 public constant MAX_PER_INSTALL = 100;
+
     enum Status {
         None,
         Installing, // requested; the deciding block does not exist yet
@@ -84,6 +90,7 @@ contract Slopware is ERC721 {
     error NothingToRefund();
     error NoSuchRelease();
     error NotSelf();
+    error BadCount();
     /// The placement ran out of gas, which is not Ethereum's opinion of the bytecode.
     /// Nothing is recorded. Complete again with more gas.
     error OutOfGasNotRejection();
@@ -98,28 +105,62 @@ contract Slopware is ERC721 {
 
     /// Install slopware. You will not know what it is until the next block does.
     function install() external payable returns (uint256 release) {
-        if (msg.value != price) revert WrongPrice();
-        release = ++releases;
-        _software[release] = Software({
-            installer: msg.sender,
-            requestedAt: uint64(block.number),
-            installedAt: 0,
-            status: Status.Installing,
-            paid: uint96(msg.value),
-            program: address(0),
-            checksum: bytes32(0)
-        });
-        _mint(msg.sender, release); // no callback; nothing else runs during an installation
-        emit Installing(release, msg.sender, block.number, msg.value);
+        (release,) = _install(1);
+    }
+
+    /// Install several at once. Each release is numbered, minted and decided on its own;
+    /// they share a transaction and a deciding block, nothing more.
+    function installMany(uint256 count) external payable returns (uint256 first, uint256 last) {
+        return _install(count);
+    }
+
+    function _install(uint256 count) internal returns (uint256 first, uint256 last) {
+        if (count == 0 || count > MAX_PER_INSTALL) revert BadCount();
+        if (msg.value != price * count) revert WrongPrice();
+        uint96 paid = uint96(price);
+        first = releases + 1;
+        last = releases + count;
+        releases = last;
+        for (uint256 release = first; release <= last; release++) {
+            _software[release] = Software({
+                installer: msg.sender,
+                requestedAt: uint64(block.number),
+                installedAt: 0,
+                status: Status.Installing,
+                paid: paid,
+                program: address(0),
+                checksum: bytes32(0)
+            });
+            _mint(msg.sender, release); // no callback; nothing else runs during an installation
+            emit Installing(release, msg.sender, block.number, paid);
+        }
     }
 
     /// Complete an installation. Anyone may, once the deciding block is final.
     /// The bytecode is the hash of that block, mixed with the release number. Once.
     function complete(uint256 release) external {
+        _complete(release, true);
+    }
+
+    /// Complete several. Releases that are not ready, or already settled, are passed over
+    /// rather than failing the rest; a batch may race the collectors' own completions.
+    function completeMany(uint256[] calldata releases_) external returns (uint256 done) {
+        for (uint256 i = 0; i < releases_.length; i++) {
+            if (_complete(releases_[i], false)) done++;
+        }
+    }
+
+    function _complete(uint256 release, bool strict) internal returns (bool) {
         Software storage s = _software[release];
-        if (s.status != Status.Installing) revert NotInstalling();
+        if (s.status != Status.Installing) {
+            if (strict) revert NotInstalling();
+            return false;
+        }
         uint256 decidingBlock = uint256(s.requestedAt) + 1;
-        if (block.number <= decidingBlock) revert TooSoon();
+        if (block.number <= decidingBlock) {
+            if (strict) revert TooSoon();
+            return false;
+        }
 
         bytes32 entropy = blockhash(decidingBlock);
         if (entropy == bytes32(0)) {
@@ -128,7 +169,7 @@ contract Slopware is ERC721 {
             refunds[s.installer] += s.paid;
             totalRefundable += s.paid;
             emit Abandoned(release, s.installer, s.paid);
-            return;
+            return true;
         }
 
         bytes memory bytecode = abi.encodePacked(
@@ -145,7 +186,7 @@ contract Slopware is ERC721 {
             _rejectedBytecode[release] = bytecode;
             rejected++;
             emit Rejected(release, s.installer, checksum, bytecode, bytes32("EIP-3541"));
-            return;
+            return true;
         }
         if (program.code.length != BYTECODE_LENGTH || keccak256(program.code) != checksum) {
             // cannot happen with LOADER; written down rather than assumed
@@ -154,7 +195,7 @@ contract Slopware is ERC721 {
             _rejectedBytecode[release] = bytecode;
             rejected++;
             emit Rejected(release, s.installer, checksum, bytecode, bytes32("MISMATCH"));
-            return;
+            return true;
         }
 
         s.status = Status.Installed;
@@ -162,6 +203,7 @@ contract Slopware is ERC721 {
         releaseOf[program] = release;
         installed++;
         emit Installed(release, s.installer, program, checksum, bytecode);
+        return true;
     }
 
     /// Place the bytecode at an address, with bounded gas, and never speak to it again.

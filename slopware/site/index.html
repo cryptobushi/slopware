@@ -20,6 +20,7 @@ a{color:inherit;text-decoration:underline}
 pre{margin:0;white-space:pre;overflow-x:auto}
 .gen{font-size:15px;line-height:1.3;letter-spacing:0;margin:0;white-space:pre;overflow:hidden}
 @media (max-width:700px){.gen{font-size:12px}}
+input#qty{font:inherit;width:2.6em;border:0;border-bottom:1px solid #000;background:none;color:inherit;text-align:center;padding:0}
 button{background:none;border:0;padding:0;margin:0;color:inherit;cursor:pointer;text-decoration:underline}
 button:disabled{text-decoration:none;color:#777;cursor:default}
 .big{font-size:1.4em}
@@ -43,8 +44,8 @@ td,th{text-align:left;padding:0 1.6em 0 0;font-weight:inherit;white-space:pre}
 <p>software nobody wrote</p>
 <pre id="gen" class="gen" aria-hidden="true" style="margin:2em 0 0"></pre>
 <p style="margin-top:3em">sixty-four uniformly random bytes become a program on the world computer</p>
-<p style="margin-top:3em"><button class="big" id="install" disabled>[ install ]</button></p>
-<p class="mute"><span id="price">—</span> ETH + gas · <span id="count">—</span> installed</p>
+<p style="margin-top:3em"><button class="big" id="install" disabled>[ install ]</button> <span class="mute">× <input id="qty" value="1" inputmode="numeric" aria-label="how many"></span></p>
+<p class="mute"><span id="price">—</span> ETH each + gas · <span id="count">—</span> installed</p>
 <pre id="state" class="mute"></pre>
 <pre id="result" class="hide"></pre>
 </div></div>
@@ -103,7 +104,7 @@ a program at an address
 const q = new URLSearchParams(location.search);
 const ADDR = q.get('contract') || '__SLOPWARE__';
 const RPC_FALLBACK = q.get('rpc') || null;
-const SEL = { install:'0x175a0061', complete:'0x971d852f', releases:'0x913e10e9', installed:'0x00bdfbcd', rejected:'0xd13b0e64', price:'0xa035b1fe',
+const SEL = { installMany:'0xcaf0b2ee', completeMany:'0xacf468ab', install:'0x175a0061', complete:'0x971d852f', releases:'0x913e10e9', installed:'0x00bdfbcd', rejected:'0xd13b0e64', price:'0xa035b1fe',
   software:'0x8ab1a894', bytecodeOf:'0xb7bc96e7', ownerOf:'0x6352211e', statusOf:'0xad35efd4' };
 const TOPIC_INSTALLING = '0x8457fc83c9b3ebc3e5dd4aec24c20a39dc83abe0a942209e2c2982ec18e0920c';
 const STATUS = ['', 'installing', 'installed', 'rejected', 'abandoned'];
@@ -204,31 +205,53 @@ async function addRow(n, prepend) {
 $('more').onclick = async () => { const from = total - shown; shown = Math.min(total, shown + 40); for (let n = from; n >= total - shown + 1 && n >= 1; n--) await addRow(n, false); $('more').classList.toggle('hide', shown >= total); };
 
 // ---------------------------------------------------------------- install
+const qty = () => Math.max(1, Math.min(100, Math.floor(Number($('qty').value) || 1)));
+$('qty').addEventListener('change', () => { $('qty').value = qty(); });
+function encodeIds(ids) { return pad((0x20).toString(16)) + pad(ids.length.toString(16)) + ids.map((n) => pad(n.toString(16))).join(''); }
 $('install').onclick = async () => {
   const btn = $('install'); btn.disabled = true; $('result').classList.add('hide'); $('state').textContent = 'requesting…';
   try {
     if (!window.ethereum) throw new Error('a wallet is needed to install; reading needs none');
     const [from] = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const hash = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to: ADDR, value: '0x' + price.toString(16), data: SEL.install, gas: '0x' + (220_000).toString(16) }] });
+    const q = qty();
+    const data = q === 1 ? SEL.install : SEL.installMany + pad(q.toString(16));
+    const value = '0x' + (price * BigInt(q)).toString(16);
+    const hash = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to: ADDR, value, data, gas: '0x' + (120_000 * q + 100_000).toString(16) }] });
     const rc = await receipt(hash);
     if (rc.status !== '0x1') throw new Error('the request failed');
-    const log = rc.logs.find((l) => l.topics[0] === TOPIC_INSTALLING);
-    const n = Number(BigInt(log.topics[1]));
+    const ids = rc.logs.filter((l) => l.topics[0] === TOPIC_INSTALLING).map((l) => Number(BigInt(l.topics[1])));
+    if (!ids.length) throw new Error('no release was recorded');
     const requestedAt = Number(BigInt(rc.blockNumber));
-    $('state').textContent = `SLOPWARE ${six(n)}\ninstalling…`;
+    const label = ids.length === 1 ? `SLOPWARE ${six(ids[0])}` : `SLOPWARE ${six(ids[0])} – ${six(ids[ids.length - 1])}`;
+    $('state').textContent = `${label}\ninstalling…`;
     for (;;) { const bn = Number(BigInt(await rpc('eth_blockNumber', []))); if (bn > requestedAt + 1) break; await sleep(1500); }
-    let s = await software(n);
-    if (s.status === 1) {
-      try { const h2 = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to: ADDR, data: SEL.complete + pad(n.toString(16)), gas: '0x' + (320_000).toString(16) }] }); await receipt(h2); }
-      catch (e) { /* the keeper may have completed it first */ }
-      for (let i = 0; i < 20 && s.status === 1; i++) { await sleep(1500); s = await software(n); }
+    let recs = await Promise.all(ids.map(software));
+    const pending = ids.filter((_, i) => recs[i].status === 1);
+    if (pending.length) {
+      try {
+        // one transaction settles the batch; fifty at a time stays well under the per-transaction gas cap
+        for (let i = 0; i < pending.length; i += 50) {
+          const chunk = pending.slice(i, i + 50);
+          const d = chunk.length === 1 ? SEL.complete + pad(chunk[0].toString(16)) : SEL.completeMany + encodeIds(chunk);
+          const h2 = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from, to: ADDR, data: d, gas: '0x' + (200_000 * chunk.length + 100_000).toString(16) }] });
+          await receipt(h2);
+        }
+      } catch (e) { /* the keeper may have completed them first */ }
+      for (let i = 0; i < 20; i++) { recs = await Promise.all(ids.map(software)); if (!recs.some((r) => r.status === 1)) break; await sleep(1500); }
     }
     $('state').textContent = '';
     const r = $('result'); r.classList.remove('hide');
-    r.textContent = s.status === 2 ? `SLOPWARE ${six(n)}\ninstalled.\n\n${s.program}\n\nbehavior unknown.`
-      : s.status === 3 ? `SLOPWARE ${six(n)}\nrejected.\n\nEthereum refused to install this bytecode.\nit is kept.`
-      : `SLOPWARE ${six(n)}\nstill installing. the record will update.`;
-    r.innerHTML += `\n\n<a href="#/${n}">record</a>`;
+    if (ids.length === 1) {
+      const s = recs[0], n = ids[0];
+      r.textContent = s.status === 2 ? `${label}\ninstalled.\n\n${s.program}\n\nbehavior unknown.`
+        : s.status === 3 ? `${label}\nrejected.\n\nEthereum refused to install this bytecode.\nit is kept.`
+        : `${label}\nstill installing. the record will update.`;
+      r.innerHTML += `\n\n<a href="#/${n}">record</a>`;
+    } else {
+      const inst = recs.filter((s) => s.status === 2).length, rej = recs.filter((s) => s.status === 3).length, wait = recs.filter((s) => s.status === 1).length;
+      r.textContent = `${label}\n${inst} installed${rej ? ` · ${rej} rejected` : ''}${wait ? ` · ${wait} still installing` : ''}.\n\nbehavior unknown.\n\n`;
+      r.innerHTML += ids.map((n) => `<a href="#/${n}">${six(n)}</a>`).join('  ');
+    }
     await refresh();
   } catch (e) { $('state').innerHTML = `<span class="err">${String(e.message || e).slice(0, 160)}</span>`; }
   finally { btn.disabled = false; }

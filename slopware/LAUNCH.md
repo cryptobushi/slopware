@@ -4,7 +4,7 @@ Nothing here deploys to mainnet by itself. The final command is at the bottom, t
 
 ## Before anything
 
-- [ ] `cd slopware/contracts && forge test` — 18/18 green.
+- [ ] `cd slopware/contracts && forge test` — 22/22 green.
 - [ ] `forge test --gas-report` consistent with README (install ~160k first / ~110k after, complete ~174k, rejection ~270k).
 - [ ] Read `Slopware.sol` once more, top to bottom. Nothing in it should surprise you.
 - [ ] Independent review arranged, or consciously waived.
