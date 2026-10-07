@@ -94,7 +94,11 @@ $('deploy').onclick = async () => {
   $('state').textContent = 'confirm the transaction in your wallet…';
   try {
     const data = BYTECODE + a.encoded;
-    const hash = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from: account, data }] });
+    // some wallets refuse a contract creation without an explicit gas limit: estimate, add a fifth, else fall back
+    let gas = '0x' + (3_600_000).toString(16);
+    try { const est = BigInt(await window.ethereum.request({ method: 'eth_estimateGas', params: [{ from: account, data }] })); gas = '0x' + (est + est / 5n).toString(16); } catch (e) {}
+    $('state').textContent = 'confirm the transaction in your wallet… (gas limit ' + parseInt(gas, 16).toLocaleString('en-US') + ')';
+    const hash = await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from: account, data, gas }] });
     $('state').textContent = 'sent ' + hash + '\\nwaiting for the receipt…';
     let rc = null;
     while (!rc) { await new Promise((r) => setTimeout(r, 3000)); rc = await window.ethereum.request({ method: 'eth_getTransactionReceipt', params: [hash] }); }
