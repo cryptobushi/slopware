@@ -4,3 +4,6 @@ results/
 slopware/contracts/out/
 slopware/contracts/cache/
 slopware/contracts/broadcast/
+slopware/site/dist/
+slopware/site/.vercel/
+slopware/site/node_modules/
