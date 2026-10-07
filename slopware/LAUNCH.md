@@ -37,6 +37,8 @@ Deployed 2026-10-06 from the artist's wallet: `0x5ae269871454c536ead7aa07052eeee
 
 ## Mainnet — by hand
 
+Deployed 2026-10-06 from the artist's wallet via the deploy page: `0x44a64905069963b8321ee2b755a0b8b56d69cbc6` (artist `0x29104975057C20062596FB755047c1C9fb59daaE`, price 0.0004 ETH, batch cap 100). Runtime code matches the build byte for byte apart from the immutable artist. Same code as the third Sepolia deployment.
+
 ```sh
 cd slopware/contracts
 cast wallet import slopware-mainnet --interactive
