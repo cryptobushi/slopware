@@ -49,6 +49,8 @@ forge verify-contract <addr> src/Slopware.sol:Slopware --chain mainnet --constru
 
 Then start the keeper, replace `__SLOPWARE__`, publish, and install release 000001 yourself.
 
+Done 2026-10-06. Release 000001: requested in block 26137572, completed by the keeper in block 26137582 (168,027 gas at 0.8 gwei, 0.000134 ETH), program `0xD6D3783A160EB03c1DE81773768e4471184FaEf6`, code equals bytecode. Site live at https://slopware.vercel.app reading mainnet. Sourcify: exact match. Etherscan: pending.
+
 ## Open items
 
 1. **No independent audit yet.**
