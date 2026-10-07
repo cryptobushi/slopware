@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SLOPWARE — readings</title>
+<meta name="description" content="The lab's observations of the programs SLOPWARE has installed. Observation, not record.">
+<style>
+html{-webkit-text-size-adjust:none;text-size-adjust:none}
+html,body{margin:0;padding:0;background:#fff;color:#000}
+html,body,pre,button{font-family:"Courier New",Courier,monospace;font-size:15px;line-height:1.3}
+h1,h2,h3{margin:0;font-size:inherit;font-weight:inherit}
+p{margin:0 0 1em}
+a{color:inherit;text-decoration:underline}
+.c{max-width:860px;margin:0 auto;padding:4em 20px;box-sizing:border-box}
+.essay{max-width:620px}
+pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.mute{color:#666}
+.tbl{display:grid;grid-template-columns:max-content 1fr;column-gap:1.5em;row-gap:0.15em;margin:1.3em 0}
+.tbl .n{text-align:right;white-space:nowrap}
+.r{margin:2.6em 0 0;padding-top:1.3em;border-top:1px solid #000}
+.r h3{display:flex;gap:1.5em;flex-wrap:wrap}
+.r .verdict{margin:0.6em 0 0}
+.r .trace{margin:0.6em 0 0;color:#000}
+button{background:none;border:0;padding:0;margin:0.6em 0 0;color:inherit;cursor:pointer;text-decoration:underline}
+.more{display:none;margin-top:1em}
+.open .more{display:block}
+.dis{columns:2;column-gap:2em}
+@media (max-width:700px){.dis{columns:1}.tbl{column-gap:1em}}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="c essay">
+<h1>readings</h1>
+<p class="mute" style="margin-top:0.3em">the lab looks at what has been installed</p>
+
+<p style="margin-top:2.6em">The installer records nothing about what a program does, and <a href="./">the catalogue</a> says <em>unknown</em> and means it. This page is something else: the lab taking each installed program, placing the same sixty-four bytes on a private copy of Ethereum, and calling it five ways with every instruction traced. What follows is observation, not record. It is written by the harness that ran the million-program study, it curates nothing, and it can be wrong about the real program in one specific way: a program that reads its own address, balance or block will see different values here than on mainnet.</p>
+
+<h2 style="margin-top:2.6em">the population so far</h2>
+<div class="tbl" id="summary"></div>
+<p class="mute" id="generated"></p>
+</div>
+
+<div class="c" id="list"></div>
+
+<div class="c essay"><p class="mute" id="foot"></p></div>
+
+<script>
+(function () {
+'use strict';
+const $ = (id) => document.getElementById(id);
+const six = (n) => String(n).padStart(6, '0');
+const fmt = (n) => Number(n).toLocaleString('en-US');
+const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const short = (h) => h.length > 14 ? `${h.slice(0, 10)}…` : h;
+const SCAN = { 1: 'https://etherscan.io', 11155111: 'https://sepolia.etherscan.io' };
+
+function instr(i) {
+  const name = i.name.replace(' (not activated)', '');
+  const future = / \(not activated\)/.test(i.name);
+  const imm = i.imm ? ` ${short('0x' + i.imm)}${i.truncated ? ' (cut off by the end of the code)' : ''}` : '';
+  return `${name}${imm}${future ? ' (an instruction from the future)' : ''}`;
+}
+
+// one sentence about how the program died, from what the probes saw
+function verdict(r) {
+  if (r.status === 'rejected') return 'Ethereum refused to install this bytecode: its first byte is 0xEF. No program exists; the bytes are kept.';
+  const a = r.probes[0]; if (!a) return '';
+  const d = r.disassembly;
+  // the count includes the instruction that failed, so the culprit is the last one executed
+  const at = d[Math.min(Math.max(0, a.instructions - 1), d.length - 1)] || d[0];
+  const name = at.name;
+  const where = a.instructions <= 1 ? 'on its first instruction' : a.instructions === 2 ? 'on its second instruction' : `after ${a.instructions} instructions`;
+  const dep = r.inputDependent ? ' It behaves differently depending on what it is sent.' : '';
+  if (a.outcome === 'success') return `It halts cleanly ${where}${a.returnDataLength ? `, returning ${a.returnDataLength} bytes` : ''}. ${a.instructions <= 1 ? 'It does nothing, successfully.' : 'It runs, and stops.'}${dep}`;
+  if (/^UNDEFINED/.test(name)) return `It dies ${where}: ${name.replace('UNDEFINED(', '').replace(')', '')} is not an instruction.${dep}`;
+  if (/not activated/.test(name)) return `It dies ${where}: ${name.replace(' (not activated)', '')} is an instruction the specification names but Ethereum cannot yet run.${dep}`;
+  if (a.outcome === 'stack_underflow') return `It dies ${where}: ${name} reaches for ${a.instructions <= 1 ? 'operands that are not there' : 'more than is on the stack'}.${dep}`;
+  if (a.outcome === 'bad_jump') return `It dies ${where}: a jump to a place that is not a destination.${dep}`;
+  if (a.outcome === 'out_of_gas') return `It runs out of gas ${where}: ${name} asks for more memory than any gas can buy.${dep}`;
+  if (a.outcome === 'revert') return `It reverts ${where}, on purpose, as far as a program can have a purpose.${dep}`;
+  return `It halts ${where} (${a.outcome.replace('_', ' ')}${a.rawError ? `: ${a.rawError}` : ''}).${dep}`;
+}
+
+// what the text would have been, past the point execution never reaches
+function wouldHaveBeen(r) {
+  if (r.status !== 'installed') return '';
+  const a = r.probes[0]; const reached = a ? a.instructions : 0;
+  const later = r.disassembly.slice(reached).map((i) => i.name.replace(' (not activated)', ''));
+  const notable = r.notable.filter((n) => later.includes(n));
+  const bits = [];
+  if (notable.length) bits.push(`Further in, never reached: ${notable.join(', ')}.`);
+  if (r.future.length) bits.push(`${r.future.length === 1 ? 'One instruction' : r.future.length + ' instructions'} from the future (${r.future.join(', ')}).`);
+  const pushes = r.disassembly.filter((i) => i.imm).reduce((s, i) => s + i.imm.length / 2, 0);
+  if (pushes >= 24) bits.push(`${pushes} of the 64 bytes are swallowed as push data.`);
+  if (r.undefinedBytes >= 20) bits.push(`${r.undefinedBytes} bytes are not instructions at all.`);
+  return bits.join(' ');
+}
+
+function render(data) {
+  const s = data.summary, lab = s.labPrediction;
+  const pct = (a, b) => b ? `${(100 * a / b).toFixed(1)}%` : '—';
+  const rows = [
+    [fmt(s.releasesRead), 'releases read'],
+    [fmt(s.installed), 'installed'],
+    [fmt(s.refused), `refused by Ethereum (the lab expects about 1 in ${lab.refusedPer})`],
+    [pct(s.diedAtFirst, s.installed), `died on their first instruction (the lab found ${lab.diedAtFirstPct}%)`],
+    [fmt(s.longest), 'instructions, the longest any has run'],
+    [fmt(s.cleanHalts), `halted cleanly (the lab expects about 1 in ${lab.cleanHaltPer})`],
+    [fmt(s.inputDependent), `answered differently to what they were sent (about 1 in ${fmt(lab.inputDependentPer)})`],
+    [fmt(s.returnedData), 'returned data'],
+    [fmt(s.withFutureOpcodes), 'carry an instruction from the future'],
+  ];
+  $('summary').innerHTML = rows.map(([n, l]) => `<span class="n">${n}</span><span>${l}</span>`).join('');
+  $('generated').textContent = `read ${new Date(data.generatedAt).toISOString().slice(0, 16).replace('T', ' ')} UTC · installer ${data.installer}`;
+  const scan = SCAN[data.chainId];
+  const list = [...data.readings].sort((x, y) => y.id - x.id);
+  $('list').innerHTML = list.map((r) => {
+    const a = r.probes[0];
+    const trace = a && a.ops.length ? a.ops.map((o) => o.split(' ')[0]).join(' · ') : (r.status === 'installed' ? '(halted before the first instruction)' : '');
+    const dis = r.disassembly.map((i) => `${i.pc.toString(16).padStart(2, '0')}  ${esc(instr(i))}`).join('\n');
+    const probes = r.probes.map((p) => `${p.name.padEnd(18)} ${p.outcome.replace('_', ' ').padEnd(16)} ${String(p.instructions).padStart(2)} instr${p.returnDataLength ? `  returns ${p.returnDataLength} B` : ''}`).join('\n');
+    return `<div class="r" id="r${r.id}">
+<h3><span>SLOPWARE ${six(r.id)}</span><span class="mute">${r.status}</span>${r.program ? `<span class="mute">${scan ? `<a href="${scan}/address/${r.program}">${r.program}</a>` : r.program}</span>` : ''}</h3>
+<p class="verdict">${esc(verdict(r))}${wouldHaveBeen(r) ? ` <span class="mute">${esc(wouldHaveBeen(r))}</span>` : ''}</p>
+${trace ? `<pre class="trace mute">${esc(trace)}</pre>` : ''}
+<button data-open="${r.id}">[ the bytes ]</button>
+<div class="more">
+<pre class="mute">${r.bytecode.slice(2).match(/.{1,32}/g).join('\n')}</pre>
+<p class="mute" style="margin:1em 0 0.3em">disassembly</p>
+<pre class="dis">${dis}</pre>
+${probes ? `<p class="mute" style="margin:1em 0 0.3em">five calls on the lab chain</p><pre>${esc(probes)}</pre>` : ''}
+<p class="mute" style="margin:1em 0 0">installed by ${r.installer} · requested in block ${fmt(r.requestedAt)}${r.installedAt ? ` · completed in block ${fmt(r.installedAt)}` : ''} · <a href="./#/${r.id}">record</a></p>
+</div>
+</div>`;
+  }).join('');
+  document.querySelectorAll('button[data-open]').forEach((b) => { b.onclick = () => { const el = $('r' + b.dataset.open); el.classList.toggle('open'); b.textContent = el.classList.contains('open') ? '[ close ]' : '[ the bytes ]'; }; });
+  $('foot').textContent = 'The lab is the harness in the repository. These readings are regenerated as releases arrive; a program still installing is read next time.';
+  if (location.hash && $(location.hash.slice(1))) { $(location.hash.slice(1)).classList.add('open'); $(location.hash.slice(1)).scrollIntoView(); }
+}
+
+fetch('readings.json').then((r) => r.json()).then(render).catch((e) => { $('summary').textContent = 'readings unavailable'; console.error(e); });
+})();
+</script>
+</body>
+</html>

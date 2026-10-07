@@ -1,6 +1,6 @@
 // The site is one document. The build copies it to dist/ with the installer's address filled in
 // from the SLOPWARE environment variable (left as the placeholder when unset, so ?contract= still works).
-import { mkdirSync, readFileSync, writeFileSync, copyFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync, copyFileSync, existsSync } from 'node:fs';
 const addr = process.env.SLOPWARE ?? '';
 mkdirSync('dist', { recursive: true });
 let html = readFileSync('index.html', 'utf8');
@@ -9,4 +9,5 @@ const rpc = process.env.RPC_URL ?? '';
 if (/^https?:\/\//.test(rpc)) html = html.replaceAll('__RPC__', rpc);
 writeFileSync('dist/index.html', html);
 copyFileSync('lab.json', 'dist/lab.json');
+for (const f of ['readings.html', 'readings.json']) if (existsSync(f)) copyFileSync(f, `dist/${f}`);
 console.log(`built dist/ · installer ${addr || '(placeholder; pass ?contract=)'}`);
