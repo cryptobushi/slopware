@@ -9,5 +9,5 @@ const rpc = process.env.RPC_URL ?? '';
 if (/^https?:\/\//.test(rpc)) html = html.replaceAll('__RPC__', rpc);
 writeFileSync('dist/index.html', html);
 copyFileSync('lab.json', 'dist/lab.json');
-for (const f of ['readings.html', 'readings.json']) if (existsSync(f)) copyFileSync(f, `dist/${f}`);
+for (const f of ['readings.html', 'readings.json', 'og-site.png', 'og-readings.png']) if (existsSync(f)) copyFileSync(f, `dist/${f}`);
 console.log(`built dist/ · installer ${addr || '(placeholder; pass ?contract=)'}`);
