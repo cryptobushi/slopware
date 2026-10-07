@@ -112,7 +112,7 @@ a program at an address
 <span class="n" data-k="external_calls">—</span><span class="l">called another contract</span>
 </div>
 <p>Nearly every random program dies at once, for one of two reasons: the byte is not an instruction, or the instruction reaches for something that is not on the stack. About one in five survives its first instruction, and one in five of those survives the next. The odds of a long life shrink by that factor at every step, whatever the length of the program.</p>
-<p>The rare ones are the point. A handful answered differently when sent money or data. Five remembered something. Seventeen tried to create another contract, and none succeeded. Roughly one program in ten thousand does anything a person would call behavior, and nobody can tell which from the bytes.</p>
+<p>The rare ones are the point. A handful answered differently when sent money or data. Five remembered something. Seventeen executed CREATE or CREATE2; no child program resulted. Roughly one program in ten thousand does anything a person would call behavior, and nobody can tell which from the bytes.</p>
 <p>Every program on this page is drawn from that same distribution. Most of it will not run. Some of it will. Nobody knows which.</p>
 <p class="mute">Method: random bytes placed by CREATE behind the same eleven-byte loader the installer uses, code verified byte for byte, then called five ways under a one-million-gas ceiling. The harness and its records are in the repository.</p>
 </div></div>
@@ -228,7 +228,7 @@ async function refresh() {
     $('install').disabled = false;
     const rejected = await u('rejected');
     const link = /^0x[0-9a-fA-F]{40}$/.test(ADDR) ? `<a href="${await scanHost()}/address/${ADDR}" target="_blank" rel="noopener">${ADDR}</a>` : ADDR.replace(/[<>&]/g, '');
-    $('colophon').innerHTML = `installer   ${link}\nreleases    ${fmt(releases)}\ninstalled   ${fmt(installed)}\nrejected    ${fmt(rejected)}\n\nthis page reads the installer directly and will change block by block.\n\nwhat the programs do is not recorded here. the lab looks, separately: <a href="readings.html">readings</a>`;
+    $('colophon').innerHTML = `installer   ${link}\nreleases    ${fmt(releases)}\ninstalled   ${fmt(installed)}\nrejected    ${fmt(rejected)}\n\nthis page reads the installer directly and will change block by block.\n\nwhat the programs do is not recorded here. the lab looks, separately: <a href="readings">readings</a>`;
     await registry(releases);
   } catch (e) { $('state').innerHTML = `<span class="err">${String(e.message || e).slice(0, 160)}</span>`; }
 }
