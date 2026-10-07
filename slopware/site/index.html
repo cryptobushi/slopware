@@ -13,13 +13,21 @@ html,body,pre,button,input{font-family:"Courier New",Courier,monospace;font-size
 h1,h2,h3{margin:0;font-size:inherit;font-weight:inherit}
 p{margin:0 0 1em}
 a{color:inherit;text-decoration:underline}
-.c{max-width:860px;margin:0 auto;padding:0 20px}
+.c{max-width:860px;margin:0 auto;padding:0 20px;box-sizing:border-box}
 .c.essay{max-width:620px}
 .w{min-height:100vh;display:flex;align-items:center;padding:6em 0}
-.s{width:100%}
+.s{width:100%;min-width:0}
 pre{margin:0;white-space:pre;overflow-x:auto}
 .gen{font-size:15px;line-height:1.3;letter-spacing:0;margin:0;white-space:pre;overflow:hidden}
-@media (max-width:700px){.gen{font-size:12px}}
+.tbl{display:grid;grid-template-columns:max-content 1fr;column-gap:1.5em;row-gap:0.15em;margin:1.3em 0}
+.tbl .n{text-align:right;white-space:nowrap}
+.row .short{display:none}
+@media (max-width:700px){
+  .gen{font-size:12px}
+  .tbl{column-gap:1em}
+  .row .full{display:none}.row .short{display:inline}
+  #rel-body,#result,#colophon,#state{white-space:pre-wrap;overflow-wrap:anywhere}
+}
 input#qty{font:inherit;width:2.6em;border:0;border-bottom:1px solid #000;background:none;color:inherit;text-align:center;padding:0}
 button{background:none;border:0;padding:0;margin:0;color:inherit;cursor:pointer;text-decoration:underline}
 button:disabled{text-decoration:none;color:#777;cursor:default}
@@ -79,18 +87,18 @@ a program at an address
 <div class="w"><div class="s c essay" id="lab">
 <h2>lab · 2026</h2>
 <p style="margin-top:1.3em">Before this installer existed we asked a plain question: what does random bytecode do? One million programs of sixty-four random bytes were installed on a private copy of Ethereum and called, with every instruction traced. Nothing was filtered, weighted or retried.</p>
-<pre id="lab-table">
-  <span data-k="observed">—</span>   programs of sixty-four random bytes
-  <span data-k="rejected">—</span>   refused by Ethereum (first byte 0xEF)
-  <span data-k="installed">—</span>   installed
-  <span data-k="first_pct">—</span>   halted on their first instruction
-  <span data-k="longest_life">—</span>   instructions, the longest any program ran
-  <span data-k="listened">—</span>   answered differently to what they were sent
-  <span data-k="remembered">—</span>   wrote something to storage that survived
-  <span data-k="returned">—</span>   returned data
-  <span data-k="out_of_gas">—</span>   ran out of gas, by appetite, never by looping
-  <span data-k="external_calls">—</span>   called another contract
-</pre>
+<div id="lab-table" class="tbl">
+<span class="n" data-k="observed">—</span><span class="l">programs of sixty-four random bytes</span>
+<span class="n" data-k="rejected">—</span><span class="l">refused by Ethereum (first byte 0xEF)</span>
+<span class="n" data-k="installed">—</span><span class="l">installed</span>
+<span class="n" data-k="first_pct">—</span><span class="l">halted on their first instruction</span>
+<span class="n" data-k="longest_life">—</span><span class="l">instructions, the longest any program ran</span>
+<span class="n" data-k="listened">—</span><span class="l">answered differently to what they were sent</span>
+<span class="n" data-k="remembered">—</span><span class="l">wrote something to storage that survived</span>
+<span class="n" data-k="returned">—</span><span class="l">returned data</span>
+<span class="n" data-k="out_of_gas">—</span><span class="l">ran out of gas, by appetite, never by looping</span>
+<span class="n" data-k="external_calls">—</span><span class="l">called another contract</span>
+</div>
 <p>Nearly every random program dies at once, for one of two reasons: the byte is not an instruction, or the instruction reaches for something that is not on the stack. About one in five survives its first instruction, and one in five of those survives the next. The odds of a long life shrink by that factor at every step, whatever the length of the program.</p>
 <p>The rare ones are the point. A handful answered differently when sent money or data. Five remembered something. Seventeen tried to create another contract, and none succeeded. Roughly one program in ten thousand does anything a person would call behavior, and nobody can tell which from the bytes.</p>
 <p>Every program on this page is drawn from that same distribution. Most of it will not run. Some of it will. Nobody knows which.</p>
@@ -192,7 +200,8 @@ let price = 0n;
       last = t;
       crypto.getRandomValues(buf);
       const h = hex(buf);
-      el.textContent = h.slice(0, 64) + '\n' + h.slice(64);
+      const cols = window.innerWidth < 700 ? 32 : 64;
+      el.textContent = h.match(new RegExp(`.{1,${cols}}`, 'g')).join('\n');
     }
     requestAnimationFrame(frame);
   }
@@ -233,7 +242,9 @@ async function registry(releases) {
 async function addRow(n, prepend) {
   const s = await software(n);
   const a = document.createElement('a'); a.className = 'row'; a.href = `#/${n}`; a.dataset.id = n;
-  a.textContent = `${six(n)}  ${s.status === 2 ? s.program : '—'.padEnd(42)}  ${STATUS[s.status]}`;
+  const addrFull = s.status === 2 ? s.program : '—'.padEnd(42);
+  const addrShort = s.status === 2 ? `${s.program.slice(0, 8)}…${s.program.slice(-6)}` : '—'.padEnd(15);
+  a.innerHTML = `${six(n)}  <span class="full">${addrFull}</span><span class="short">${addrShort}</span>  ${STATUS[s.status]}`;
   const reg = $('reg'); prepend && reg.firstChild ? reg.insertBefore(a, reg.firstChild) : reg.appendChild(a);
 }
 $('more').onclick = async () => { const from = total - shown; shown = Math.min(total, shown + 40); for (let n = from; n >= total - shown + 1 && n >= 1; n--) await addRow(n, false); $('more').classList.toggle('hide', shown >= total); };
@@ -338,7 +349,7 @@ $('back').onclick = (e) => { e.preventDefault(); location.hash = ''; };
 // numbers come from lab.json beside this page (written from the repository's runs); the words are here
 fetch('lab.json').then((r) => r.json()).then((lab) => {
   const n = lab.numbers || {};
-  const w = (k) => String(k).padStart(9, ' ');
+  const w = (k) => String(k);
   const vals = {
     observed: w(fmt(lab.observed)), rejected: w(fmt(lab.rejected)), installed: w(fmt(lab.installed)),
     first_pct: w((100 * n.first_instruction_deaths / lab.installed).toFixed(1) + '%'),
