@@ -3,6 +3,7 @@ pragma solidity ^0.8.26;
 
 import {ERC721} from "solady/tokens/ERC721.sol";
 import {LibString} from "solady/utils/LibString.sol";
+import {Base64} from "solady/utils/Base64.sol";
 
 /*
 
@@ -302,14 +303,14 @@ contract Slopware is ERC721 {
                 ? "Software nobody wrote, which Ethereum refused to install. The bytecode is recorded here; no program exists."
                 : s.status == Status.Abandoned ? "An installation nobody completed in time. No bytecode was produced." : "An installation awaiting its deciding block.";
 
-        return string(
-            abi.encodePacked(
-                "data:application/json;utf8,",
-                '{"name":"SLOPWARE ', n, '","description":"', desc, '",',
-                '"image":"data:image/svg+xml;utf8,', _svg(n, status, s, hex_), '",',
-                '"attributes":[', attrs, "]}"
-            )
+        // base64 throughout: a raw data URI is a URL, and the '#' in a color or the quotes in JSON
+        // are enough for some readers to cut it short. Encoded, it survives every wallet.
+        bytes memory json = abi.encodePacked(
+            '{"name":"SLOPWARE ', n, '","description":"', desc, '",',
+            '"image":"data:image/svg+xml;base64,', Base64.encode(_svg(n, status, s, hex_)), '",',
+            '"attributes":[', attrs, "]}"
         );
+        return string(abi.encodePacked("data:application/json;base64,", Base64.encode(json)));
     }
 
     function _svg(string memory n, string memory status, Software memory s, string memory hex_) internal pure returns (bytes memory) {

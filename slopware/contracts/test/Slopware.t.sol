@@ -3,6 +3,7 @@ pragma solidity ^0.8.26;
 
 import {Test, Vm} from "forge-std/Test.sol";
 import {Slopware} from "../src/Slopware.sol";
+import {Base64} from "solady/utils/Base64.sol";
 
 /// @dev Exposes the deployment primitive so a large corpus can be pushed through it directly.
 contract SlopwareHarness is Slopware {
@@ -345,7 +346,16 @@ contract SlopwareTest is Test {
     function test_tokenURI_isFactual() public {
         uint256 id = _request(alice);
         _finalize(id);
-        string memory uri = w.tokenURI(id);
+        string memory raw = w.tokenURI(id);
+        assertTrue(_contains(raw, "data:application/json;base64,"));
+        // decode the JSON, then the image inside it; both must be well formed and factual
+        string memory uri = string(Base64.decode(_after(raw, "base64,")));
+        assertTrue(_contains(uri, '"name":"SLOPWARE 000001"'));
+        assertTrue(_contains(uri, '"image":"data:image/svg+xml;base64,'));
+        string memory svg = string(Base64.decode(_between(uri, 'svg+xml;base64,', '"')));
+        assertTrue(_contains(svg, "<svg xmlns='http://www.w3.org/2000/svg'"));
+        assertTrue(_contains(svg, "</svg>"));
+        assertTrue(_contains(svg, "SLOPWARE 000001"));
         assertTrue(_contains(uri, '"Status","value":"INSTALLED"'));
         assertTrue(_contains(uri, "Observed behavior"));
         assertTrue(_contains(uri, "UNKNOWN"));
@@ -442,6 +452,36 @@ contract SlopwareTest is Test {
         w.complete(1);
         vm.expectRevert(Slopware.TooSoon.selector);
         w.complete(four);
+    }
+
+    function _after(string memory s, string memory marker) internal pure returns (string memory) {
+        bytes memory b = bytes(s);
+        bytes memory m = bytes(marker);
+        for (uint256 i = 0; i + m.length <= b.length; i++) {
+            bool hit = true;
+            for (uint256 j = 0; j < m.length; j++) if (b[i + j] != m[j]) { hit = false; break; }
+            if (hit) {
+                bytes memory out = new bytes(b.length - i - m.length);
+                for (uint256 k = 0; k < out.length; k++) out[k] = b[i + m.length + k];
+                return string(out);
+            }
+        }
+        revert("marker not found");
+    }
+
+    function _between(string memory s, string memory start, string memory stop) internal pure returns (string memory) {
+        bytes memory rest = bytes(_after(s, start));
+        bytes memory e = bytes(stop);
+        for (uint256 i = 0; i + e.length <= rest.length; i++) {
+            bool hit = true;
+            for (uint256 j = 0; j < e.length; j++) if (rest[i + j] != e[j]) { hit = false; break; }
+            if (hit) {
+                bytes memory out = new bytes(i);
+                for (uint256 k = 0; k < i; k++) out[k] = rest[k];
+                return string(out);
+            }
+        }
+        revert("end marker not found");
     }
 
     function _contains(string memory hay, string memory needle) internal pure returns (bool) {

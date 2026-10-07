@@ -24,7 +24,7 @@ Deployed 2026-10-06 from the artist's wallet: `0xb8e9ef6e0859bfe4aba6b3e93530636
 - [ ] Deploy from your own wallet: `node slopware/deploy/make.mjs && (cd slopware/deploy && python3 -m http.server 8002)`, open http://127.0.0.1:8002, connect, set artist and price, confirm the network, deploy. (Or from a keystore: `cast wallet import slopware-sepolia --interactive`, then `ARTIST=<artist> PRICE=300000000000000 forge script script/Deploy.s.sol --rpc-url https://ethereum-sepolia-rpc.publicnode.com --account slopware-sepolia --broadcast -vv` in `slopware/contracts`.)
 - [ ] `forge verify-contract <addr> src/Slopware.sol:Slopware --chain sepolia --constructor-args $(cast abi-encode "constructor(address,uint256)" <artist> 300000000000000)`
 - [ ] Keeper: on Vercel, set `SLOPWARE=<addr>` in the project's production environment and redeploy; the cron at `/api/keeper` runs every minute. (The always-on `keeper/keeper.ts` remains for running one by hand.)
-- [ ] Site: the same `SLOPWARE` variable fills the page at build time on Vercel (https://slopware.vercel.app); install a handful from different wallets; confirm records on Etherscan and that marketplace testnet views render `tokenURI` (utf8 JSON + utf8 SVG — watch for ones that need base64).
+- [ ] Site: the same `SLOPWARE` variable fills the page at build time on Vercel (https://slopware.vercel.app); install a handful from different wallets; confirm records on Etherscan and that wallets render `tokenURI` (base64 JSON and SVG — the first utf8 version broke on the `#` in a color).
 - [ ] Leave it a day with the keeper running. Nothing should be abandoned.
 
 ## Mainnet decisions (write the answers here)
@@ -50,7 +50,7 @@ Then start the keeper, replace `__SLOPWARE__`, publish, and install release 0000
 ## Open items
 
 1. **No independent audit yet.**
-2. **Marketplace rendering of utf8 `tokenURI` unverified**; switch the image to base64 if Sepolia shows a problem.
+2. ~~Marketplace rendering of utf8 `tokenURI`~~ — Sepolia showed the problem (a raw `#` truncates the image data URI); metadata is now base64 end to end.
 3. **Proposer influence on entropy** — disclosed, not eliminated (RANDOMNESS.md).
 4. **Keeper liveness is operational.** Down 51 minutes with no one else completing → abandonment (refundable).
 5. **`setPrice` trades away full immutability** for a dollar target in a moving ETH price.

@@ -31,7 +31,7 @@ The program carries no ownership logic, no interface, no metadata. Ownership liv
 | `complete(release)` · `completeMany(releases[])` | anyone, once the deciding block (request block + 1) is final: bytecode = `keccak(blockhash, release, 0) ‖ keccak(blockhash, release, 1)`; placed by CREATE behind an 11-byte loader with every unit of gas the completer sent; recorded `Installed`, `Rejected` (bytecode Ethereum refuses, EIP-3541) or `Abandoned` (deciding block older than 256 blocks; refundable). |
 | `software(release)` | installer, request/completion block, status, price paid, program address, checksum |
 | `bytecodeOf(release)` | installed → the program's own code; rejected → kept here |
-| `tokenURI(release)` | on-chain utf8 JSON + a plain Courier SVG: facts only |
+| `tokenURI(release)` | on-chain JSON and a plain Courier SVG, both base64: facts only |
 | `setPrice` | artist only; the one mutable thing |
 | `withdraw` / `claimRefund` | pull payments |
 
