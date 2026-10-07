@@ -151,7 +151,7 @@ function wouldHaveBeen(r) {
   const later = r.disassembly.slice(reached).map((i) => i.name.replace(' (not activated)', ''));
   const wishes = [...new Set(later.filter((n) => r.notable.includes(n)).map((n) => SPEAK[n]).filter(Boolean))];
   const bits = [];
-  if (wishes.length) bits.push(`Had it lived, it would have ${list(wishes)}.`);
+  if (wishes.length) bits.push(a && a.outcome === 'success' ? `Past where it stopped, unread, it would have ${list(wishes)}.` : `Had it lived, it would have ${list(wishes)}.`);
   if (r.future.length) bits.push(`It carries ${r.future.length === 1 ? 'one word' : r.future.length + ' words'} from a language Ethereum will speak later: ${r.future.join(', ')}.`);
   const pushes = r.disassembly.filter((i) => i.imm).reduce((s, i) => s + i.imm.length / 2, 0);
   if (pushes >= 32) bits.push(`${pushes} of its 64 bytes are luggage.`);
