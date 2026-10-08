@@ -166,3 +166,7 @@ The frozen protocol and its three data files were hashed and the hashes written 
 
 To verify: check out commit `1d7a407`, hash each file with keccak256, and compare with the calldata of that transaction. The anchor was sent after the run started but before any results existed; for every later experiment the anchor transaction precedes the first placement. The record's root hash will be anchored the same way when the run completes.
 
+### Amendment 4 — 2026-10-08, during the run
+
+One shard (genesis indices 1–200) exited at 23:4x UTC after 140 parents when its Anvil did not answer within the runner's ten-second start window under a machine load of about 14; the error is preserved in `logs/genesis-1-200.crashed.txt`. The runner was changed to wait up to a minute and retry three times (commit `57b1e58`), and the shard was resumed from index 141 as `genesis-141-200`. Parent 141's partial placements from the crashed shard are duplicates by event id and are deduplicated in analysis. No placement result is altered.
+
