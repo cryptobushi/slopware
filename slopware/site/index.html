@@ -237,7 +237,7 @@ let shown = 0, total = 0;
 async function registry(releases, installedCount, rejectedCount) {
   total = Number(releases);
   const refused = Number(rejectedCount ?? 0), inst = Number(installedCount ?? 0), pending = Math.max(0, total - inst - refused);
-  $('releases-note').textContent = total ? `${fmt(total)} releases, newest first · ${fmt(inst)} installed${refused ? ` · ${fmt(refused)} refused by Ethereum` : ''}${pending ? ` · ${fmt(pending)} installing` : ''}` : 'none yet';
+  $('releases-note').textContent = total ? `${fmt(total)} release${total === 1 ? '' : 's'}, newest first · ${fmt(inst)} installed${refused ? ` · ${fmt(refused)} refused by Ethereum` : ''}${pending ? ` · ${fmt(pending)} installing` : ''}` : 'none yet';
   if (!total) return;
   const reg = $('reg');
   const newestShown = reg.firstChild ? Number(reg.firstChild.dataset.id) : 0;
