@@ -229,14 +229,15 @@ async function refresh() {
     const rejected = await u('rejected');
     const link = /^0x[0-9a-fA-F]{40}$/.test(ADDR) ? `<a href="${await scanHost()}/address/${ADDR}" target="_blank" rel="noopener">${ADDR}</a>` : ADDR.replace(/[<>&]/g, '');
     $('colophon').innerHTML = `installer   ${link}\nreleases    ${fmt(releases)}\ninstalled   ${fmt(installed)}\nrejected    ${fmt(rejected)}\n\nthis page reads the installer directly and will change block by block.\n\nwhat the programs do is not recorded here. the lab looks, separately: <a href="readings">readings</a>`;
-    await registry(releases);
+    await registry(releases, installed, rejected);
   } catch (e) { $('state').innerHTML = `<span class="err">${String(e.message || e).slice(0, 160)}</span>`; }
 }
 
 let shown = 0, total = 0;
-async function registry(releases) {
+async function registry(releases, installedCount, rejectedCount) {
   total = Number(releases);
-  $('releases-note').textContent = total ? `${fmt(total)} so far, newest first` : 'none yet';
+  const refused = Number(rejectedCount ?? 0), inst = Number(installedCount ?? 0), pending = Math.max(0, total - inst - refused);
+  $('releases-note').textContent = total ? `${fmt(total)} releases, newest first · ${fmt(inst)} installed${refused ? ` · ${fmt(refused)} refused by Ethereum` : ''}${pending ? ` · ${fmt(pending)} installing` : ''}` : 'none yet';
   if (!total) return;
   const reg = $('reg');
   const newestShown = reg.firstChild ? Number(reg.firstChild.dataset.id) : 0;
