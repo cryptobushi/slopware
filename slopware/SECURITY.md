@@ -45,4 +45,11 @@ SLOPWARE places arbitrary, untrusted programs on purpose. The model is: **the in
 
 ## Audit status
 
-Unaudited. The test suite (`contracts/test/Slopware.t.sol`, 21 tests including fuzzing and a 3,000-bytecode corpus) encodes the properties above. An independent review of `Slopware.sol` is recommended before mainnet.
+Unaudited, and live on mainnet since 2026-10-06 by the artist's decision. The test suite (`contracts/test/Slopware.t.sol`, 21 tests including fuzzing and a 3,000-bytecode corpus) encodes the properties above, and a three-deployment Sepolia rehearsal found and fixed two defects that tests could not (a gas allowance that failed under Amsterdam pricing; a metadata encoding that broke in wallets), both recorded in `LAUNCH.md`. An independent review of `Slopware.sol` is still recommended.
+
+## Operational surface
+
+- **Keeper key.** Held as a Vercel environment variable, readable by the team; the wallet holds gas money only and can affect no outcome. The cron endpoint requires a bearer secret; completing is permissionless anyway, so the secret only prevents strangers from spending the keeper's gas.
+- **Read API.** `site/api/state.ts` and `site/api/release.ts` are read-only, hold no keys, and cache at the edge.
+- **Deploy page.** `deploy/index.html` embeds the compiled creation bytecode and signs with the artist's own wallet in the browser; no key leaves the wallet.
+- **The lab and experiments** run only on private chains with Anvil's published test keys and refuse any other RPC; see `ROADMAP.md` Part XV for the binding safety rules of the experiment.
