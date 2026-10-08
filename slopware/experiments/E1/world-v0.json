@@ -1,0 +1,18 @@
+{
+ "worldId": "0x7d9128756067823a0cc0fdc092f9880d49be94e01f62a3d7d412389628f5b50c",
+ "name": "world v0",
+ "chain": "anvil",
+ "hardfork": "osaka",
+ "chainId": 31337,
+ "state": "fresh per batch",
+ "loader": "0x604080600b6000396000f3",
+ "gasPerCall": 1000000,
+ "callerKeyIndex": 9,
+ "tracer": "debug_traceCall structLogs, stack disabled",
+ "probes": {
+  "random32": "0x74202fc1f0cf1e82d41adfef7783b95b53ae00ea08259829800426779d4539b9",
+  "selector": "0x882f15b2",
+  "arg32": "0xe256d5b9896e529be99c0ed50a91c8139f0caf016157d31529762c7fd59871db",
+  "payloadSeed": "E1-world-v0"
+ }
+}

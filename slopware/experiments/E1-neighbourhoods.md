@@ -141,3 +141,10 @@ E1 does not advance any era by itself. It establishes the record's habits and th
 Artist: Bushi (@bushibuilds) · date: 2026-10-08 · protocol frozen at commit 20d23d1
 
 Amendments after sign-off are listed here with dates.
+
+### Amendment 1 — 2026-10-08, before the run
+
+- **Snapshot block *S* = 26149410.** The genesis set is the 803 releases requested at or before it (801 installed, 2 refused). `genesis.json`, `controls.json` and `world-v0.json` (worldId `0x7d9128756067823a0cc0fdc092f9880d49be94e01f62a3d7d412389628f5b50c`) are committed beside this document.
+- **Storage compaction, no effect on results.** §8 said every placement stores the full probe result. For a child whose signature is identical to its parent's, the record stores the signature and the compact per-probe fields but not the opcode list; the parent's own placements store everything. Children that differ from their parent, or that reach any behaviour, store the full opcode list. Any placement can be regenerated from `(parent bytes, position, value)` under world v0.
+- **Noise probe.** A parent's three unmutated placements are the reference; the first is the reference signature for classification, as §6 says.
+
