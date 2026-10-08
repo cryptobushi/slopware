@@ -139,7 +139,7 @@ function verdict(r) {
   else if (/not activated/.test(at.name)) fall = `${n <= 1 ? 'Its first word' : 'Its next word'}, ${bare}, is from a language Ethereum does not speak yet. It died ${n <= 1 ? 'before its first breath' : 'mid-sentence'}.`;
   else if (a.outcome === 'stack_underflow') fall = `${n <= 1 ? 'It reached' : 'Then it reached'} to ${reach(bare)} with ${n <= 1 ? 'empty hands' : 'less in its hands than that takes'}, and fell.`;
   else if (a.outcome === 'bad_jump') fall = 'Then it tried to go somewhere that is not a place, and fell.';
-  else if (a.outcome === 'out_of_gas') fall = `Then it asked for more room than the world could give (${bare}) and starved.`;
+  else if (a.outcome === 'out_of_gas' || /memory(limit)?oog/i.test(a.rawError || '')) fall = `${n <= 1 ? 'It asked' : 'Then it asked'} for more room than the world could give (${bare}) and starved.`;
   else if (a.outcome === 'revert') fall = 'Then it took everything back and went quiet.';
   else fall = `Then it fell (${a.outcome.replace('_', ' ')}).`;
   return `${did}${fall}${dep}`;
