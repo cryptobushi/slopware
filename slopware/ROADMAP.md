@@ -749,6 +749,8 @@ Amendments to these are recorded here with dates. Experiments cite the version t
 
 ## Part XI — The minimum next release
 
+*Pre-registered as [`experiments/E1-neighbourhoods.md`](experiments/E1-neighbourhoods.md) on 2026-10-08; not yet run.*
+
 The smallest honest step toward heredity that keeps everything that makes the current work what it is:
 
 **Neighbourhoods.** For every genesis genome (installed and refused), generate every single-byte substitution at a sample of positions, or all 64 × 255 = 16,320 one-mutants if compute allows (800 × 16,320 ≈ 13 million placements, about nine hours on the lab at 400/s; a 1-in-16 sample is thirty-five minutes). Place and probe each under world v0. Record mutation events, genotypes and phenotypes in the lineage record with the schema from Part X. Compute, per genesis genome, the neutral / lethal / altering fractions, and the same for a matched set of fresh random genomes.

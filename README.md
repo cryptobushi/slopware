@@ -110,7 +110,7 @@ Each criterion carries a status, **NOT OBSERVED · CANDIDATE · REPLICATED · ST
 
 ### Roadmap — PROPOSED
 
-The brief's eras, in order: abiogenesis (current) · descent · swarm · selection · ecology · anatomy · metabolism · self-representation · reproduction · wild · autonomy. The roadmap argues the order should change: ablation and the lineage record come first; worlds must be defined before selection; swarm is capacity, not an era; self-representation and reproduction are detectors that run from the start; wild-versus-collected is a decision needed before the first descendant exists. The minimum next release is **neighbourhoods**: every single-byte mutant of every genesis genome, placed and probed on the lab chain, recorded in a reproducible lineage record, published in the readings' voice with the record's numbers beneath, and nothing changed on mainnet.
+The brief's eras, in order: abiogenesis (current) · descent · swarm · selection · ecology · anatomy · metabolism · self-representation · reproduction · wild · autonomy. The roadmap argues the order should change: ablation and the lineage record come first; worlds must be defined before selection; swarm is capacity, not an era; self-representation and reproduction are detectors that run from the start; wild-versus-collected is a decision needed before the first descendant exists. The minimum next release is **neighbourhoods**, pre-registered in [`slopware/experiments/E1-neighbourhoods.md`](slopware/experiments/E1-neighbourhoods.md) and not yet run: every single-byte mutant of every genesis genome, placed and probed on the lab chain, recorded in a reproducible lineage record, published in the readings' voice with the record's numbers beneath, and nothing changed on mainnet.
 
 ### Safety — binding
 
