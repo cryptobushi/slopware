@@ -50,13 +50,15 @@ err.sort(); med = err[len(err) // 2]
 res["H2"] = {"median_abs_error": med, "within_0.02": sum(1 for e in err if e <= 0.02) / len(err), "confirmed": med < 0.01}
 # H3 — the first byte: among parents dying at byte one, position-0 children living >= 2 instructions
 # (recorded via placements: count children with pos 0 whose probe A instruction count >= 2)
-k = n = 0
+k = n = 0; seen_events = set()
 for s in ("genesis", "control"):
     for f in sorted(glob.glob(f"{root}/record/{s}/placements-*.jsonl")):
         for l in open(f):
             if '"pos":0' not in l and '"pos": 0' not in l: continue
             r = json.loads(l)
             if r.get("pos") != 0 or not r.get("probes"): continue
+            if r["e"] in seen_events: continue   # a shard restarted mid-parent may have written a child twice
+            seen_events.add(r["e"])
             pa = next((p for p in r["probes"] if p["n"] == "A"), None)
             if pa is None: continue
             n += 1; k += 1 if pa["i"] >= 2 else 0

@@ -19,6 +19,12 @@ shard() { # set from to port
 }
 
 case "${1:-genesis}" in
+  shard) shard "$2" "$3" "$4" "$5" ;;
+  all8)
+    # eight shards, four per set; the machine is latency-bound so this is ~4x two shards
+    shard genesis "${2:-0}" 200 8560; shard genesis 201 401 8561; shard genesis "${3:-402}" 602 8562; shard genesis 603 $((N_GENESIS - 1)) 8563
+    shard control 0 200 8564; shard control 201 401 8565; shard control 402 602 8566; shard control 603 $((N_CONTROL - 1)) 8567 ;;
+  stop) pkill -f "src/e1.ts" || true; pkill -f "anvil --port 85" || true; echo stopped ;;
   genesis)
     shard genesis 0 $((HALF_G - 1)) 8560
     shard genesis $HALF_G $((N_GENESIS - 1)) 8561 ;;
