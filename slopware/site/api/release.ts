@@ -29,7 +29,8 @@ export default async function handler(req: any, res: any) {
     res.status(200).json({ id, status: STATUS[s.status] ?? String(s.status), installer: s.installer, owner, program: s.status === 2 ? s.program : null, requestedAt: Number(s.requestedAt), installedAt: Number(s.installedAt), checksum: s.checksum, bytecode });
   } catch (e: any) {
     const m = String(e.shortMessage ?? e.message ?? e);
-    if (/NoSuchRelease|0xbdf01e81/.test(m)) { res.setHeader('Cache-Control', 'public, s-maxage=10'); res.status(404).json({ error: 'no such release' }); return; }
+    const full = [m, e.message, e.details, e.cause?.data?.errorName, e.cause?.shortMessage].filter(Boolean).join(' ');
+    if (/NoSuchRelease|0xbdf01e81/.test(full)) { res.setHeader('Cache-Control', 'public, s-maxage=10'); res.status(404).json({ error: 'no such release' }); return; }
     res.setHeader('Cache-Control', 'no-store');
     res.status(502).json({ error: m.slice(0, 200) });
   }
