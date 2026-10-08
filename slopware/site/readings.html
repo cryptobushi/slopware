@@ -176,6 +176,12 @@ function render(data) {
   $('summary').innerHTML = rows.map(([n, l]) => `<span class="n">${n}</span><span>${l}</span>`).join('');
   $('generated').textContent = `read ${new Date(data.generatedAt).toISOString().slice(0, 16).replace('T', ' ')} UTC\ninstaller ${data.installer}`;
   $('generated').style.whiteSpace = 'pre-wrap';
+  // the catalogue moves faster than the lab reads it; say so
+  fetch('/api/state', { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).then((st) => {
+    if (!st) return;
+    const behind = st.releases - s.releasesRead;
+    $('generated').textContent += `\nthe catalogue is at ${fmt(st.releases)}${behind > 0 ? `; ${fmt(behind)} release${behind === 1 ? ' has' : 's have'} not been read yet` : '; every release has been read'}`;
+  }).catch(() => {});
   const scan = SCAN[data.chainId];
   const list = [...data.readings].sort((x, y) => y.id - x.id);
   $('list').innerHTML = list.map((r) => {
