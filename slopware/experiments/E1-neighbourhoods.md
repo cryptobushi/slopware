@@ -153,3 +153,16 @@ Amendments after sign-off are listed here with dates.
 - **Execution.** Run on a rented 16-vCPU machine (Ubuntu 24.04, Node v24.21.0, Anvil 1.8.5, repository commit `1a2d70b`), as eight shards of ten workers each, four per set, each shard owning its own Anvil restarted every ten parents. The record is on an attached volume; its root hash is committed when the run completes.
 - **Restart.** The run began as two shards, was stopped after four parents to widen to eight, and the widened shards resumed one parent early. Releases 2 and 404 therefore have two complete summaries and two parents (releases 3 and 405) have partial duplicate placements from the stopped shards. The analysis keeps the first complete summary per genotype and dedupes placements by event id. No placement result is altered by this.
 
+### Amendment 3 — 2026-10-08, anchor on Ethereum
+
+The frozen protocol and its three data files were hashed and the hashes written to Ethereum mainnet as calldata, from the keeper wallet to itself, in transaction `0x43cf98936519c7d068b631a15144d16a405680308cea9bc4edb9fe0bd85829ec`, block 26149568. The calldata is the UTF-8 text in `E1/anchor.txt`:
+
+| file | keccak256 at commit `1d7a407` |
+|---|---|
+| `E1-neighbourhoods.md` (this document, before this amendment) | `0xbaa09001fae948bbe026225401043f7bb0433e56b336e6527a2fc460bbe4c631` |
+| `E1/genesis.json` | `0x59daa8d4c5b44c44c9a17b12dfcd3568d29fcad3ee725da35f2a90601437b9ba` |
+| `E1/controls.json` | `0x6d22dc0cc555cf219c249103108ea7eda38f3a5b4d11ae6f3a350cbf036e267b` |
+| `E1/world-v0.json` | `0x7c4b04d9a8e9981c03a793a4f78c839ed855f9e2bdaf0f83f0fa445b3131f327` |
+
+To verify: check out commit `1d7a407`, hash each file with keccak256, and compare with the calldata of that transaction. The anchor was sent after the run started but before any results existed; for every later experiment the anchor transaction precedes the first placement. The record's root hash will be anchored the same way when the run completes.
+
