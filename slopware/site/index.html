@@ -156,6 +156,17 @@ function rpc(method, params) {
   return Promise.reject(new Error('no ethereum client — open in a wallet browser, or add ?rpc='));
 }
 const CHAIN_NAMES = { 1: 'Ethereum mainnet', 11155111: 'Sepolia', 31337: 'the local chain' };
+// reads that every visitor makes go through a small cached API when this page is served by the site itself;
+// the chain is still the source, but one read every ten seconds serves everyone. Falls back to the RPC.
+const API = (!q.get('rpc') && !q.get('contract') && /^https?:$/.test(location.protocol)) ? '/api' : null;
+let apiDown = false;
+async function viaApi(path) {
+  if (!API || apiDown) return null;
+  try { const r = await fetch(`${API}${path}`, { cache: 'no-cache' }); if (!r.ok) { if (r.status === 404) apiDown = true; return null; } return await r.json(); }
+  catch (e) { return null; }
+}
+const STATUS_NUM = { none: 0, installing: 1, installed: 2, rejected: 3, abandoned: 4 };
+const fromApiRow = (r) => ({ installer: r.installer, requestedAt: r.requestedAt, installedAt: r.installedAt, status: STATUS_NUM[r.status] ?? 0, program: r.program || '0x0000000000000000000000000000000000000000', checksum: r.checksum });
 const TX_GAS_CAP = 16_777_216; // EIP-7825: no transaction may use more
 // gas is priced by the chain, not by this page: estimate on the installer's chain and add a fifth
 async function gasFor(tx) {
@@ -223,18 +234,21 @@ let price = 0n;
 // ---------------------------------------------------------------- state
 async function refresh() {
   try {
-    const [p, releases, installed] = await Promise.all([u('price'), u('releases'), u('installed')]);
+    const st = await viaApi('/state');
+    let p, releases, installed, rejected, rows = null;
+    if (st) { p = BigInt(st.price); releases = BigInt(st.releases); installed = BigInt(st.installed); rejected = BigInt(st.rejected); rows = st.rows; }
+    else { [p, releases, installed, rejected] = await Promise.all([u('price'), u('releases'), u('installed'), u('rejected')]); }
     price = p; $('price').textContent = eth(price); $('count').textContent = fmt(installed);
     $('install').disabled = false;
-    const rejected = await u('rejected');
     const link = /^0x[0-9a-fA-F]{40}$/.test(ADDR) ? `<a href="${await scanHost()}/address/${ADDR}" target="_blank" rel="noopener">${ADDR}</a>` : ADDR.replace(/[<>&]/g, '');
     $('colophon').innerHTML = `installer   ${link}\nreleases    ${fmt(releases)}\ninstalled   ${fmt(installed)}\nrejected    ${fmt(rejected)}\n\nthis page reads the installer directly and will change block by block.\n\nwhat the programs do is not recorded here. the lab looks, separately: <a href="readings">readings</a>`;
-    await registry(releases, installed, rejected);
+    await registry(releases, installed, rejected, rows);
   } catch (e) { $('state').innerHTML = `<span class="err">${String(e.message || e).slice(0, 160)}</span>`; }
 }
 
 let shown = 0, total = 0;
-async function registry(releases, installedCount, rejectedCount) {
+async function registry(releases, installedCount, rejectedCount, rows) {
+  const byId = new Map((rows || []).map((r) => [r.id, fromApiRow(r)]));
   total = Number(releases);
   const refused = Number(rejectedCount ?? 0), inst = Number(installedCount ?? 0), pending = Math.max(0, total - inst - refused);
   $('releases-note').textContent = total ? `${fmt(total)} release${total === 1 ? '' : 's'}, newest first · ${fmt(inst)} installed${refused ? ` · ${fmt(refused)} refused by Ethereum` : ''}${pending ? ` · ${fmt(pending)} installing` : ''}` : 'none yet';
@@ -244,23 +258,28 @@ async function registry(releases, installedCount, rejectedCount) {
   if (!newestShown) {
     // first load: the newest forty, appended in order
     shown = Math.min(total, 40);
-    for (let n = total; n > total - shown; n--) await addRow(n, false);
+    for (let n = total; n > total - shown; n--) await addRow(n, false, byId.get(n));
   } else {
     // later: only what arrived since, each placed on top, oldest first so the newest ends up first
-    for (let n = newestShown + 1; n <= total; n++) await addRow(n, true);
+    for (let n = newestShown + 1; n <= total; n++) await addRow(n, true, byId.get(n));
     shown += total - newestShown;
   }
   $('more').classList.toggle('hide', shown >= total);
 }
-async function addRow(n, prepend) {
-  const s = await software(n);
+async function addRow(n, prepend, known) {
+  const s = known || await software(n);
   const a = document.createElement('a'); a.className = 'row'; a.href = `#/${n}`; a.dataset.id = n;
   const addrFull = s.status === 2 ? s.program : '—'.padEnd(42);
   const addrShort = s.status === 2 ? `${s.program.slice(0, 8)}…${s.program.slice(-6)}` : '—'.padEnd(15);
   a.innerHTML = `${six(n)}  <span class="full">${addrFull}</span><span class="short">${addrShort}</span>  ${STATUS[s.status]}`;
   const reg = $('reg'); prepend && reg.firstChild ? reg.insertBefore(a, reg.firstChild) : reg.appendChild(a);
 }
-$('more').onclick = async () => { const from = total - shown; shown = Math.min(total, shown + 40); for (let n = from; n >= total - shown + 1 && n >= 1; n--) await addRow(n, false); $('more').classList.toggle('hide', shown >= total); };
+$('more').onclick = async () => {
+  const from = total - shown; shown = Math.min(total, shown + 40); const lo = Math.max(1, total - shown + 1);
+  const win = await viaApi(`/state?from=${lo}&to=${from}`); const byId = new Map(((win && win.rows) || []).map((r) => [r.id, fromApiRow(r)]));
+  for (let n = from; n >= lo; n--) await addRow(n, false, byId.get(n));
+  $('more').classList.toggle('hide', shown >= total);
+};
 
 // ---------------------------------------------------------------- install
 const qty = () => Math.max(1, Math.min(100, Math.floor(Number($('qty').value) || 1)));
@@ -328,7 +347,8 @@ async function record(n) {
   $('home').classList.add('hide'); $('rel').classList.remove('hide'); window.scrollTo(0, 0);
   const body = $('rel-body'); body.textContent = `SLOPWARE ${six(n)}\nreading…`;
   try {
-    const [s, owner, code] = await Promise.all([software(n), ownerOf(n), bytecodeOf(n)]);
+    const rec = await viaApi(`/release?id=${n}`);
+    const [s, owner, code] = rec ? [fromApiRow(rec), rec.owner, rec.bytecode && rec.bytecode !== '0x' ? rec.bytecode : ''] : await Promise.all([software(n), ownerOf(n), bytecodeOf(n)]);
     const L = [];
     L.push(`SLOPWARE ${six(n)}`, '');
     if (s.status === 2) L.push(s.program, '');
