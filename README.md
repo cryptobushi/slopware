@@ -92,6 +92,10 @@ The framework is the artificial-life analysis of computer viruses, whose central
 11. BIRTH never closes: anyone, at any time, may introduce unrelated random bytes into whatever world exists.
 12. A fee is taken only at abiogenesis. Everything after birth belongs to the experiment.
 
+### Decisions ratified — constitution version 1, 2026-10-08
+
+Genotype identity is the keccak of the bytes. Descendant length is fixed at 64 for the first experiment only. The genesis population is every release before the block of the first mutation event. Receipts refer to releases only; descendants have no owner. Refused genomes are in the population. Facts are stated in the installer's words; biology is reserved for the readings and labelled. A stopping rule will be written before the first population experiment. Full text in [`ROADMAP.md`](slopware/ROADMAP.md), Part X-A.
+
 ### Ontology — PROPOSED
 
 **Genotype** (the inherited bytes; identity `keccak256(bytes)`, already the on-chain checksum) · **instance** (one deployment) · **phenotype** (behaviour in a defined environment) · **lineage** (the recorded graph of mutation and reproduction events) · **environment** (a fully specified world; today, *world v0*: the lab's five probes) · **release** and **receipt** (the installer's record and its NFT, which refer to releases only) · **contract** (the permanent Ethereum instance) · **wild organism** (exists only in experimental worlds; no receipt, no owner) · **fossil** (a wild genotype preserved on Ethereum).

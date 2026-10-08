@@ -716,7 +716,21 @@ Today a receipt means: this release, its bytes, its program, who installed it, w
 
 ---
 
-## Part X — Decisions needed now (expensive or impossible to reverse)
+## Part X-A — Decisions ratified (constitution version 1, 2026-10-08)
+
+Ratified by the artist at release 802, before any heredity experiment, before any code.
+
+1. **Genotype identity is `keccak256(runtime bytes)`.** It is the on-chain checksum and what the invariant verifies. Identical bytes born twice are one genotype with two genesis events.
+2. **Descendant length is fixed at 64 bytes for the neighbourhoods experiment only.** This expires when the first population experiment is designed; that experiment must publish its length rule as a world parameter. Permanent fixed length would deny organisms duplication and insertion, which is designing the organism by omission.
+3. **The genesis population is every installer release requested before block *G*, the block in which the first mutation event is recorded.** *G* will be written here when it happens. Later births are generation 0 with an era tag and are not biologically distinguished in any way.
+4. **Receipts refer to releases only. Descendants have no owner.** No future contract mints receipts for descendants by default. Collectors, the artist, and the keeper hold no property interest in any lineage. This protects the credibility of everything reported afterward.
+5. **Refused genomes are in the population** as genesis genotypes with `instantiable: false`. They may have descendants.
+6. **Vocabulary is layered and labelled.** Wherever facts are stated (the installer, the catalogue, the record, datasets) the words are install, release, program, refused, abandoned. The readings and the essays may use birth, organism, abiogenesis, and the rest, labelled as interpretation. The install button is never renamed.
+7. **A stopping rule will be written before the first population experiment runs**, stating what result ends the experiment with a published negative conclusion. It is a required part of that experiment's pre-registration, not an afterthought.
+
+Amendments to these are recorded here with dates. Experiments cite the version they ran under.
+
+## Part X — Decisions needed now, as originally posed (expensive or impossible to reverse)
 
 1. **Genotype identity = `keccak256(runtime bytes)`.** Already the on-chain checksum. Adopt. Consequence: identical bytes born twice are one genotype with two genesis events.
 2. **Descendant identity.** Content-addressed: `childId = keccak256(parentIds ‖ operator ‖ seed ‖ experimentVersion)`; the genotype id is separate (two different events can yield the same bytes). Adopt before the first mutation event is written.
