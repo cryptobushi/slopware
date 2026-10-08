@@ -148,3 +148,8 @@ Amendments after sign-off are listed here with dates.
 - **Storage compaction, no effect on results.** §8 said every placement stores the full probe result. For a child whose signature is identical to its parent's, the record stores the signature and the compact per-probe fields but not the opcode list; the parent's own placements store everything. Children that differ from their parent, or that reach any behaviour, store the full opcode list. Any placement can be regenerated from `(parent bytes, position, value)` under world v0.
 - **Noise probe.** A parent's three unmutated placements are the reference; the first is the reference signature for classification, as §6 says.
 
+### Amendment 2 — 2026-10-08, during the run
+
+- **Execution.** Run on a rented 16-vCPU machine (Ubuntu 24.04, Node v24.21.0, Anvil 1.8.5, repository commit `1a2d70b`), as eight shards of ten workers each, four per set, each shard owning its own Anvil restarted every ten parents. The record is on an attached volume; its root hash is committed when the run completes.
+- **Restart.** The run began as two shards, was stopped after four parents to widen to eight, and the widened shards resumed one parent early. Releases 2 and 404 therefore have two complete summaries and two parents (releases 3 and 405) have partial duplicate placements from the stopped shards. The analysis keeps the first complete summary per genotype and dedupes placements by event id. No placement result is altered by this.
+

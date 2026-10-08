@@ -9,7 +9,12 @@ def load(s):
     rows = []
     for f in sorted(glob.glob(f"{root}/record/{s}/parents-*.jsonl")):
         rows += [json.loads(l) for l in open(f) if l.strip()]
-    return [r for r in rows if r["instantiable"] and r["children"]["placed"] > 0]
+    # a shard restarted one parent early records that parent twice; keep the first complete summary per genotype
+    seen = set(); out = []
+    for r in rows:
+        if r["genotypeId"] in seen: continue
+        seen.add(r["genotypeId"]); out.append(r)
+    return [r for r in out if r["instantiable"] and r["children"]["placed"] > 0]
 G, C = load("genesis"), load("control")
 print(f"genesis parents {len(G)} · control parents {len(C)}")
 if not G or not C: sys.exit("both sets are needed")
