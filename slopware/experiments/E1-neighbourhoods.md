@@ -1,8 +1,8 @@
 # Experiment E1 — Neighbourhoods
 
-**Status:** pre-registered, not run. No code exists for it yet.
+**Status:** pre-registered and signed, not run. No code exists for it yet.
 **Constitution:** version 1 (2026-10-08). **Roadmap:** Part XI, "the minimum next release."
-**Written:** 2026-10-08, at release 803. **Sign-off:** pending the artist.
+**Written:** 2026-10-08, at release 803. **Signed:** 2026-10-08 by the artist.
 
 This document is written before the experiment so that the hypotheses, the protocol, and the analysis cannot be shaped by the results. Once signed, it is frozen; anything learned during the run that requires a change is recorded as a dated amendment below the sign-off, and the run is restarted if the change affects results.
 
@@ -138,6 +138,6 @@ E1 does not advance any era by itself. It establishes the record's habits and th
 
 ## Sign-off
 
-Artist: ____________________ date: __________
+Artist: Bushi (@bushibuilds) · date: 2026-10-08 · protocol frozen at commit 20d23d1
 
 Amendments after sign-off are listed here with dates.
