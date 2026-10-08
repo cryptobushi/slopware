@@ -46,10 +46,14 @@ const parentsFile = `${OUT}/${SET}/parents-${FROM}-${TO}.jsonl`;
 let anvil: ChildProcess | null = null;
 async function startAnvil(): Promise<void> {
   if (anvil) { anvil.kill('SIGKILL'); await new Promise((r) => setTimeout(r, 300)); }
-  anvil = spawn('anvil', ['--port', String(PORT), '--hardfork', world.hardfork, '--chain-id', String(world.chainId), '--silent', '--gas-limit', '30000000'], { stdio: 'ignore' });
-  for (let i = 0; i < 100; i++) {
-    try { const r = await fetch(`http://127.0.0.1:${PORT}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{"jsonrpc":"2.0","id":1,"method":"eth_chainId","params":[]}' }); if (r.ok) return; } catch {}
-    await new Promise((r) => setTimeout(r, 100));
+  // under heavy load anvil can take tens of seconds to answer; wait up to a minute, and try three times
+  for (let attempt = 0; attempt < 3; attempt++) {
+    anvil = spawn('anvil', ['--port', String(PORT), '--hardfork', world.hardfork, '--chain-id', String(world.chainId), '--silent', '--gas-limit', '30000000'], { stdio: 'ignore' });
+    for (let i = 0; i < 300; i++) {
+      try { const r = await fetch(`http://127.0.0.1:${PORT}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{"jsonrpc":"2.0","id":1,"method":"eth_chainId","params":[]}' }); if (r.ok) return; } catch {}
+      await new Promise((r) => setTimeout(r, 200));
+    }
+    anvil.kill('SIGKILL'); await new Promise((r) => setTimeout(r, 1000));
   }
   throw new Error('anvil did not start');
 }
