@@ -62,6 +62,7 @@ Lifespan is geometric: about one in five survives each instruction. Of 256 byte 
 | `src/`, `scripts/` | the lab |
 | [`BASELINE.md`](BASELINE.md) | what the lab found before launch, reproducible from seeds |
 | [`slopware/ROADMAP.md`](slopware/ROADMAP.md) | the proposed experiment: constitution, ontology, economics, eras, scorecards, open questions |
+| [`slopware/IDEAS.md`](slopware/IDEAS.md) | ideas on hold, with where they might fit and what must be true first |
 
 Local run: `./slopware/sim.sh` for the whole system on a private chain; `cd slopware/contracts && forge test` for the suite; `npm run explore -- --count 100 --bytes 64` for the lab.
 
