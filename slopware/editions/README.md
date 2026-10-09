@@ -38,7 +38,8 @@ SIG='createListing((uint256,uint8,uint24,uint24,uint16,uint16,address,address,ui
 cast send --rpc-url $RPC --private-key $PK $MKT "$SIG" "($R,1,1,1,300,1000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0,$D)" "($T,$C,1,false)" "(0,0)" "[($ARTIST,10000)]" false false 0x
 # listing id = return value (simulate with cast call first) — the token is escrowed in the marketplace
 
-# 5. page: fill widgets.html with the listing id, chain id, marketplace; add to the experiment's results page
+# 5. page: the experiment's results page (one image, the five hypotheses with numbers, three sentences, the data, the auction) is drafted
+#    and shown to the artist before it is published; the auction section is widgets.html filled with the listing id, chain id, marketplace
 
 # 6. after endTime (startTime is set by the first bid; endTime = first bid + D, extended by late bids)
 cast send --rpc-url $RPC --private-key $PK $MKT 'finalize(uint40)' $LISTING   # token → winner, ETH → artist; with no bid the token returns to the keeper
