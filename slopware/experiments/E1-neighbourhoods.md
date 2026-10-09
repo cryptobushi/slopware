@@ -170,3 +170,7 @@ To verify: check out commit `1d7a407`, hash each file with keccak256, and compar
 
 One shard (genesis indices 1–200) exited at 23:4x UTC after 140 parents when its Anvil did not answer within the runner's ten-second start window under a machine load of about 14; the error is preserved in `logs/genesis-1-200.crashed.txt`. The runner was changed to wait up to a minute and retry three times (commit `57b1e58`), and the shard was resumed from index 141 as `genesis-141-200`. Parent 141's partial placements from the crashed shard are duplicates by event id and are deduplicated in analysis. No placement result is altered.
 
+### Amendment 5 — 2026-10-09 00:16 UTC, during the run
+
+Two more shards still running the original ten-second start code exited the same way (genesis indices 201–401 after index 360; 403–602 after index 562); their logs are preserved as `*.crashed.txt`. Both were resumed from the next index with the patched runner (`genesis-361-401`, `genesis-563-602`). As before, the partial placements of indices 361 and 563 are duplicates by event id and are deduplicated in analysis. The record itself (about 27 GB) will remain on a snapshot of the droplet's volume; the manifest, root hash, parent summaries, logs, analysis and readings artefacts are brought into the repository or `results/`.
+
