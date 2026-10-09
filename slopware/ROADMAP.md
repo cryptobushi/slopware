@@ -748,6 +748,8 @@ Ratified by the artist at release 806, with E1 running and its results unknown.
 
 **E1.** The E1 edition is a 1/1 generated from the sealed E1 record once it is complete, auctioned on the E1 results page after the results are published. Its form is chosen from renders made from the record and is recorded in `IDEAS.md` and the E1 document when fixed.
 
+**Who signs (decided by the artist 2026-10-08, E1 still running).** Research editions are minted from the keeper's wallet, `0xB847…913f`, not the artist's. The keeper is the project's own hand: it has completed every installation nobody else completed, it anchored the E1 pre-registration, and the artist regards the work as co-authored with the machine that attends it. So the creator of record on every research edition is the keeper. Conditions: the edition contract names the artist's wallet as an admin alongside the keeper, so the series does not depend on a hot key; proceeds are swept to the artist as rule 6 requires, as the installer's sales already are; the keeper still holds nothing of value between transactions. `SECURITY.md` records the change to the keeper's surface.
+
 ## Part X — Decisions needed now, as originally posed (expensive or impossible to reverse)
 
 1. **Genotype identity = `keccak256(runtime bytes)`.** Already the on-chain checksum. Adopt. Consequence: identical bytes born twice are one genotype with two genesis events.

@@ -49,7 +49,8 @@ Unaudited, and live on mainnet since 2026-10-06 by the artist's decision. The te
 
 ## Operational surface
 
-- **Keeper key.** Held as a Vercel environment variable, readable by the team; the wallet holds gas money only and can affect no outcome. The cron endpoint requires a bearer secret; completing is permissionless anyway, so the secret only prevents strangers from spending the keeper's gas.
+- **Keeper key.** Held as a Vercel environment variable, readable by the team; the wallet holds gas money and can affect no outcome of the installer. The cron endpoint requires a bearer secret; completing is permissionless anyway, so the secret only prevents strangers from spending the keeper's gas.
+- **Keeper as creator of record (from 2026-10-08).** Research editions (roadmap Part X-B) are minted from the keeper's wallet on a creator contract separate from the installer. That contract names the artist's wallet as a second admin, so a compromised or lost keeper key cannot take the series, and auction proceeds are swept from the keeper to the artist promptly, so the wallet never holds more than gas and a pending sweep. A compromised keeper key could still mint an unauthorised token on that contract; the artist admin can revoke the keeper if that ever happens, and the edition list in each experiment's document is the authority on which tokens are real.
 - **Read API.** `site/api/state.ts` and `site/api/release.ts` are read-only, hold no keys, and cache at the edge.
 - **Deploy page.** `deploy/index.html` embeds the compiled creation bytecode and signs with the artist's own wallet in the browser; no key leaves the wallet.
 - **The lab and experiments** run only on private chains with Anvil's published test keys and refuse any other RPC; see `ROADMAP.md` Part XV for the binding safety rules of the experiment.

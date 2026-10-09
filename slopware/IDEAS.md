@@ -27,7 +27,7 @@ Things worth keeping that do not yet have a place. Each entry says where it migh
 
 ## THREADS — the E1 research edition (fixed 2026-10-08)
 
-Every genesis program as a walk: the sixty-four bytes read in order turn and advance a pen; the whole walk in faint grey (what the program is), the executed prefix in black (how much of itself it lived), a red mark where a program reached three or more instructions. Grid in release order, genesis only. Rules fixed in `scripts/e1_threads.py` before E1's results were known (E1 amendment 6). The ghosts (below) stay for the readings page, one per release.
+Every genesis program as a walk: the sixty-four bytes read in order turn and advance a pen; the whole walk in faint grey (what the program is), the executed prefix in black (how much of itself it lived), a red mark where a program reached three or more instructions. Grid in release order, genesis only. Rules fixed in `scripts/e1_threads.py` before E1's results were known (E1 amendment 6). Minted from the keeper's wallet as creator of record, the artist's wallet as second admin, proceeds to the artist (E1 amendment 7). The ghosts (below) stay for the readings page, one per release.
 
 ## Ghosts (2026-10-08)
 

@@ -178,3 +178,6 @@ Two more shards still running the original ten-second start code exited the same
 
 Under constitution amendment 1 (roadmap Part X-B), E1 has one research edition, **THREADS**, defined here before any result is known. It is generated from the sealed record by `scripts/e1_threads.py` (keccak256 of the script at this commit: `0x67bd975b34a16877b3c31de91c78887eaa4c368a6f9f64bf0d366a334e9a97e6`), genesis programs only, in release order, with the red mark at three or more executed instructions. The rules are stated in the script's header and are not changed after this amendment. The edition's metadata will carry the record's root hash, the anchor transaction, and this script hash. It is offered only after the results below are published, on the E1 results page, and confers no rights over anything.
 
+### Amendment 7 — 2026-10-08 21:30 ET, before results: who mints the edition
+
+THREADS is minted from the keeper's wallet (`0xB847754313D6320f43396F885d168b0B433b913f`) on a creator contract separate from the installer, with the artist's wallet as a second admin; the keeper is the creator of record and proceeds are swept to the artist (roadmap Part X-B, "Who signs"). This changes nothing about what the edition depicts or when it is offered.
