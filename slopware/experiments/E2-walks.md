@@ -125,3 +125,7 @@ The anchor transaction, sent by the keeper after this signing commit, is recorde
 ### Amendment 1 — 2026-10-09, anchor on Ethereum, before the first attempt
 
 Anchored from the keeper in transaction `0xacb2614447721b5e959171c7e267301e0974be6d7cb691488d2578890ec85d7f` (block 26,156,572). The message (`E2/anchor.txt`) carries this document's keccak256 at the signing commit `50ad530` (`0xcfc6bd5918622a107c4b11c860b79c25c4dbf12afbe2a04653dd573b0afca63e`), the sha256 of `parents.json` and `world-v0.json`, and the keccak256 of the three frozen scripts. No attempt had been placed at that block.
+
+### Note — 2026-10-09, during the run, before any trajectory was seen: STEPS left as signed
+
+A synthetic mock of STEPS (random climbs at an assumed rate, not data) was rendered with the frozen script to preview the picture's form. It showed that with 88 strips and one shared power-of-two axis, modest climbs will be faint. Two amendments were offered (taller strips; taller strips with a log₂ axis). The artist declined both and left STEPS exactly as signed. No E2 trajectory had been looked at. This note changes nothing.
