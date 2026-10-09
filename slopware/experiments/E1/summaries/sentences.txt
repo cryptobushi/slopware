@@ -1,3 +1,3 @@
 One byte changed at random in a random program is, with 98.4% certainty, the same program; the rest is almost entirely a different way to die.
 The programs people bought behave under mutation exactly like programs nobody bought, so there is nothing in the catalogue that the lab's distribution does not already contain.
-The single new thing in twenty-six million tries was a program that creates an empty account, which is the smallest possible act of reproduction and still more than anything in the million-program study did.
+The single new thing in twenty-six million tries was a program that creates an empty account, which the scorecard names as the counterfeit of reproduction, and which is still more than anything in the million-program study did.

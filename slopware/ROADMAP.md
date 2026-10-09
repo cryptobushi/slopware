@@ -609,7 +609,7 @@ Each criterion publishes: definition; what would count; what would not count; kn
 | criterion | counts | does not count | today |
 |---|---|---|---|
 | pattern in space-time | a genotype persisting across instances and time | one deployed contract existing | REPLICATED, trivially: genotypes are patterns; this criterion is weak and is listed to be honest about it |
-| self-reproduction | see R-scale ≥ R3 | infrastructure copying; CREATE without inherited bytes | NOT OBSERVED |
+| self-reproduction | see R-scale ≥ R3 | infrastructure copying; CREATE without inherited bytes | NOT OBSERVED (E1, 2026-10-09: the counterfeit was observed once and replicated: one one-mutant of control 182 executes a successful `CREATE` of an empty account, event `0xccea0c3a…`; no inherited bytes, no code) |
 | self-representation | see S-scale ≥ S2 | having bytecode | NOT OBSERVED |
 | metabolism | see M-scale ≥ M3 | gas paid by a caller | NOT OBSERVED |
 | functional environmental interaction | see E-scale ≥ E4 | reading `TIMESTAMP` then dying | NOT OBSERVED (E1 CANDIDATE: 107 input-dependent programs in the study; sensing without benefit) |
@@ -769,7 +769,7 @@ Ratified by the artist at release 806, with E1 running and its results unknown.
 
 ## Part XI — The minimum next release
 
-*Pre-registered as [`experiments/E1-neighbourhoods.md`](experiments/E1-neighbourhoods.md) on 2026-10-08; not yet run.*
+*Pre-registered as [`experiments/E1-neighbourhoods.md`](experiments/E1-neighbourhoods.md) on 2026-10-08; run 2026-10-08/09; results in that document under "Results — 2026-10-09" and at `slopware.fun/e1`. H1, H2, H4 held; H3 not held as written (a counting error in the pre-registration, one opcode); H5 not held: one replicated one-mutant of a control parent executes a successful `CREATE` of an empty account.*
 
 The smallest honest step toward heredity that keeps everything that makes the current work what it is:
 
