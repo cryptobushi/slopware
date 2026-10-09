@@ -4,7 +4,7 @@
 One strip per parent, in parents.json order, stacked top to bottom. In each strip the x axis is the attempt (0 to the
 budget) and the y axis is probe-A lifespan (0 at the strip's baseline to a shared ceiling). Arm A's walks (neutral)
 are drawn in faint grey; arm B's walks (persistence) in black, as step functions that rise at every accepted
-lengthening step. A red mark where a walk first reaches a never-seen behaviour. The parent's lifespan is a hairline
+lengthening step. A red mark where a walk first reaches a never-observed behaviour. The parent's lifespan is a hairline
 across the strip. Nothing is chosen after seeing the data: the order is parents.json, the ceiling is the largest
 lifespan any walk reached (so the picture is scaled by the record itself), the palette is the site's.
 
