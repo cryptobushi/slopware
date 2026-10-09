@@ -58,7 +58,7 @@ pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
 </div>
 
 <div class="c fig" id="figure">
-<img id="threads" alt="THREADS: every genesis program drawn as a walk from its bytes; the executed part in black, a red mark where a program reached three instructions" src="e1/threads.png">
+<img id="threads" alt="THREADS: every genesis program drawn as a walk from its bytes; the executed part in black, a red mark where a program reached three instructions" src="e1-data/threads.png">
 <p class="mute" id="caption"></p>
 </div>
 
@@ -124,7 +124,7 @@ ${w('m-listing-interactions')}`;
   }
 }
 
-fetch('e1/e1.json', { cache: 'no-cache' }).then((r) => r.json()).then(render).catch((e) => { $('hypotheses').textContent = 'results unavailable'; console.error(e); });
+fetch('e1-data/e1.json', { cache: 'no-cache' }).then((r) => r.json()).then(render).catch((e) => { $('hypotheses').textContent = 'results unavailable'; console.error(e); });
 })();
 </script>
 </body>

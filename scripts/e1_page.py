@@ -13,7 +13,7 @@ Usage: python3 scripts/e1_page.py [--record-anchor 0x…] [--snapshot name]
 Every number on the page comes from results.json; this script only words them."""
 import json, re, sys, os, datetime
 
-E1 = "slopware/experiments/E1"; S = f"{E1}/summaries"; OUT = "slopware/site/e1/e1.json"
+E1 = "slopware/experiments/E1"; S = f"{E1}/summaries"; OUT = "slopware/site/e1-data/e1.json"
 args = dict(zip(sys.argv[1::2], sys.argv[2::2]))
 res = json.load(open(f"{S}/results.json"))
 root = open(f"{S}/ROOT.sha256").read().strip()

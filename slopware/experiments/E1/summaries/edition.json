@@ -1,0 +1,9 @@
+{
+  "text": "THREADS (E1) is the research edition for this experiment: one token, the picture above at print resolution, pinned to Arweave with metadata carrying the record root, both anchors, and the hash of the script that drew it. It was minted by the keeper, the wallet that completes SLOPWARE's installations, on a contract separate from the installer, and is offered here by reserve auction. Proceeds go to the artist and fund the work. It confers no rights over any program, release, receipt or experiment.",
+  "note": "Reserve 0.05 ETH. The auction runs 24 hours from the first bid, 10% minimum increments, extended by five minutes for a bid in the last five. Settled by Manifold's marketplace contract; the keeper finalizes it when it ends. Contract 0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664, token 1, listing 20909.",
+  "listing": { "id": 20909, "network": 1, "marketplace": "0x3a3548e060be10c2614d0a4cb0c03cc9093fd799", "rpc": "https://ethereum-rpc.publicnode.com" },
+  "contract": "0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664",
+  "tokenId": 1,
+  "image": "ar://DopXN8CPDhkMhmwasQ8JuB9PJQPa2dh3xqm6Kk6C7VUo",
+  "metadata": "ar://4a2zNEXHWr1WKCpngsFdtb2LvYgHv6AgNtVSRRckANF6"
+}

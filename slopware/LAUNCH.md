@@ -35,3 +35,5 @@ What happened, in order, and what has to keep happening. Nothing here deploys an
 3. **Proposer influence on entropy**, disclosed in `RANDOMNESS.md`, not eliminated.
 4. **Keeper liveness is operational.** Down 51 minutes with nobody else completing means abandonment and a refund.
 5. **`setPrice` is the one mutable thing**, and the gas-rule change coming to mainnet is the reason it exists.
+
+**E1 and the first research edition (2026-10-09).** E1 ran 2026-10-08/09 (record root `bed1b583…`, anchored block 26,151,785; results in `experiments/E1-neighbourhoods.md` and at `/e1`). THREADS (E1) minted by the keeper on `0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664`, listing 20909, embedded on `/e1`. The keeper finalizes the auction after it ends (`editions/README.md`).
