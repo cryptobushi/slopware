@@ -2,7 +2,10 @@
 
 Things worth keeping that do not yet have a place. Each entry says where it might fit and what would have to be true first. Nothing here is a commitment.
 
-## Neighbourhood maps (2026-10-08)
+## Neighbourhood maps (2026-10-08) — tried and set aside
+
+**Outcome.** Rendered from E1 on 2026-10-08 for releases 1 and 51 with the palette below. Correct, and almost entirely white: a flat landscape makes a flat picture. Set aside by the artist the same day as the visual for the work. The generator stays in `scripts/e1_descent.py` because the data it draws is the right data; the presentation moves to a scrolling essay (next entry).
+
 
 **The idea.** Every genome's one-mutant neighbourhood is a grid: 64 positions by 255 replacement values, each cell one child, each child with an outcome under world v0. Colour the cells by outcome class and the grid is an image of the territory around a program. A program that dies on its first byte is a flat field with one bright column at position zero. A program that executes five instructions has structure across its first columns. Nothing in the image is drawn; the only human choice is the palette, fixed and published once.
 
@@ -21,6 +24,10 @@ Things worth keeping that do not yet have a place. Each entry says where it migh
 **Palette, fixed 2026-10-08 by the artist** (in `scripts/e1_descent.py`): white for a child identical to its parent and for the parent's own byte; black for a child that died sooner; dark grey for a different death at the same length; mid grey for a child that lived longer; one red-brown accent for a clean halt. Rows are positions 0–63, top to bottom; columns are replacement values 0–255. First rendered from E1 on 2026-10-08 (releases 1 and 51).
 
 **Open.** Whether a map of a *lineage* (many generations) has a natural form.
+
+## The neighbourhoods essay (2026-10-08)
+
+A scrolling, data-driven piece in the manner of pudding.cool, in the site's own register (Courier, black on white, one red accent, motion only for data), at `slopware.fun/neighbourhoods`. Eight moves: one program dying on its first byte · its first byte fanned into 255 siblings, 54 of which live a step longer and one of which stops cleanly (H3, watched) · the full 16,320-child grid where 63 rows do nothing (H2, felt) · 803 parents arranged by how many instructions they execute, the lively few growing as you scroll · genesis and control clouds overlaid and indistinguishable (H1) · a counter to twenty-six million with the "anything new" bar staying at zero (H5) · small multiples of the parents with texture, the hills · three plain sentences. Needs aggregates captured from the E1 record before the droplet is destroyed: per-parent per-position class counts, child-versus-parent lifespan distribution, first-byte outcomes by opcode.
 
 ## Random walks on the living (2026-10-08)
 
