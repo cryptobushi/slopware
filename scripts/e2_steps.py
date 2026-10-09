@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""STEPS — the E2 research edition. Fixed by the artist before the run (E2 pre-registration §9).
+"""STEPS — the E2 research edition. Fixed by the artist before the run (E2 pre-registration §10).
 
 One strip per parent, in parents.json order, stacked top to bottom. In each strip the x axis is the attempt (0 to the
 budget) and the y axis is probe-A lifespan (0 at the strip's baseline to a shared ceiling). Arm A's walks (neutral)
 are drawn in faint grey; arm B's walks (persistence) in black, as step functions that rise at every accepted
 lengthening step. A red mark where a walk first reaches a never-observed behaviour. The parent's lifespan is a hairline
-across the strip. Nothing is chosen after seeing the data: the order is parents.json, the ceiling is the largest
-lifespan any walk reached (so the picture is scaled by the record itself), the palette is the site's.
+across the strip. Nothing is chosen after seeing the data: the order is parents.json, the y axis runs from 0 to the smallest
+power of two >= the largest lifespan any walk reached (so the picture is scaled by the record itself, deterministically), the palette is the site's.
 
 Input: the sealed E2 record, record/<arm>/summaries-*.jsonl, each line a walk with
   parentIndex, arm ("A"|"B"), walk, parentLifespan, budget, steps: [[attempt, lifespanAfter], ...] (lifespan after each
@@ -26,7 +26,9 @@ for arm in ("A", "B"):
             if l.strip(): walks.append(json.loads(l))
 parents = sorted({w["parentIndex"] for w in walks})
 budget = max(w["budget"] for w in walks)
-ceiling = max([max([lv for _, lv in w["steps"]] + [w["parentLifespan"]]) for w in walks])
+observed_max = max([max([lv for _, lv in w["steps"]] + [w["parentLifespan"]]) for w in walks])
+ceiling = 1
+while ceiling < observed_max: ceiling *= 2   # the smallest power of two >= the maximum lifespan in the record (pre-registration §10)
 W = int(1600 * SCALE); strip = int(18 * SCALE); gap = int(4 * SCALE); pad = int(80 * SCALE)
 H = pad * 2 + len(parents) * (strip + gap)
 img = Image.new("RGB", (W, H), (255, 255, 255)); d = ImageDraw.Draw(img)
