@@ -26,6 +26,7 @@ const RPC = args.rpc ?? 'https://ethereum-rpc.publicnode.com';
 const CONTRACT = (args.contract ?? '') as Hex;
 const LAB = args.lab ?? 'http://127.0.0.1:8546';
 const OUT = args.out ?? 'slopware/site/readings.json';
+const DESCENT = args.descent ?? 'slopware/experiments/E1/summaries/descent.json';
 if (!/^0x[0-9a-fA-F]{40}$/.test(CONTRACT)) { console.error('--contract is required'); process.exit(2); }
 
 const abi = parseAbi([
@@ -118,10 +119,28 @@ writeFileSync(OUT, JSON.stringify({ installer: CONTRACT, chainId, generatedAt, s
 const CHUNK = 100;
 const rdir = join(dirname(OUT), 'r');
 mkdirSync(rdir, { recursive: true });
+// E1's neighbourhood, one sentence per release, from the sealed record (protocol §13): made by infrastructure, lab chain only
+const descent: Record<number, any> = {};
+if (existsSync(DESCENT)) for (const d of JSON.parse(readFileSync(DESCENT, 'utf8')).releases) descent[d.release] = d;
+const fmtN = (n: number) => n.toLocaleString('en-US');
+function siblings(r: Reading): string {
+  const d = descent[r.id]; if (!d || !d.instantiable) return '';
+  const c = d.children; const placed = c.placed; const same = c.neutral;
+  const parts: string[] = [];
+  if (c.lengthened) parts.push(`${fmtN(c.lengthened)} live${c.lengthened === 1 ? 's' : ''} longer`);
+  if (c.shortened) parts.push(`${fmtN(c.shortened)} die${c.shortened === 1 ? 's' : ''} sooner`);
+  if (c.altered) parts.push(`${fmtN(c.altered)} die${c.altered === 1 ? 's' : ''} differently`);
+  const clean = d.reaches?.clean_halt ?? 0;
+  if (clean) parts.push(`${fmtN(clean)} halt${clean === 1 ? 's' : ''} cleanly`);
+  const rest = parts.length ? `; ${parts.join(', ')}` : '';
+  const noise = d.noiseIdentical === false ? ' Its own re-placements did not all agree, so the lab calls it environment-sensitive.' : '';
+  return `In E1 the lab changed one byte at a time, every way: of its ${fmtN(placed)} one-byte siblings, ${fmtN(same)} behave exactly as it does${rest}.${noise} The siblings were made by infrastructure and exist only on the lab's chain.`;
+}
+
 const index = all.map((r) => ({
   id: r.id, status: r.status, program: r.program, by: r.installer, life: r.lifespan,
   clean: r.probes.some((p) => p.outcome === 'success'), dep: r.inputDependent, fut: r.future.length > 0, ret: r.probes.some((p) => p.returnDataLength > 0),
-  verdict: verdict(r), would: wouldHaveBeen(r), trace: traceLine(r),
+  verdict: verdict(r), would: wouldHaveBeen(r), trace: traceLine(r), sib: siblings(r) || undefined,
 }));
 writeFileSync(join(rdir, 'index.json'), JSON.stringify({ installer: CONTRACT, chainId, generatedAt, summary, chunk: CHUNK, readings: index }, null, 0));
 const chunks = new Map<number, object[]>();

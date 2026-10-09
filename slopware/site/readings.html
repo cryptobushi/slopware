@@ -38,6 +38,7 @@ pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
 #list .r:first-child{margin-top:1em}
 .r .verdict{margin:0.6em 0 0}
 .r .trace{margin:0.6em 0 0;color:#000}
+.r .sib{color:#666}
 button{background:none;border:0;padding:0;margin:0.6em 0 0;color:inherit;cursor:pointer;text-decoration:underline}
 .more{display:none;margin-top:1em}
 .open .more{display:block}
@@ -123,6 +124,7 @@ function row(r) {
   return `<div class="r" id="r${r.id}">
 <h3><span>SLOPWARE ${six(r.id)}</span><span class="mute">${r.status}</span>${r.program ? `<span class="mute">${scan ? `<a href="${scan}/address/${r.program}"><span class="full">${r.program}</span><span class="short">${r.program.slice(0, 8)}…${r.program.slice(-6)}</span></a>` : r.program}</span>` : ''}</h3>
 <p class="verdict">${esc(r.verdict)}${r.would ? ` <span class="mute">${esc(r.would)}</span>` : ''}</p>
+${r.sib ? `<p class="verdict sib">${esc(r.sib)}</p>` : ''}
 ${r.trace ? `<pre class="trace mute">${esc(r.trace)}</pre>` : ''}
 <button data-open="${r.id}">[ the bytes ]</button>
 <div class="more"><p class="mute">reading the bytes…</p></div>

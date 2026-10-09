@@ -1,0 +1,97 @@
+{
+ "experiment": "E1",
+ "generatedAt": "2026-10-09T02:17:45+00:00",
+ "caption": "THREADS. Every genesis program as a walk from its bytes, in release order. Faint: the whole program. Black: the part it executed before it halted. Red: it reached three or more instructions. Rules fixed before the results; generated from the sealed record.",
+ "hypotheses": [
+  {
+   "id": "H1",
+   "name": "no privilege",
+   "registered": "The programs people collected are not special: the neighbourhood statistics of the genesis set are indistinguishable from those of fresh random programs. Threshold: every one of the five fractions differs in mean by less than 0.01 and has a Kolmogorov\u2013Smirnov p above 0.01.",
+   "observed": "Genesis versus control, mean of each fraction: neutral 98.39% vs 98.33% (difference +0.05 points, KS p 0.93); altered 0.91% vs 0.91% (difference -0.01 points, KS p 0.99); lengthened 0.37% vs 0.37% (difference -0.01 points, KS p 0.61); shortened 0.34% vs 0.38% (difference -0.04 points, KS p 1.00); lethal 0.01% vs 0.01% (difference +0.00 points, KS p 1.00).",
+   "verdict": "held",
+   "note": ""
+  },
+  {
+   "id": "H2",
+   "name": "the executed prefix",
+   "registered": "A mutation changes nothing unless it touches a byte the parent executes or reads, so each parent's neutral fraction is about (64 \u2212 bytes consumed) / 64. Threshold: median absolute error below 0.01.",
+   "observed": "Median absolute error between predicted and observed neutral fraction: 0.0062. 87.0% of parents are within \u00b10.02 of their prediction.",
+   "verdict": "held",
+   "note": ""
+  },
+  {
+   "id": "H3",
+   "name": "the first byte",
+   "registered": "For a parent that dies on its first byte, a new first byte lets the program live at least two instructions exactly when it is one of the 55 operand-free opcodes: 55/255, which is 21.6%.",
+   "observed": "Of 325,380 position-0 children of parents that die on their first byte, 69,173 lived at least two instructions: 21.26% (95% interval 21.12% to 21.40%). The registered 21.57% lies outside it. Exactly 54 replacement values ever let such a program live: the 32 PUSHes and 22 operand-free opcodes. The pre-registration counted STOP as a 55th, and STOP halts at once; 54/255 = 21.18% is inside the interval.",
+   "verdict": "not held as written",
+   "note": "The harness agrees with the arithmetic once the arithmetic is right; that corrected comparison is exploratory because its number was fixed after the run."
+  },
+  {
+   "id": "H4",
+   "name": "lengthening is rare",
+   "registered": "Fewer than 3% of all one-mutants live longer than their parent, and fewer than 0.5% reach a clean halt the parent did not.",
+   "observed": "Of 26,110,350 placements, 97,062 lived longer than their parent: 0.37% (upper bound of the interval 0.37%). 5,400 halted cleanly where the parent did not: 0.021% (upper bound 0.021%).",
+   "verdict": "held",
+   "note": ""
+  },
+  {
+   "id": "H5",
+   "name": "nothing new under one mutation",
+   "registered": "No one-mutant does anything the million-program study never saw: no external call completing, no child program from CREATE, no loop.",
+   "observed": "One one-mutant, of control 182 (not a collected program), reached a behaviour the million-program study never showed: byte 32 changed from POP to PUSH6, and the program now runs PUSH11 \u00b7 PUSH18 \u00b7 CALLVALUE \u00b7 PUSH6 \u00b7 PUSH14 \u00b7 CREATE \u00b7 PUSH12 \u00b7 STOP, a CREATE that succeeds followed by a clean halt. Replicated three times on fresh chains with identical signatures. What it creates is an empty account: with no value sent, CALLVALUE is zero and is the length of the initcode. Sent one wei, the same program starves asking for one byte from an absurd memory offset.",
+   "verdict": "not held",
+   "note": "A program that gives birth, to nothing. The scorecard's heredity criterion moves to CANDIDATE; whether an empty account is a child program is a question for the next protocol."
+  }
+ ],
+ "sentences": [
+  "One byte changed at random in a random program is, with 98.4% certainty, the same program; the rest is almost entirely a different way to die.",
+  "The programs people bought behave under mutation exactly like programs nobody bought, so there is nothing in the catalogue that the lab's distribution does not already contain.",
+  "The single new thing in twenty-six million tries was a program that creates an empty account, which is the smallest possible act of reproduction and still more than anything in the million-program study did."
+ ],
+ "facts": [
+  [
+   "parents",
+   "803 genesis programs (every release before block 26,149,410) and 803 fresh random programs"
+  ],
+  [
+   "children",
+   "16,320 per parent, enumerated: 26,110,350 placements in all"
+  ],
+  [
+   "world",
+   "v0, frozen: a private Ethereum with one block, one caller, 1,000,000 gas, five calls per child"
+  ],
+  [
+   "record root",
+   "bed1b583ca6f51919bb2d5f967e2153d64e113a13dd8fdff7a21318822f1dd1d"
+  ],
+  [
+   "pre-registration anchor",
+   "0xbaa09001fae948bbe026225401043f7bb0433e56b336e6527a2fc460bbe4c631",
+   "https://etherscan.io/tx/0xbaa09001fae948bbe026225401043f7bb0433e56b336e6527a2fc460bbe4c631"
+  ],
+  [
+   "record anchor",
+   "0xad4f7470be6f337111dd651e97621cb60d5c8c39ae33ecd71d0efc46c624e07c",
+   "https://etherscan.io/tx/0xad4f7470be6f337111dd651e97621cb60d5c8c39ae33ecd71d0efc46c624e07c"
+  ],
+  [
+   "record",
+   "slopware-e1-record-20261009, a DigitalOcean volume snapshot of the full 28 GB record; the parent summaries and manifest are in the repository"
+  ],
+  [
+   "protocol",
+   "slopware/experiments/E1-neighbourhoods.md, signed 2026-10-08, amendments dated below the signature",
+   "https://github.com/cryptobushi/slopware/blob/main/slopware/experiments/E1-neighbourhoods.md"
+  ],
+  [
+   "analysis",
+   "scripts/e1_analysis.py, pre-specified; scripts/e1_threads.py for the picture, hashed before the results",
+   null
+  ]
+ ],
+ "reproduce": "To check any number: fetch the snapshot or the parent summaries, run scripts/e1_analysis.py, and compare with results.json; to check the picture, run scripts/e1_threads.py on record/genesis. The root hash above is the sha256 of the sorted sha256 manifest of every file in the record.",
+ "anchorTx": "0xbaa09001fae948bbe026225401043f7bb0433e56b336e6527a2fc460bbe4c631",
+ "edition": null
+}

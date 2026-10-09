@@ -32,7 +32,7 @@ h1 = res["H1"]; fr = h1["fractions"]
 def h1_line():
     parts = []
     for k, v in fr.items():
-        parts.append(f"{k} {pct(v['genesis_mean'],2)} vs {pct(v['control_mean'],2)} (difference {v['diff_mean']*100:+.2f} points, KS p {v['ks_p']:.2f})")
+        parts.append(f"{k} {pct(v['genesis_mean'],2)} vs {pct(v['control_mean'],2)} (difference {v['diff']*100:+.2f} points, KS p {v['ks_p']:.2f})")
     return "; ".join(parts)
 H = []
 H.append({"id": "H1", "name": "no privilege",
@@ -46,11 +46,25 @@ H.append({"id": "H2", "name": "the executed prefix",
     "observed": f"Median absolute error between predicted and observed neutral fraction: {h2['median_abs_error']:.4f}. {pct(h2['within_0.02'])} of parents are within ±0.02 of their prediction.",
     "verdict": "held" if h2["confirmed"] else "not held", "note": ""})
 h3 = res["H3"]
+# §7.4 as registered, from the per-position aggregates: parents dying at their first byte, position-0 children living >= 2
+import math
+agg = json.load(open(f"{S}/aggregates.json")) if os.path.exists(f"{S}/aggregates.json") else None
+def wilson(k, n, z=1.96):
+    p = k / n; d = 1 + z * z / n; c = (p + z * z / (2 * n)) / d; h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
+    return p, c - h, c + h
+if agg:
+    fb = agg["firstByte"]; n3 = sum(sum(c.values()) for c in fb.values()); k3 = sum(k for c in fb.values() for o, k in c.items() if o.endswith("|lives"))
+    p3, lo3, hi3 = wilson(k3, n3); living_values = sum(1 for c in fb.values() if any(o.endswith("|lives") for o in c))
+    obs3 = f"Of {fmt(n3)} position-0 children of parents that die on their first byte, {fmt(k3)} lived at least two instructions: {pct(p3,2)} (95% interval {pct(lo3,2)} to {pct(hi3,2)}). The registered 21.57% lies outside it. Exactly {living_values} replacement values ever let such a program live: the 32 PUSHes and 22 operand-free opcodes. The pre-registration counted STOP as a 55th, and STOP halts at once; 54/255 = 21.18% is inside the interval."
+    held3 = lo3 <= 55/255 <= hi3
+else:
+    p3, lo3, hi3 = h3["fraction"], *h3["ci95"]; held3 = lo3 <= 55/255 <= hi3
+    obs3 = f"Of {fmt(h3['position0_children'])} position-0 children, {fmt(h3['survive_first'])} lived at least two instructions: {pct(p3)} (95% interval {pct(lo3)} to {pct(hi3)}), against 21.6% predicted."
 H.append({"id": "H3", "name": "the first byte",
     "registered": "For a parent that dies on its first byte, a new first byte lets the program live at least two instructions exactly when it is one of the 55 operand-free opcodes: 55/255, which is 21.6%.",
-    "observed": f"Of {fmt(h3['position0_children'])} position-0 children, {fmt(h3['survive_first'])} lived at least two instructions: {pct(h3['fraction'])} (95% interval {pct(h3['ci95'][0])} to {pct(h3['ci95'][1])}), against 21.6% predicted.",
-    "verdict": "held" if h3["ci95"][0] <= 55/255 <= h3["ci95"][1] else "not held",
-    "note": h3.get("note", "")})
+    "observed": obs3,
+    "verdict": "held" if held3 else "not held as written",
+    "note": "" if held3 else "The harness agrees with the arithmetic once the arithmetic is right; that corrected comparison is exploratory because its number was fixed after the run."})
 h4 = res["H4"]
 H.append({"id": "H4", "name": "lengthening is rare",
     "registered": "Fewer than 3% of all one-mutants live longer than their parent, and fewer than 0.5% reach a clean halt the parent did not.",
@@ -59,9 +73,9 @@ H.append({"id": "H4", "name": "lengthening is rare",
 h5 = res["H5"]
 H.append({"id": "H5", "name": "nothing new under one mutation",
     "registered": "No one-mutant does anything the million-program study never saw: no external call completing, no child program from CREATE, no loop.",
-    "observed": f"Candidates reaching a never-seen behaviour: {h5['candidates']}." + ("" if h5["candidates"] == 0 else " Each is replicated three times on fresh chains before it is anything but a candidate."),
-    "verdict": "held" if h5["candidates"] == 0 else "candidates found",
-    "note": "A replicated candidate would be the first result of heredity worth the name." if h5["candidates"] else ""})
+    "observed": (f"One one-mutant, of control 182 (not a collected program), reached a behaviour the million-program study never showed: byte 32 changed from POP to PUSH6, and the program now runs PUSH11 · PUSH18 · CALLVALUE · PUSH6 · PUSH14 · CREATE · PUSH12 · STOP, a CREATE that succeeds followed by a clean halt. Replicated three times on fresh chains with identical signatures. What it creates is an empty account: with no value sent, CALLVALUE is zero and is the length of the initcode. Sent one wei, the same program starves asking for one byte from an absurd memory offset." if h5["candidates"] == 1 else f"Candidates reaching a never-seen behaviour: {h5['candidates']}."),
+    "verdict": "held" if h5["candidates"] == 0 else "not held",
+    "note": "A program that gives birth, to nothing. The scorecard's heredity criterion moves to CANDIDATE; whether an empty account is a child program is a question for the next protocol." if h5["candidates"] else ""})
 
 facts = [
     ["parents", f"{fmt(man.get('genesis', 803))} genesis programs (every release before block 26,149,410) and {fmt(man.get('controls', 803))} fresh random programs"],
