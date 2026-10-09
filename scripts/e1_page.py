@@ -77,14 +77,14 @@ H.append({"id": "H4", "name": "lengthening is rare",
     "verdict": "held" if h4["confirmed"] else "not held", "note": ""})
 h5 = res["H5"]
 H.append({"id": "H5", "name": "nothing new under one mutation",
-    "registered": "No one-mutant does anything the million-program study never saw: no external call completing, no child program from CREATE, no loop.",
-    "observed": ("One one-mutant, of control 182 (not a collected program), set a flag the million-program study never set: byte 32 changed from POP to PUSH6, and the program now runs PUSH11 · PUSH18 · CALLVALUE · PUSH6 · PUSH14 · CREATE · PUSH12 · STOP, executing CREATE and then halting cleanly. Replicated three times on fresh chains with identical signatures. The CREATE itself fails: it offers 2.46 × 10³² wei from an account holding none, pushes 0, and the program rests. Nothing is created; the child's nonce stays at 1." if h5["candidates"] == 1 else f"Candidates reaching a never-seen behaviour: {h5['candidates']}."),
+    "registered": "No one-mutant does anything the million-program study never saw: no external call completing, no child program from CREATE, no loop. Operationally, fixed in the harness before the run: none of three flags the study never set, external_call, child_may_exist (CREATE executed inside a call that halts cleanly), loop.",
+    "observed": ("None of the three named examples occurred. One one-mutant set the flag child_may_exist. Its parent is control 182, not a collected program; byte 32 changed from POP to PUSH6, and the program now runs PUSH11 · PUSH18 · CALLVALUE · PUSH6 · PUSH14 · CREATE · PUSH12 · STOP, executing CREATE and then halting cleanly. Replicated three times on fresh chains with identical signatures. The CREATE itself fails: it offers 2.46 × 10³² wei from an account holding none, pushes 0, and the program rests. Nothing is created; after a real transaction the mutant's own nonce is still 1. The seventeen CREATE executions in the million-program study all ended in exceptional halts; this is the first inside a clean one." if h5["candidates"] == 1 else f"Candidates reaching a never-seen behaviour: {h5['candidates']}."),
     "verdict": "held" if h5["candidates"] == 0 else "not held, narrowly",
-    "note": "Not reproduction and not its counterfeit: a program that attempts a creation, is refused, and halts cleanly instead of dying. The scorecard changes no status; the self-reproduction row gains a note." if h5["candidates"] else ""})
+    "note": "By the three named examples H5 would be held; by the operational test, which is the one fixed in advance, it is not. Not reproduction and not its counterfeit: a program that attempts a creation, is refused, and halts cleanly instead of dying. The scorecard changes no status; the self-reproduction row gains a note." if h5["candidates"] else ""})
 
 facts = [
     ["parents", f"{fmt(man.get('genesis', 803))} genesis programs (every release before block 26,149,410) and {fmt(man.get('controls', 803))} fresh random programs"],
-    ["children", f"16,320 per parent, enumerated: {fmt(h4['placed'])} placements in all"],
+    ["children", f"16,320 per parent, enumerated. 1,600 instantiable parents × 16,320 = 26,112,000; less 1,600 that cannot be placed (the position-0 replacement 0xEF, one per parent) and 50 the harness failed to execute (deployment errors on the lab chain, recorded as failures, not outcomes): {fmt(h4['placed'])} placements counted. The 6 refused parents' 1,530 placeable children are in the record but outside every hypothesis."],
     ["world", "v0, frozen: a private Ethereum with one block, one caller, 1,000,000 gas, five calls per child"],
     ["record root", root],
     ["pre-registration anchor", anchor, f"https://etherscan.io/tx/{anchor}" if anchor else None],
