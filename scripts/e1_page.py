@@ -126,7 +126,7 @@ if edition:
 <h2>the research edition</h2>
 <p>{esc(edition["text"])}</p>
 <div id="auction" data-id="{L.get("id","")}" data-network="{L.get("network","")}" data-marketplace="{L.get("marketplace","")}" data-rpc="{L.get("rpc","")}"></div>
-<p class="mute">{esc(edition.get("note",""))}</p>
+<p class="mute">{esc(edition.get("note",""))}{(' Bid here, or on <a href="' + edition["gallery"] + '">the same listing at Manifold</a>.') if edition.get("gallery") else ''}</p>
 </div>"""
 tpl = open("slopware/site/e1.template.html").read()
 page = (tpl.replace("{{HYPOTHESES}}", hyp_html).replace("{{SENTENCES}}", sent_html).replace("{{FACTS}}", facts_html).replace("{{REPRO}}", esc(out["reproduce"]))
@@ -136,7 +136,7 @@ md = ["# SLOPWARE — E1 neighbourhoods", "", "The first pre-registered experime
       f"Picture: THREADS, https://slopware.fun/e1-data/threads.png — {out['caption']}", "", "## Hypotheses and verdicts", ""]
 for h in H_: md += [f"### {h['id']} · {h['name']} — {h['verdict']}", "", f"Registered: {h['registered']}", "", f"Observed: {h['observed']}", ""] + ([h["note"], ""] if h.get("note") else [])
 md += ["## In three sentences", ""] + [s for x in sentences for s in (x, "")] + ["## The data", ""] + [f"- {f[0]}: {f[1]}" + (f" ({f[2]})" if len(f) > 2 and f[2] else "") for f in facts] + ["", out["reproduce"], ""]
-if edition: md += ["## The research edition", "", edition["text"], "", edition.get("note", ""), ""]
+if edition: md += ["## The research edition", "", edition["text"], "", edition.get("note", "") + (f" Listing at Manifold: {edition['gallery']}" if edition.get("gallery") else ""), ""]
 md += ["Also: https://slopware.fun/llms.txt · https://slopware.fun/readings.md · the repository https://github.com/cryptobushi/slopware"]
 open("slopware/site/e1.md", "w").write("\n".join(md))
 print("e1.html and e1.md written")

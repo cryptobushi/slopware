@@ -1,6 +1,6 @@
 {
  "experiment": "E1",
- "generatedAt": "2026-10-09T14:26:25+00:00",
+ "generatedAt": "2026-10-09T14:39:33+00:00",
  "caption": "THREADS. Every genesis program as a walk from its bytes, in release order. Faint: the whole program. Black: the part it executed before it halted. Red: it reached three or more instructions. Rules fixed before the results; generated from the sealed record.",
  "hypotheses": [
   {
@@ -105,6 +105,7 @@
   "contract": "0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664",
   "tokenId": 1,
   "image": "ar://DopXN8CPDhkMhmwasQ8JuB9PJQPa2dh3xqm6Kk6C7VUo",
-  "metadata": "ar://4a2zNEXHWr1WKCpngsFdtb2LvYgHv6AgNtVSRRckANF6"
+  "metadata": "ar://4a2zNEXHWr1WKCpngsFdtb2LvYgHv6AgNtVSRRckANF6",
+  "gallery": "https://gallery.manifold.xyz/listing?listingId=20909"
  }
 }

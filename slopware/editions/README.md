@@ -56,7 +56,7 @@ Metadata carries: name, description (what the lines are), image, `external_url` 
 | metadata | Arweave `4a2zNEXHWr1WKCpngsFdtb2LvYgHv6AgNtVSRRckANF6` |
 | mint | token 1 to the keeper, tx `0x6cc817b5accf8dbfde0037ef3bdfbf7e5a5fbcbedfbf2d87281ef3bb9d365698` |
 | listing | id 20909 on marketplace V1, tx `0xa77bc70b107da57e583b75b024320ab1550b667e5699b1d7f86db421dcda67f1` (block 26,155,204): reserve 0.05 ETH, 24 h from first bid, 10% increments, 5-minute extension, receiver artist 100%, no referrer |
-| page | slopware.fun/e1 |
+| page | slopware.fun/e1 · Manifold Gallery https://gallery.manifold.xyz/listing?listingId=20909 |
 
 ## E1 listing parameters
 
