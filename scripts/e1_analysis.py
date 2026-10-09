@@ -21,12 +21,17 @@ if not G or not C: sys.exit("both sets are needed")
 
 FR = ["neutral", "altered", "lengthened", "shortened", "lethal"]
 def ks(a, b):
+    # two-sample Kolmogorov-Smirnov D, evaluated at every distinct value with ties handled (the ECDFs are compared
+    # after all equal values on both sides are consumed). Corrected 2026-10-09 after the run: the first version
+    # advanced one side per step and reported spurious D on heavily tied data; see E1 amendment 8.
     a, b = sorted(a), sorted(b); i = j = 0; d = 0.0; n, m = len(a), len(b)
-    while i < n and j < m:
-        if a[i] <= b[j]: i += 1
-        else: j += 1
+    while i < n or j < m:
+        v = min(a[i] if i < n else float("inf"), b[j] if j < m else float("inf"))
+        while i < n and a[i] == v: i += 1
+        while j < m and b[j] == v: j += 1
         d = max(d, abs(i / n - j / m))
     en = math.sqrt(n * m / (n + m)); lam = (en + 0.12 + 0.11 / en) * d
+    if lam < 1e-3: return d, 1.0
     p = 2 * sum((-1) ** (k - 1) * math.exp(-2 * k * k * lam * lam) for k in range(1, 101))
     return d, max(0.0, min(1.0, p))
 def boot_diff(a, b, n=10000, seed=1):

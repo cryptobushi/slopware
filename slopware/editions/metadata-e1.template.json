@@ -1,0 +1,18 @@
+{
+  "name": "THREADS (E1)",
+  "description": "SLOPWARE research edition 1, for experiment E1 (neighbourhoods). Every genesis program of SLOPWARE drawn as a walk: its sixty-four bytes read in order turn and advance a pen. The whole walk is faint grey, which is what the program is. The part in black is how much of itself the program lived before it halted, measured on the lab's frozen copy of Ethereum. A red mark ends any program that reached three or more instructions. Programs are in release order. The rules were fixed and hashed before the experiment's results were known (E1 amendment 6) and the image is generated from the sealed record by scripts/e1_threads.py, so anyone holding the record can regenerate it. Minted by the keeper, the wallet that completes SLOPWARE's installations. It confers no rights over any program, release, receipt or experiment.",
+  "image": "__IMAGE_URI__",
+  "external_url": "https://slopware.fun/e1",
+  "attributes": [
+    { "trait_type": "series", "value": "SLOPWARE research editions" },
+    { "trait_type": "experiment", "value": "E1 neighbourhoods" },
+    { "trait_type": "programs", "value": "__GENESIS_COUNT__" },
+    { "trait_type": "record root (sha256)", "value": "__ROOT__" },
+    { "trait_type": "pre-registration anchor", "value": "0x43cf98936519c7d068b631a15144d16a405680308cea9bc4edb9fe0bd85829ec" },
+    { "trait_type": "record anchor", "value": "__RECORD_ANCHOR_TX__" },
+    { "trait_type": "script keccak256", "value": "0x67bd975b34a16877b3c31de91c78887eaa4c368a6f9f64bf0d366a334e9a97e6" },
+    { "trait_type": "world", "value": "v0" },
+    { "trait_type": "date", "value": "__DATE__" },
+    { "trait_type": "minted by", "value": "the keeper" }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+ "parents": {
+  "genesis": 801,
+  "control": 799
+ },
+ "H1": {
+  "indistinguishable_by_prespecified_threshold": true,
+  "fractions": {
+   "neutral": {
+    "genesis_mean": 0.9838712425901849,
+    "control_mean": 0.983325912020205,
+    "diff": 0.0005453305699798516,
+    "ci95": [
+     -0.00044077128342945304,
+     0.001543528144610673
+    ],
+    "ks_D": 0.026720354250553496,
+    "ks_p": 0.9345739382878675
+   },
+   "altered": {
+    "genesis_mean": 0.009055505407902049,
+    "control_mean": 0.009148043500219014,
+    "diff": -9.253809231696448e-05,
+    "ci95": [
+     -0.0004180753992052925,
+     0.00021914984936739247
+    ],
+    "ks_D": 0.021168783076223496,
+    "ks_p": 0.9934280599203019
+   },
+   "lengthened": {
+    "genesis_mean": 0.0036898607527464495,
+    "control_mean": 0.003744960810489939,
+    "diff": -5.5100057743489445e-05,
+    "ci95": [
+     -0.00015227348898409722,
+     3.921232907456735e-05
+    ],
+    "ks_D": 0.03787818418466282,
+    "ks_p": 0.6064761135513415
+   },
+   "shortened": {
+    "genesis_mean": 0.003383391249166712,
+    "control_mean": 0.003781083669086051,
+    "diff": -0.00039769241991933916,
+    "ci95": [
+     -0.0012699975518749088,
+     0.000438261924170129
+    ],
+    "ks_D": 0.020509407045948502,
+    "ks_p": 0.9956491416347047
+   },
+   "lethal": {
+    "genesis_mean": 0.00011054568332876997,
+    "control_mean": 9.395205936610894e-05,
+    "diff": 1.6593623962661035e-05,
+    "ci95": [
+     -0.0001665059471453874,
+     0.00021671208880169336
+    ],
+    "ks_D": 0.001254689460452263,
+    "ks_p": 0.9999974723513317
+   }
+  }
+ },
+ "H2": {
+  "median_abs_error": 0.006188147251669829,
+  "within_0.02": 0.87,
+  "confirmed": true
+ },
+ "H3": {
+  "position0_children": 407930,
+  "survive_first": 86398,
+  "fraction": 0.2117961414948643,
+  "ci95": [
+   0.2105450201890455,
+   0.21305269095510396
+  ],
+  "predicted": 0.21568627450980393,
+  "note": "denominator is all position-0 children; restrict to dead-at-first-byte parents in exploratory analysis"
+ },
+ "H4": {
+  "placed": 26110350,
+  "lengthened": 97062,
+  "lengthened_fraction": 0.0037173764426750313,
+  "ci95": [
+   0.003694106207996195,
+   0.003740792712856735
+  ],
+  "bound": 0.03,
+  "new_clean_halts": 5400,
+  "new_clean_fraction": 0.00020681453906209606,
+  "ci95_clean": [
+   0.00020137195078950834,
+   0.00021240419585109792
+  ],
+  "bound_clean": 0.005,
+  "confirmed": true
+ },
+ "H5": {
+  "candidates": 1,
+  "list": [
+   {
+    "parent": "0xf8524bc5ec6b6a222aed8794b888cd5d5046bc31603b5e044037aca239f55953",
+    "label": "control 182",
+    "childId": "0x68acd7d9e60ee433dfae81dec36b0b176f55ee9d195883392019a2ab4f01fb3c",
+    "eventId": "0xccea0c3a39928c9de5ddad3cf9caf9f0786e54e6b347c9b8b261febb74eb536e",
+    "pos": 32,
+    "val": 101,
+    "novel": [
+     "child_may_exist"
+    ],
+    "address": "0x5dd62ab987cfd0e8be3c26f387fe84c36270b3cc"
+   }
+  ],
+  "confirmed_if_empty_after_replication": false
+ },
+ "noise": {
+  "triplicate_identical_fraction": 0.999375,
+  "environment_sensitive_parents": [
+   "release 16"
+  ]
+ }
+}
