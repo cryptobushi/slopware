@@ -1,0 +1,3 @@
+SLOPWARE E1 record anchor | record root sha256 bed1b583ca6f51919bb2d5f967e2153d64e113a13dd8fdff7a21318822f1dd1d (sha256 of the sorted sha256 manifest of 43 files, 28 GB) | 26,110,350 placements · 1,608 parent summaries · 801 genesis + 799 control genotypes | results.json keccak256 0x927cfcf87698fe209ce6f86da231e889140c2296ff2a7db45ebbe25b775ef628 | repo commit c0da3ec | sealed 2026-10-09 01:57 UTC | slopware.fun/e1
+
+tx 0xad4f7470be6f337111dd651e97621cb60d5c8c39ae33ecd71d0efc46c624e07c · block 26151785 · from the keeper 0xB847754313D6320f43396F885d168b0B433b913f
