@@ -730,6 +730,24 @@ Ratified by the artist at release 802, before any heredity experiment, before an
 
 Amendments to these are recorded here with dates. Experiments cite the version they ran under.
 
+## Part X-B — Constitution amendment 1 (2026-10-08): research editions
+
+Ratified by the artist at release 806, with E1 running and its results unknown.
+
+**Rule 13 is amended.** The installer remains the only place a fee is taken from a participant, and everything after abiogenesis remains free. In addition, the artist may make and sell **research editions**: one artwork per pre-registered experiment, under these conditions, all of which are binding:
+
+1. The edition is defined in the experiment's pre-registration, before results exist, and is generated deterministically from the sealed record. It exists whatever the hypotheses say.
+2. Its metadata carries the record's root hash and the anchor transaction, so the image can be checked against the data that produced it.
+3. It is offered only after the experiment's results are published.
+4. It confers no rights over any program, release, receipt, lineage, or experiment, and no influence on any future one.
+5. It is minted on a contract separate from the installer; the installer and its receipts are never touched.
+6. Proceeds go to the artist and fund the work. The amount changes nothing about what is run or reported.
+7. The catalogue stays plain. An edition is shown on the experiment's results page, never on a release's record or receipt.
+
+**Why this is consistent with the principle.** The principle protects participants from being charged for evolution and protects the experiment from an artist with a stake in which lineages thrive. An edition about a finished experiment, fixed before its outcome, charges no participant and rewards no outcome. It is the artist's artwork about the research, which the roadmap (Part V) already named as the one honest lever.
+
+**E1.** The E1 edition is a 1/1 generated from the sealed E1 record once it is complete, auctioned on the E1 results page after the results are published. Its form is chosen from renders made from the record and is recorded in `IDEAS.md` and the E1 document when fixed.
+
 ## Part X — Decisions needed now, as originally posed (expensive or impossible to reverse)
 
 1. **Genotype identity = `keccak256(runtime bytes)`.** Already the on-chain checksum. Adopt. Consequence: identical bytes born twice are one genotype with two genesis events.

@@ -91,7 +91,7 @@ The framework is the artificial-life analysis of computer viruses, whose central
 9. SLOPWARE never declares itself alive.
 10. Metaphor is labelled and kept out of datasets.
 11. BIRTH never closes: anyone, at any time, may introduce unrelated random bytes into whatever world exists.
-12. A fee is taken only at abiogenesis. Everything after birth belongs to the experiment.
+12. A fee is taken only at abiogenesis. Everything after birth belongs to the experiment. (Amendment 1, 2026-10-08: the artist may sell one research edition per pre-registered experiment, defined before results exist, generated from the sealed record, offered after publication, conferring no rights; see the roadmap, Part X-B.)
 
 ### Decisions ratified — constitution version 1, 2026-10-08
 
