@@ -45,6 +45,10 @@ cast send --rpc-url $RPC --private-key $PK $MKT 'finalize(uint40)' $LISTING   # 
 
 Metadata carries: name, description (what the lines are), image, `external_url` (the experiment's results page), and attributes for experiment, record root hash, anchor transaction, script hash, program count, date, "minted by: the keeper". Fixed before the auction; `setTokenURI` exists but is not used after listing.
 
+## E1 listing parameters
+
+Fixed by the artist 2026-10-08: **reserve 0.05 ETH**. Duration and extension interval to be fixed before listing (proposal: 24 hours from the first bid, 10% increments, 5-minute extension). Proceeds 100% to the artist's wallet; no referrer cut.
+
 ## Rehearsal — Sepolia, 2026-10-08
 
 Everything above was run once on Sepolia with a placeholder image, by the keeper, with no human step.
