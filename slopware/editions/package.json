@@ -1,0 +1,11 @@
+{
+  "name": "slopware-editions",
+  "private": true,
+  "type": "module",
+  "description": "SLOPWARE research editions: Manifold's ERC721Creator deployed, minted and listed from the keeper wallet.",
+  "dependencies": {
+    "@irys/upload": "^0.0.15",
+    "@irys/upload-ethereum": "^0.0.16",
+    "@manifoldxyz/creator-core-solidity": "^3.0.0"
+  }
+}
