@@ -10,7 +10,9 @@
  *
  * Incremental: releases already in the output file are kept; only new ones are read.
  */
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { traceLine, verdict, wouldHaveBeen } from './readings-text.js';
 import { createPublicClient, http, parseAbi, type Hex } from 'viem';
 import { connect } from './chain.js';
 import { classify } from './classify.js';
@@ -108,6 +110,26 @@ const summary = {
   withFutureOpcodes: installed.filter((r) => r.future.length > 0).length,
   labPrediction: { diedAtFirstPct: 78.4, cleanHaltPer: 130, refusedPer: 256, inputDependentPer: 9300 },
 };
-writeFileSync(OUT, JSON.stringify({ installer: CONTRACT, chainId, generatedAt: new Date().toISOString(), summary, readings: all }, null, 0));
-console.log(`\n${fresh.length} new · ${all.length} readings → ${OUT}`);
+const generatedAt = new Date().toISOString();
+writeFileSync(OUT, JSON.stringify({ installer: CONTRACT, chainId, generatedAt, summary, readings: all }, null, 0));
+
+// The page's files: a light index with the sentences already written, and the bytes in chunks of 100 releases,
+// fetched only when a reader opens them. The full record above stays as the lab's data file.
+const CHUNK = 100;
+const rdir = join(dirname(OUT), 'r');
+mkdirSync(rdir, { recursive: true });
+const index = all.map((r) => ({
+  id: r.id, status: r.status, program: r.program, by: r.installer, life: r.lifespan,
+  clean: r.probes.some((p) => p.outcome === 'success'), dep: r.inputDependent, fut: r.future.length > 0, ret: r.probes.some((p) => p.returnDataLength > 0),
+  verdict: verdict(r), would: wouldHaveBeen(r), trace: traceLine(r),
+}));
+writeFileSync(join(rdir, 'index.json'), JSON.stringify({ installer: CONTRACT, chainId, generatedAt, summary, chunk: CHUNK, readings: index }, null, 0));
+const chunks = new Map<number, object[]>();
+for (const r of all) {
+  const k = Math.floor((r.id - 1) / CHUNK);
+  if (!chunks.has(k)) chunks.set(k, []);
+  chunks.get(k)!.push({ id: r.id, bytecode: r.bytecode, disassembly: r.disassembly, probes: r.probes.map((p) => ({ name: p.name, outcome: p.outcome, instructions: p.instructions, returnDataLength: p.returnDataLength })), installer: r.installer, requestedAt: r.requestedAt, installedAt: r.installedAt });
+}
+for (const [k, rows] of chunks) writeFileSync(join(rdir, `d-${k}.json`), JSON.stringify(rows, null, 0));
+console.log(`\n${fresh.length} new · ${all.length} readings → ${OUT} · index + ${chunks.size} chunks → ${rdir}/`);
 process.exit(0);
