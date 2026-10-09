@@ -11,13 +11,14 @@ its parent, under world v0. The palette is the only human choice and is fixed he
   altered     dark grey  same length, different signature
   lengthened  mid grey   lived longer than the parent
   clean halt  accent     the child halted cleanly (over any class)
-  parent      blank      the position's own byte
+  parent      white      the position's own byte (unmarked)
 
 Usage: python3 scripts/e1_descent.py <record dir, e.g. results/E1/record> [site dir]"""
 import glob, json, os, struct, sys, zlib
 
 rec = sys.argv[1]; site = sys.argv[2] if len(sys.argv) > 2 else "slopware/site"
-PALETTE = {"neutral": (255, 255, 255), "shortened": (0, 0, 0), "altered": (90, 90, 90), "lengthened": (170, 170, 170), "clean": (200, 60, 30), "blank": (235, 235, 235), "none": (235, 235, 235)}
+# fixed 2026-10-08 by the artist: the parent's own byte is white, so only what changed is visible
+PALETTE = {"neutral": (255, 255, 255), "shortened": (0, 0, 0), "altered": (90, 90, 90), "lengthened": (170, 170, 170), "clean": (200, 60, 30), "blank": (255, 255, 255), "none": (235, 235, 235)}
 
 def png(width, height, rows):
     raw = b"".join(b"\x00" + bytes(r) for r in rows)

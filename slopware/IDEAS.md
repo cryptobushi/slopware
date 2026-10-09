@@ -18,7 +18,9 @@ Things worth keeping that do not yet have a place. Each entry says where it migh
 
 **What has to be true first.** E1 complete and published; a palette chosen and written down once; the outcome classes frozen (they are, in the E1 protocol §6); a decision on fossils and fees (roadmap Part IX / Era 9).
 
-**Open.** Whether the map should colour by outcome class only, or also by how far the child's life differs from the parent's. Whether position 0 should be drawn at the left or the top. Whether a map of a *lineage* (many generations) has a natural form.
+**Palette, fixed 2026-10-08 by the artist** (in `scripts/e1_descent.py`): white for a child identical to its parent and for the parent's own byte; black for a child that died sooner; dark grey for a different death at the same length; mid grey for a child that lived longer; one red-brown accent for a clean halt. Rows are positions 0–63, top to bottom; columns are replacement values 0–255. First rendered from E1 on 2026-10-08 (releases 1 and 51).
+
+**Open.** Whether a map of a *lineage* (many generations) has a natural form.
 
 ## Random walks on the living (2026-10-08)
 
