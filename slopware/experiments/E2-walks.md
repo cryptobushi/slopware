@@ -1,6 +1,6 @@
 # E2 — Walks on the living
 
-**Pre-registration. Draft 3 of 2026-10-09, final text, unsigned. Nothing below is run until it is signed and anchored.**
+**Pre-registration. Signed 2026-10-09 (see Sign-off). Anchored on Ethereum before the first attempt was placed (Amendment 1).**
 
 E2 is the second pre-registered experiment of SLOPWARE and follows E1 (`E1-neighbourhoods.md`, record root `bed1b583…`). E1 found that almost all local mutation is neutral: 98.4% of one-byte changes leave behaviour identical, 0.37% lengthen a run, and the only never-seen behaviour came from a parent already standing two instructions from a `CREATE`. E1 asked what is next door. E2 asks whether there is a road: is that neutrality empty space, or navigable ground? Starting from the E1 programs that executed for three or more instructions, can a long sequence of single-byte changes move through byte-space without shortening a run, and does neutral movement change which improvements become reachable without changing the current behaviour?
 
@@ -116,4 +116,8 @@ The smoke test (two parents, one 60-attempt walk per arm, 2026-10-09) was run be
 
 ## Sign-off
 
-*Frozen for signature, 2026-10-09. keccak256 of the frozen scripts: `src/e2.ts` `0x6b1c2e2a1f704a40cb41ab1e307556ff3eb0999f34619d31fa31e9fcb9dda3cc`; `scripts/e2_analysis.py` `0x7a1a8911c3ee67fa5ee642f1b2e7f405964502c36c2acf51958032852e68757d`; `scripts/e2_steps.py` `0xc94740859034805f4c8161078b423fa78f2b5c3f0f0a7c10c6a72abc73e40dac`; `E2/parents.json` sha256 `0df39d8a510a11de5f783ed575eadb1343e93f10f5f36aa5eefb887789260b01`; `E2/world-v0.json` sha256 `5a115d87c7ce9b31c0f0262e92bb7ee96e4c0a38a0b86d375a9fb10069f06190`. Smoke-tested on 2026-10-09 with two parents, one 60-attempt walk per arm (arm B climbed 3 → 7 on one parent in those 60 attempts, and the naive prefix model failed at `PUSH` immediates; a smoke test, not a result, disclosed in W1, W3 and §14). To be signed by the artist, then anchored on Ethereum from the keeper, with `parents.json`, `world-v0.json` and this document's keccak256 in the message, before the first attempt is placed.*
+Signed by the artist, Bushi, on 2026-10-09 at installer release 916 (block 26,156,564), with E1 published and no E2 attempt yet placed. The design, the 88-parent population, the two arms, the budget and stopping rule, the five hypotheses with their thresholds, the pre-specified analysis, the STEPS rules and the frozen scripts named below are fixed. Anything changed after this line is an amendment, dated and placed below it.
+
+Frozen at signing: `src/e2.ts` keccak256 `0x6b1c2e2a1f704a40cb41ab1e307556ff3eb0999f34619d31fa31e9fcb9dda3cc`; `scripts/e2_analysis.py` `0x7a1a8911c3ee67fa5ee642f1b2e7f405964502c36c2acf51958032852e68757d`; `scripts/e2_steps.py` `0xc94740859034805f4c8161078b423fa78f2b5c3f0f0a7c10c6a72abc73e40dac`; `E2/parents.json` sha256 `0df39d8a510a11de5f783ed575eadb1343e93f10f5f36aa5eefb887789260b01`; `E2/world-v0.json` sha256 `5a115d87c7ce9b31c0f0262e92bb7ee96e4c0a38a0b86d375a9fb10069f06190`. Smoke-tested 2026-10-09 (two parents, one 60-attempt walk per arm; disclosed in W1, W3 and §14). The construction row was added to the scorecard (roadmap Part VII) at this signing, per §9.
+
+The anchor transaction, sent by the keeper after this signing commit, is recorded in Amendment 1 below.
