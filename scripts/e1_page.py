@@ -73,9 +73,9 @@ H.append({"id": "H4", "name": "lengthening is rare",
 h5 = res["H5"]
 H.append({"id": "H5", "name": "nothing new under one mutation",
     "registered": "No one-mutant does anything the million-program study never saw: no external call completing, no child program from CREATE, no loop.",
-    "observed": (f"One one-mutant, of control 182 (not a collected program), reached a behaviour the million-program study never showed: byte 32 changed from POP to PUSH6, and the program now runs PUSH11 · PUSH18 · CALLVALUE · PUSH6 · PUSH14 · CREATE · PUSH12 · STOP, a CREATE that succeeds followed by a clean halt. Replicated three times on fresh chains with identical signatures. What it creates is an empty account: with no value sent, CALLVALUE is zero and is the length of the initcode. Sent one wei, the same program starves asking for one byte from an absurd memory offset." if h5["candidates"] == 1 else f"Candidates reaching a never-seen behaviour: {h5['candidates']}."),
-    "verdict": "held" if h5["candidates"] == 0 else "not held",
-    "note": "A program that gives birth, to nothing. The scorecard's self-reproduction row names CREATE without inherited bytes as its counterfeit, so the criterion stays NOT OBSERVED and the row records this placement; whether an empty account can ever be a child program is a question for the next protocol." if h5["candidates"] else ""})
+    "observed": ("One one-mutant, of control 182 (not a collected program), set a flag the million-program study never set: byte 32 changed from POP to PUSH6, and the program now runs PUSH11 · PUSH18 · CALLVALUE · PUSH6 · PUSH14 · CREATE · PUSH12 · STOP, executing CREATE and then halting cleanly. Replicated three times on fresh chains with identical signatures. The CREATE itself fails: it offers 2.46 × 10³² wei from an account holding none, pushes 0, and the program rests. Nothing is created; the child's nonce stays at 1." if h5["candidates"] == 1 else f"Candidates reaching a never-seen behaviour: {h5['candidates']}."),
+    "verdict": "held" if h5["candidates"] == 0 else "not held, narrowly",
+    "note": "Not reproduction and not its counterfeit: a program that attempts a creation, is refused, and halts cleanly instead of dying. The scorecard changes no status; the self-reproduction row gains a note." if h5["candidates"] else ""})
 
 facts = [
     ["parents", f"{fmt(man.get('genesis', 803))} genesis programs (every release before block 26,149,410) and {fmt(man.get('controls', 803))} fresh random programs"],

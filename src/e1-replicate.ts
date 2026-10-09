@@ -65,7 +65,8 @@ for (let t = 0; t < TIMES; t++) {
     for (const spec of specs) ps.push(await probe(chain, d.address, spec));
     const result: any = { address: d.address, signature: ps.map(sig).join('||'), reaches: reaches(ps), probes: ps.map((p) => ({ name: p.name, outcome: p.outcome, instructions: p.instructionCount, creates: p.creates, calls: p.calls, gasUsed: p.gasUsed, ops: p.ops })) };
     if (args.persist) {
-      // exploratory: commit the CREATE for real and look for the grandchild
+      // exploratory: commit the CREATE for real and look for the grandchild. A contract's nonce starts at 1 (EIP-161) and a
+      // CREATE that proceeds increments it, so childNonceAfter === 1 means the creation failed before it began.
       const creating = ps.find((p) => p.creates > 0 && p.outcome === 'success') ?? ps[0];
       const spec = specs.find((s) => s.name === creating.name)!;
       const hash = await chain.wallet.sendTransaction({ account: chain.wallet.account!, chain: null, to: d.address as Hex, data: spec.calldata, value: spec.value, gas: BigInt(world.gasPerCall) } as any);
