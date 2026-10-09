@@ -67,6 +67,13 @@ function consumedBytes(bytes: Uint8Array, probeA: ProbeResult) {
   const last = dis[n - 1]; const len = 1 + (last.imm ? last.imm.length / 2 : 0);
   return Math.min(64, last.pc + len);
 }
+// which bytes of the consumed prefix are executed opcodes and which are PUSH immediates (the two prefix models, W1/W3)
+function executedOpcodePositions(bytes: Uint8Array, probeA: ProbeResult): Set<number> {
+  const dis = disassemble(bytes); const n = Math.min(probeA.instructionCount, dis.length); const ops = new Set<number>();
+  for (let i = 0; i < n; i++) ops.add(dis[i].pc);
+  return ops;
+}
+const kindOf = (pos: number, consumed: number, ops: Set<number>) => pos >= consumed ? 'tail' : ops.has(pos) ? 'op' : 'imm';
 
 // ---------------------------------------------------------------- the stream (§4): keccak256(seed ‖ parent ‖ arm ‖ walk ‖ attempt)
 function proposal(parentIndex: number, walk: number, attempt: number, current: Uint8Array): { pos: number; val: number } {
@@ -97,12 +104,12 @@ async function freshChain() { await startAnvil(); chain = await connect(`http://
 async function clean() { const ok = await chain.request('evm_revert', [snap]); if (!ok) throw new Error('revert failed'); snap = await chain.request('evm_snapshot', []); }
 
 // ---------------------------------------------------------------- one evaluation from the clean state (§5)
-interface Evaluation { instantiable: boolean; failure: string | null; address: string | null; sig: string; life: number; consumed: number; reach: string[]; probes: ProbeResult[] }
+interface Evaluation { instantiable: boolean; failure: string | null; address: string | null; sig: string; life: number; consumed: number; ops: Set<number>; reach: string[]; probes: ProbeResult[] }
 async function evaluate(bytes: Uint8Array): Promise<Evaluation> {
-  if (bytes[0] === 0xef) return { instantiable: false, failure: 'refused: first byte 0xEF', address: null, sig: 'REFUSED', life: 0, consumed: 0, reach: [], probes: [] };
+  if (bytes[0] === 0xef) return { instantiable: false, failure: 'refused: first byte 0xEF', address: null, sig: 'REFUSED', life: 0, consumed: 0, ops: new Set(), reach: [], probes: [] };
   await clean();
   const d = await deployRuntime(chain, bytes);
-  if (d.status !== 'deployed' || !d.address) return { instantiable: false, failure: d.reason ?? d.status, address: null, sig: `FAILED|${d.status}`, life: 0, consumed: 0, reach: [], probes: [] };
+  if (d.status !== 'deployed' || !d.address) return { instantiable: false, failure: d.reason ?? d.status, address: null, sig: `FAILED|${d.status}`, life: 0, consumed: 0, ops: new Set(), reach: [], probes: [] };
   const ps: ProbeResult[] = [];
   for (const spec of specs) {
     try { ps.push(await probe(chain, d.address, spec)); }
@@ -124,7 +131,7 @@ async function evaluate(bytes: Uint8Array): Promise<Evaluation> {
       }
     } catch (e: any) { r.add(`detector_error:${String(e.message ?? e).slice(0, 40)}`); }
   }
-  return { instantiable: true, failure: null, address: d.address, sig: signature(ps), life: ps[0].instructionCount, consumed: consumedBytes(bytes, ps[0]), reach: [...r].sort(), probes: ps };
+  return { instantiable: true, failure: null, address: d.address, sig: signature(ps), life: ps[0].instructionCount, consumed: consumedBytes(bytes, ps[0]), ops: executedOpcodePositions(bytes, ps[0]), reach: [...r].sort(), probes: ps };
 }
 
 // ---------------------------------------------------------------- the walk (§4)
@@ -140,26 +147,28 @@ for (let pi = FROM; pi <= TO; pi++) {
     await freshChain();
     const base = await evaluate(parentBytes);
     if (!base.instantiable) throw new Error(`parent ${pi} not instantiable`);
-    let cur = new Uint8Array(parentBytes), curSig = base.sig, curLife = base.life, curConsumed = base.consumed;
+    let cur = new Uint8Array(parentBytes), curSig = base.sig, curLife = base.life, curConsumed = base.consumed, curOps = base.ops;
     let plateau = new Uint8Array(parentBytes), plateauLife = base.life, plateauAttempt = 0, neutralSince = 0;
     const steps: [number, number][] = []; const firstReach: Record<string, number> = {}; let firstNovel: number | null = null;
-    let accepted = 0, acceptedBelowPrefix = 0, predRight = 0, maxLife = base.life; const hammingSeries: [number, number][] = [];
-    const decile = new Array(10).fill(0).map(() => ({ right: 0, n: 0 }));
+    let accepted = 0, acceptedBelowPrefix = 0, acceptedOnOpcode = 0, acceptedOnImmediate = 0, predRight = 0, predRight2 = 0, maxLife = base.life; const hammingSeries: [number, number][] = [];
+    const decile = new Array(10).fill(0).map(() => ({ right: 0, right2: 0, n: 0 }));
     for (let t = 1; t <= ATTEMPTS; t++) {
       const { pos, val } = proposal(pi, w, t, cur);
       const child = new Uint8Array(cur); child[pos] = val;
       const ev = await evaluate(child);
       const cls = !ev.instantiable ? 'lethal' : ev.sig === curSig ? 'neutral' : ev.life > curLife ? 'lengthened' : ev.life < curLife ? 'shortened' : 'altered';
-      const predictedNeutral = pos >= curConsumed; const isNeutral = cls === 'neutral';
-      if (predictedNeutral === isNeutral) predRight++;
-      const dec = Math.min(9, Math.floor((t - 1) * 10 / ATTEMPTS)); decile[dec].n++; if (predictedNeutral === isNeutral) decile[dec].right++;
+      const kind = kindOf(pos, curConsumed, curOps);
+      const predictedNeutral = pos >= curConsumed; const predictedNeutral2 = kind !== 'op'; const isNeutral = cls === 'neutral';
+      if (predictedNeutral === isNeutral) predRight++; if (predictedNeutral2 === isNeutral) predRight2++;
+      const dec = Math.min(9, Math.floor((t - 1) * 10 / ATTEMPTS)); decile[dec].n++; if (predictedNeutral === isNeutral) decile[dec].right++; if (predictedNeutral2 === isNeutral) decile[dec].right2++;
       const accept = ARM === 'A' ? ev.instantiable && ev.sig === curSig : ev.instantiable && ev.life >= curLife;
       for (const b of ev.reach) if (!(b in firstReach)) { firstReach[b] = t; if (NOVEL.has(b) && firstNovel === null) firstNovel = t; }
-      const line: any = { p: pi, arm: ARM, w, t, pos, val, acc: accept, cls, sigH: keccak256(toBytes(ev.sig)).slice(0, 18), life: ev.life, reach: ev.reach, pred: predictedNeutral, cons: curConsumed };
+      const line: any = { p: pi, arm: ARM, w, t, pos, val, acc: accept, cls, sigH: keccak256(toBytes(ev.sig)).slice(0, 18), life: ev.life, reach: ev.reach, kind, pred: predictedNeutral, pred2: predictedNeutral2, cons: curConsumed };
       if (!ev.instantiable) line.failure = ev.failure;
       if (accept) {
         line.bytes = hex(child);
         if (pos < curConsumed) acceptedBelowPrefix++;
+        if (kind === 'op') acceptedOnOpcode++; else if (kind === 'imm') acceptedOnImmediate++;
         if (ev.life > curLife) {
           // W5: the same substitution on the plateau-start genome (defines the class) and on the original parent (descriptive)
           const onPlateau = new Uint8Array(plateau); onPlateau[pos] = val; const evP = await evaluate(onPlateau);
@@ -171,7 +180,7 @@ for (let pi = FROM; pi <= TO; pi++) {
           appendFileSync(lengtheningFile, JSON.stringify(rec) + '\n');
           steps.push([t, ev.life]); plateau = new Uint8Array(child); plateauLife = ev.life; plateauAttempt = t; neutralSince = 0;
         } else neutralSince++;
-        cur = child; curSig = ev.sig; curLife = ev.life; curConsumed = ev.consumed; accepted++; if (ev.life > maxLife) maxLife = ev.life;
+        cur = child; curSig = ev.sig; curLife = ev.life; curConsumed = ev.consumed; curOps = ev.ops; accepted++; if (ev.life > maxLife) maxLife = ev.life;
       }
       appendFileSync(walksFile, JSON.stringify(line) + '\n');
       if (t % 1000 === 0) hammingSeries.push([t, hamming(cur, parentBytes)]);
@@ -180,9 +189,10 @@ for (let pi = FROM; pi <= TO; pi++) {
     }
     const summary = {
       parentIndex: pi, set: parent.set, label: parent.label, arm: ARM, walk: w, parentLifespan: base.life, parentConsumed: base.consumed, budget: ATTEMPTS,
-      accepted, acceptedBelowPrefix, finalBytes: hex(cur), finalLifespan: curLife, maxLifespan: maxLife, finalConsumed: curConsumed,
+      accepted, acceptedBelowPrefix, acceptedOnOpcode, acceptedOnImmediate, finalBytes: hex(cur), finalLifespan: curLife, maxLifespan: maxLife, finalConsumed: curConsumed,
       localNeutralSteps: ARM === 'A' ? accepted : undefined, ancestralNeutral: curSig === base.sig, prefixUnchanged: hex(cur.slice(0, base.consumed)) === hex(parentBytes.slice(0, base.consumed)),
-      hammingFromParent: hamming(cur, parentBytes), hammingSeries, steps, firstReach, firstNovel, prefixPredictorRight: predRight, prefixPredictorByDecile: decile, ...HARNESS, finishedAt: new Date().toISOString(),
+      opcodesUnchanged: [...base.ops].every((pc) => cur[pc] === parentBytes[pc]),
+      hammingFromParent: hamming(cur, parentBytes), hammingSeries, steps, firstReach, firstNovel, prefixPredictorRight: predRight, opcodePredictorRight: predRight2, prefixPredictorByDecile: decile, ...HARNESS, finishedAt: new Date().toISOString(),
     };
     appendFileSync(summariesFile, JSON.stringify(summary) + '\n');
     const rate = attemptsRun / ((Date.now() - t0) / 1000);

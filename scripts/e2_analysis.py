@@ -22,12 +22,13 @@ S = load_summaries(root)
 A = [s for s in S.values() if s["arm"] == "A"]; B = [s for s in S.values() if s["arm"] == "B"]
 res = {"walks": {"A": len(A), "B": len(B)}, "parents": len({k[0] for k in S})}
 
-# W1 — neutral movement: accepted arm-A steps inside the naive consumed prefix; final prefix unchanged; local vs ancestral neutrality
-acc = sum(s["accepted"] for s in A); below = sum(s["acceptedBelowPrefix"] for s in A)
-res["W1"] = {"accepted_neutral_steps": acc, "accepted_below_prefix": below, "fraction_below_prefix": below / acc if acc else None,
-             "walks_prefix_unchanged": sum(1 for s in A if s["prefixUnchanged"]) / len(A) if A else None,
+# W1 — neutral movement: accepted arm-A steps on executed opcode bytes / inside the naive prefix; executed opcodes unchanged at the end; local vs ancestral neutrality
+acc = sum(s["accepted"] for s in A); below = sum(s["acceptedBelowPrefix"] for s in A); on_op = sum(s["acceptedOnOpcode"] for s in A); on_imm = sum(s["acceptedOnImmediate"] for s in A)
+res["W1"] = {"accepted_neutral_steps": acc, "accepted_on_executed_opcode": on_op, "fraction_on_executed_opcode": on_op / acc if acc else None,
+             "accepted_on_immediate": on_imm, "fraction_on_immediate": on_imm / acc if acc else None, "accepted_below_naive_prefix": below, "fraction_below_naive_prefix": below / acc if acc else None,
+             "walks_opcodes_unchanged": sum(1 for s in A if s["opcodesUnchanged"]) / len(A) if A else None, "walks_naive_prefix_unchanged": sum(1 for s in A if s["prefixUnchanged"]) / len(A) if A else None,
              "ancestral_neutral_fraction": sum(1 for s in A if s["ancestralNeutral"]) / len(A) if A else None,
-             "held": bool(A) and acc > 0 and below / acc < 0.01 and sum(1 for s in A if s["prefixUnchanged"]) / len(A) >= 0.90}
+             "held": bool(A) and acc > 0 and on_op / acc < 0.01 and sum(1 for s in A if s["opcodesUnchanged"]) / len(A) >= 0.90}
 # W2 — persistence can climb
 per_parent = collections.defaultdict(list)
 for s in B: per_parent[s["parentIndex"]].append(s["finalLifespan"] / s["parentLifespan"])
@@ -35,13 +36,14 @@ ratios = [statistics.median(v) for v in per_parent.values()]
 res["W2"] = {"median_parent_ratio": statistics.median(ratios) if ratios else None, "max_lifespan": max((s["maxLifespan"] for s in B), default=None),
              "parents_doubled": sum(1 for r in ratios if r >= 2), "can_climb": bool(ratios) and statistics.median(ratios) >= 2, "can_climb_far": any(s["maxLifespan"] >= 32 for s in B),
              "final_lifespans_B": sorted(collections.Counter(s["finalLifespan"] for s in B).items())}
-# W3 — the naive prefix predictor, from the per-walk counters (every attempt) and by decile
-tot = {"A": [0, 0], "B": [0, 0]}; dec = {"A": [[0, 0] for _ in range(10)], "B": [[0, 0] for _ in range(10)]}
+# W3 — two prefix models, from the per-walk counters (every attempt) and by decile: naive (neutral iff pos >= consumed) and opcode (neutral iff pos is not an executed opcode byte)
+tot = {m: {"A": [0, 0], "B": [0, 0]} for m in ("naive", "opcode")}; dec = {m: {"A": [[0, 0] for _ in range(10)], "B": [[0, 0] for _ in range(10)]} for m in ("naive", "opcode")}
 for s in S.values():
-    tot[s["arm"]][0] += s["prefixPredictorRight"]; tot[s["arm"]][1] += s["budget"]
-    for i, d in enumerate(s["prefixPredictorByDecile"]): dec[s["arm"]][i][0] += d["right"]; dec[s["arm"]][i][1] += d["n"]
-res["W3"] = {arm: {"accuracy": tot[arm][0] / tot[arm][1] if tot[arm][1] else None, "by_decile": [r / n if n else None for r, n in dec[arm]]} for arm in ("A", "B")}
-res["W3"]["held"] = all((tot[a][1] and tot[a][0] / tot[a][1] >= 0.98) for a in ("A", "B")) and all((n == 0 or r / n >= 0.98) for a in ("A", "B") for r, n in dec[a])
+    a = s["arm"]; tot["naive"][a][0] += s["prefixPredictorRight"]; tot["opcode"][a][0] += s["opcodePredictorRight"]; tot["naive"][a][1] += s["budget"]; tot["opcode"][a][1] += s["budget"]
+    for i, d in enumerate(s["prefixPredictorByDecile"]): dec["naive"][a][i][0] += d["right"]; dec["opcode"][a][i][0] += d["right2"]; dec["naive"][a][i][1] += d["n"]; dec["opcode"][a][i][1] += d["n"]
+res["W3"] = {m: {a: {"accuracy": tot[m][a][0] / tot[m][a][1] if tot[m][a][1] else None, "by_decile": [r / n if n else None for r, n in dec[m][a]]} for a in ("A", "B")} for m in ("naive", "opcode")}
+ok = lambda m: all((tot[m][a][1] and tot[m][a][0] / tot[m][a][1] >= 0.98) for a in ("A", "B")) and all((n == 0 or r / n >= 0.98) for a in ("A", "B") for r, n in dec[m][a])
+res["W3"]["naive_held"] = ok("naive"); res["W3"]["opcode_held"] = ok("opcode")
 # W4 — behavioural reach (a measurement)
 EVENTS = ["clean_halt", "returns_data", "write_survives", "create_executed", "external_call", "create_succeeds", "child_has_code", "loop"]
 w4 = {}
