@@ -24,7 +24,8 @@ BIN=$(python3 -c "import json;print(json.load(open('out/ResearchEditions.sol/Res
 cast send --rpc-url $RPC --private-key $PK --create "${BIN}${ARGS#0x}"          # → contract C
 cast send --rpc-url $RPC --private-key $PK $C 'approveAdmin(address)' $ARTIST
 
-# 2. pin (image first, then metadata that points at it)
+# 2. gate: the artist sees the final render and the metadata text before anything is pinned. Nothing below runs without that yes.
+#    pin (image first, then metadata that points at it)
 IMG=$(node irys-upload.mjs threads.png image/png mainnet)
 META=$(node irys-upload.mjs metadata.json application/json mainnet)
 
