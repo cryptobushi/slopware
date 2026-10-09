@@ -174,3 +174,7 @@ One shard (genesis indices 1–200) exited at 23:4x UTC after 140 parents when i
 
 Two more shards still running the original ten-second start code exited the same way (genesis indices 201–401 after index 360; 403–602 after index 562); their logs are preserved as `*.crashed.txt`. Both were resumed from the next index with the patched runner (`genesis-361-401`, `genesis-563-602`). As before, the partial placements of indices 361 and 563 are duplicates by event id and are deduplicated in analysis. The record itself (about 27 GB) will remain on a snapshot of the droplet's volume; the manifest, root hash, parent summaries, logs, analysis and readings artefacts are brought into the repository or `results/`.
 
+### Amendment 6 — 2026-10-08 20:55 ET, before results: the E1 research edition
+
+Under constitution amendment 1 (roadmap Part X-B), E1 has one research edition, **THREADS**, defined here before any result is known. It is generated from the sealed record by `scripts/e1_threads.py` (keccak256 of the script at this commit: `0x67bd975b34a16877b3c31de91c78887eaa4c368a6f9f64bf0d366a334e9a97e6`), genesis programs only, in release order, with the red mark at three or more executed instructions. The rules are stated in the script's header and are not changed after this amendment. The edition's metadata will carry the record's root hash, the anchor transaction, and this script hash. It is offered only after the results below are published, on the E1 results page, and confers no rights over anything.
+

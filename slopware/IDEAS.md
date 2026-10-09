@@ -25,7 +25,19 @@ Things worth keeping that do not yet have a place. Each entry says where it migh
 
 **Open.** Whether a map of a *lineage* (many generations) has a natural form.
 
-## The neighbourhoods essay (2026-10-08)
+## THREADS — the E1 research edition (fixed 2026-10-08)
+
+Every genesis program as a walk: the sixty-four bytes read in order turn and advance a pen; the whole walk in faint grey (what the program is), the executed prefix in black (how much of itself it lived), a red mark where a program reached three or more instructions. Grid in release order, genesis only. Rules fixed in `scripts/e1_threads.py` before E1's results were known (E1 amendment 6). The ghosts (below) stay for the readings page, one per release.
+
+## Ghosts (2026-10-08)
+
+A release's sixty-four bytes in Courier with all 16,320 one-byte siblings printed as a typographic field: 64 columns × 255 rows of hex, pale where a sibling behaves like the parent, dark where it lives longer, mid where it dies differently, red where it stops cleanly, the parent's own byte black. For the readings page, one per release, generated from the E1 record. Not for the receipts, which stay plain.
+
+## The neighbourhoods essay (2026-10-08) — set aside
+
+Judged confusing in prototype; replaced by a short results page per experiment (one image, five hypotheses with numbers, three sentences, the data) and one line per release on the readings page.
+
+
 
 A scrolling, data-driven piece in the manner of pudding.cool, in the site's own register (Courier, black on white, one red accent, motion only for data), at `slopware.fun/neighbourhoods`. Eight moves: one program dying on its first byte · its first byte fanned into 255 siblings, 54 of which live a step longer and one of which stops cleanly (H3, watched) · the full 16,320-child grid where 63 rows do nothing (H2, felt) · 803 parents arranged by how many instructions they execute, the lively few growing as you scroll · genesis and control clouds overlaid and indistinguishable (H1) · a counter to twenty-six million with the "anything new" bar staying at zero (H5) · small multiples of the parents with texture, the hills · three plain sentences. Needs aggregates captured from the E1 record before the droplet is destroyed: per-parent per-position class counts, child-versus-parent lifespan distribution, first-byte outcomes by opcode.
 
