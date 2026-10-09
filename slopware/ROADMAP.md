@@ -750,6 +750,34 @@ Ratified by the artist at release 806, with E1 running and its results unknown.
 
 **Who signs (decided by the artist 2026-10-08, E1 still running).** Research editions are minted from the keeper's wallet, `0xB847…913f`, not the artist's. The keeper is the project's own hand: it has completed every installation nobody else completed, it anchored the E1 pre-registration, and the artist regards the work as co-authored with the machine that attends it. So the creator of record on every research edition is the keeper. Conditions: the edition contract names the artist's wallet as an admin alongside the keeper, so the series does not depend on a hot key; proceeds are swept to the artist as rule 6 requires, as the installer's sales already are; the keeper still holds nothing of value between transactions. `SECURITY.md` records the change to the keeper's surface. Rehearsed end to end on Sepolia on 2026-10-08 with no human step: contract deployed, artist approved as admin, image and metadata pinned to Arweave via Irys, token minted, reserve auction created on Manifold's marketplace with the artist as sole receiver, a bid placed, and the listing rendered on a page of ours through Manifold's widgets (`editions/README.md`).
 
+## Part X-C — Cohorts (2026-10-09): experiments freeze populations; SLOPWARE itself never freezes
+
+A methodological rule, recorded so that it is not forgotten when the catalogue is several times its present size. It changes nothing about E2, whose protocol, parent set, hypotheses, analysis, edition and run are frozen, and nothing about the installer.
+
+**The principle.** Experiments freeze populations. SLOPWARE itself never freezes. The installer has kept installing since E1's snapshot block, and every release since is as much a SLOPWARE program as the first. An experiment has a cutoff; the catalogue does not.
+
+**The cohorts so far, kept distinct.**
+
+| cohort | definition | status |
+|---|---|---|
+| E1 genesis population | every release requested at or before block 26,149,410: releases 1 to 803 (801 installed, 2 refused) | the population that existed when the laboratory first opened; constitution decision 3, *G* = 26,149,410 |
+| E2 experimental population | the 88 E1 parents (42 genesis, 46 control) whose probe-A lifespan was three or more, by E2's frozen eligibility rule from the sealed E1 record | frozen; must not change |
+| post-E1 releases | every release requested after block 26,149,410 | generation 0, era 1; part of SLOPWARE; in no experiment yet |
+
+**Why the post-E1 releases are not added to E2.** E2 is a direct continuation of E1: its parents were chosen by a rule applied to the sealed E1 record. Adding programs born after E1 would change the meaning of that population after E2 was designed, for little scientific gain. Keeping E2 frozen preserves a clean lineage: the million-program study, then E1 on the 803 historical genesis programs, then E2 on the 88 qualifying parents. Meanwhile the installer continues, producing new unrelated generation-0 programs, preserved for future pre-registered work.
+
+**What the post-E1 releases are for.** They are candidates for future experiments, which is not decided now: a fresh replication cohort for E1's or E2's findings; a contemporary cohort for a later experiment; a comparison between historical cohorts; a population experiment; something not yet conceived. E3 is not created here and remains conditional on E2's results. Optionality is being preserved, not a result written in advance.
+
+**Inclusion is mechanical and pre-registered.** No later program is ever selected because it looked interesting. A future experiment states, before examining the relevant results: the exact block or release range; the eligibility criterion; the environment; the protocol; whether the cohort is confirmatory, replication or exploratory; and a stopping rule where one applies. Then every program satisfying the rule enters.
+
+**No cohort is sacred.** The original 803 are historically important because they were there when the laboratory opened. They are not the only legitimate SLOPWARE programs and hold no permanent privilege. Later releases get their chance to enter experiments under rules set before their relevant behaviour is examined.
+
+**Participation.** The installer can stay open while research proceeds. Someone who installs a program after E1 or E2 has not missed SLOPWARE; they have introduced new arbitrary computational material into a continuing system. Experiments have cutoff blocks. The catalogue continues past them.
+
+**Provenance that makes this possible.** For every program the existing record already answers: release number and request block, bytes and genotype (`readings.json`, the installer's events); installed or refused (the receipt and `readings.json`); which cohorts it has entered (E1: `experiments/E1/genesis.json` and the parent summaries under `experiments/E1/summaries/parents/`; E2: `experiments/E2/parents.json`); which experiments have evaluated it (the same files plus `descent.json`). Every future experiment publishes its cohort file the same way, so a program's experimental history is the set of cohort files that name it. Nothing new is built for this now.
+
+**In one line.** The catalogue is continuous; experiments are snapshots. A program's birth block is part of its experimental history. Programs born after an experiment's cutoff remain untested material for later pre-registered work. No historical cohort is permanently privileged.
+
 ## Part X — Decisions needed now, as originally posed (expensive or impossible to reverse)
 
 1. **Genotype identity = `keccak256(runtime bytes)`.** Already the on-chain checksum. Adopt. Consequence: identical bytes born twice are one genotype with two genesis events.

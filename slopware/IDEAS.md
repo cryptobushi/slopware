@@ -52,3 +52,7 @@ From the few genesis programs that execute more than one byte, take long random 
 ## Two-parent children (2026-10-08)
 
 Recombination between two genesis programs, the catalogue's first children with two owned ancestors. Waits for the fixed-length rule to expire or for a crossover that preserves length.
+
+## Cohorts after E1 (2026-10-09)
+
+The releases after block 26,149,410 are in no experiment yet and are reserved for future pre-registered work under mechanical inclusion rules: see roadmap Part X-C, "experiments freeze populations; SLOPWARE itself never freezes".
