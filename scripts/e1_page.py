@@ -53,9 +53,13 @@ def wilson(k, n, z=1.96):
     p = k / n; d = 1 + z * z / n; c = (p + z * z / (2 * n)) / d; h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
     return p, c - h, c + h
 if agg:
-    fb = agg["firstByte"]; n3 = sum(sum(c.values()) for c in fb.values()); k3 = sum(k for c in fb.values() for o, k in c.items() if o.endswith("|lives"))
-    p3, lo3, hi3 = wilson(k3, n3); living_values = sum(1 for c in fb.values() if any(o.endswith("|lives") for o in c))
-    obs3 = f"Of {fmt(n3)} position-0 children of parents that die on their first byte, {fmt(k3)} lived at least two instructions: {pct(p3,2)} (95% interval {pct(lo3,2)} to {pct(hi3,2)}). The registered 21.57% lies outside it. Exactly {living_values} replacement values ever let such a program live: the 32 PUSHes and 22 operand-free opcodes. The pre-registration counted STOP as a 55th, and STOP halts at once; 54/255 = 21.18% is inside the interval."
+    fb = agg["firstByte"]
+    refused = [p for p in agg["parents"] if p["lifespanA"] is None]; dead = [p for p in agg["parents"] if p["lifespanA"] == 1]
+    n_all = sum(sum(c.values()) for c in fb.values()); k_all = sum(v for c in fb.values() for o, v in c.items() if o.endswith("|lives"))
+    # the table also holds the six refused parents' position-0 children (first byte 0xEF, so all 54 living opcodes live there); §7.4 excludes them
+    n3 = n_all - sum(sum(p["perPosition"][0]) for p in refused); k3 = k_all - 54 * len(refused)
+    p3, lo3, hi3 = wilson(k3, n3)
+    obs3 = f"{fmt(len(dead))} parents die on their first byte. Their {fmt(n3)} placeable position-0 children (254 each: the 0xEF replacement cannot be placed) include {fmt(k3)} that lived at least two instructions: {pct(p3,2)} (95% interval {pct(lo3,2)} to {pct(hi3,2)}). The registered 21.57% lies outside it. Exactly 54 replacement values ever let such a program live, the 32 PUSHes and 22 operand-free opcodes; the pre-registration counted STOP as a 55th, and STOP halts at once, and it divided by 255 where only 254 replacements can be placed. 54/254 = {pct(54/254,2)}, equal to the observed fraction."
     held3 = lo3 <= 55/255 <= hi3
 else:
     p3, lo3, hi3 = h3["fraction"], *h3["ci95"]; held3 = lo3 <= 55/255 <= hi3

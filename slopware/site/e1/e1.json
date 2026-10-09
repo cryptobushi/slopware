@@ -1,6 +1,6 @@
 {
  "experiment": "E1",
- "generatedAt": "2026-10-09T13:25:08+00:00",
+ "generatedAt": "2026-10-09T13:25:55+00:00",
  "caption": "THREADS. Every genesis program as a walk from its bytes, in release order. Faint: the whole program. Black: the part it executed before it halted. Red: it reached three or more instructions. Rules fixed before the results; generated from the sealed record.",
  "hypotheses": [
   {
@@ -23,7 +23,7 @@
    "id": "H3",
    "name": "the first byte",
    "registered": "For a parent that dies on its first byte, a new first byte lets the program live at least two instructions exactly when it is one of the 55 operand-free opcodes: 55/255, which is 21.6%.",
-   "observed": "Of 325,380 position-0 children of parents that die on their first byte, 69,173 lived at least two instructions: 21.26% (95% interval 21.12% to 21.40%). The registered 21.57% lies outside it. Exactly 54 replacement values ever let such a program live: the 32 PUSHes and 22 operand-free opcodes. The pre-registration counted STOP as a 55th, and STOP halts at once; 54/255 = 21.18% is inside the interval.",
+   "observed": "1,275 parents die on their first byte. Their 323,850 placeable position-0 children (254 each: the 0xEF replacement cannot be placed) include 68,849 that lived at least two instructions: 21.26% (95% interval 21.12% to 21.40%). The registered 21.57% lies outside it. Exactly 54 replacement values ever let such a program live, the 32 PUSHes and 22 operand-free opcodes; the pre-registration counted STOP as a 55th, and STOP halts at once, and it divided by 255 where only 254 replacements can be placed. 54/254 = 21.26%, equal to the observed fraction.",
    "verdict": "not held as written",
    "note": "The harness agrees with the arithmetic once the arithmetic is right; that corrected comparison is exploratory because its number was fixed after the run."
   },
