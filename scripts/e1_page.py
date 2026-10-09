@@ -19,9 +19,8 @@ args = dict(zip(sys.argv[1::2], sys.argv[2::2]))
 res = json.load(open(f"{S}/results.json"))
 root = open(f"{S}/ROOT.sha256").read().strip()
 man = json.load(open(f"{S}/run-manifest.json")) if os.path.exists(f"{S}/run-manifest.json") else {}
-anchor = ""
-if os.path.exists(f"{E1}/anchor.txt"):
-    m = re.search(r"0x[0-9a-f]{64}", open(f"{E1}/anchor.txt").read()); anchor = m.group(0) if m else ""
+# the pre-registration anchor transaction (block 26,149,568, sent by the keeper 2026-10-08); anchor.txt holds the message, not the tx hash
+anchor = args.get("--anchor", "0x43cf98936519c7d068b631a15144d16a405680308cea9bc4edb9fe0bd85829ec")
 sentences = [l.strip() for l in open(f"{S}/sentences.txt")] if os.path.exists(f"{S}/sentences.txt") else []
 sentences = [s for s in sentences if s]
 edition = json.load(open(f"{S}/edition.json")) if os.path.exists(f"{S}/edition.json") else None

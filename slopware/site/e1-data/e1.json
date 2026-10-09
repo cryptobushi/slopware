@@ -1,6 +1,6 @@
 {
  "experiment": "E1",
- "generatedAt": "2026-10-09T14:39:33+00:00",
+ "generatedAt": "2026-10-09T15:21:23+00:00",
  "caption": "THREADS. Every genesis program as a walk from its bytes, in release order. Faint: the whole program. Black: the part it executed before it halted. Red: it reached three or more instructions. Rules fixed before the results; generated from the sealed record.",
  "hypotheses": [
   {
@@ -68,8 +68,8 @@
   ],
   [
    "pre-registration anchor",
-   "0xbaa09001fae948bbe026225401043f7bb0433e56b336e6527a2fc460bbe4c631",
-   "https://etherscan.io/tx/0xbaa09001fae948bbe026225401043f7bb0433e56b336e6527a2fc460bbe4c631"
+   "0x43cf98936519c7d068b631a15144d16a405680308cea9bc4edb9fe0bd85829ec",
+   "https://etherscan.io/tx/0x43cf98936519c7d068b631a15144d16a405680308cea9bc4edb9fe0bd85829ec"
   ],
   [
    "record anchor",
@@ -92,7 +92,7 @@
   ]
  ],
  "reproduce": "To check any number: fetch the snapshot or the parent summaries, run scripts/e1_analysis.py, and compare with results.json; to check the picture, run scripts/e1_threads.py on record/genesis. The root hash above is the sha256 of the sorted sha256 manifest of every file in the record.",
- "anchorTx": "0xbaa09001fae948bbe026225401043f7bb0433e56b336e6527a2fc460bbe4c631",
+ "anchorTx": "0x43cf98936519c7d068b631a15144d16a405680308cea9bc4edb9fe0bd85829ec",
  "edition": {
   "text": "THREADS (E1) is the research edition for this experiment: one token, the picture above at print resolution, pinned to Arweave with metadata carrying the record root, both anchors, and the hash of the script that drew it. It was minted by the keeper, the wallet that completes SLOPWARE's installations, on a contract separate from the installer, and is offered here by reserve auction. Proceeds go to the artist and fund the work. It confers no rights over any program, release, receipt or experiment.",
   "note": "Reserve 0.05 ETH. The auction runs 24 hours from the first bid, 10% minimum increments, extended by five minutes for a bid in the last five. Settled by Manifold's marketplace contract; the keeper finalizes it when it ends. Contract 0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664, token 1, listing 20909.",
