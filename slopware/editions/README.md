@@ -60,6 +60,6 @@ Everything above was run once on Sepolia with a placeholder image, by the keeper
 | mint | token 1, 796,865 gas |
 | listing | id 1554 on marketplace V2 (tx `0xa7b67a9b0722c614458e8870e10b707e4c38e89fc557d0b6ebc732d20947f3dc`), reserve 0.01, 15 minutes, receiver artist 100% |
 | bid | 0.01 ETH from a throwaway wallet; widgets showed image, current bid, countdown, minimum next bid 0.011, history |
-| finalize | queued for the auction's end; result appended below when it lands |
+| finalize | tx `0x06b6c25b66af0f1a809ee5094caa9cec4e651aaa86db7c1ca5605f072ad2dda0`, 232,726 gas, called by the keeper after the end time; token 1 delivered to the bidder, the full 0.01 ETH arrived in the artist's wallet, the keeper paid only gas |
 
 Notes: the connect widget must not be given `data-app-name` without a `data-client-id`; with neither, it runs on the fallback provider. The widgets read the listing from the chain directly and fetched the token's media through Manifold's own API, so no indexing by Manifold was needed. Deploy cost 33.5M gas on Sepolia under the Amsterdam repricing; the mainnet estimate for the same bytecode is 4.79M gas, about 0.001 ETH at a 0.1 gwei base fee.
