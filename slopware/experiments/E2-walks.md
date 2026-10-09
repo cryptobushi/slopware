@@ -121,3 +121,7 @@ Signed by the artist, Bushi, on 2026-10-09 at installer release 916 (block 26,15
 Frozen at signing: `src/e2.ts` keccak256 `0x6b1c2e2a1f704a40cb41ab1e307556ff3eb0999f34619d31fa31e9fcb9dda3cc`; `scripts/e2_analysis.py` `0x7a1a8911c3ee67fa5ee642f1b2e7f405964502c36c2acf51958032852e68757d`; `scripts/e2_steps.py` `0xc94740859034805f4c8161078b423fa78f2b5c3f0f0a7c10c6a72abc73e40dac`; `E2/parents.json` sha256 `0df39d8a510a11de5f783ed575eadb1343e93f10f5f36aa5eefb887789260b01`; `E2/world-v0.json` sha256 `5a115d87c7ce9b31c0f0262e92bb7ee96e4c0a38a0b86d375a9fb10069f06190`. Smoke-tested 2026-10-09 (two parents, one 60-attempt walk per arm; disclosed in W1, W3 and §14). The construction row was added to the scorecard (roadmap Part VII) at this signing, per §9.
 
 The anchor transaction, sent by the keeper after this signing commit, is recorded in Amendment 1 below.
+
+### Amendment 1 — 2026-10-09, anchor on Ethereum, before the first attempt
+
+Anchored from the keeper in transaction `0xacb2614447721b5e959171c7e267301e0974be6d7cb691488d2578890ec85d7f` (block 26,156,572). The message (`E2/anchor.txt`) carries this document's keccak256 at the signing commit `50ad530` (`0xcfc6bd5918622a107c4b11c860b79c25c4dbf12afbe2a04653dd573b0afca63e`), the sha256 of `parents.json` and `world-v0.json`, and the keccak256 of the three frozen scripts. No attempt had been placed at that block.
