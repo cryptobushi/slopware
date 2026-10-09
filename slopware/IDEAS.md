@@ -41,7 +41,11 @@ Judged confusing in prototype; replaced by a short results page per experiment (
 
 A scrolling, data-driven piece in the manner of pudding.cool, in the site's own register (Courier, black on white, one red accent, motion only for data), at `slopware.fun/neighbourhoods`. Eight moves: one program dying on its first byte · its first byte fanned into 255 siblings, 54 of which live a step longer and one of which stops cleanly (H3, watched) · the full 16,320-child grid where 63 rows do nothing (H2, felt) · 803 parents arranged by how many instructions they execute, the lively few growing as you scroll · genesis and control clouds overlaid and indistinguishable (H1) · a counter to twenty-six million with the "anything new" bar staying at zero (H5) · small multiples of the parents with texture, the hills · three plain sentences. Needs aggregates captured from the E1 record before the droplet is destroyed: per-parent per-position class counts, child-versus-parent lifespan distribution, first-byte outcomes by opcode.
 
-## Random walks on the living (2026-10-08)
+## Random walks on the living (2026-10-08) — became E2
+
+Drafted as the second pre-registration on 2026-10-09: `experiments/E2-walks.md` (two arms, neutral and persistence; 88 parents with lifespan ≥ 3 from E1; 8.8 million attempts; edition STEPS). The text below is the original note.
+
+### original note
 
 From the few genesis programs that execute more than one byte, take long random one-byte walks, keeping only steps that stay alive. How far can a program wander without dying? Are the living programs connected to one another or isolated islands? This is the single most important fact for whether evolution can move on this machine, and it is cheap to measure. A candidate for the second pre-registered experiment. Parents must be chosen by a stated rule written before looking at E1's results (for example, every genesis genome whose probe-A lifespan is at least three).
 

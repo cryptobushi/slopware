@@ -769,6 +769,8 @@ Ratified by the artist at release 806, with E1 running and its results unknown.
 
 ## Part XI — The minimum next release
 
+*E2 drafted 2026-10-09 as [`experiments/E2-walks.md`](experiments/E2-walks.md): walks on the 88 living parents from E1, neutral and persistence arms, pre-registered, unsigned.*
+
 *Pre-registered as [`experiments/E1-neighbourhoods.md`](experiments/E1-neighbourhoods.md) on 2026-10-08; run 2026-10-08/09; results in that document under "Results — 2026-10-09" and at `slopware.fun/e1`. H1, H2, H4 held; H3 not held as written (a counting error in the pre-registration, one opcode); H5 not held: one replicated one-mutant of a control parent executes a successful `CREATE` of an empty account.*
 
 The smallest honest step toward heredity that keeps everything that makes the current work what it is:
