@@ -247,7 +247,7 @@ async function refresh() {
     const link = /^0x[0-9a-fA-F]{40}$/.test(ADDR) ? `<a href="${await scanHost()}/address/${ADDR}" target="_blank" rel="noopener">${ADDR}</a>` : ADDR.replace(/[<>&]/g, '');
     $('colophon').innerHTML = `<div class="tbl facts"><span>installer</span><span class="addr">${link}</span><span>releases</span><span>${fmt(releases)}</span><span>installed</span><span>${fmt(installed)}</span><span>rejected</span><span>${fmt(rejected)}</span></div>
 <p>this page reads the installer directly and will change block by block.</p>
-<p>what the programs do is not recorded here. the lab looks, separately: <a href="readings">readings</a> · the first experiment: <a href="e1">E1 neighbourhoods</a></p>`;
+<p>what the programs do is not recorded here. the lab looks, separately: <a href="readings">readings</a> · the first experiment: <a href="e1">E1 neighbourhoods</a> · for agents: <a href="llms.txt">llms.txt</a></p>`;
     await registry(releases, installed, rejected, rows);
   } catch (e) { $('state').innerHTML = `<span class="err">${String(e.message || e).slice(0, 160)}</span>`; }
 }

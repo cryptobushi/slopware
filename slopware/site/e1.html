@@ -17,6 +17,7 @@
 <meta name="twitter:title" content="SLOPWARE — E1 neighbourhoods">
 <meta name="twitter:description" content="Every one-byte change to every genesis program, placed and traced. What one mutation does to software nobody wrote.">
 <meta name="twitter:image" content="https://slopware.fun/og-e1.png">
+<link rel="alternate" type="text/markdown" href="e1.md" title="this page as Markdown">
 <style>
 html{-webkit-text-size-adjust:none;text-size-adjust:none}
 html,body{margin:0;padding:0;background:#fff;color:#000}
@@ -42,8 +43,6 @@ pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
 .h .v{margin-top:0.6em}
 .h .v b{font-weight:normal;text-decoration:underline}
 .sentences p{margin:0 0 0.8em}
-#edition{display:none}
-#edition.on{display:block}
 .lens{margin:1em 0 0;display:flex;gap:1.5em;flex-wrap:wrap;align-items:baseline}
 @media (max-width:700px){.tbl{column-gap:1em}.h{margin-top:1.6em}}
 </style>
@@ -54,77 +53,78 @@ pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
 <p class="mute" style="margin-top:0.3em">the first experiment, pre-registered, run once</p>
 
 <p style="margin-top:2.6em">Every program SLOPWARE installed before block 26,149,410 was taken into the lab and changed by one byte, in every position, to every other value: 16,320 children per program, all of them placed on a private copy of Ethereum and called with every instruction traced. The same was done to an equal number of fresh random programs nobody owns. The question was what one mutation does to software nobody wrote, and whether the programs people collected are any different from programs that were simply drawn.</p>
-<p>The hypotheses, the analysis, and the picture were written down and <a id="anchor-link" href="#data">anchored on Ethereum</a> before the run. Nothing below was chosen after seeing the data.</p>
+<p>The hypotheses, the analysis, and the picture were written down and <a id="anchor-link" href="https://etherscan.io/tx/0xbaa09001fae948bbe026225401043f7bb0433e56b336e6527a2fc460bbe4c631">anchored on Ethereum</a> before the run. Nothing below was chosen after seeing the data.</p>
 </div>
 
 <div class="c fig" id="figure">
 <img id="threads" alt="THREADS: every genesis program drawn as a walk from its bytes; the executed part in black, a red mark where a program reached three instructions" src="e1-data/threads.png">
-<p class="mute" id="caption"></p>
+<p class="mute" id="caption">THREADS. Every genesis program as a walk from its bytes, in release order. Faint: the whole program. Black: the part it executed before it halted. Red: it reached three or more instructions. Rules fixed before the results; generated from the sealed record.</p>
 </div>
 
 <div class="c essay">
 <h2>what was asked, and what the record says</h2>
 <p class="mute">Five hypotheses, each stated before the run with its own threshold. Each is judged by that threshold and nothing else.</p>
-<div id="hypotheses"></div>
+<div id="hypotheses"><div class="h">
+<h3>H1 · no privilege</h3>
+<p class="mute">The programs people collected are not special: the neighbourhood statistics of the genesis set are indistinguishable from those of fresh random programs. Threshold: every one of the five fractions differs in mean by less than 0.01 and has a Kolmogorov–Smirnov p above 0.01.</p>
+<p>Genesis versus control, mean of each fraction: neutral 98.39% vs 98.33% (difference +0.05 points, KS p 0.93); altered 0.91% vs 0.91% (difference -0.01 points, KS p 0.99); lengthened 0.37% vs 0.37% (difference -0.01 points, KS p 0.61); shortened 0.34% vs 0.38% (difference -0.04 points, KS p 1.00); lethal 0.01% vs 0.01% (difference +0.00 points, KS p 1.00).</p>
+<p class="v"><b>held</b></p>
+</div><div class="h">
+<h3>H2 · the executed prefix</h3>
+<p class="mute">A mutation changes nothing unless it touches a byte the parent executes or reads, so each parent&#x27;s neutral fraction is about (64 − bytes consumed) / 64. Threshold: median absolute error below 0.01.</p>
+<p>Median absolute error between predicted and observed neutral fraction: 0.0062. 87.0% of parents are within ±0.02 of their prediction.</p>
+<p class="v"><b>held</b></p>
+</div><div class="h">
+<h3>H3 · the first byte</h3>
+<p class="mute">For a parent that dies on its first byte, a new first byte lets the program live at least two instructions exactly when it is one of the 55 operand-free opcodes: 55/255, which is 21.6%.</p>
+<p>1,275 parents die on their first byte. Their 323,850 placeable position-0 children (254 each: the 0xEF replacement cannot be placed) include 68,849 that lived at least two instructions: 21.26% (95% interval 21.12% to 21.40%). The registered 21.57% lies outside it. Exactly 54 replacement values ever let such a program live, the 32 PUSHes and 22 operand-free opcodes; the pre-registration counted STOP as a 55th, and STOP halts at once, and it divided by 255 where only 254 replacements can be placed. 54/254 = 21.26%, equal to the observed fraction.</p>
+<p class="v"><b>not held as written</b> <span class="mute">The harness agrees with the arithmetic once the arithmetic is right; that corrected comparison is exploratory because its number was fixed after the run.</span></p>
+</div><div class="h">
+<h3>H4 · lengthening is rare</h3>
+<p class="mute">Fewer than 3% of all one-mutants live longer than their parent, and fewer than 0.5% reach a clean halt the parent did not.</p>
+<p>Of 26,110,350 placements, 97,062 lived longer than their parent: 0.37% (upper bound of the interval 0.37%). 5,400 halted cleanly where the parent did not: 0.021% (upper bound 0.021%).</p>
+<p class="v"><b>held</b></p>
+</div><div class="h">
+<h3>H5 · nothing new under one mutation</h3>
+<p class="mute">No one-mutant does anything the million-program study never saw: no external call completing, no child program from CREATE, no loop.</p>
+<p>One one-mutant, of control 182 (not a collected program), set a flag the million-program study never set: byte 32 changed from POP to PUSH6, and the program now runs PUSH11 · PUSH18 · CALLVALUE · PUSH6 · PUSH14 · CREATE · PUSH12 · STOP, executing CREATE and then halting cleanly. Replicated three times on fresh chains with identical signatures. The CREATE itself fails: it offers 2.46 × 10³² wei from an account holding none, pushes 0, and the program rests. Nothing is created; the child&#x27;s nonce stays at 1.</p>
+<p class="v"><b>not held, narrowly</b> <span class="mute">Not reproduction and not its counterfeit: a program that attempts a creation, is refused, and halts cleanly instead of dying. The scorecard changes no status; the self-reproduction row gains a note.</span></p>
+</div></div>
 
 <h2>in three sentences</h2>
-<div class="sentences" id="sentences"></div>
+<div class="sentences" id="sentences"><p>One byte changed at random in a random program is, with 98.4% certainty, the same program; the rest is almost entirely a different way to die.</p><p>The programs people bought behave under mutation exactly like programs nobody bought, so there is nothing in the catalogue that the lab&#x27;s distribution does not already contain.</p><p>The single new thing in twenty-six million tries was a program that tries to create another, is refused for offering money it does not have, and then rests instead of dying, which is not reproduction, and is still more than anything in the million-program study did.</p></div>
 
 <h2 id="data">the data</h2>
-<div class="tbl facts" id="facts"></div>
-<p class="mute" id="repro"></p>
+<div class="tbl facts" id="facts"><span class="n">parents</span><span>803 genesis programs (every release before block 26,149,410) and 803 fresh random programs</span><span class="n">children</span><span>16,320 per parent, enumerated: 26,110,350 placements in all</span><span class="n">world</span><span>v0, frozen: a private Ethereum with one block, one caller, 1,000,000 gas, five calls per child</span><span class="n">record root</span><span>bed1b583ca6f51919bb2d5f967e2153d64e113a13dd8fdff7a21318822f1dd1d</span><span class="n">pre-registration anchor</span><span><a href="https://etherscan.io/tx/0xbaa09001fae948bbe026225401043f7bb0433e56b336e6527a2fc460bbe4c631">0xbaa09001fae948bbe026225401043f7bb0433e56b336e6527a2fc460bbe4c631</a></span><span class="n">record anchor</span><span><a href="https://etherscan.io/tx/0xad4f7470be6f337111dd651e97621cb60d5c8c39ae33ecd71d0efc46c624e07c">0xad4f7470be6f337111dd651e97621cb60d5c8c39ae33ecd71d0efc46c624e07c</a></span><span class="n">record</span><span>slopware-e1-record-20261009, a DigitalOcean volume snapshot of the full 28 GB record; the parent summaries and manifest are in the repository</span><span class="n">protocol</span><span><a href="https://github.com/cryptobushi/slopware/blob/main/slopware/experiments/E1-neighbourhoods.md">slopware/experiments/E1-neighbourhoods.md, signed 2026-10-08, amendments dated below the signature</a></span><span class="n">analysis</span><span>scripts/e1_analysis.py, pre-specified; scripts/e1_threads.py for the picture, hashed before the results</span></div>
+<p class="mute" id="repro">To check any number: fetch the snapshot or the parent summaries, run scripts/e1_analysis.py, and compare with results.json; to check the picture, run scripts/e1_threads.py on record/genesis. The root hash above is the sha256 of the sorted sha256 manifest of every file in the record.</p>
 
 <div id="edition">
 <h2>the research edition</h2>
-<p id="edition-text"></p>
-<div id="auction"></div>
-<p class="mute" id="edition-note"></p>
+<p>THREADS (E1) is the research edition for this experiment: one token, the picture above at print resolution, pinned to Arweave with metadata carrying the record root, both anchors, and the hash of the script that drew it. It was minted by the keeper, the wallet that completes SLOPWARE&#x27;s installations, on a contract separate from the installer, and is offered here by reserve auction. Proceeds go to the artist and fund the work. It confers no rights over any program, release, receipt or experiment.</p>
+<div id="auction" data-id="20909" data-network="1" data-marketplace="0x3a3548e060be10c2614d0a4cb0c03cc9093fd799" data-rpc="https://ethereum-rpc.publicnode.com"></div>
+<p class="mute">Reserve 0.05 ETH. The auction runs 24 hours from the first bid, 10% minimum increments, extended by five minutes for a bid in the last five. Settled by Manifold&#x27;s marketplace contract; the keeper finalizes it when it ends. Contract 0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664, token 1, listing 20909.</p>
 </div>
 
-<p class="mute" style="margin-top:3em">The catalogue states facts. The lab records what executed. The readings interpret. This page is the lab's. <a href="readings">readings</a> · <a href="./">catalogue</a></p>
+<p class="mute" style="margin-top:3em">The catalogue states facts. The lab records what executed. The readings interpret. This page is the lab's. <a href="readings">readings</a> · <a href="./">catalogue</a> · as text: <a href="e1.md">e1.md</a> · <a href="llms.txt">llms.txt</a></p>
 <p class="mute" style="margin-top:3em">created by <a href="https://x.com/bushibuilds" target="_blank" rel="noopener">Bushi</a></p>
 </div>
 
 <script>
 (function () {
 'use strict';
-const $ = (id) => document.getElementById(id);
-const fmt = (n) => Number(n).toLocaleString('en-US');
-const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
-const pct = (x, d = 1) => `${(100 * x).toFixed(d)}%`;
-
-function render(d) {
-  $('caption').textContent = d.caption;
-  $('hypotheses').innerHTML = d.hypotheses.map((h) => `<div class="h">
-<h3>${esc(h.id)} · ${esc(h.name)}</h3>
-<p class="mute">${esc(h.registered)}</p>
-<p>${esc(h.observed)}</p>
-<p class="v"><b>${esc(h.verdict)}</b>${h.note ? ` <span class="mute">${esc(h.note)}</span>` : ''}</p>
-</div>`).join('');
-  $('sentences').innerHTML = d.sentences.map((s) => `<p>${esc(s)}</p>`).join('');
-  $('facts').innerHTML = d.facts.map(([k, v, href]) => `<span class="n">${esc(k)}</span><span>${href ? `<a href="${href}">${esc(v)}</a>` : esc(v)}</span>`).join('');
-  $('repro').textContent = d.reproduce;
-  if (d.anchorTx) $('anchor-link').href = `https://etherscan.io/tx/${d.anchorTx}`;
-  if (d.edition) {
-    $('edition').classList.add('on');
-    $('edition-text').textContent = d.edition.text;
-    $('edition-note').textContent = d.edition.note || '';
-    if (d.edition.listing) {
-      const { id, network, marketplace } = d.edition.listing;
-      const w = (name, extra = '') => `<div data-widget="${name}" data-id="${id}" data-network="${network}"${extra}></div>`;
-      $('auction').innerHTML = `<div data-widget="m-connect" data-network="${network}" data-fallback-provider="${d.edition.listing.rpc}"></div>
+// Everything on this page is static HTML, written by scripts/e1_page.py from the sealed record. The only script is the
+// auction, which needs Manifold's widgets; without JavaScript the listing's facts are still in the text above it.
+const a = document.getElementById('auction'); if (!a || !a.dataset.id) return;
+const { id, network, marketplace, rpc } = a.dataset;
+const w = (name, extra = '') => `<div data-widget="${name}" data-id="${id}" data-network="${network}"${extra}></div>`;
+a.innerHTML = `<div data-widget="m-connect" data-network="${network}" data-fallback-provider="${rpc}"></div>
 <div class="lens">${w('m-listing-name')}${w('m-listing-price')}${w('m-listing-countdown')}</div>
 ${w('m-listing-bid-form-rich', ` data-address="${marketplace}" data-version="2"`)}
 ${w('m-listing-interactions')}`;
-      for (const [tag, attrs] of [['link', { rel: 'stylesheet', href: 'https://connect.manifoldxyz.dev/3.1.0/connect.css' }], ['link', { rel: 'stylesheet', href: 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.css' }]]) { const el = document.createElement(tag); Object.assign(el, attrs); document.head.appendChild(el); }
-      const s1 = document.createElement('script'); s1.src = 'https://connect.manifoldxyz.dev/3.1.0/connect.umd.min.js';
-      s1.onload = () => { const s2 = document.createElement('script'); s2.src = 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.umd.min.js'; document.body.appendChild(s2); };
-      document.body.appendChild(s1);
-    }
-  }
-}
-
-fetch('e1-data/e1.json', { cache: 'no-cache' }).then((r) => r.json()).then(render).catch((e) => { $('hypotheses').textContent = 'results unavailable'; console.error(e); });
+for (const href of ['https://connect.manifoldxyz.dev/3.1.0/connect.css', 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.css']) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); }
+const s1 = document.createElement('script'); s1.src = 'https://connect.manifoldxyz.dev/3.1.0/connect.umd.min.js';
+s1.onload = () => { const s2 = document.createElement('script'); s2.src = 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.umd.min.js'; document.body.appendChild(s2); };
+document.body.appendChild(s1);
 })();
 </script>
 </body>

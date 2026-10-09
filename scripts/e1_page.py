@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Build slopware/site/e1/e1.json, the data behind the E1 results page, from the pre-specified analysis.
+"""Build the E1 results page: slopware/site/e1.html (static HTML from slopware/site/e1.template.html, so crawlers and agents
+read the results without JavaScript), slopware/site/e1-data/e1.json (the same data, machine-readable) and slopware/site/e1.md.
 
 Inputs (all produced by finish.sh seal / analyse):
   slopware/experiments/E1/summaries/results.json   the H1–H5 statistics (scripts/e1_analysis.py)
@@ -93,6 +94,7 @@ if args.get("--snapshot"): facts.append(["record", f"{args['--snapshot']}, a Dig
 facts.append(["protocol", "slopware/experiments/E1-neighbourhoods.md, signed 2026-10-08, amendments dated below the signature", "https://github.com/cryptobushi/slopware/blob/main/slopware/experiments/E1-neighbourhoods.md"])
 facts.append(["analysis", "scripts/e1_analysis.py, pre-specified; scripts/e1_threads.py for the picture, hashed before the results", None])
 
+H_ = H
 out = {
     "experiment": "E1", "generatedAt": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
     "caption": f"THREADS. Every genesis program as a walk from its bytes, in release order. Faint: the whole program. Black: the part it executed before it halted. Red: it reached three or more instructions. Rules fixed before the results; generated from the sealed record.",
@@ -104,3 +106,37 @@ os.makedirs(os.path.dirname(OUT), exist_ok=True)
 json.dump(out, open(OUT, "w"), indent=1)
 print(f"e1.json: {len(H)} hypotheses · {len(sentences)} sentences · edition {'yes' if edition else 'no'} → {OUT}")
 for h in H: print(f"  {h['id']} {h['verdict']}")
+
+
+# ---------------------------------------------------------------- static HTML and Markdown
+import html as H
+esc = H.escape
+hyp_html = "".join(f"""<div class="h">
+<h3>{esc(h["id"])} · {esc(h["name"])}</h3>
+<p class="mute">{esc(h["registered"])}</p>
+<p>{esc(h["observed"])}</p>
+<p class="v"><b>{esc(h["verdict"])}</b>{(' <span class="mute">' + esc(h["note"]) + '</span>') if h.get("note") else ''}</p>
+</div>""" for h in H_)
+sent_html = "".join(f"<p>{esc(x)}</p>" for x in sentences)
+facts_html = "".join(f'<span class="n">{esc(k)}</span><span>{("<a href=" + chr(34) + href + chr(34) + ">" + esc(v) + "</a>") if (len(f) > 2 and (href := f[2])) else esc(v)}</span>' for f in facts for k, v in [f[:2]])
+edition_html = ""
+if edition:
+    L = edition.get("listing") or {}
+    edition_html = f"""<div id="edition">
+<h2>the research edition</h2>
+<p>{esc(edition["text"])}</p>
+<div id="auction" data-id="{L.get("id","")}" data-network="{L.get("network","")}" data-marketplace="{L.get("marketplace","")}" data-rpc="{L.get("rpc","")}"></div>
+<p class="mute">{esc(edition.get("note",""))}</p>
+</div>"""
+tpl = open("slopware/site/e1.template.html").read()
+page = (tpl.replace("{{HYPOTHESES}}", hyp_html).replace("{{SENTENCES}}", sent_html).replace("{{FACTS}}", facts_html).replace("{{REPRO}}", esc(out["reproduce"]))
+        .replace("{{CAPTION}}", esc(out["caption"])).replace("{{ANCHOR_HREF}}", f"https://etherscan.io/tx/{anchor}" if anchor else "#data").replace("{{EDITION}}", edition_html))
+open("slopware/site/e1.html", "w").write(page)
+md = ["# SLOPWARE — E1 neighbourhoods", "", "The first pre-registered experiment on SLOPWARE's programs, run once on 2026-10-08/09. Every program installed before block 26,149,410 was changed by one byte, in every position, to every other value (16,320 children per program), placed on a private copy of Ethereum and called with every instruction traced; the same was done to an equal number of fresh random programs. Hypotheses, analysis and picture were fixed and anchored on Ethereum before the run.", "",
+      f"Picture: THREADS, https://slopware.fun/e1-data/threads.png — {out['caption']}", "", "## Hypotheses and verdicts", ""]
+for h in H_: md += [f"### {h['id']} · {h['name']} — {h['verdict']}", "", f"Registered: {h['registered']}", "", f"Observed: {h['observed']}", ""] + ([h["note"], ""] if h.get("note") else [])
+md += ["## In three sentences", ""] + [s for x in sentences for s in (x, "")] + ["## The data", ""] + [f"- {f[0]}: {f[1]}" + (f" ({f[2]})" if len(f) > 2 and f[2] else "") for f in facts] + ["", out["reproduce"], ""]
+if edition: md += ["## The research edition", "", edition["text"], "", edition.get("note", ""), ""]
+md += ["Also: https://slopware.fun/llms.txt · https://slopware.fun/readings.md · the repository https://github.com/cryptobushi/slopware"]
+open("slopware/site/e1.md", "w").write("\n".join(md))
+print("e1.html and e1.md written")

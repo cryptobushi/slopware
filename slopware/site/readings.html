@@ -207,7 +207,7 @@ function render(data) {
   let t; $('q').oninput = () => { clearTimeout(t); t = setTimeout(() => { query = $('q').value; select(); }, 150); };
   $('list').onclick = (e) => { const b = e.target.closest('button[data-open]'); if (b) open(Number(b.dataset.open), false); };
   $('more').onclick = more;
-  $('foot').innerHTML = 'The lab is the harness in the repository. These readings are regenerated as releases arrive; a program still installing is read next time. The lines about siblings come from the first experiment, <a href="e1">E1 neighbourhoods</a>.';
+  $('foot').innerHTML = 'The lab is the harness in the repository. These readings are regenerated as releases arrive; a program still installing is read next time. The lines about siblings come from the first experiment, <a href="e1">E1 neighbourhoods</a>. For agents and anyone without scripts: <a href="readings.md">readings.md</a> · <a href="llms.txt">llms.txt</a>.';
 
   // a deep link to one life: show it whatever the lens, open, and scroll to it
   const m = /^#r(\d+)$/.exec(location.hash);

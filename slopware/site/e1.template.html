@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SLOPWARE — E1 neighbourhoods</title>
+<meta name="description" content="The first pre-registered experiment on SLOPWARE's programs: every one-byte change to every genesis program, placed and traced. Results, data, and the research edition.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SLOPWARE">
+<meta property="og:title" content="SLOPWARE — E1 neighbourhoods">
+<meta property="og:description" content="Every one-byte change to every genesis program, placed and traced. What one mutation does to software nobody wrote.">
+<meta property="og:url" content="https://slopware.fun/e1">
+<meta property="og:image" content="https://slopware.fun/og-e1.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SLOPWARE — E1 neighbourhoods">
+<meta name="twitter:description" content="Every one-byte change to every genesis program, placed and traced. What one mutation does to software nobody wrote.">
+<meta name="twitter:image" content="https://slopware.fun/og-e1.png">
+<link rel="alternate" type="text/markdown" href="e1.md" title="this page as Markdown">
+<style>
+html{-webkit-text-size-adjust:none;text-size-adjust:none}
+html,body{margin:0;padding:0;background:#fff;color:#000}
+html,body,pre,button,input{font-family:"Courier New",Courier,monospace;font-size:15px;line-height:1.3}
+h1,h2,h3{margin:0;font-size:inherit;font-weight:inherit}
+h2{margin-top:2.6em}
+p{margin:0 0 1em}
+a{color:inherit;text-decoration:underline}
+.c{max-width:860px;margin:0 auto;padding:4em 20px 1.5em;box-sizing:border-box}
+.essay{max-width:620px}
+pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.mute{color:#666}
+.red{color:#c83c1e}
+.tbl{display:grid;grid-template-columns:max-content 1fr;column-gap:1.5em;row-gap:0.15em;margin:1.3em 0}
+.tbl .n{text-align:right;white-space:nowrap}
+.tbl.facts{grid-template-columns:max-content 1fr}
+.tbl.facts .n{text-align:left;color:#666}
+.fig{margin:2.6em auto 0;text-align:center}
+.fig img{display:block;width:100%;height:auto;border:0;margin:0 auto}
+.fig p{margin:0.8em auto 0;max-width:620px;text-align:center}
+.h{margin:2em 0 0;padding-top:1em;border-top:1px solid #000}
+.h p{margin:0.4em 0 0}
+.h .v{margin-top:0.6em}
+.h .v b{font-weight:normal;text-decoration:underline}
+.sentences p{margin:0 0 0.8em}
+.lens{margin:1em 0 0;display:flex;gap:1.5em;flex-wrap:wrap;align-items:baseline}
+@media (max-width:700px){.tbl{column-gap:1em}.h{margin-top:1.6em}}
+</style>
+</head>
+<body>
+<div class="c essay">
+<h1>E1 · neighbourhoods</h1>
+<p class="mute" style="margin-top:0.3em">the first experiment, pre-registered, run once</p>
+
+<p style="margin-top:2.6em">Every program SLOPWARE installed before block 26,149,410 was taken into the lab and changed by one byte, in every position, to every other value: 16,320 children per program, all of them placed on a private copy of Ethereum and called with every instruction traced. The same was done to an equal number of fresh random programs nobody owns. The question was what one mutation does to software nobody wrote, and whether the programs people collected are any different from programs that were simply drawn.</p>
+<p>The hypotheses, the analysis, and the picture were written down and <a id="anchor-link" href="{{ANCHOR_HREF}}">anchored on Ethereum</a> before the run. Nothing below was chosen after seeing the data.</p>
+</div>
+
+<div class="c fig" id="figure">
+<img id="threads" alt="THREADS: every genesis program drawn as a walk from its bytes; the executed part in black, a red mark where a program reached three instructions" src="e1-data/threads.png">
+<p class="mute" id="caption">{{CAPTION}}</p>
+</div>
+
+<div class="c essay">
+<h2>what was asked, and what the record says</h2>
+<p class="mute">Five hypotheses, each stated before the run with its own threshold. Each is judged by that threshold and nothing else.</p>
+<div id="hypotheses">{{HYPOTHESES}}</div>
+
+<h2>in three sentences</h2>
+<div class="sentences" id="sentences">{{SENTENCES}}</div>
+
+<h2 id="data">the data</h2>
+<div class="tbl facts" id="facts">{{FACTS}}</div>
+<p class="mute" id="repro">{{REPRO}}</p>
+
+{{EDITION}}
+
+<p class="mute" style="margin-top:3em">The catalogue states facts. The lab records what executed. The readings interpret. This page is the lab's. <a href="readings">readings</a> · <a href="./">catalogue</a> · as text: <a href="e1.md">e1.md</a> · <a href="llms.txt">llms.txt</a></p>
+<p class="mute" style="margin-top:3em">created by <a href="https://x.com/bushibuilds" target="_blank" rel="noopener">Bushi</a></p>
+</div>
+
+<script>
+(function () {
+'use strict';
+// Everything on this page is static HTML, written by scripts/e1_page.py from the sealed record. The only script is the
+// auction, which needs Manifold's widgets; without JavaScript the listing's facts are still in the text above it.
+const a = document.getElementById('auction'); if (!a || !a.dataset.id) return;
+const { id, network, marketplace, rpc } = a.dataset;
+const w = (name, extra = '') => `<div data-widget="${name}" data-id="${id}" data-network="${network}"${extra}></div>`;
+a.innerHTML = `<div data-widget="m-connect" data-network="${network}" data-fallback-provider="${rpc}"></div>
+<div class="lens">${w('m-listing-name')}${w('m-listing-price')}${w('m-listing-countdown')}</div>
+${w('m-listing-bid-form-rich', ` data-address="${marketplace}" data-version="2"`)}
+${w('m-listing-interactions')}`;
+for (const href of ['https://connect.manifoldxyz.dev/3.1.0/connect.css', 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.css']) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); }
+const s1 = document.createElement('script'); s1.src = 'https://connect.manifoldxyz.dev/3.1.0/connect.umd.min.js';
+s1.onload = () => { const s2 = document.createElement('script'); s2.src = 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.umd.min.js'; document.body.appendChild(s2); };
+document.body.appendChild(s1);
+})();
+</script>
+</body>
+</html>
