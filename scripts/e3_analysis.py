@@ -67,7 +67,8 @@ def parent_medians(target, key, sub=None):
         if vals: out[pi] = statistics.median(vals)
     return out
 def boot_mean(values_by_parent, n=10000):
-    ps = list(values_by_parent); if not ps: return None
+    ps = list(values_by_parent)
+    if not ps: return None
     means = []
     for _ in range(n):
         smp = [values_by_parent[rnd.choice(ps)] for _ in ps]; means.append(sum(smp) / len(smp))
