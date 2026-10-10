@@ -13,13 +13,15 @@ rs = sorted(idx["readings"], key=lambda r: r["id"])
 s = idx["summary"]
 now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
-lines = ["# SLOPWARE — readings", "", f"The lab's observations of every program SLOPWARE has installed, as of {now}: {s['releasesRead']:,} releases read, {s['installed']:,} installed, {s['refused']} refused by Ethereum. Each installed program's sixty-four bytes were placed on a private copy of Ethereum and called five ways with every instruction traced. Observation, not record: the installer itself records nothing about behaviour. The siblings line comes from experiment E1 (https://slopware.fun/e1.md).", "",
+lines = ["# SLOPWARE — readings", "", f"The lab's observations of every program SLOPWARE has installed, as of {now}: {s['releasesRead']:,} releases read, {s['installed']:,} installed, {s['refused']} refused by Ethereum. Each installed program's sixty-four bytes were placed on a private copy of Ethereum and called five ways with every instruction traced. Observation, not record: the installer itself records nothing about behaviour. The siblings line comes from experiment E1 (https://slopware.fun/e1.md), the walks line from E2 (https://slopware.fun/e2.md), the descendants line from E3 (https://slopware.fun/e3.md).", "",
          f"- {100*s['diedAtFirst']/max(1,s['installed']):.1f}% died on their first instruction (the million-program study found {s['labPrediction']['diedAtFirstPct']}%)", f"- longest run: {s['longest']} instructions", f"- {s['cleanHalts']} halted cleanly", f"- {s['inputDependent']} answered differently to different input", f"- {s['returnedData']} returned data", f"- {s['withFutureOpcodes']} carry an instruction Ethereum does not activate yet", "", "## Every release", ""]
 for r in rs:
     bits = [f"**SLOPWARE {r['id']:06d}** · {r['status']}" + (f" · program {r['program']}" if r.get("program") else "") + f" · installed by {r['by']}", r["verdict"]]
     if r.get("would"): bits.append(r["would"])
     if r.get("trace"): bits.append(f"Trace: {r['trace']}")
     if r.get("sib"): bits.append(r["sib"])
+    if r.get("walk"): bits.append(r["walk"])
+    if r.get("far"): bits.append(r["far"])
     lines.append(" ".join(bits)); lines.append("")
 open(f"{SITE}/readings.md", "w").write("\n".join(lines))
 

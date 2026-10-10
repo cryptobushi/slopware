@@ -126,6 +126,7 @@ function row(r) {
 <p class="verdict">${esc(r.verdict)}${r.would ? ` <span class="mute">${esc(r.would)}</span>` : ''}</p>
 ${r.sib ? `<p class="verdict sib">${esc(r.sib)}</p>` : ''}
 ${r.walk ? `<p class="verdict sib">${esc(r.walk)}</p>` : ''}
+${r.far ? `<p class="verdict sib">${esc(r.far)}</p>` : ''}
 ${r.trace ? `<pre class="trace mute">${esc(r.trace)}</pre>` : ''}
 <button data-open="${r.id}">[ the bytes ]</button>
 <div class="more"><p class="mute">reading the bytes…</p></div>
@@ -208,7 +209,7 @@ function render(data) {
   let t; $('q').oninput = () => { clearTimeout(t); t = setTimeout(() => { query = $('q').value; select(); }, 150); };
   $('list').onclick = (e) => { const b = e.target.closest('button[data-open]'); if (b) open(Number(b.dataset.open), false); };
   $('more').onclick = more;
-  $('foot').innerHTML = 'The lab is the harness in the repository. These readings are regenerated as releases arrive; a program still installing is read next time. The lines about siblings come from the first experiment, <a href="e1">E1 neighbourhoods</a>; the lines about walks from the second, <a href="e2">E2 walks on the living</a>. For agents and anyone without scripts: <a href="readings.md">readings.md</a> · <a href="llms.txt">llms.txt</a>.';
+  $('foot').innerHTML = 'The lab is the harness in the repository. These readings are regenerated as releases arrive; a program still installing is read next time. The lines about siblings come from the first experiment, <a href="e1">E1 neighbourhoods</a>; the lines about walks from the second, <a href="e2">E2 walks on the living</a>; the lines about descendants from the third, <a href="e3">E3 somewhere else</a>. For agents and anyone without scripts: <a href="readings.md">readings.md</a> · <a href="llms.txt">llms.txt</a>.';
 
   // a deep link to one life: show it whatever the lens, open, and scroll to it
   const m = /^#r(\d+)$/.exec(location.hash);

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" class="manifold-scheme-light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SLOPWARE — E3 somewhere else</title>
+<meta name="description" content="The third pre-registered experiment: do neutral descendants of a program, which still do exactly what it does, have the same futures? Exhaustive one-mutant neighbourhoods of 88 programs and 1,319 of their neutral descendants. Results, data, and the research edition.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SLOPWARE">
+<meta property="og:title" content="SLOPWARE — E3 somewhere else">
+<meta property="og:description" content="Two programs can do the same thing without being in the same place. 23 million placements ask whether neutral history changes what is reachable next.">
+<meta property="og:url" content="https://slopware.fun/e3">
+<meta property="og:image" content="https://slopware.fun/og-e3.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SLOPWARE — E3 somewhere else">
+<meta name="twitter:description" content="Two programs can do the same thing without being in the same place. 23 million placements ask whether neutral history changes what is reachable next.">
+<meta name="twitter:image" content="https://slopware.fun/og-e3.png">
+<link rel="alternate" type="text/markdown" href="e3.md" title="this page as Markdown">
+<style>
+html{-webkit-text-size-adjust:none;text-size-adjust:none}
+html,body{margin:0;padding:0;background:#fff;color:#000}
+html,body,pre,button,input{font-family:"Courier New",Courier,monospace;font-size:15px;line-height:1.3}
+h1,h2,h3{margin:0;font-size:inherit;font-weight:inherit}
+h2{margin-top:2.6em}
+p{margin:0 0 1em}
+a{color:inherit;text-decoration:underline}
+.c{max-width:860px;margin:0 auto;padding:4em 20px 1.5em;box-sizing:border-box}
+.essay{max-width:620px}
+pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.mute{color:#666}
+.red{color:#c83c1e}
+.tbl{display:grid;grid-template-columns:max-content 1fr;column-gap:1.5em;row-gap:0.15em;margin:1.3em 0}
+.tbl .n{text-align:right;white-space:nowrap}
+.tbl.facts{grid-template-columns:max-content 1fr}
+.tbl.facts .n{text-align:left;color:#666}
+.fig{margin:2.6em auto 0;text-align:center}
+.fig img{display:block;width:100%;height:auto;border:0;margin:0 auto}
+.fig p{margin:0.8em auto 0;max-width:620px;text-align:center}
+.fig .scroll{max-height:88vh;overflow:auto;margin:0 auto;max-width:416px;border:1px solid #000}
+.fig .scroll img{width:100%}
+.h{margin:2em 0 0;padding-top:1em;border-top:1px solid #000}
+.h p{margin:0.4em 0 0}
+.h .v{margin-top:0.6em}
+.h .v b{font-weight:normal;text-decoration:underline}
+.sentences p{margin:0 0 0.8em}
+.lens{margin:1em 0 0;display:flex;gap:1.5em;flex-wrap:wrap;align-items:baseline}
+@media (max-width:700px){.tbl{column-gap:1em}.h{margin-top:1.6em}}
+/* Manifold's widgets follow the system colour scheme by default; the page is black on white whatever the system says */
+html.manifold-scheme-light{--manifold-page--color--background:#fff;--manifold-element--color--background:#fff;--manifold-text--color--body:#000;--manifold-text--color--muted:#666;--manifold-border--color:#000;--manifold-border--radius:0;--manifold-theme--color--primary:#000;--manifold-text--color--primary:#fff;color-scheme:light}
+</style>
+</head>
+<body>
+<div class="c essay">
+<h1>E3 · somewhere else</h1>
+<p class="mute" style="margin-top:0.3em">the third experiment, pre-registered, run once</p>
+
+<p style="margin-top:2.6em">E2 found that a program can be rewritten byte by byte, executed code included, without changing anything it does, and that half of every improvement found under selection had been enabled by such silent changes beforehand. E3 asks the question underneath: when a program's neutral descendants still do exactly what it does, do they still have the same futures? From each of the 88 E2 parents, 42 collected and 46 fresh random, the lab took three fresh neutral walks and froze each at the first accepted step where it had moved 8, 16, 32, 48 and 60 bytes away from its parent. Then it did what E1 did, exhaustively: every one-byte change of every parent and every endpoint, 16,319 children each, placed on a clean copy of Ethereum and called five ways with every instruction traced. The walks make the specimens. The neighbourhoods are the measurement.</p>
+<p>Nothing is selected and nothing is rewarded. The five measurements, their decision rules, the references, the reproducibility checks, the analysis and the picture's rules were written down and <a id="anchor-link" href="{{ANCHOR_HREF}}">anchored on Ethereum</a> before the first attempt. Nothing below was chosen after seeing the data.</p>
+</div>
+
+<div class="c fig" id="figure">
+<div class="scroll"><img id="somewhere" alt="SOMEWHERE ELSE: one row per parent; the parent then its neutral descendants at five distances, each drawn as a walk from its bytes with a 64-cell bar beneath, one cell per byte position, inked by how many of that position's 255 one-byte changes alter behaviour" src="e3-data/somewhere.png"></div>
+<p class="mute" id="caption">{{CAPTION}}</p>
+</div>
+
+<div class="c fig" id="figure2">{{FIGURE2}}</div>
+
+<div class="c essay">
+<h2>what was asked, and what the record says</h2>
+<p class="mute">Five measurements, stated before the run, with their readings listed in advance; none has a threshold called success. Each is read by its own rule and nothing else.</p>
+<div id="hypotheses">{{HYPOTHESES}}</div>
+
+<h2>in three sentences</h2>
+<div class="sentences" id="sentences">{{SENTENCES}}</div>
+
+<h2 id="data">the data</h2>
+<div class="tbl facts" id="facts">{{FACTS}}</div>
+<p class="mute" id="repro">{{REPRO}}</p>
+
+{{EDITION}}
+
+<p class="mute" style="margin-top:3em">The catalogue states facts. The lab records what executed. The readings interpret. This page is the lab's. <a href="readings">readings</a> · <a href="./">catalogue</a> · as text: <a href="e3.md">e3.md</a> · <a href="llms.txt">llms.txt</a></p>
+<p class="mute" style="margin-top:3em">created by <a href="https://x.com/bushibuilds" target="_blank" rel="noopener">Bushi</a></p>
+</div>
+
+<script>
+(function () {
+'use strict';
+// Everything on this page is static HTML, written by scripts/e3_page.py from the sealed record. The only script is the
+// auction, which needs Manifold's widgets; without JavaScript the listing's facts are still in the text above it.
+const a = document.getElementById('auction'); if (!a || !a.dataset.id) return;
+const { id, network, marketplace, rpc } = a.dataset;
+const w = (name, extra = '') => `<div data-widget="${name}" data-id="${id}" data-network="${network}"${extra}></div>`;
+a.innerHTML = `<div data-widget="m-connect" data-network="${network}" data-fallback-provider="${rpc}"></div>
+<div class="lens">${w('m-listing-name')}${w('m-listing-price')}${w('m-listing-countdown')}</div>
+${w('m-listing-bid-form-rich', ` data-address="${marketplace}" data-version="2"`)}
+${w('m-listing-interactions')}`;
+for (const href of ['https://connect.manifoldxyz.dev/3.1.0/connect.css', 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.css']) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); }
+const s1 = document.createElement('script'); s1.src = 'https://connect.manifoldxyz.dev/3.1.0/connect.umd.min.js';
+s1.onload = () => { const s2 = document.createElement('script'); s2.src = 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.umd.min.js'; document.body.appendChild(s2); };
+document.body.appendChild(s1);
+})();
+</script>
+</body>
+</html>

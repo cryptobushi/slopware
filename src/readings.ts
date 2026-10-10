@@ -169,10 +169,41 @@ function walks(r: Reading): string {
   return bits.join(' ');
 }
 
+// E3's neighbourhoods of neutral descendants, one sentence per genesis parent (E3 §12), shown once E3 is published
+// (the lab writes summaries/sentences.txt at publication; before that the line is absent)
+const E3DIR = args.e3 ?? 'slopware/experiments/E3';
+const e3: Record<number, { parent: any; ends: any[] }> = {};
+if (existsSync(`${E3DIR}/summaries/sentences.txt`) && existsSync(`${E2DIR}/parents.json`)) {
+  const parents = JSON.parse(readFileSync(`${E2DIR}/parents.json`, 'utf8')).parents as any[];
+  const byIndex: Record<number, any> = {}; for (const p of parents) byIndex[p.index] = p;
+  const { readdirSync } = await import('node:fs');
+  const ndir = `${E3DIR}/summaries/neighbourhoods/main`;
+  if (existsSync(ndir)) for (const f of readdirSync(ndir)) if (f.startsWith('summaries-')) for (const l of readFileSync(`${ndir}/${f}`, 'utf8').split('\n')) if (l.trim()) {
+    const s = JSON.parse(l); const p = byIndex[s.parentIndex]; if (!p || p.set !== 'genesis' || !s.counts) continue;
+    const slot = (e3[p.release] ??= { parent: null, ends: [] }); if (s.kind === 'parent') slot.parent = s; else slot.ends.push(s);
+  }
+}
+function somewhere(r: Reading): string {
+  const d = e3[r.id]; if (!d || !d.parent || !d.ends.length) return '';
+  const hist = (s: any) => new Map<string, number>(s.signatureHistogram);
+  const A = hist(d.parent);
+  const reachDiffers = (e: any) => { const B = hist(e); return A.size !== B.size || [...A.keys()].some((k) => !B.has(k)); };
+  const oddsDiffer = (e: any) => { const B = hist(e); let tv = 0; for (const k of new Set([...A.keys(), ...B.keys()])) tv += Math.abs((A.get(k) ?? 0) / d.parent.placeable - (B.get(k) ?? 0) / e.placeable); return tv > 0; };
+  const nReach = d.ends.filter(reachDiffers).length; const nOdds = d.ends.filter((e) => !reachDiffers(e) && oddsDiffer(e)).length; const n = d.ends.length;
+  const far = d.ends.filter((e) => e.target === 60);
+  const same = (s: any) => s.counts.neutral as number;
+  const bits = [`In E3 the lab let it drift three more times, keeping only changes that left it the same, and stopped each walk at 8, 16, 32, 48 and 60 bytes from where it began; then it changed one byte at a time, every way, in each of those ${n} descendants, as it had in the original.`];
+  if (far.length) bits.push(`Sixty bytes away a descendant still did exactly this, and ${fmtN(Math.round(far.reduce((t, e) => t + same(e), 0) / far.length))} of its ${fmtN(far[0].placeable)} one-byte siblings behaved as it does, against ${fmtN(same(d.parent))} for the original.`);
+  const who = nReach === n ? 'Every one of the descendants' : nReach === 0 ? 'None of the descendants' : `${nReach} of the ${n} descendants`;
+  bits.push(`${who} could reach in one byte something the original could not, or had lost something it could${nOdds ? `; ${nOdds} more reached the same things at different odds` : ''}.`);
+  bits.push('The descendants were made by infrastructure and exist only on the lab\'s chain.');
+  return bits.join(' ');
+}
+
 const index = all.map((r) => ({
   id: r.id, status: r.status, program: r.program, by: r.installer, life: r.lifespan,
   clean: r.probes.some((p) => p.outcome === 'success'), dep: r.inputDependent, fut: r.future.length > 0, ret: r.probes.some((p) => p.returnDataLength > 0),
-  verdict: verdict(r), would: wouldHaveBeen(r), trace: traceLine(r), sib: siblings(r) || undefined, walk: walks(r) || undefined,
+  verdict: verdict(r), would: wouldHaveBeen(r), trace: traceLine(r), sib: siblings(r) || undefined, walk: walks(r) || undefined, far: somewhere(r) || undefined,
 }));
 writeFileSync(join(rdir, 'index.json'), JSON.stringify({ installer: CONTRACT, chainId, generatedAt, summary, chunk: CHUNK, readings: index }, null, 0));
 const chunks = new Map<number, object[]>();
