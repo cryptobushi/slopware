@@ -27,12 +27,17 @@ def nonneutral(nb): return {(ch["pos"], ch["val"]) for ch in nb if ch["cls"] != 
 def jaccard(x, y): return len(x & y) / len(x | y) if (x | y) else 1.0
 def JS(a, b): return jaccard(reachable(a), reachable(b))
 def JM(a, b): return jaccard(nonneutral(a), nonneutral(b))
-def JM_null(a, b, total=16319):
-    """Expected Jaccard of two independent uniformly random subsets with the observed sizes."""
-    na, nb_ = len(nonneutral(a)), len(nonneutral(b))
+def expected_jaccard(na, nb_, total=16319):
+    """Exact expected Jaccard of two independent uniformly random subsets of sizes na, nb_ of a set of size total:
+    the intersection K is hypergeometric(total, na, nb_) and E[J] = sum_k P(K=k) k/(na+nb_-k). No plug-in approximation."""
     if na == 0 and nb_ == 0: return 1.0
-    inter = na * nb_ / total
-    return inter / (na + nb_ - inter)
+    from math import comb
+    lo, hi = max(0, na + nb_ - total), min(na, nb_)
+    denom = comb(total, nb_)
+    return sum(comb(na, k) * comb(total - na, nb_ - k) / denom * (k / (na + nb_ - k)) for k in range(lo, hi + 1))
+def JM_null(a, b, total=16319): return expected_jaccard(len(nonneutral(a)), len(nonneutral(b)), total)
+def JM_plugin(na, nb_, total=16319):
+    inter = na * nb_ / total; return inter / (na + nb_ - inter) if (na + nb_) else 1.0
 
 # ---------------------------------------------------------------- synthetic neighbourhoods
 def synth(seed, n_nonneutral=600, sig_pool=40, positions=None, nonneutral_pairs=None):
@@ -75,4 +80,6 @@ if __name__ == "__main__":
     # 6. localisation: non-neutral children confined to the first 24 positions vs spread
     loc = synth(6, positions=list(range(24)))
     print(f"localised vs spread: D5 {D5(base, loc):.4f}  JM {JM(base, loc):.3f}  JM_null {JM_null(base, loc):.4f}")
+    na = len(nonneutral(base)); nb_ = len(nonneutral(other))
+    print(f"\nnull check: exact hypergeometric E[J] {expected_jaccard(na, nb_):.5f} vs plug-in {JM_plugin(na, nb_):.5f} for sizes {na}, {nb_} of 16,319")
     print("\nreadings: identical → all zeros / ones; same-aggregate-different-set → D5≈0, Dsig≈0, JM≈null; shared set → JM tracks the shared fraction; aggregate change → D5 tracks the fraction changed; signature relabelling → Dsig high while D5 ≈ 0.")
