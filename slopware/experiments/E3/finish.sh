@@ -29,7 +29,7 @@ case "${1:-}" in
     echo "sealed: root $(cat results/E3/ROOT) · neighbourhoods $(cat results/E3/record/neighbourhoods/main/summaries-*.jsonl | wc -l)" ;;
   analyse)
     RS scripts/e3_analysis.py scripts/e3_metrics.py root@"$IP":/opt/slopware/scripts/
-    $SSH root@"$IP" 'cd /opt/slopware && mkdir -p slopware/experiments/E3/summaries && rm -rf slopware/experiments/E3/record && ln -s /mnt/record/E3/record slopware/experiments/E3/record && python3 scripts/e3_analysis.py scripts/e3_metrics.py slopware/experiments/E3 > slopware/experiments/E3/summaries/report.txt 2>&1; tail -3 slopware/experiments/E3/summaries/report.txt'
+    $SSH root@"$IP" 'cd /opt/slopware && mkdir -p slopware/experiments/E3/summaries && rm -rf slopware/experiments/E3/record && ln -s /mnt/record/E3/record slopware/experiments/E3/record && python3 scripts/e3_analysis.py slopware/experiments/E3 --rerun-endpoints /mnt/record/E3/rerun/walks --e1-aggregates slopware/experiments/E1/summaries/aggregates.json > slopware/experiments/E3/summaries/report.txt 2>&1; tail -3 slopware/experiments/E3/summaries/report.txt'
     RS root@"$IP":/opt/slopware/slopware/experiments/E3/summaries/ "$E3/summaries/"
     RS --include='*/' --include='summaries-*.jsonl' --include='endpoints-*.jsonl' --include='genomes.jsonl' --include='reproducibility.jsonl' --exclude='*' root@"$IP":/mnt/record/E3/record/ results/E3/record/
     echo "analysis and per-walk summaries fetched" ;;
