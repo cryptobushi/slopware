@@ -124,3 +124,7 @@ If accessibility structure is substantial, a population experiment with heredity
 ### Amendment 1 — 2026-10-10, anchor on Ethereum, before the first attempt
 
 Anchored from the keeper in transaction `0xb24f764500dfac4d69df23942d95962d6f6033ca65d3de8af345d08c772c9a57` (block 26,162,987). The message (`E3/anchor.txt`) carries this document's keccak256 at the signing commit `ad39e33` (`0x34f5daf5747fb37451425cd56fec4ca30fba9e8a800dc7d464c99e58b0816e48`), the sha256 of `parents.json` and `world-v0.json`, and the keccak256 of the five frozen scripts. The mined transaction's input was decoded and every hash in it checked against the local files before anything else happened. No attempt had been placed under the run seed at that block.
+
+### Note — 2026-10-10, during the run: the endpoint reproducibility gate
+
+Walk phase: 264 walks on the c-32 droplet under the run seed, 56,349 attempts, 0 harness failures, 1 retry; 1,319 endpoints. One walk (parent 47, walk 1) ended its 2,000-attempt budget at Hamming 59 without reaching the 60 target and contributes its four endpoints, as §4 provides. The same 264 walks were re-run on a different machine (the laptop, eight workers): 63,346 attempts counted across workers, 0 harness failures, 6 retries, 1,319 endpoints, every one identical to the droplet's in bytes, attempt index and accepted-step count. The gate passed (1,319 of 1,319) and the neighbourhood phase was started afterwards. No neighbourhood had been evaluated before the gate.
