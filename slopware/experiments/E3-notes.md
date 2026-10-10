@@ -1,6 +1,6 @@
 # E3 — design notes, not a pre-registration
 
-**Status: notes, 2026-10-10. E3 is conditional on E2 and is not yet drafted, signed or anchored. Nothing here binds anything.** The pre-registration, when written, follows the E1/E2 form and is signed and anchored before a single placement.
+**Status: notes, 2026-10-10, superseded the same day by the candidate pre-registration [`E3-somewhere-else.md`](E3-somewhere-else.md), which redirects E3 from population selection to accessibility (does neutral history change what is reachable next?). Kept for the record of how the question moved. Nothing here binds anything.** The pre-registration, when written, follows the E1/E2 form and is signed and anchored before a single placement.
 
 ## What E2 settled, and what it did not
 
