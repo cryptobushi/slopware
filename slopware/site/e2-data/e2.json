@@ -1,6 +1,6 @@
 {
  "experiment": "E2",
- "generatedAt": "2026-10-10T13:49:00+00:00",
+ "generatedAt": "2026-10-10T13:51:36+00:00",
  "caption": "STEPS. One strip per parent, in parents.json order. Attempts run left to right, instructions executed rise from the strip's baseline to a shared axis that ends at the smallest power of two above the longest run in the record, 131,072. Neutral walks faint, persistence walks black, a red mark where a walk first reached a behaviour E1 never observed. Rules fixed before the run; the axis makes most climbs a hairline and the loops cliffs, and the artist declined to change it before seeing the data.",
  "hypotheses": [
   {
@@ -82,7 +82,7 @@
   ],
   [
    "noise",
-   "125 of 176 walks re-run from the same seed on a fresh machine reproduced their trajectory attempt for attempt; 51 differed, most by a single attempt evaluated differently under load (transient instrument timeouts, about one attempt in ten thousand), which a path-dependent walk can amplify. Reported in full in the protocol document; the record is not bit-for-bit reproducible across machines. Recomputed on the re-run alone, every pre-specified statistic landed inside its interval: W5's class-B fraction was 49.0% against 49.7% on the full run, W2's median ratio 7.67 against 7.67, W1's opcode-step fraction 0.75% against 0.77%."
+   "125 of 176 walks re-run from the same seed on a fresh machine reproduced their trajectory attempt for attempt; 51 differed, most by a single attempt evaluated differently under load (transient instrument timeouts, about one attempt in ten thousand), which a path-dependent walk can amplify. Reported in full in the protocol document; the record is not bit-for-bit reproducible across machines. The pre-registered reproducibility threshold was not met, but an exploratory sensitivity analysis found the aggregate findings reproduced despite the divergent trajectories: W5 was 48.8% class B in the original 176 walks and 49.0% in their re-runs, both with exactly 658 class-B improvements; W2's median ratio was 7.67 on both; W1's opcode-step fraction 0.75% on both."
   ],
   [
    "protocol",

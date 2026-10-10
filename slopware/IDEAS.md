@@ -56,3 +56,7 @@ Recombination between two genesis programs, the catalogue's first children with 
 ## Cohorts after E1 (2026-10-09)
 
 The releases after block 26,149,410 are in no experiment yet and are reserved for future pre-registered work under mechanical inclusion rules: see roadmap Part X-C, "experiments freeze populations; SLOPWARE itself never freezes".
+
+## Contingency against regularity (2026-10-10, from E2's noise check)
+
+E2's re-run perturbed 51 of 176 walks through instrumentation noise, seven of them substantially, and the ensemble statistics did not move (W5 class B 48.8% against 49.0%, 658 against 658). The micro-history was unstable while the macro-statistics were stable. E2 did not demonstrate this in general and did not pre-register it. A future experiment could test it deliberately: identical parents, hundreds of replicate walks with tiny intentional differences introduced, and the question whether individual trajectories diverge while population-level properties converge. That touches contingency against regularity in evolving systems, and it would need its own pre-registration.
