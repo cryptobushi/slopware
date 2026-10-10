@@ -1,6 +1,6 @@
 # E3 — Somewhere else
 
-**Candidate pre-registration. Draft 3 of 2026-10-10, signing candidate, unsigned. Nothing below is run until it is signed and anchored. No candidate endpoint's neighbourhood has been evaluated, and none will be until the endpoint rule and the analysis below are frozen.**
+**Pre-registration. Signed 2026-10-10 (see Sign-off). Anchored on Ethereum before the first attempt was placed (Amendment 1). Nothing below is run until it is signed and anchored. No candidate endpoint's neighbourhood has been evaluated, and none will be until the endpoint rule and the analysis below are frozen.**
 
 E3 follows E1 (`E1-neighbourhoods.md`) and E2 (`E2-walks.md`). E1 found that 98.4% of one-byte changes leave a program's measured behaviour identical. E2 found that this neutrality is navigable ground: neutral walks rewrote a median 63 of 64 bytes while preserving the exact signature, and under persistence half of all lifespan improvements (49.7%, 95% interval 48.6 to 50.9) were unavailable from the start of their plateau and became available only after intervening neutral changes. E3 asks the question that result raises and does not answer: does neutral history change what a program can become next, before it changes what the program does? Two programs can do the same thing without being in the same place.
 
@@ -63,13 +63,13 @@ World v0, frozen as in E1 and E2 (`E2/world-v0.json`), with every genotype evalu
 
 **Reproducibility, three kinds, all checked.** (a) Endpoints: the walks are re-run from the same seeds on a fresh machine before any neighbourhood is evaluated; every endpoint must match bit for bit, or the run does not proceed. (b) Neighbourhoods: the reproducibility subset (§5.6), exact agreement expected. (c) Conclusions: the pre-specified statistics recomputed on the reproducibility subset alone, as E2's sensitivity check did.
 
-**A free cross-harness check.** E1 measured the one-mutant neighbourhood of all 88 parents under the E1 harness (no revert between placements). E3 measures them again under the fixed harness. The two are compared per parent (*D*₅ and Jaccard(*M*)) and reported as the harness-to-harness floor, exploratory.
+**A free cross-harness check.** E1 measured the one-mutant neighbourhood of all 88 parents under the E1 harness (no revert between placements). E3 measures them again under the fixed harness. The two are compared per parent (*D*₅ and Jaccard(*M*)) and reported as the cross-harness difference, exploratory.
 
 ## 7. Analysis, pre-specified
 
 1. **Per genome:** signature re-verified against *P*; the five class counts; the reachable-signature set and distribution; the non-neutral substitution set; the X3 quantities; detector incidence; harness failures.
 2. **X1:** within-parent medians over the three walks per target; mean over parents per target with a parent-bootstrap interval (10,000 resamples); Spearman ρ over parent-level medians against target; secondary continuous analyses against realised Hamming and ancestral expressed-region Hamming; all read against §5.6 and §5.7.
-3. **X2:** Jaccard(*S*) and *D*_sig per endpoint; the fraction of endpoints that differ under the fixed rule, Wilson interval, by target; parents as units.
+3. **X2:** Jaccard(*S*) and *D*_sig per endpoint; the fraction of endpoints that differ under the fixed rule, by target, reported descriptively; uncertainty from the parent-level bootstrap specified in X2.
 4. **X3:** paired differences by target, with bootstrap intervals; sign consistency across parents.
 5. **X4:** Jaccard(*M*) minus its exact expectation (§5.8), beside *D*₅ and *D*_sig, by target, within-parent medians and parent bootstrap; the joint pattern reported descriptively beside the references, with no binary classification.
 6. **X5:** incidence per detector; replications.
@@ -119,4 +119,4 @@ If accessibility structure is substantial, a population experiment with heredity
 
 **Smoke test, 2026-10-10 (harness validation; disclosed above).** Two parents, one 400-attempt neutral walk each: 197 and 197 accepted steps, all five targets reached, 0 harness failures, 0 retries. The walks re-run from the same seeds on a fresh chain reproduced every endpoint bit for bit (10 of 10). Sampled neighbourhoods (150 children, smoke only) of 98 genomes evaluated twice on separate chains agreed exactly (98 of 98; every class count, every signature multiset, every non-neutral set). 15,164 placements, 0 harness failures, 0 retries. The analysis script ran end to end on the smoke record and produced every pre-specified statistic; its values from the smoke are not results and were not read as such. The synthetic STEPS-style mock of the edition was shown to the artist before signing.
 
-*Unsigned. To be signed by the artist, then anchored on Ethereum from the keeper with this document's keccak256, the parent set, the world and the five script hashes, before the first attempt is placed.*
+**Signed by the artist, Bushi, on 2026-10-10, with E1 and E2 published, THREADS settled, STEPS on auction, and no E3 attempt placed under the run seed.** The question, the 88-parent population, the walk and endpoint rules, the five targets, the exhaustive neighbourhoods, the clean-state harness with its retry policy, the five measurements with their decision rules and pre-listed readings, the references, the reproducibility checks, the analysis, the edition's rules and the five frozen scripts named above are fixed. Anything changed after this line is a dated amendment below it. The anchor transaction is recorded in Amendment 1.
