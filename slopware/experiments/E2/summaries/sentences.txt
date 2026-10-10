@@ -1,0 +1,3 @@
+A program can be rewritten one byte at a time until none of its sixty-four bytes is the one it was born with, and still do exactly what it did.
+Refuse every change that shortens a program's run and the run grows, from a median of three instructions to about twenty, and for some into loops that stop only when the gas is gone.
+Half of those gains were impossible until silent changes had rearranged the program's background first: the neutrality E1 found is not dead space, it is the road.

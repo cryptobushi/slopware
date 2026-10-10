@@ -24,6 +24,6 @@ writeFileSync('dist/index.html', html);
 copyFileSync('lab.json', 'dist/lab.json');
 for (const f of ['readings.html', 'readings.json', 'og-site.png', 'og-readings.png']) if (existsSync(f)) copyFileSync(f, `dist/${f}`);
 if (existsSync('r')) cpSync('r', 'dist/r', { recursive: true });
-for (const f of ['e1.html', 'e1.md', 'og-e1.png', 'llms.txt', 'readings.md']) if (existsSync(f)) copyFileSync(f, `dist/${f}`);
-if (existsSync('e1-data')) cpSync('e1-data', 'dist/e1-data', { recursive: true });
+for (const f of ['e1.html', 'e1.md', 'og-e1.png', 'e2.html', 'e2.md', 'og-e2.png', 'llms.txt', 'readings.md']) if (existsSync(f)) copyFileSync(f, `dist/${f}`);
+for (const d of ['e1-data', 'e2-data']) if (existsSync(d)) cpSync(d, `dist/${d}`, { recursive: true });
 console.log(`built dist/ · installer ${addr || '(placeholder; pass ?contract=)'}`);

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" class="manifold-scheme-light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SLOPWARE — E2 walks on the living</title>
+<meta name="description" content="The second pre-registered experiment: long one-byte walks from the 88 programs that ran three or more instructions, under neutral and persistence acceptance. Results, data, and the research edition.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SLOPWARE">
+<meta property="og:title" content="SLOPWARE — E2 walks on the living">
+<meta property="og:description" content="Is the neutrality E1 found empty space or navigable ground? 8.8 million one-byte steps from the programs that lived longest.">
+<meta property="og:url" content="https://slopware.fun/e2">
+<meta property="og:image" content="https://slopware.fun/og-e2.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SLOPWARE — E2 walks on the living">
+<meta name="twitter:description" content="Is the neutrality E1 found empty space or navigable ground? 8.8 million one-byte steps from the programs that lived longest.">
+<meta name="twitter:image" content="https://slopware.fun/og-e2.png">
+<link rel="alternate" type="text/markdown" href="e2.md" title="this page as Markdown">
+<style>
+html{-webkit-text-size-adjust:none;text-size-adjust:none}
+html,body{margin:0;padding:0;background:#fff;color:#000}
+html,body,pre,button,input{font-family:"Courier New",Courier,monospace;font-size:15px;line-height:1.3}
+h1,h2,h3{margin:0;font-size:inherit;font-weight:inherit}
+h2{margin-top:2.6em}
+p{margin:0 0 1em}
+a{color:inherit;text-decoration:underline}
+.c{max-width:860px;margin:0 auto;padding:4em 20px 1.5em;box-sizing:border-box}
+.essay{max-width:620px}
+pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.mute{color:#666}
+.red{color:#c83c1e}
+.tbl{display:grid;grid-template-columns:max-content 1fr;column-gap:1.5em;row-gap:0.15em;margin:1.3em 0}
+.tbl .n{text-align:right;white-space:nowrap}
+.tbl.facts{grid-template-columns:max-content 1fr}
+.tbl.facts .n{text-align:left;color:#666}
+.fig{margin:2.6em auto 0;text-align:center}
+.fig img{display:block;width:100%;height:auto;border:0;margin:0 auto}
+.fig p{margin:0.8em auto 0;max-width:620px;text-align:center}
+.h{margin:2em 0 0;padding-top:1em;border-top:1px solid #000}
+.h p{margin:0.4em 0 0}
+.h .v{margin-top:0.6em}
+.h .v b{font-weight:normal;text-decoration:underline}
+.sentences p{margin:0 0 0.8em}
+.lens{margin:1em 0 0;display:flex;gap:1.5em;flex-wrap:wrap;align-items:baseline}
+@media (max-width:700px){.tbl{column-gap:1em}.h{margin-top:1.6em}}
+/* Manifold's widgets follow the system colour scheme by default; the page is black on white whatever the system says */
+html.manifold-scheme-light{--manifold-page--color--background:#fff;--manifold-element--color--background:#fff;--manifold-text--color--body:#000;--manifold-text--color--muted:#666;--manifold-border--color:#000;--manifold-border--radius:0;--manifold-theme--color--primary:#000;--manifold-text--color--primary:#fff;color-scheme:light}
+</style>
+</head>
+<body>
+<div class="c essay">
+<h1>E2 · walks on the living</h1>
+<p class="mute" style="margin-top:0.3em">the second experiment, pre-registered, run once</p>
+
+<p style="margin-top:2.6em">E1 found that almost all local mutation is neutral: 98.4% of one-byte changes leave a program's behaviour identical. E2 asks whether that neutrality is empty space or navigable ground. From the 88 E1 programs that executed three or more instructions, 42 collected and 46 fresh random, the lab took long walks: one byte changed at a time, ten thousand attempts per walk, five walks per program under each of two rules. Arm A kept only changes that left behaviour identical. Arm B kept any change that did not shorten the program's run, which is selection, disclosed in advance as "we select for not dying sooner". Every one of the 8.8 million proposed programs was placed on a clean copy of Ethereum and called five ways with every instruction traced.</p>
+<p>"The living" is the readings' voice. Here the parents are the programs that ran long enough to enter, and execution is not called life. The hypotheses, the analysis, and the picture were written down and <a id="anchor-link" href="https://etherscan.io/tx/0xacb2614447721b5e959171c7e267301e0974be6d7cb691488d2578890ec85d7f">anchored on Ethereum</a> before the run. Nothing below was chosen after seeing the data.</p>
+</div>
+
+<div class="c fig" id="figure">
+<img id="steps" alt="STEPS: one strip per parent; attempts left to right, instructions executed bottom to top; neutral walks faint, persistence walks black, a red mark where a never-observed behaviour first appeared" src="e2-data/steps.png">
+<p class="mute" id="caption">STEPS. One strip per parent, in parents.json order. Attempts run left to right, instructions executed rise from the strip&#x27;s baseline to a shared axis that ends at the smallest power of two above the longest run in the record, 131,072. Neutral walks faint, persistence walks black, a red mark where a walk first reached a behaviour E1 never observed. Rules fixed before the run; the axis makes most climbs a hairline and the loops cliffs, and the artist declined to change it before seeing the data.</p>
+</div>
+
+<div class="c fig" id="figure2"></div>
+
+<div class="c essay">
+<h2>what was asked, and what the record says</h2>
+<p class="mute">Five hypotheses, stated before the run; three with thresholds, two as measurements whose reading was fixed in advance. Each is judged by its own statement and nothing else.</p>
+<div id="hypotheses"><div class="h">
+<h3>W1 · neutral movement and cryptic variation</h3>
+<p class="mute">Under neutral acceptance, accepted steps almost never change an executed opcode byte: fewer than 1% of them do, and in at least 90% of walks every executed opcode byte of the final genome equals the parent&#x27;s. Steps inside PUSH immediates were expected to be common.</p>
+<p>0.77% of 4,194,592 accepted neutral steps changed an executed opcode byte, inside the 1% threshold; 31.6% landed in PUSH immediates. But only 6.8% of walks ended with every executed opcode byte unchanged, far below 90%: over ten thousand attempts the rare opcode changes accumulate. Every walk ended with a median 63 of 64 bytes different from its parent while 100% of them still behaved exactly like it (ancestral neutrality).</p>
+<p class="v"><b>not held</b> <span class="mute">The neutral network is not only the unread tail. Locally silent changes reach into executed code, and a program can be rewritten byte by byte without changing what it does.</span></p>
+</div><div class="h">
+<h3>W2 · persistence can climb</h3>
+<p class="mute">Under persistence acceptance, probe-A lifespan grows: the median walk at least doubles its parent&#x27;s lifespan (&quot;persistence can climb&quot;), and some walk reaches 32 or more instructions, beyond anything in E1&#x27;s 26 million children (&quot;can climb far&quot;). Not evolution: a hill climb with neutral drift.</p>
+<p>The median parent multiplied its lifespan by 7.7; all 88 parents doubled. The longest run was 118,478 instructions. Lifespan is an instruction count, and a loop that runs until the million-gas ceiling is the degenerate way to never be shorter: 63 of 440 persistence walks found one. Excluding every looping walk, the median parent still multiplied its lifespan by 7.3 and 47 walks passed 32 instructions; one reached 12,259 and halted cleanly.</p>
+<p class="v"><b>held, both thresholds</b> <span class="mute">Non-decreasing paths through genotype space exist from every one of these programs, and they are not only loops.</span></p>
+</div><div class="h">
+<h3>W3 · two prefix models under accumulated mutation</h3>
+<p class="mute">The naive model (a step is neutral iff its position is at or beyond the consumed prefix) is below 98% accurate; the opcode model (neutral iff the position is not an executed opcode byte) is at least 98% accurate in both arms and every decile.</p>
+<p>Naive model: 69.1% accurate in arm A and 28.5% in arm B, failing at immediates as predicted. Opcode model: 99.3% in arm A, steady across deciles, but 95.7% under persistence, where jumps and loops make which bytes execute depend on more than their position.</p>
+<p class="v"><b>naive as predicted; opcode not held under persistence</b> <span class="mute">Position alone predicts neutrality for programs that run straight; once control flow bends, it does not.</span></p>
+</div><div class="h">
+<h3>W4 · behavioural reach</h3>
+<p class="mute">A measurement. Eight events of interest were fixed in advance; the only prediction was that clean halts become more frequent under persistence (at least half of arm-B walks). No directional prediction for behaviours E1 never observed. child_has_code and external_call events are replicated three times before being reported as more than candidates.</p>
+<p>Clean halts: 100% of persistence walks (the prediction held). Returned data: 86%. A storage write surviving to a clean halt: 94%. CREATE executed: 96%, and succeeding, which makes an empty account: 78%. A CALL-family instruction executed: 69%. A loop: 14%. A created account with code: none. Replication of the external_call events is in progress.</p>
+<p class="v"><b>the one prediction held; the rest is reported</b> <span class="mute">The scorecard: no child with code, so construction stays NOT OBSERVED; a succeeding CREATE of an empty account is the named counterfeit; the replicated CALL executions move the environment scale only to E1, environment sensed, since no call reached code and no benefit is measured.</span></p>
+</div><div class="h">
+<h3>W5 · is neutrality the road?</h3>
+<p class="mute">A measurement with its reading fixed in advance. Every lengthening step is re-applied to the plateau-start genome, the genome right after the previous lifespan increase. Class B means the step lengthens the current genome but not the plateau-start genome: enabled by the intervening neutral drift. Zero class B: no evidence. A rare event: existence proof. Many: an important route.</p>
+<p>6,869 lengthening steps; 3,417 of them class B, 49.7% with a 95% interval of 48.6% to 50.9%. Only 6.5% of lengthening steps lengthen the original parent. A median of 130 accepted neutral steps and 50 changed bytes separate each improvement from the plateau it rose from.</p>
+<p class="v"><b>important route</b> <span class="mute">Half of every improvement found was unavailable until phenotypically silent changes had altered the program&#x27;s background. E1&#x27;s 98.4% neutrality is the ground the climbs stand on.</span></p>
+</div></div>
+
+<h2>in three sentences</h2>
+<div class="sentences" id="sentences"><p>placeholder</p></div>
+
+<h2 id="data">the data</h2>
+<div class="tbl facts" id="facts"><span class="n">parents</span><span>88 E1 parents whose probe-A lifespan was three or more: 42 genesis, 46 control; fixed in parents.json before the run</span><span class="n">walks</span><span>440 neutral and 440 persistence walks: 5 per parent per arm, 10,000 attempts each, 8,800,000 attempts in all, plus two counterfactual placements per lengthening step</span><span class="n">world</span><span>v0, frozen as in E1; every genotype evaluated from the same clean chain state at the same address</span><span class="n">record root</span><span>15849149ca70177ef0a068a74b08134b757237a76be66b9f4e9de6b19b200552</span><span class="n">pre-registration anchor</span><span><a href="https://etherscan.io/tx/0xacb2614447721b5e959171c7e267301e0974be6d7cb691488d2578890ec85d7f">0xacb2614447721b5e959171c7e267301e0974be6d7cb691488d2578890ec85d7f</a></span><span class="n">record anchor</span><span><a href="https://etherscan.io/tx/0xefd700f6e43fdd68628861f09736010b495fc557d6d982390f8a686547cc4010">0xefd700f6e43fdd68628861f09736010b495fc557d6d982390f8a686547cc4010</a></span><span class="n">record</span><span>slopware-e2-record-20261010, a DigitalOcean volume snapshot of the full 2.6 GB record; the per-walk summaries, every lengthening step with its counterfactuals, the manifest and the root are in the repository</span><span class="n">protocol</span><span><a href="https://github.com/cryptobushi/slopware/blob/main/slopware/experiments/E2-walks.md">slopware/experiments/E2-walks.md, signed 2026-10-09, amendments dated below the signature</a></span><span class="n">analysis</span><span>scripts/e2_analysis.py, pre-specified; scripts/e2_steps.py for the picture, hashed before the run</span></div>
+<p class="mute" id="repro">To check any number: fetch the snapshot or the per-walk summaries, run scripts/e2_analysis.py, and compare with results.json; to check the picture, run scripts/e2_steps.py on the record. The root hash above is the sha256 of the sorted sha256 manifest of every file in the record.</p>
+
+
+
+<p class="mute" style="margin-top:3em">The catalogue states facts. The lab records what executed. The readings interpret. This page is the lab's. <a href="readings">readings</a> · <a href="./">catalogue</a> · as text: <a href="e2.md">e1.md</a> · <a href="llms.txt">llms.txt</a></p>
+<p class="mute" style="margin-top:3em">created by <a href="https://x.com/bushibuilds" target="_blank" rel="noopener">Bushi</a></p>
+</div>
+
+<script>
+(function () {
+'use strict';
+// Everything on this page is static HTML, written by scripts/e1_page.py from the sealed record. The only script is the
+// auction, which needs Manifold's widgets; without JavaScript the listing's facts are still in the text above it.
+const a = document.getElementById('auction'); if (!a || !a.dataset.id) return;
+const { id, network, marketplace, rpc } = a.dataset;
+const w = (name, extra = '') => `<div data-widget="${name}" data-id="${id}" data-network="${network}"${extra}></div>`;
+a.innerHTML = `<div data-widget="m-connect" data-network="${network}" data-fallback-provider="${rpc}"></div>
+<div class="lens">${w('m-listing-name')}${w('m-listing-price')}${w('m-listing-countdown')}</div>
+${w('m-listing-bid-form-rich', ` data-address="${marketplace}" data-version="2"`)}
+${w('m-listing-interactions')}`;
+for (const href of ['https://connect.manifoldxyz.dev/3.1.0/connect.css', 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.css']) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); }
+const s1 = document.createElement('script'); s1.src = 'https://connect.manifoldxyz.dev/3.1.0/connect.umd.min.js';
+s1.onload = () => { const s2 = document.createElement('script'); s2.src = 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.umd.min.js'; document.body.appendChild(s2); };
+document.body.appendChild(s1);
+})();
+</script>
+</body>
+</html>

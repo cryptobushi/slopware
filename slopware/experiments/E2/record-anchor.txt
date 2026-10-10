@@ -1,0 +1,3 @@
+SLOPWARE E2 record anchor | record root sha256 15849149ca70177ef0a068a74b08134b757237a76be66b9f4e9de6b19b200552 (sha256 of the sorted sha256 manifest of 113 files, 2.6 GB) | 8,800,000 attempts · 880 walks · 88 parents · two arms | repo commit aefa470 | sealed 2026-10-10 01:10 UTC | slopware.fun/e2
+
+tx 0xefd700f6e43fdd68628861f09736010b495fc557d6d982390f8a686547cc4010 · block 26158653 · from the keeper
