@@ -1,6 +1,6 @@
 {
  "experiment": "E2",
- "generatedAt": "2026-10-10T01:21:17+00:00",
+ "generatedAt": "2026-10-10T01:24:39+00:00",
  "caption": "STEPS. One strip per parent, in parents.json order. Attempts run left to right, instructions executed rise from the strip's baseline to a shared axis that ends at the smallest power of two above the longest run in the record, 131,072. Neutral walks faint, persistence walks black, a red mark where a walk first reached a behaviour E1 never observed. Rules fixed before the run; the axis makes most climbs a hairline and the loops cliffs, and the artist declined to change it before seeing the data.",
  "hypotheses": [
   {
@@ -31,9 +31,9 @@
    "id": "W4",
    "name": "behavioural reach",
    "registered": "A measurement. Eight events of interest were fixed in advance; the only prediction was that clean halts become more frequent under persistence (at least half of arm-B walks). No directional prediction for behaviours E1 never observed. child_has_code and external_call events are replicated three times before being reported as more than candidates.",
-   "observed": "Clean halts: 100% of persistence walks (the prediction held). Returned data: 86%. A storage write surviving to a clean halt: 94%. CREATE executed: 96%, and succeeding, which makes an empty account: 78%. A CALL-family instruction executed: 69%. A loop: 14%. A created account with code: none. Replication of the external_call events is in progress.",
+   "observed": "Clean halts: 100% of persistence walks (the prediction held). Returned data: 86%. A storage write surviving to a clean halt: 94%. CREATE executed: 96%, and succeeding, which makes an empty account: 78%. A CALL-family instruction executed: 69%. A loop: 14%. A created account with code: none. Replication: 304 of 304 external_call events reproduced three times on fresh chains. In 248 the call reached an account without code, which the EVM counts as completed; in 56 it entered code, and on a clean chain the only code is the program's own, so these programs call themselves. The deepest lets itself act in its own name 24 levels deep and halts cleanly.",
    "verdict": "the one prediction held; the rest is reported",
-   "note": "The scorecard: no child with code, so construction stays NOT OBSERVED; a succeeding CREATE of an empty account is the named counterfeit; the replicated CALL executions move the environment scale only to E1, environment sensed, since no call reached code and no benefit is measured."
+   "note": "The scorecard: no child with code, so construction stays NOT OBSERVED; a succeeding CREATE of an empty account is the named counterfeit; the replicated CALL executions move the environment scale only to E1, environment sensed, and the self-calls move nothing, since no self-inspection, inherited information or benefit is involved."
   },
   {
    "id": "W5",
@@ -45,7 +45,9 @@
   }
  ],
  "sentences": [
-  "placeholder"
+  "A program can be rewritten one byte at a time until none of its sixty-four bytes is the one it was born with, and still do exactly what it did.",
+  "Refuse every change that shortens a program's run and the run grows, from a median of three instructions to about twenty, and for some into loops that stop only when the gas is gone.",
+  "Half of those gains were impossible until silent changes had rearranged the program's background first: the neutrality E1 found is not dead space, it is the road."
  ],
  "facts": [
   [
