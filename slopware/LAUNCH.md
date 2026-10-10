@@ -40,4 +40,4 @@ What happened, in order, and what has to keep happening. Nothing here deploys an
 
 **E2 and the second research edition (2026-10-10).** E2 ran 2026-10-09/10 (record root `15849149…`, anchored block 26,158,653; results in `experiments/E2-walks.md` and at `/e2`). STEPS (E2) minted by the keeper as token 2, listing 20931, embedded on `/e2`. THREADS (E1) auction closes 2026-10-10 11:02 ET; the keeper finalizes both auctions when they end.
 
-**THREADS (E1) settled (2026-10-10).** Winning bid 0.06 ETH (rpl.eth), finalized by the keeper, proceeds to the artist. The auction watcher process had died overnight; the keeper's finalize was sent by hand thirteen minutes after the close. Watchers now run with shorter horizons.
+**THREADS (E1) settled (2026-10-10).** Winning bid 0.06 ETH (rpl.eth), finalized by the keeper, proceeds to the artist. The keeper's finalize was sent by hand thirteen minutes after the close, ahead of the watcher's next half-hourly tick; the watcher then saw the listing finalized and exited normally.
