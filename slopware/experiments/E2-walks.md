@@ -140,6 +140,23 @@ Run 2026-10-09 18:20 UTC to 2026-10-10 01:08 UTC on one DigitalOcean c-32 drople
 
 **Descriptives.** Final Hamming distance from parent, median 63 in both arms; the persistence arm travelled less far than the neutral arm for 32% of parents, so climbing did not cost mobility in these walks. **Noise (§7.8) — the threshold was not met.** One walk per parent per arm (walk 0) was re-run from the same seed on a fresh c-32 droplet: 125 of 176 trajectories were identical attempt for attempt; 51 differed (21 neutral, 30 persistence). Most differences are a single attempt evaluated differently: 28 of the 51 final genomes differ from their counterpart in one byte and 16 differ by exactly one accepted step, and 41 of 51 ended at the same lifespan. Because a persistence walk is path-dependent, one differing attempt can redirect it, and 7 walks diverged by more than twenty bytes. The cause is transient instrumentation under load, not the programs: a probe that times out is recorded as an instrument error with a different signature, and the W4 detector's real transaction timed out 20 times across both runs (`detector_error` flags in the summaries). This is the same failure class as E1's 0.06% triplicate disagreement, at a rate of roughly one attempt in ten thousand. It cannot materially move statistics aggregated over 8,800,000 attempts and 880 walks, but it means the record is not reproducible bit for bit across machines, and every walk should be read as one sample of a harness that is deterministic in its stream and not quite in its measurement. The 51 differing walks are listed in `summaries/rerun/results-noise.json` and their parents are flagged there as the protocol requires. E3's harness must retry instrument errors rather than record them.
 
+*Sensitivity check (exploratory, added 2026-10-10 at the artist's request).* The pre-specified statistics were recomputed on the re-run alone and on the matching walk-0 subset of the main run:
+
+| | main, all 880 walks | main, walk 0 only | re-run, walk 0 |
+|---|---|---|---|
+| W1 neutral steps on executed opcodes | 0.77% | 0.75% | 0.75% |
+| W1 walks with opcodes unchanged | 6.8% | 6.8% | 6.8% |
+| W1 ancestral neutrality | 100% | 100% | 100% |
+| W2 median parent ratio | 7.67 | 7.67 | 7.67 |
+| W2 parents doubled | 88 | 88 | 88 |
+| W2 looping walks | 63 of 440 | 11 of 88 | 11 of 88 |
+| W2 walks reaching 32 | 110 | 22 | 20 |
+| W5 lengthening steps | 6,869 | 1,349 | 1,344 |
+| W5 class B | 3,417 (49.7% [48.6, 50.9]) | 658 (48.8% [46.1, 51.4]) | 658 (49.0% [46.3, 51.6]) |
+| W5 lengthens the original parent | 6.5% | 6.4% | 6.6% |
+
+The 51 trajectory differences change no statistic beyond its interval. The measurement noise is real and is reported; the findings do not depend on it.
+
 **What this means, in three sentences.** A program can be rewritten one byte at a time until none of its sixty-four bytes is the one it was born with, and still do exactly what it did. Refuse every change that shortens a program's run and the run grows, from a median of three instructions to about twenty, and for some into loops that stop only when the gas is gone. Half of those gains were impossible until silent changes had rearranged the program's background first: the neutrality E1 found is not dead space, it is the road.
 
 **What happens next.** Nothing changes in the installer. The scorecard moves one row by one level (environment sensed) and no other. W2 and W5 show traversable ground, so a population experiment with heredity, variation and disclosed selection (E3) may be pre-registered, with a stopping rule, and with the loop problem addressed in its design: a persistence criterion that counts instructions rewards loops, and E3 must say what it rewards before it runs, and its harness must retry transient instrument errors so that a re-run reproduces the record exactly. The post-E1 releases remain reserved for pre-registered work (roadmap Part X-C).

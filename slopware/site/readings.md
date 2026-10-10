@@ -1,13 +1,13 @@
 # SLOPWARE — readings
 
-The lab's observations of every program SLOPWARE has installed, as of 2026-10-10 01:24 UTC: 916 releases read, 914 installed, 2 refused by Ethereum. Each installed program's sixty-four bytes were placed on a private copy of Ethereum and called five ways with every instruction traced. Observation, not record: the installer itself records nothing about behaviour. The siblings line comes from experiment E1 (https://slopware.fun/e1.md).
+The lab's observations of every program SLOPWARE has installed, as of 2026-10-10 10:37 UTC: 926 releases read, 924 installed, 2 refused by Ethereum. Each installed program's sixty-four bytes were placed on a private copy of Ethereum and called five ways with every instruction traced. Observation, not record: the installer itself records nothing about behaviour. The siblings line comes from experiment E1 (https://slopware.fun/e1.md).
 
 - 80.3% died on their first instruction (the million-program study found 78.4%)
-- longest run: 6 instructions
+- longest run: 7 instructions
 - 3 halted cleanly
-- 0 answered differently to different input
+- 1 answered differently to different input
 - 0 returned data
-- 707 carry an instruction Ethereum does not activate yet
+- 715 carry an instruction Ethereum does not activate yet
 
 ## Every release
 
@@ -1842,3 +1842,23 @@ The lab's observations of every program SLOPWARE has installed, as of 2026-10-10
 **SLOPWARE 000915** · installed · program 0x397aA719b39edeD566751cB744898180F129cCA7 · installed by 0xc0FE1769e63125FF277D8a8E72267791B614Ffe0 Its first word was not a word: 0xce is not an instruction. It died before its first breath. Had it lived, it would have shouted into the log and gone somewhere else. It carries 3 words from a language Ethereum will speak later: RETURNDATALOAD, DATALOAD, EOFCREATE. 42 of its 64 bytes are luggage. Trace: Unknown
 
 **SLOPWARE 000916** · installed · program 0x94484A9bFCbaA00eECF95cF7952690F7C119f7e3 · installed by 0xc0FE1769e63125FF277D8a8E72267791B614Ffe0 Its first word was not a word: 0xed is not an instruction. It died before its first breath. Had it lived, it would have hashed something and taken it all back. It carries one word from a language Ethereum will speak later: RETURNCONTRACT. 38 of its 64 bytes are luggage. Trace: Unknown
+
+**SLOPWARE 000917** · installed · program 0x9b737d41EC260c10f1c7278f187BE308DB534107 · installed by 0x7195e51F56385a27a48069B485609eFfBbdd2940 Its first word was not a word: 0x21 is not an instruction. It died before its first breath. Had it lived, it would have shouted into the log. It carries 2 words from a language Ethereum will speak later: DATACOPY, RETURNCONTRACT. 36 of its 64 bytes are luggage. Trace: Unknown
+
+**SLOPWARE 000918** · installed · program 0xebf7f6006B4Caf2D3874e644949a6Ce6a4a78F39 · installed by 0x773B1aCC268f8A0C6076752FcC042BaB87597718 It reached to compare two things with empty hands, and fell. 54 of its 64 bytes are luggage. Trace: SLT
+
+**SLOPWARE 000919** · installed · program 0x4A3738feCb0B97Ae4A8F7e6f111f9506afDF42Ea · installed by 0xb764767e2Ef9a1C711A869F0E8163C7C60060f5F Picked up 5 bytes and picked up 30 bytes. Then it reached to let someone act in its name with less in its hands than that takes, and fell. Had it lived, it would have shouted into the log. 52 of its 64 bytes are luggage. Trace: PUSH5 · PUSH30 · DELEGATECALL
+
+**SLOPWARE 000920** · installed · program 0x19c46bb9976FA0962A82938593840b7fbd93C9FC · installed by 0xb764767e2Ef9a1C711A869F0E8163C7C60060f5F It reached to call someone with empty hands, and fell. Had it lived, it would have hashed something. It carries one word from a language Ethereum will speak later: SWAPN. 51 of its 64 bytes are luggage. Trace: CALL
+
+**SLOPWARE 000921** · installed · program 0x2708Fe3Caf4E563f7FE277468e1230f7F1A6df8A · installed by 0xb764767e2Ef9a1C711A869F0E8163C7C60060f5F Picked up 2 bytes, checked the price of things, checked its wallet, and checked someone's wallet. Then it fell (invalid opcode). It answers differently depending on what you say to it. Had it lived, it would have checked its memory, given an answer, called someone, let someone else act in its name, checked its short-term memory, and shouted into the log. It carries 4 words from a language Ethereum will speak later: JUMPF, DATALOADN, RETURNCONTRACT, CALLF. Trace: PUSH2 · BLOBBASEFEE · SELFBALANCE · BALANCE · KECCAK256
+
+**SLOPWARE 000922** · installed · program 0xAe8353E0D4bd9c1f3265cB2DB4AdBc25507fEED5 · installed by 0xb764767e2Ef9a1C711A869F0E8163C7C60060f5F It reached to rummage in memory with empty hands, and fell. Had it lived, it would have given an answer and checked its short-term memory. It carries 5 words from a language Ethereum will speak later: RJUMPI, DATALOADN, DATACOPY, DATASIZE, EXCHANGE. Trace: MLOAD
+
+**SLOPWARE 000923** · installed · program 0x9fA0F17a4F0cb817c89F3705F4A6aCa93708cD62 · installed by 0xb764767e2Ef9a1C711A869F0E8163C7C60060f5F Its first word was not a word: 0xb7 is not an instruction. It died before its first breath. It carries one word from a language Ethereum will speak later: EOFCREATE. 44 of its 64 bytes are luggage. Trace: Unknown
+
+**SLOPWARE 000924** · installed · program 0x62ce467fDcd89AdA61D3C2ef22aa5D03E32e228b · installed by 0x0e71d6c7316C06C5bA720CfFdb2a427f7bb1114E Its first word was not a word: 0xeb is not an instruction. It died before its first breath. It carries one word from a language Ethereum will speak later: EXTDELEGATECALL. 52 of its 64 bytes are luggage. Trace: Unknown
+
+**SLOPWARE 000925** · installed · program 0x17312C87335A1DD5aE17133142264dc1d345C4aA · installed by 0x5fEB3281d7E81Ea5e55AAeA96639DaaCA5d601c1 It reached to shuffle what it was holding with empty hands, and fell. Had it lived, it would have had a child. It carries 2 words from a language Ethereum will speak later: DUPN, DATALOADN. 41 of its 64 bytes are luggage. Trace: DUP11
+
+**SLOPWARE 000926** · installed · program 0xEab1b7937C2F097974f2E9bA2BB91a97775dC1d1 · installed by 0x5fEB3281d7E81Ea5e55AAeA96639DaaCA5d601c1 Its first word was not a word: 0xd5 is not an instruction. It died before its first breath. Had it lived, it would have shouted into the log and had a child at a chosen address. It carries 4 words from a language Ethereum will speak later: EXTDELEGATECALL, DATALOAD, EOFCREATE, RJUMP. 32 of its 64 bytes are luggage. Trace: Unknown
