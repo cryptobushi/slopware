@@ -1,0 +1,22 @@
+{
+  "name": "SOMEWHERE ELSE (E3)",
+  "description": "SLOPWARE research edition 3, for experiment E3 (somewhere else). One row per parent, 88 rows in parents.json order: the 42 collected and 46 fresh random programs from E1 that executed three or more instructions. In each row, left to right: the parent, then its first neutral walk's descendants frozen at 8, 16, 32, 48 and 60 bytes' distance, every one of which does exactly what the parent does. Each is drawn as a walk from its bytes with THREADS' pen (faint: the whole program; black: the part it executes; red: three or more instructions), and beneath each a bar of 64 cells, one per byte position, inked by the fraction of that position's 255 one-byte changes that alter what the program does, from the exhaustive one-mutant neighbourhood of every genome in the sealed record. If neutral history changed nothing about what is reachable next, every bar in a row would be the same bar under five different drawings. The rules were fixed and hashed in the pre-registration anchor before the first attempt; the artist saw only a synthetic mock before signing. Generated from the sealed record by scripts/e3_somewhere.py. Minted by the keeper, the wallet that completes SLOPWARE's installations. It confers no rights over any program, release, receipt or experiment.",
+  "image": "__IMAGE_URI__",
+  "external_url": "https://slopware.fun/e3",
+  "attributes": [
+    { "trait_type": "series", "value": "SLOPWARE research editions" },
+    { "trait_type": "experiment", "value": "E3 somewhere else" },
+    { "trait_type": "parents", "value": "88" },
+    { "trait_type": "neighbourhoods", "value": "__NEIGHBOURHOODS__" },
+    { "trait_type": "placements", "value": "__PLACEMENTS__" },
+    { "trait_type": "arweave image", "value": "__ARWEAVE_IMAGE__" },
+    { "trait_type": "record root (sha256)", "value": "__ROOT__" },
+    { "trait_type": "pre-registration anchor", "value": "0xb24f764500dfac4d69df23942d95962d6f6033ca65d3de8af345d08c772c9a57" },
+    { "trait_type": "record anchor", "value": "__RECORD_ANCHOR__" },
+    { "trait_type": "script keccak256", "value": "0x7fd9807b7bd245589a78cd4c5a295a3fedb501973d7471b327b0b016bc3d203f" },
+    { "trait_type": "world", "value": "v0" },
+    { "trait_type": "date", "value": "2026-10-10" },
+    { "trait_type": "print size", "value": "__PRINT_SIZE__" },
+    { "trait_type": "minted by", "value": "the keeper" }
+  ]
+}
