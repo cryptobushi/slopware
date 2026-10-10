@@ -1,6 +1,6 @@
 {
  "experiment": "E2",
- "generatedAt": "2026-10-10T13:51:36+00:00",
+ "generatedAt": "2026-10-10T14:28:34+00:00",
  "caption": "STEPS. One strip per parent, in parents.json order. Attempts run left to right, instructions executed rise from the strip's baseline to a shared axis that ends at the smallest power of two above the longest run in the record, 131,072. Neutral walks faint, persistence walks black, a red mark where a walk first reached a behaviour E1 never observed. Rules fixed before the run; the axis makes most climbs a hairline and the loops cliffs, and the artist declined to change it before seeing the data.",
  "hypotheses": [
   {
@@ -97,5 +97,19 @@
  ],
  "reproduce": "To check any number: fetch the snapshot or the per-walk summaries, run scripts/e2_analysis.py, and compare with results.json; to check the picture, run scripts/e2_steps.py on the record. The root hash above is the sha256 of the sorted sha256 manifest of every file in the record.",
  "anchorTx": "0xacb2614447721b5e959171c7e267301e0974be6d7cb691488d2578890ec85d7f",
- "edition": null
+ "edition": {
+  "text": "STEPS (E2) is the research edition for this experiment: one token, the picture above at print resolution, pinned to Arweave with metadata carrying the record root, both anchors, and the hash of the script that drew it. Its rules and axis were fixed before the run, and the artist declined to change them after seeing a synthetic mock and before seeing any trajectory, so what you see is the record's own scale: hairlines, cliffs, and red. Minted by the keeper on the research editions contract, offered here by reserve auction. Proceeds go to the artist and fund the work. It confers no rights over any program, release, receipt or experiment.",
+  "note": "Reserve 0.05 ETH. The auction runs 24 hours from the first bid, 10% minimum increments, extended by five minutes for a bid in the last five. Settled by Manifold's marketplace contract; the keeper finalizes it when it ends. Contract 0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664, token 2, listing 20931.",
+  "gallery": "https://gallery.manifold.xyz/listing?listingId=20931",
+  "listing": {
+   "id": 20931,
+   "network": 1,
+   "marketplace": "0x3a3548e060be10c2614d0a4cb0c03cc9093fd799",
+   "rpc": "https://ethereum-rpc.publicnode.com"
+  },
+  "contract": "0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664",
+  "tokenId": 2,
+  "image": "ar://8Vz3GoUQ4zX5VTJZFRADQBAh26HAiK83Bg3Gf7mRg9Em",
+  "metadata": "ar://8bh9Yk3kKZyCpvBYWWC4c7sjdmE6P9XPt9NP8uSSPzwJ"
+ }
 }

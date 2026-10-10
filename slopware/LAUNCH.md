@@ -37,3 +37,5 @@ What happened, in order, and what has to keep happening. Nothing here deploys an
 5. **`setPrice` is the one mutable thing**, and the gas-rule change coming to mainnet is the reason it exists.
 
 **E1 and the first research edition (2026-10-09).** E1 ran 2026-10-08/09 (record root `bed1b583…`, anchored block 26,151,785; results in `experiments/E1-neighbourhoods.md` and at `/e1`). THREADS (E1) minted by the keeper on `0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664`, listing 20909, embedded on `/e1`. The keeper finalizes the auction after it ends (`editions/README.md`).
+
+**E2 and the second research edition (2026-10-10).** E2 ran 2026-10-09/10 (record root `15849149…`, anchored block 26,158,653; results in `experiments/E2-walks.md` and at `/e2`). STEPS (E2) minted by the keeper as token 2, listing 20931, embedded on `/e2`. THREADS (E1) auction closes 2026-10-10 11:02 ET; the keeper finalizes both auctions when they end.

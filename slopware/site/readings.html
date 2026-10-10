@@ -125,6 +125,7 @@ function row(r) {
 <h3><span>SLOPWARE ${six(r.id)}</span><span class="mute">${r.status}</span>${r.program ? `<span class="mute">${scan ? `<a href="${scan}/address/${r.program}"><span class="full">${r.program}</span><span class="short">${r.program.slice(0, 8)}…${r.program.slice(-6)}</span></a>` : r.program}</span>` : ''}</h3>
 <p class="verdict">${esc(r.verdict)}${r.would ? ` <span class="mute">${esc(r.would)}</span>` : ''}</p>
 ${r.sib ? `<p class="verdict sib">${esc(r.sib)}</p>` : ''}
+${r.walk ? `<p class="verdict sib">${esc(r.walk)}</p>` : ''}
 ${r.trace ? `<pre class="trace mute">${esc(r.trace)}</pre>` : ''}
 <button data-open="${r.id}">[ the bytes ]</button>
 <div class="more"><p class="mute">reading the bytes…</p></div>
@@ -207,7 +208,7 @@ function render(data) {
   let t; $('q').oninput = () => { clearTimeout(t); t = setTimeout(() => { query = $('q').value; select(); }, 150); };
   $('list').onclick = (e) => { const b = e.target.closest('button[data-open]'); if (b) open(Number(b.dataset.open), false); };
   $('more').onclick = more;
-  $('foot').innerHTML = 'The lab is the harness in the repository. These readings are regenerated as releases arrive; a program still installing is read next time. The lines about siblings come from the first experiment, <a href="e1">E1 neighbourhoods</a>. For agents and anyone without scripts: <a href="readings.md">readings.md</a> · <a href="llms.txt">llms.txt</a>.';
+  $('foot').innerHTML = 'The lab is the harness in the repository. These readings are regenerated as releases arrive; a program still installing is read next time. The lines about siblings come from the first experiment, <a href="e1">E1 neighbourhoods</a>; the lines about walks from the second, <a href="e2">E2 walks on the living</a>. For agents and anyone without scripts: <a href="readings.md">readings.md</a> · <a href="llms.txt">llms.txt</a>.';
 
   // a deep link to one life: show it whatever the lens, open, and scroll to it
   const m = /^#r(\d+)$/.exec(location.hash);

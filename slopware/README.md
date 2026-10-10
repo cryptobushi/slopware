@@ -78,7 +78,7 @@ Reads go through two cached functions, `site/api/state.ts` and `site/api/release
 
 ## Documents
 
-[`RANDOMNESS.md`](RANDOMNESS.md) · [`SECURITY.md`](SECURITY.md) · [`FUTURE.md`](FUTURE.md) · [`LAUNCH.md`](LAUNCH.md) · [`ROADMAP.md`](ROADMAP.md) (the proposed experiment, constitution v1) · [`IDEAS.md`](IDEAS.md) · [`experiments/`](experiments/) (pre-registered experiments; E1 is the first). The lab — the harness that sampled random program space before the installer was built — lives one directory up (`../README.md`, `../BASELINE.md`).
+[`RANDOMNESS.md`](RANDOMNESS.md) · [`SECURITY.md`](SECURITY.md) · [`FUTURE.md`](FUTURE.md) · [`LAUNCH.md`](LAUNCH.md) · [`ROADMAP.md`](ROADMAP.md) (the proposed experiment, constitution v1) · [`IDEAS.md`](IDEAS.md) · [`experiments/`](experiments/) (pre-registered experiments: E1 and E2 run and published with results inside their documents; E3 notes) · [`editions/`](editions/) (the research editions, minted by the keeper). The lab — the harness that sampled random program space before the installer was built — lives one directory up (`../README.md`, `../BASELINE.md`).
 
 `deploy/` — the page that deploys the installer from the artist's own wallet; `make.mjs` regenerates it from the compiled artifact.
 

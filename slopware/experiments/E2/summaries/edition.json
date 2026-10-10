@@ -1,0 +1,8 @@
+{
+  "text": "STEPS (E2) is the research edition for this experiment: one token, the picture above at print resolution, pinned to Arweave with metadata carrying the record root, both anchors, and the hash of the script that drew it. Its rules and axis were fixed before the run, and the artist declined to change them after seeing a synthetic mock and before seeing any trajectory, so what you see is the record's own scale: hairlines, cliffs, and red. Minted by the keeper on the research editions contract, offered here by reserve auction. Proceeds go to the artist and fund the work. It confers no rights over any program, release, receipt or experiment.",
+  "note": "Reserve 0.05 ETH. The auction runs 24 hours from the first bid, 10% minimum increments, extended by five minutes for a bid in the last five. Settled by Manifold's marketplace contract; the keeper finalizes it when it ends. Contract 0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664, token 2, listing 20931.",
+  "gallery": "https://gallery.manifold.xyz/listing?listingId=20931",
+  "listing": { "id": 20931, "network": 1, "marketplace": "0x3a3548e060be10c2614d0a4cb0c03cc9093fd799", "rpc": "https://ethereum-rpc.publicnode.com" },
+  "contract": "0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664", "tokenId": 2,
+  "image": "ar://8Vz3GoUQ4zX5VTJZFRADQBAh26HAiK83Bg3Gf7mRg9Em", "metadata": "ar://8bh9Yk3kKZyCpvBYWWC4c7sjdmE6P9XPt9NP8uSSPzwJ"
+}

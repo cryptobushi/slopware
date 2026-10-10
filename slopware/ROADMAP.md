@@ -613,7 +613,7 @@ Each criterion publishes: definition; what would count; what would not count; kn
 | construction | a program's own execution causes another code-bearing account to exist (`child_has_code`), replicated | infrastructure copying; a created account with no code | NOT OBSERVED (row added 2026-10-09 at E2's signing, E2 §9; construction is not heredity and not reproduction) |
 | self-representation | see S-scale ≥ S2 | having bytecode | NOT OBSERVED |
 | metabolism | see M-scale ≥ M3 | gas paid by a caller | NOT OBSERVED |
-| functional environmental interaction | see E-scale ≥ E4 | reading `TIMESTAMP` then dying | NOT OBSERVED (E1 CANDIDATE: 107 input-dependent programs in the study; sensing without benefit) |
+| functional environmental interaction | see E-scale ≥ E4 | reading `TIMESTAMP` then dying | NOT OBSERVED (E1 CANDIDATE: 107 input-dependent programs in the study; sensing without benefit. E2, 2026-10-10: CALL-family instructions executed in 304 persistence walks, replicated 3/3, 56 of them self-calls; E-scale E1 "environment sensed" reached, nothing higher, since no benefit is measured) |
 | interdependence of parts | ablation shows parts whose removal destroys a function other parts depend on | one-instruction programs | NOT OBSERVED |
 | stability under perturbation | phenotype persists across environment perturbations better than random controls | identical behaviour because the program ignores the environment | NOT OBSERVED |
 | evolution | heritable phenotype change across generations under selection, beyond drift | mutation alone | NOT OBSERVED |
@@ -798,7 +798,7 @@ A methodological rule, recorded so that it is not forgotten when the catalogue i
 
 ## Part XI — The minimum next release
 
-*E2 drafted 2026-10-09 as [`experiments/E2-walks.md`](experiments/E2-walks.md): walks on the 88 living parents from E1, neutral and persistence arms, pre-registered, unsigned.*
+*E2, [`experiments/E2-walks.md`](experiments/E2-walks.md): signed and anchored 2026-10-09, run the same day, results published 2026-10-10 at `slopware.fun/e2`. W1 not held (neutral walks rewrote every byte, executed code included, with behaviour unchanged); W2 held (persistence multiplied the median run by 7.7; 63 of 440 walks found loops); W3 the naive prefix model fails, the opcode model holds only without control flow; W4 clean halts everywhere, succeeding CREATEs of empty accounts, self-calls, no child with code; W5 half of all lengthening steps were enabled by intervening neutral drift. The reproducibility threshold was not met (51 of 176 re-run trajectories differed through instrument timeouts) and a sensitivity check reproduced every statistic. E3 is conditional; design notes in [`experiments/E3-notes.md`](experiments/E3-notes.md), not a pre-registration.*
 
 *Pre-registered as [`experiments/E1-neighbourhoods.md`](experiments/E1-neighbourhoods.md) on 2026-10-08; run 2026-10-08/09; results in that document under "Results — 2026-10-09" and at `slopware.fun/e1`. H1, H2, H4 held; H3 not held as written (a counting error in the pre-registration, one opcode); H5 not held: one replicated one-mutant of a control parent executes a successful `CREATE` of an empty account.*
 

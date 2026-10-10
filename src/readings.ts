@@ -27,6 +27,7 @@ const CONTRACT = (args.contract ?? '') as Hex;
 const LAB = args.lab ?? 'http://127.0.0.1:8546';
 const OUT = args.out ?? 'slopware/site/readings.json';
 const DESCENT = args.descent ?? 'slopware/experiments/E1/summaries/descent.json';
+const E2DIR = args.e2 ?? 'slopware/experiments/E2';
 if (!/^0x[0-9a-fA-F]{40}$/.test(CONTRACT)) { console.error('--contract is required'); process.exit(2); }
 
 const abi = parseAbi([
@@ -137,10 +138,41 @@ function siblings(r: Reading): string {
   return `In E1 the lab changed one byte at a time, every way: of its ${fmtN(placed)} one-byte siblings, ${fmtN(same)} behave exactly as it does${rest}.${noise} The siblings were made by infrastructure and exist only on the lab's chain.`;
 }
 
+// E2's walks, one sentence per parent release (protocol §12): how far its walks went, in the readings' voice
+const e2walks: Record<number, any[]> = {};
+if (existsSync(`${E2DIR}/parents.json`)) {
+  const parents = JSON.parse(readFileSync(`${E2DIR}/parents.json`, 'utf8')).parents as any[];
+  const byIndex: Record<number, any> = {}; for (const p of parents) byIndex[p.index] = p;
+  const { readdirSync } = await import('node:fs');
+  const wdir = `${E2DIR}/summaries/walks`;
+  if (existsSync(wdir)) for (const f of readdirSync(wdir)) if (f.startsWith('summaries-')) for (const l of readFileSync(`${wdir}/${f}`, 'utf8').split('\n')) if (l.trim()) {
+    const w = JSON.parse(l); const p = byIndex[w.parentIndex]; if (!p || p.set !== 'genesis') continue;
+    (e2walks[p.release] ??= []).push(w);
+  }
+}
+function walks(r: Reading): string {
+  const ws = e2walks[r.id]; if (!ws || !ws.length) return '';
+  const B = ws.filter((w) => w.arm === 'B'); const A = ws.filter((w) => w.arm === 'A');
+  if (!B.length) return '';
+  const best = Math.max(...B.map((w) => w.finalLifespan)); const loops = B.filter((w) => w.firstReach && 'loop' in w.firstReach).length;
+  const bits = [`In E2 the lab walked it, one byte at a time, ten thousand steps, five times keeping only changes that left it the same and five times refusing any that cut its life short.`];
+  if (A.length) bits.push(`Kept the same, it ended with every byte changed and still did exactly this.`);
+  bits.push(`Refused a shorter life, it grew from ${r.lifespan} instruction${r.lifespan === 1 ? '' : 's'} to as many as ${fmtN(best)}${loops ? `, ${loops === B.length ? 'every time' : loops === 1 ? 'once' : loops + ' times'} by finding a loop that runs until the gas is gone` : ''}.`);
+  const reach = new Set<string>(); for (const w of B) for (const k of Object.keys(w.firstReach || {})) reach.add(k);
+  const said: string[] = [];
+  if (reach.has('create_succeeds')) said.push('made an empty account');
+  if (reach.has('external_call')) said.push('called out, sometimes to itself');
+  if (reach.has('write_survives')) said.push('remembered something for good');
+  if (reach.has('returns_data')) said.push('gave an answer');
+  if (said.length) bits.push(`Along the way its descendants ${said.length === 1 ? said[0] : said.slice(0, -1).join(', ') + ', and ' + said[said.length - 1]}.`);
+  bits.push('The walks were made by infrastructure and exist only on the lab\'s chain.');
+  return bits.join(' ');
+}
+
 const index = all.map((r) => ({
   id: r.id, status: r.status, program: r.program, by: r.installer, life: r.lifespan,
   clean: r.probes.some((p) => p.outcome === 'success'), dep: r.inputDependent, fut: r.future.length > 0, ret: r.probes.some((p) => p.returnDataLength > 0),
-  verdict: verdict(r), would: wouldHaveBeen(r), trace: traceLine(r), sib: siblings(r) || undefined,
+  verdict: verdict(r), would: wouldHaveBeen(r), trace: traceLine(r), sib: siblings(r) || undefined, walk: walks(r) || undefined,
 }));
 writeFileSync(join(rdir, 'index.json'), JSON.stringify({ installer: CONTRACT, chainId, generatedAt, summary, chunk: CHUNK, readings: index }, null, 0));
 const chunks = new Map<number, object[]>();

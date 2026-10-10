@@ -58,6 +58,16 @@ Metadata carries: name, description (what the lines are), image, `external_url` 
 | listing | id 20909 on marketplace V1, tx `0xa77bc70b107da57e583b75b024320ab1550b667e5699b1d7f86db421dcda67f1` (block 26,155,204): reserve 0.05 ETH, 24 h from first bid, 10% increments, 5-minute extension, receiver artist 100%, no referrer |
 | page | slopware.fun/e1 · Manifold Gallery https://gallery.manifold.xyz/listing?listingId=20909 |
 
+## Mainnet — E2 edition, 2026-10-10
+
+| | |
+|---|---|
+| image | Arweave `8Vz3GoUQ4zX5VTJZFRADQBAh26HAiK83Bg3Gf7mRg9Em` (6400 × 8384 px PNG, 199,459 bytes) |
+| metadata | Arweave `8bh9Yk3kKZyCpvBYWWC4c7sjdmE6P9XPt9NP8uSSPzwJ` |
+| mint | token 2 to the keeper, tx `0x7f21836bfb55ca25206874609687a4e8ab6e7f5fbfbc465086c8ee4501062400` |
+| listing | id 20931 on marketplace V1, tx `0xab4603af161db1aa7cea92fee47ef4f476a98ef422608eb95c5df30564fbb5c4` (block 26,162,625): reserve 0.05 ETH, 24 h from first bid, 10% increments, 5-minute extension, receiver artist 100%, no referrer |
+| page | slopware.fun/e2 · Manifold Gallery https://gallery.manifold.xyz/listing?listingId=20931 |
+
 ## E1 listing parameters
 
 Fixed by the artist 2026-10-08: **reserve 0.05 ETH**. Duration 24 hours from the first bid, 10% increments, 5-minute extension (the proposal, adopted at listing). Proceeds 100% to the artist's wallet; no referrer cut.

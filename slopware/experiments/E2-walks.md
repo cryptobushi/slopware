@@ -168,3 +168,7 @@ Anchored from the keeper in transaction `0xacb2614447721b5e959171c7e267301e0974b
 ### Note — 2026-10-09, during the run, before any trajectory was seen: STEPS left as signed
 
 A synthetic mock of STEPS (random climbs at an assumed rate, not data) was rendered with the frozen script to preview the picture's form. It showed that with 88 strips and one shared power-of-two axis, modest climbs will be faint. Two amendments were offered (taller strips; taller strips with a log₂ axis). The artist declined both and left STEPS exactly as signed. No E2 trajectory had been looked at. This note changes nothing.
+
+### The edition — 2026-10-10, after publication of the results above
+
+STEPS (E2) was minted by the keeper as token 2 of `0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664` ("SLOPWARE research editions"), image and metadata on Arweave (`ar://8Vz3GoUQ4zX5VTJZFRADQBAh26HAiK83Bg3Gf7mRg9Em`, `ar://8bh9Yk3kKZyCpvBYWWC4c7sjdmE6P9XPt9NP8uSSPzwJ`), mint tx `0x7f21836bfb55ca25206874609687a4e8ab6e7f5fbfbc465086c8ee4501062400`, and listed as Manifold marketplace listing 20931 (tx `0xab4603af161db1aa7cea92fee47ef4f476a98ef422608eb95c5df30564fbb5c4`, block 26,162,625) with a 0.05 ETH reserve and the artist as sole receiver, on the results page `slopware.fun/e2`. Constitution amendment 1 conditions 1–7 checked. The compute droplets were destroyed on 2026-10-10; the record lives on its volume and in the verified 2.79 GiB snapshot `slopware-e2-record-20261010`.
