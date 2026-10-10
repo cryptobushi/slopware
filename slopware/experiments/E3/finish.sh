@@ -6,6 +6,7 @@
 #   finish.sh seal       on the droplet: sha256 manifest of every record file; root hash; then fetch
 #   finish.sh fetch      copies home: manifest, root, parent summaries, logs
 #   finish.sh analyse    on the droplet: the pre-specified analysis and the descent/map artefacts; fetched here
+#   finish.sh positions  on the droplet: per-position non-neutral fractions from the placements (edition input); fetched here
 #   finish.sh snapshot   DigitalOcean snapshot of the record volume (kept; ~$0.06/GB/month)
 #   finish.sh teardown   destroy the droplet and the volume (asks for confirmation; requires a snapshot)
 set -euo pipefail
@@ -33,6 +34,11 @@ case "${1:-}" in
     RS root@"$IP":/opt/slopware/slopware/experiments/E3/summaries/ "$E3/summaries/"
     RS --include='*/' --include='summaries-*.jsonl' --include='endpoints-*.jsonl' --include='genomes.jsonl' --include='reproducibility.jsonl' --exclude='*' root@"$IP":/mnt/record/E3/record/ results/E3/record/
     echo "analysis and per-walk summaries fetched" ;;
+  positions)
+    RS scripts/e3_positions.py root@"$IP":/opt/slopware/scripts/
+    $SSH root@"$IP" 'cd /opt/slopware && python3 scripts/e3_positions.py slopware/experiments/E3 main > slopware/experiments/E3/summaries/positions.json'
+    RS root@"$IP":/opt/slopware/slopware/experiments/E3/summaries/positions.json "$E3/summaries/"
+    echo "positions fetched: $(python3 -c "import json;print(json.load(open('$E3/summaries/positions.json'))['genomes'])") genomes" ;;
   snapshot)
     VOL=$(doctl compute volume list --format ID,Name --no-header | awk '/slopware-e3-record/{print $1}')
     doctl compute volume snapshot "$VOL" --snapshot-name "slopware-e3-record-$(date -u +%Y%m%d)" --format ID,Name,Size 2>&1 | tail -2 ;;
@@ -45,5 +51,5 @@ case "${1:-}" in
     doctl compute droplet delete "$ID" --force && echo "droplet destroyed"
     sleep 10
     doctl compute volume delete "$VOL" --force && echo "volume destroyed (snapshot kept)" ;;
-  *) echo "usage: finish.sh seal|analyse|snapshot|teardown"; exit 1 ;;
+  *) echo "usage: finish.sh seal|fetch|analyse|positions|snapshot|teardown"; exit 1 ;;
 esac
