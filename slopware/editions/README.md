@@ -57,6 +57,7 @@ Metadata carries: name, description (what the lines are), image, `external_url` 
 | mint | token 1 to the keeper, tx `0x6cc817b5accf8dbfde0037ef3bdfbf7e5a5fbcbedfbf2d87281ef3bb9d365698` |
 | listing | id 20909 on marketplace V1, tx `0xa77bc70b107da57e583b75b024320ab1550b667e5699b1d7f86db421dcda67f1` (block 26,155,204): reserve 0.05 ETH, 24 h from first bid, 10% increments, 5-minute extension, receiver artist 100%, no referrer |
 | page | slopware.fun/e1 · Manifold Gallery https://gallery.manifold.xyz/listing?listingId=20909 |
+| settled | 2026-10-10 11:02 ET, two bidders, winning bid 0.06 ETH by `0xfAB22550fcD520A7eCED27414CD74Bc70a6ac1a9` (rpl.eth); finalized by the keeper in tx `0x7aee4685d4ca5fdce21512087b22e99b4004b598a4964805249fd384408c0437` (block 26,162,871); token 1 delivered to the winner, 0.06 ETH to the artist, the keeper paid gas only |
 
 ## Mainnet — E2 edition, 2026-10-10
 
