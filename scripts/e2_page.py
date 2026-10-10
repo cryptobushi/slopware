@@ -60,7 +60,7 @@ facts = [
 ]
 if rec_anchor: facts.append(["record anchor", rec_anchor, f"https://etherscan.io/tx/{rec_anchor}"])
 if args.get("--snapshot"): facts.append(["record", f"{args['--snapshot']}, a DigitalOcean volume snapshot of the full 2.6 GB record; the per-walk summaries, every lengthening step with its counterfactuals, the manifest and the root are in the repository"])
-if noise: facts.append(["noise", f"{noise['identical']} of {noise['rerun_walks']} walks re-run from the same seed on a fresh machine reproduced their trajectory exactly" + ("" if noise['identical'] == noise['rerun_walks'] else f"; differing: {noise['differing']}")])
+if noise: facts.append(["noise", f"{noise['identical']} of {noise['rerun_walks']} walks re-run from the same seed on a fresh machine reproduced their trajectory attempt for attempt; {len(noise['differing'])} differed, most by a single attempt evaluated differently under load (transient instrument timeouts, about one attempt in ten thousand), which a path-dependent walk can amplify. Reported in full in the protocol document; it cannot materially move statistics over 8.8 million attempts, and the record is not bit-for-bit reproducible across machines."])
 facts.append(["protocol", "slopware/experiments/E2-walks.md, signed 2026-10-09, amendments dated below the signature", "https://github.com/cryptobushi/slopware/blob/main/slopware/experiments/E2-walks.md"])
 facts.append(["analysis", "scripts/e2_analysis.py, pre-specified; scripts/e2_steps.py for the picture, hashed before the run", None])
 

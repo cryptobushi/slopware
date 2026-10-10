@@ -1,0 +1,21 @@
+{
+  "name": "STEPS (E2)",
+  "description": "SLOPWARE research edition 2, for experiment E2 (walks on the living). One strip per parent, 88 strips in parents.json order: the 42 collected and 46 fresh random programs from E1 that executed three or more instructions. In each strip, attempts run left to right (0 to 10,000) and instructions executed rise from the baseline to a shared axis ending at the smallest power of two above the longest run in the record, 131,072. The five neutral walks are faint grey; the five persistence walks are black, stepping up at every accepted lengthening step; a red mark where a walk first reached a behaviour the million-program study never showed; the parent's lifespan is a hairline. The rules and the axis were fixed and hashed before the run (E2 pre-registration §10) and the artist declined to change them after seeing a synthetic mock and before seeing any trajectory, so the picture is scaled by the record itself: nearly flat hairlines, cliffs where loops appeared, and a constellation of red. Generated from the sealed record by scripts/e2_steps.py. Minted by the keeper, the wallet that completes SLOPWARE's installations. It confers no rights over any program, release, receipt or experiment.",
+  "image": "__IMAGE_URI__",
+  "external_url": "https://slopware.fun/e2",
+  "attributes": [
+    { "trait_type": "series", "value": "SLOPWARE research editions" },
+    { "trait_type": "experiment", "value": "E2 walks on the living" },
+    { "trait_type": "parents", "value": "88" },
+    { "trait_type": "attempts", "value": "8,800,000" },
+    { "trait_type": "arweave image", "value": "__ARWEAVE_IMAGE__" },
+    { "trait_type": "record root (sha256)", "value": "15849149ca70177ef0a068a74b08134b757237a76be66b9f4e9de6b19b200552" },
+    { "trait_type": "pre-registration anchor", "value": "0xacb2614447721b5e959171c7e267301e0974be6d7cb691488d2578890ec85d7f" },
+    { "trait_type": "record anchor", "value": "0xefd700f6e43fdd68628861f09736010b495fc557d6d982390f8a686547cc4010" },
+    { "trait_type": "script keccak256", "value": "0xc94740859034805f4c8161078b423fa78f2b5c3f0f0a7c10c6a72abc73e40dac" },
+    { "trait_type": "world", "value": "v0" },
+    { "trait_type": "date", "value": "2026-10-10" },
+    { "trait_type": "print size", "value": "6400 × 8384 px" },
+    { "trait_type": "minted by", "value": "the keeper" }
+  ]
+}

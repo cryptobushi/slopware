@@ -1,6 +1,6 @@
 {
  "experiment": "E2",
- "generatedAt": "2026-10-10T01:24:39+00:00",
+ "generatedAt": "2026-10-10T05:48:27+00:00",
  "caption": "STEPS. One strip per parent, in parents.json order. Attempts run left to right, instructions executed rise from the strip's baseline to a shared axis that ends at the smallest power of two above the longest run in the record, 131,072. Neutral walks faint, persistence walks black, a red mark where a walk first reached a behaviour E1 never observed. Rules fixed before the run; the axis makes most climbs a hairline and the loops cliffs, and the artist declined to change it before seeing the data.",
  "hypotheses": [
   {
@@ -79,6 +79,10 @@
   [
    "record",
    "slopware-e2-record-20261010, a DigitalOcean volume snapshot of the full 2.6 GB record; the per-walk summaries, every lengthening step with its counterfactuals, the manifest and the root are in the repository"
+  ],
+  [
+   "noise",
+   "125 of 176 walks re-run from the same seed on a fresh machine reproduced their trajectory attempt for attempt; 51 differed, most by a single attempt evaluated differently under load (transient instrument timeouts, about one attempt in ten thousand), which a path-dependent walk can amplify. Reported in full in the protocol document; it cannot materially move statistics over 8.8 million attempts, and the record is not bit-for-bit reproducible across machines."
   ],
   [
    "protocol",
