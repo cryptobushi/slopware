@@ -1,7 +1,7 @@
 {
  "experiment": "E3",
  "instrument": "The instrument was exact on every pre-registered check: all 1,319 endpoints reproduced byte for byte on a second machine before any neighbourhood was evaluated, all 141 repeated neighbourhoods agreed exactly, and no placement failed.",
- "generatedAt": "2026-10-11T02:16:40+00:00",
+ "generatedAt": "2026-10-11T14:27:30+00:00",
  "caption": "SOMEWHERE ELSE. One row per parent, 88 rows in parents.json order. Left to right: the parent, then its first walk's neutral descendants at 8, 16, 32, 48 and 60 bytes' distance, each drawn as a walk from its bytes with THREADS' pen: faint, the whole program; black, the part it executes; red, three or more instructions. Beneath each, a bar of 64 cells, one per byte position, inked by the fraction of that position's 255 one-byte changes that alter what the program does. Every genome in a row does exactly the same thing. If neutral history changed nothing about what is reachable next, every bar in a row would be the same bar. Rules fixed and hashed before the run.",
  "hypotheses": [
   {
@@ -110,5 +110,22 @@
  ],
  "reproduce": "To check any number: fetch the snapshot or the per-genome summaries, run scripts/e3_analysis.py, and compare with results.json; to check the picture, run scripts/e3_positions.py, scripts/e3_rows.py and scripts/e3_somewhere.py on the record. The root hash above is the sha256 of the sorted sha256 manifest of every file in the record.",
  "anchorTx": "0xb24f764500dfac4d69df23942d95962d6f6033ca65d3de8af345d08c772c9a57",
- "edition": null
+ "edition": {
+  "text": "SOMEWHERE ELSE (E3) is the research edition for this experiment: one token, the picture above at print resolution, pinned to Arweave with metadata carrying the record root, both anchors, and the hash of the script that drew it. Its rules were fixed and hashed before the first attempt, and the artist saw only a synthetic mock before signing, so the bars are inked by the record's own fractions: in every row, five programs that do the same measured thing, each beneath a bar of the mutations that would change it. Minted by the keeper on the research editions contract, offered here by reserve auction. Proceeds go to the artist and fund the work. It confers no rights over any program, release, receipt or experiment.",
+  "note": "Reserve 0.05 ETH. The auction runs 24 hours from the first bid, 10% minimum increments, extended by five minutes for a bid in the last five. Settled by Manifold's marketplace contract; the keeper finalizes it when it ends. Contract 0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664, token 3, listing 20956.",
+  "gallery": "https://gallery.manifold.xyz/listing?listingId=20956",
+  "listing": {
+   "id": 20956,
+   "network": 1,
+   "marketplace": "0x3a3548e060be10c2614d0a4cb0c03cc9093fd799",
+   "rpc": "https://ethereum-rpc.publicnode.com"
+  },
+  "contract": "0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664",
+  "tokenId": 3,
+  "image": "ar://CJSdr3MaPMMDD7MHLP9g8UfSYipQUm9NB4q8xTL9kM39",
+  "metadata": "ar://ECjYK5NEmoG5XNGkmTaS4EqvhvFX9NtHUDB47NazHRJY",
+  "mintTx": "0x326babfd4bd88a5defed604c68aefe5c8964e02a8b61e058702341945b4c6e13",
+  "listingTx": "0xb64729977638b59a0cfc62c8bcc249f660670677d66d8180aba48fbbd8a89f04",
+  "listingBlock": 26169796
+ }
 }

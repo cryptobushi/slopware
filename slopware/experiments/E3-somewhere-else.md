@@ -156,3 +156,7 @@ Run 2026-10-10 15:41 UTC to 2026-10-11 00:42 UTC on one DigitalOcean c-32 drople
 ### Amendment 2 — 2026-10-11, record anchor
 
 The record root above was anchored from the keeper after sealing and before any result was published; `E3/record-anchor.txt` holds the message and the transaction. The edition is recorded below after publication, as E2's was.
+
+### The edition — 2026-10-11, after publication of the results above
+
+SOMEWHERE ELSE (E3) was minted by the keeper as token 3 of `0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664` ("SLOPWARE research editions"), image and metadata on Arweave (`ar://CJSdr3MaPMMDD7MHLP9g8UfSYipQUm9NB4q8xTL9kM39`, `ar://ECjYK5NEmoG5XNGkmTaS4EqvhvFX9NtHUDB47NazHRJY`), mint tx `0x326babfd4bd88a5defed604c68aefe5c8964e02a8b61e058702341945b4c6e13`, and listed as Manifold marketplace listing 20956 (tx `0xb64729977638b59a0cfc62c8bcc249f660670677d66d8180aba48fbbd8a89f04`, block 26,169,796) with a 0.05 ETH reserve and the artist as sole receiver, on the results page `slopware.fun/e3`. The image is the frozen rendering at print scale (2496 × 38496 px), unchanged from the rules hashed in the pre-registration anchor; the artist approved the image, the metadata and the results page before anything was pinned. Constitution amendment 1 conditions 1–7 checked. The compute droplet was destroyed on 2026-10-11 after the record was sealed, analysed and snapshotted; the record lives on its volume and in the verified 2.45 GiB snapshot `slopware-e3-record-20261011`.

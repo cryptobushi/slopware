@@ -1,0 +1,18 @@
+{
+  "text": "SOMEWHERE ELSE (E3) is the research edition for this experiment: one token, the picture above at print resolution, pinned to Arweave with metadata carrying the record root, both anchors, and the hash of the script that drew it. Its rules were fixed and hashed before the first attempt, and the artist saw only a synthetic mock before signing, so the bars are inked by the record's own fractions: in every row, five programs that do the same measured thing, each beneath a bar of the mutations that would change it. Minted by the keeper on the research editions contract, offered here by reserve auction. Proceeds go to the artist and fund the work. It confers no rights over any program, release, receipt or experiment.",
+  "note": "Reserve 0.05 ETH. The auction runs 24 hours from the first bid, 10% minimum increments, extended by five minutes for a bid in the last five. Settled by Manifold's marketplace contract; the keeper finalizes it when it ends. Contract 0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664, token 3, listing 20956.",
+  "gallery": "https://gallery.manifold.xyz/listing?listingId=20956",
+  "listing": {
+    "id": 20956,
+    "network": 1,
+    "marketplace": "0x3a3548e060be10c2614d0a4cb0c03cc9093fd799",
+    "rpc": "https://ethereum-rpc.publicnode.com"
+  },
+  "contract": "0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664",
+  "tokenId": 3,
+  "image": "ar://CJSdr3MaPMMDD7MHLP9g8UfSYipQUm9NB4q8xTL9kM39",
+  "metadata": "ar://ECjYK5NEmoG5XNGkmTaS4EqvhvFX9NtHUDB47NazHRJY",
+  "mintTx": "0x326babfd4bd88a5defed604c68aefe5c8964e02a8b61e058702341945b4c6e13",
+  "listingTx": "0xb64729977638b59a0cfc62c8bcc249f660670677d66d8180aba48fbbd8a89f04",
+  "listingBlock": 26169796
+}
