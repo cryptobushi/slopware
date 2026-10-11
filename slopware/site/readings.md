@@ -1,6 +1,6 @@
 # SLOPWARE — readings
 
-The lab's observations of every program SLOPWARE has installed, as of 2026-10-11 01:51 UTC: 926 releases read, 924 installed, 2 refused by Ethereum. Each installed program's sixty-four bytes were placed on a private copy of Ethereum and called five ways with every instruction traced. Observation, not record: the installer itself records nothing about behaviour. The siblings line comes from experiment E1 (https://slopware.fun/e1.md), the walks line from E2 (https://slopware.fun/e2.md), the descendants line from E3 (https://slopware.fun/e3.md).
+The lab's observations of every program SLOPWARE has installed, as of 2026-10-11 01:58 UTC: 926 releases read, 924 installed, 2 refused by Ethereum. Each installed program's sixty-four bytes were placed on a private copy of Ethereum and called five ways with every instruction traced. Observation, not record: the installer itself records nothing about behaviour. The siblings line comes from experiment E1 (https://slopware.fun/e1.md), the walks line from E2 (https://slopware.fun/e2.md), the descendants line from E3 (https://slopware.fun/e3.md).
 
 - 80.3% died on their first instruction (the million-program study found 78.4%)
 - longest run: 7 instructions
