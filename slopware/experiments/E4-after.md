@@ -1,0 +1,124 @@
+# E4 — After
+
+**Pre-registration, draft for hostile review. Not yet signed, not yet anchored. Nothing below is run until it is signed and anchored. No E4 proposal has been evaluated, no population exists, and none will until the implementation named in the Sign-off is frozen and hashed.**
+
+E4 follows E1 (`E1-neighbourhoods.md`), E2 (`E2-walks.md`) and E3 (`E3-somewhere-else.md`). E1 found that most one-byte changes leave a program's measured behaviour identical. E2 found that neutral space is traversable and that half of the lifespan improvements found under persistence selection were enabled by prior neutral substitutions. E3 found that neutral travel progressively rearranges which mutations are accessible next while the amount of adjacent variation stays approximately constant. E4 asks whether a quantity E3 already measured, frozen before any selection, predicts the response to selection: **does accessibility measured before selection predict what happens after selection begins?**
+
+E4 is designed in `E4-design.md` (three rounds of outside review and the artist's decisions, all dated 2026-10-11). This document makes that design executable, auditable and unambiguous. It introduces nothing the design notes did not fix. The predictor table `E4/predictors.json` was extracted from the sealed E3 record on 2026-10-11, before this document was written, and its hash is in §5.
+
+## 1. Question
+
+For 88 matched founder pairs, each a program *P* and a neutral descendant *N* with exactly the same measured behaviour but different bytes, E3 has already recorded the complete one-mutant neighbourhood of both. From that record a single number per founder is fixed: A1, the probability that one random single-byte proposal yields a finite child that runs longer. E4 starts identical population searches from *P* and from *N* under one disclosed selection rule and asks, across the 88 pairs, whether the difference in A1 predicts the difference in what the populations reach after 256 generations.
+
+The mechanism under test is stated mechanically and nowhere else: neutral history → a different genotype → a different one-mutant neighbourhood → possibly a different response to the same selection rule. Execution is deterministic; nothing remembers anything. The claim E4 can make, if the record supports it, is that an accessibility difference produced by these neutral histories predicted the later response under selection. It is not that neutral history caused adaptation; *P* and *N* were not assigned their histories at random.
+
+The important null is not "nothing evolves". It is: **neutral history, as measured by E3, does not predict subsequent selection outcomes.**
+
+## 2. Design in one paragraph
+
+From each of 176 founders (88 *P*, 88 *N*), 16 independent replicate populations of 64 individuals run for 256 generations under one rule: each generation, 64 proposals are made by choosing a parent slot uniformly and changing exactly one byte; proposals are evaluated from the same clean world state as E1–E3; the 64 fittest finite individuals among survivors and offspring continue, ties resolved by a seeded order; a program that runs out of gas after more than 32 instructions never continues. Fitness is the probe-A instruction count of a finite run. Generation 1 of every population is a sample from a neighbourhood E3 has already measured in full, and is checked against it. After the run, the per-pair difference in mean final log₂ best fitness is correlated with the per-pair difference in A1 across the 88 pairs. That correlation is the result.
+
+## 3. Hypotheses and pre-specified measurements
+
+Definitions are in §5; outcomes are listed in advance; none is "success".
+
+**Primary — prediction.** Spearman ρ across the 88 pairs between ΔA1 = A1(*N*) − A1(*P*) and ΔB = *b*₂₅₆(*N*) − *b*₂₅₆(*P*), where *b*₂₅₆ is the mean over the 16 replicates of log₂ best finite fitness at generation 256. Ties take average ranks. Uncertainty: 95% percentile bootstrap interval from 10,000 resamples of the 88 pairs with replacement; a resample with zero variance in either ranked variable has undefined ρ, is excluded from the interval and counted. Direction stated in advance: positive. **ρ = 0.3 is pre-specified as the smallest effect considered scientifically substantial.** It is an interpretive reference and not a success threshold: the result is the estimate with its interval, read against that reference.
+
+**Secondary — founder identity.** Do matched founders produce more different outcomes than replicate stochasticity alone? *S* = (mean over pairs of |ΔB|) ÷ (mean over pairs of the pooled within-founder standard deviation of *B*₂₅₆ over the 16 replicates). Null distribution: within each pair the 32 populations are relabelled *P*/*N* at random (16 each), 10,000 times; *S* is recomputed each time; the permutation p is reported with the observed *S*. Also reported: the number of pairs whose 16 *N*-populations all lie above or all below the 16 *P*-populations (null expectation 88 × 2/C(32,16)). If every pair's replicates agree exactly, the denominator is zero, *S* is undefined, and that absence of replicate variation is the reported result. A signed mean ΔB is not used: neutral history has no global direction. This test says whether founder identity matters, not whether E3 knew which way. A positive secondary with a null primary is outcome D below.
+
+**Tertiary — the prediction horizon.** ρ_g, the primary statistic recomputed at every generation *g* from 1 to 256, drawn as one trajectory with its 10,000-resample pair-bootstrap band and interpreted descriptively. No per-generation test and no derived "half-life". The prediction is expected to be most directly expressed early, because generation-1 proposals are sampled from the neighbourhood E3 measured; whether a finite population of 64 draws realises that expectation is itself empirical.
+
+**Also reported, pre-specified.** (a) Secondary predictors A2 (best accessible improvement) and A3 (neutral probability), each with its own ρ against ΔB; A4 (loop accessibility) was defined prospectively and is identically zero across all 176 founders in the frozen table, admits no correlation test, and that is reported. (b) Loop-class incidence per founder, per generation, descriptively. (c) Convergence: for each population the multiset of its 64 final survivors' signatures; total variation distance between populations, averaged over the 16 × 16 *P*–*N* population pairs within a pair and over the C(16,2) replicate pairs within each founder; the within-pair *P*–*N* mean reported beside the within-founder mean, per pair and overall with a pair bootstrap. (d) Strata: every statistic by parent lifespan (3; ≥ 4) and by set (genesis; control). (e) Leave-one-pair-out on the primary ρ. (f) Logical proposals, physical executions and cache hits.
+
+**Outcomes, written now.** "Adapt" means only that *B*₂₅₆ exceeds the founder's log₂ fitness.
+- **A.** Neither founder adapts. Unexpected given E2; the mechanics are examined and reported, not tuned.
+- **B.** Both adapt alike; the primary interval covers zero; founder identity does not exceed replicate noise. *E3 showed that neutral history changes immediate accessibility; E4 found that those differences do not measurably predict adaptation under this selection regime.* Reported with the observed interval; the synthetic simulations of the design notes expect intervals about 0.4 wide at 88 pairs, and the actual interval, not the simulation, says what magnitudes remain compatible with the record.
+- **C.** The sealed predictor is positively associated with the outcome, estimate and interval reported against ρ = 0.3, with the horizon showing how long E3's information lasts.
+- **D.** Founder identity matters but E3 does not predict which way: secondary positive, primary null. History acts through something the one-mutant neighbourhood does not measure.
+- **E.** Early prediction, then convergence: ρ_g positive early and gone by 256. The horizon is the result.
+- **F.** Anything else, reported descriptively against this list, primary test unchanged.
+
+## 4. Population: the 88 founder pairs
+
+**Parents.** The 88 E3 parents (`E2/parents.json`, sha256 `0df39d8a510a11de5f783ed575eadb1343e93f10f5f36aa5eefb887789260b01`): the E1 parents that executed three or more instructions, 42 genesis and 46 control. 66 run exactly three instructions.
+
+**Matched founders.** For parent *p*, *N* is E3's walk-0, target-60 endpoint, genomeId `E<p>.0.60` in `E3/summaries/neighbourhoods/main/summaries-*.jsonl`, chosen by E3's Hamming rule before any E3 result; all 88 exist. *P* and *N* have identical full frozen signatures by E3's neutral-walk acceptance rule, re-verified when E3 placed the endpoints for neighbourhood evaluation, and therefore identical fitness under §5.1. They differ in 60 of 64 bytes. The founder list with bytes, lifespans and E3 genome ids is `E4/founders.json`, generated by `scripts/e4_founders.py` from the E3 summaries and hashed in the Sign-off.
+
+**Reserved.** E3's walk-1 and walk-2 endpoints are not used and are reserved for an independent replication after E4.
+
+## 5. Definitions, frozen
+
+1. **Fitness (F2, the longest finite run).** For an instantiable program evaluated under §6: if probe A ends out of gas after more than 32 traced instructions, the program is in the **loop class** and has no fitness; otherwise its fitness is its probe-A instruction count. A finite program with count *k* ranks above one with count *j* iff *k* > *j*. A loop-class program never ranks above any finite program and never continues. The loop class is E2's frozen operational classification, kept for continuity; the name does not assert cycle detection, and a gas-expensive finite path that exhausts gas is also in the class. Disclosed: *we select for the longest finite run.* Reported as log₂(count).
+2. **Signature.** E1 §6, unchanged.
+3. **Proposal.** From a parent genome *g*: position *i* uniform in 0..63, value *v* uniform over the 255 bytes other than *g*[*i*]; 16,320 equally probable proposals. A proposal whose child begins with `0xEF` is **uninstantiable**: recorded, not evaluated, not a candidate, not replaced. Genome length is 64 bytes (constitution amendment 2, `ROADMAP.md` Part X-D; `E4/world-v0.json` records `genomeLength: 64`).
+4. **Population.** A multiset of 64 **individual slots**. Generation 0: 64 slots carrying the founder. Duplicate genomes may occupy several slots and each slot has its own reproductive weight.
+5. **Generation.** 64 proposals, proposal *s* (slot 0..63) from the parent in survivor slot `parentIndex(s)`; evaluation of each instantiable child (physical execution or cache, §5.8); then selection.
+6. **Selection.** Candidates are the 64 survivor slots and every finite offspring. Each candidate slot receives a **tie key** from the seeded stream (§5.7). Candidates sort by fitness descending, then tie key ascending; the first 64 become the next generation's slots in that order. Nothing is deduplicated before ranking. Founders are finite and survivors remain candidates, so at least 64 finite candidates always exist and the population is exactly 64 every generation. In one sentence: neutral mutations can enter through the random resolution of fitness ties; fitness-decreasing mutations cannot displace a fitter survivor; fitness-increasing mutations are preferentially retained.
+7. **Seeds, domain-separated.** The run seed string is `E4-2026-10-11`. For pair index *q* (0..87, parents.json order), founder *f* (0 = *P*, 1 = *N*), replicate *r* (0..15), generation *n* (1..256) and slot *s* (0..63), the stream value for a domain is `keccak256(utf8("E4-2026-10-11-" ‖ domain) ‖ uint32(q) ‖ uint8(f) ‖ uint32(r) ‖ uint32(n) ‖ uint32(s))`, big-endian fields. Domains and their use: `parent`: first 8 bytes as uint64 mod 64 → `parentIndex(s)`; `position`: first 8 bytes mod 64 → *i*; `value`: first 8 bytes mod 255 → *w*, then *v* = *w* if *w* < *g*[*i*] else *w* + 1; `tie`: the full 32 bytes, for offspring slot *s*; `tie-survivor`: the full 32 bytes with *s* the survivor slot, for survivors. The uint64 reductions have bias below 2⁻⁵⁶ and it is accepted and stated. One further domain, `calibration`, seeds the simulation of §7.5.
+8. **Cache.** A genotype has one phenotype under world v0 because every evaluation starts from the identical post-genesis state at the same address. The cache is global across the run and keyed on genome bytes; the world id, address and harness version are constants of the run written into the record header. A genotype executed once is looked up thereafter, never re-executed and never counted as a second measurement. The cache does not collapse slots or change reproductive weight. Logical proposals and physical executions are both counted.
+9. **Outcome statistics.** *B_g*(population) = log₂ of the best finite fitness among its 64 slots at generation *g*. *b_g*(founder) = mean of *B_g* over its 16 replicates. ΔB_g(pair) = *b_g*(*N*) − *b_g*(*P*). ΔB = ΔB₂₅₆.
+10. **Predictors, from the sealed E3 record.** `E4/predictors.json`, sha256 `810759357e401957e5d23738c6411eb90704aa4bf63445c8f3cf8d4c6251e907`, extracted 2026-10-11 by `scripts/e4_predictors.py` from a read-only copy of snapshot `slopware-e3-record-20261011` (ROOT `70471484778c5c91a8e7a299524af13d127bf491d70a0a62e7e53cd2628b8205`), before this document. Per founder, over its 16,320 proposals as E3 recorded them (16,319 placeable children and one uninstantiable): **A1** = *u*/16,320, *u* the placeable children that are finite and whose probe-A count exceeds the founder's; **A2** = log₂ of the largest finite child count; **A3** = children with the founder's exact signature / 16,320; **A4** = loop-class children / 16,320; **F_f**, the complete proposal distribution (finite counts by instruction count, loop, refused, harness failure); and the sha256 of the canonical child table (`pos,val,cls,sigH,life,loop` sorted by position and value). Properties, stated before the run: A1 over all 176 founders from 0.00055 to 0.01471, median 0.00662; ΔA1 from −65 to +61 children, median +1, 50 distinct values, 3 exact zeros, 46 positive, 39 negative; A4 = 0 for every founder; A2 from 2.32 to 3.70. The table changes nothing about which pairs run or how.
+
+## 6. Environment and the fixed harness
+
+World v0, frozen as in E1–E3 (`E4/world-v0.json`, a copy of `E3/world-v0.json` with the length parameter added), every genotype evaluated from the same post-genesis snapshot at the same address with the E3 harness code path (`harnessVersion e4-1`, identical placement, probes and signature to `e3-1`). **Instrument errors are not phenotypes:** a probe or receipt timeout, RPC error or instrumentation exception is retried up to three times from a fresh revert; a proposal that still fails is a **harness failure**, recorded, excluded from candidates, counted and listed; the slot is not refilled. A harness-failure rate above 0.1% of physical executions in any shard halts that shard for inspection.
+
+**Generation-1 deterministic check (halts on failure).** Generation-1 children are physically executed, never looked up. Before the run, each founder's canonical child table is read from a volume made from the E3 snapshot and its sha256 must equal the hash in `predictors.json`. For every generation-1 child, the E4 evaluation is compared with E3's row for that (founder, position, value): child bytes, signature hash, probe-A count, class, loop flag and the reach flags that enter fitness. Any disagreement halts the run until the cause is written down. This is instrument validity and is not statistical.
+
+**Reproducibility subset.** Replicate 0 of every founder (176 populations) is re-run from its seeds on a second machine after the run and before analysis. Expected: identical proposal streams, survivor populations, cache results and record, byte for byte. Anything else is an instrumentation failure to investigate before analysis.
+
+## 7. Analysis, pre-specified
+
+1. **Per population, per generation:** the 64 survivor slots (genome hash, fitness), the 64 proposals (parent slot, position, value, child hash, class, fitness, cache hit, harness failure, uninstantiable), loop-class events, *B_g*.
+2. **Primary:** ρ(ΔA1, ΔB₂₅₆) with average ranks; 10,000 pair-bootstrap resamples, percentile interval, undefined draws counted; leave-one-pair-out.
+3. **Secondary:** *S* and its 10,000-permutation null within pairs; the all-above/all-below count.
+4. **Tertiary:** ρ_g for *g* = 1..256 with the pair-bootstrap band.
+5. **Generation-1 calibration (reported, not a halt).** Generation 1 consists of 64 i.i.d. proposals from a frozen founder-specific distribution. *K*, the number of populations whose generation 1 contains at least one finite offspring longer than the founder, has *p_i* = 1 − (1 − *u_i*/16,320)^64 per population and is evaluated against its **exact Poisson-binomial** reference distribution over the 2,816 populations. *M*, the mean over populations of the exact mid-probability *m_i* = *F*(*x_i*⁻) + ½[*F*(*x_i*) − *F*(*x_i*⁻)] of the observed best generation-1 finite offspring fitness *x_i* under its founder's discrete best-of-64 distribution (non-finite outcomes ranked below every finite one, "no finite offspring" the lowest category), is evaluated against the **Monte Carlo** reference distribution produced by the pre-registered 10,000-run simulation of every population's generation 1 from the frozen *F_f* tables, seeded in the `calibration` domain. A value beyond the 1-in-10,000 tails of its reference triggers investigation before analysis; an ordinary tail event does not.
+6. **Convergence, loop incidence, A2, A3, strata, compute counts:** as §3.
+7. **Script:** `scripts/e4_analysis.py`, frozen at the signing commit; no analysis is added after the run without being labelled exploratory.
+
+## 8. Compute, record, stopping rule
+
+176 founders × 16 replicates × 256 generations × 64 proposals = 46,137,344 logical proposals, plus 176 founder evaluations; physical executions fewer by the cache. E3 placed 22,960,833 children in four hours on one c-32 droplet (about $9 all in); E4 is planned on the same class for about eight hours, about $20. Record: per-generation lines as §7.1 and the cache table, compact, roughly 5 GB; manifest, root hash and anchoring as E1 §8; snapshot and teardown as E2 and E3, the droplet destroyed only after the record is sealed, analysed and snapshotted. **Stopping rule (constitution decision 7):** every population runs exactly 256 generations and stops nowhere else; nothing is extended, restarted, pruned or re-seeded after any trajectory is seen. Halts for inspection: the generation-1 deterministic check, the harness-failure rate, the reproducibility subset. Never a stop: stagnation, convergence, loops, no adaptation, strong adaptation, any look of any result. Extinction cannot occur.
+
+## 9. Confounders named in advance
+
+- **Harness drift between E3 and E4**, which would void the prediction: the generation-1 deterministic check.
+- **Heavy-tailed fitness**: the loop class never continues; statistics on log₂ and ranks.
+- **Ties as the drift mechanism**: fully specified seeded tie keys over individual slots.
+- **Pseudo-replication**: the pair is the unit; replicates estimate within-founder spread only.
+- **Founder heterogeneity across pairs**: removed by the within-pair contrast; reported as a stratum.
+- **Small expected effects**: at sixty bytes *P* and *N* still share 92.5% of their exact non-neutral mutations; the design states its precision and reports the observed interval.
+- **Convergence by strong selection**: outcome E, a result.
+- **Analyst freedom**: one primary predictor, one outcome, one test, named here; no composite scores; A4 not replaced.
+
+## 10. The research edition: AFTER
+
+Under constitution amendment 1. **Title fixed 2026-10-11 from the synthetic mock, before any trajectory: AFTER.** Form fixed in `scripts/e4_mirror.py`, hashed in the Sign-off: the 88 pairs as an 8 × 11 grid in parents.json order, left to right then top to bottom, on a 1:1 square; in each cell generations run from the left edge (0) to the right edge (256), the pair's shared generation-0 fitness is the horizontal centreline, the 16 *P*-founded replicates are drawn upward and the 16 *N*-founded downward, one hairline each, height log₂ of best finite fitness, a red mark at the first generation a replicate produced a loop-class offspring. **A pre-registered data-dependent global scale:** the smallest whole number of doublings at or above the largest rise anywhere in the sealed record; the rule is frozen now, the record determines the number, every cell uses it, nothing is clipped or individually autoscaled. Master 6144 × 6144 px, the edition image. An elongated inspection render (one strip per pair, 1680 × 51,624 px, `--strip`) may sit in the scientific record and is not a second artwork. The picture is 88 small mirrors: empty cells for no adaptation, symmetry for alike response, asymmetry for different response, a shape that changes left to right for divergence then convergence. Minted, listed and finalized by the keeper as THREADS, STEPS and SOMEWHERE ELSE were; reserve set by the artist at listing. The rendering does not change after E4 is seen, and the work is not renamed because of the result.
+
+## 11. What must not happen
+
+- No founder is chosen, kept or dropped by anything but the E3 rule. No proposal is evaluated before signing and anchoring.
+- Nothing is rewarded but the longest finite run. No CREATE, CALL, self-inspection, novelty or "life" enters fitness.
+- No crossover, no AI-guided mutation, no changing environment, no second objective, no length change.
+- No walk-1 or walk-2 endpoint is used.
+- Nothing is placed on a public chain; the installer is not touched.
+- No trajectory is looked at before all 2,816 populations have finished, except by the halting checks of §6, which read instrument fields only.
+
+## 12. Publication
+
+As E1–E3: results under a dated heading here; a static page at `slopware.fun/e4` with a Markdown mirror, stating the three temporal regions (generation 0 known, generation 1 mapped in advance, generation 2 onward unmapped) and the primary estimate with its interval first; `llms.txt` updated; one line per genesis parent on the readings page; vocabulary as the design notes §13: program, founder, population, selection rule, finite run, loop class, accessibility; not life, organism, evolvability, open-ended evolution, and adaptation only in the operational sense of §3.
+
+## 13. After E4
+
+If the primary association is present, the walk-1 and walk-2 endpoints are the pre-specified independent replication: the same design from different neutral histories of the same parents. If it is absent, that is where E3's consequence ends under this regime, and the length question of amendment 2 is open for the next experiment on its own terms. Either way nothing here is extended.
+
+## Sign-off
+
+**Chronology.** Design notes written, reviewed three times and approved 2026-10-11; predictor table extracted 2026-10-11 from the sealed E3 record (snapshot copy destroyed afterward, original untouched); this draft written 2026-10-11 after approval. Implementation (`src/e4.ts`), analysis (`scripts/e4_analysis.py`), founders list (`scripts/e4_founders.py` → `E4/founders.json`) and the renderer's strip mode are written after this draft and before signing; a smoke test on two pairs with a non-run seed string is run and disclosed here before signing, its record kept out of the E4 record.
+
+**Hostile review.** Once, of this document, for contradictions, underspecified implementation details, accidental analyst freedom and inconsistencies with `E4-design.md`; its findings and the changes they caused are recorded here before signing.
+
+**Signing candidate.** To be filled at the signing commit: keccak256 of `src/e4.ts`, `scripts/e4_analysis.py`, `scripts/e4_mirror.py`, `scripts/e4_founders.py`, `scripts/e4_predictors.py`; sha256 of `E4/predictors.json` (`810759357e401957e5d23738c6411eb90704aa4bf63445c8f3cf8d4c6251e907`), `E4/founders.json`, `E4/world-v0.json`, `E2/parents.json` (`0df39d8a510a11de5f783ed575eadb1343e93f10f5f36aa5eefb887789260b01`).
+
+**Signature.** *Not yet signed.* When the artist signs: the question, the 88 pairs and their founders, the fitness, the proposal operator, the multiset population and its selection rule with seeded ties, the seeds, the cache, the harness and its checks, the primary, secondary and tertiary analyses with their uncertainty procedures, the calibration, the outcomes, the compute and stopping rule, the edition's title, form and scale rule, constitution amendment 2, and the frozen files named above are fixed. Anything changed after that line is a dated amendment below it. The anchor transaction is recorded in Amendment 1.

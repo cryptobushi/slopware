@@ -779,6 +779,16 @@ A methodological rule, recorded so that it is not forgotten when the catalogue i
 
 **In one line.** The catalogue is continuous; experiments are snapshots. A program's birth block is part of its experimental history. Programs born after an experiment's cutoff remain untested material for later pre-registered work. No historical cohort is permanently privileged.
 
+## Part X-D — Constitution amendment 2 (2026-10-11): genotype length for the first population experiment
+
+Decision 2 of version 1 fixed descendant length at 64 bytes for the neighbourhoods experiment only and expires when the first population experiment is designed, which must publish its length rule as a world parameter. E4 (`experiments/E4-after.md`) is that experiment, and its length rule is:
+
+**Genotype length is fixed at 64 bytes for E4.** Reason, and the only reason: E4's primary predictor is E3's exhaustive one-mutant neighbourhood of each founder, measured at fixed length over the 16,320 single-byte substitutions. E4 tests whether that frozen measurement predicts the response to selection. Insertion, deletion or duplication would introduce mutation classes that E3 never measured, and the prospective E3 → E4 test would no longer be about the measured quantity. Fixed length is therefore a requirement of the prediction, not a convenience, and not a judgement that length should stay fixed. The world parameter is recorded in `E4/world-v0.json` as `genomeLength: 64`.
+
+Length change is deferred, not denied. A later experiment that is not built on a fixed-length predictor must decide its own length rule as a world parameter under this same requirement to publish it, and the original concern of decision 2, that permanent fixed length designs the organism by omission, stands.
+
+Proposed 2026-10-11 from the E4 design notes (`experiments/E4-design.md` §5, §15); ratified by the artist at the signing of the E4 pre-registration, whose sign-off cites this amendment.
+
 ## Part X — Decisions needed now, as originally posed (expensive or impossible to reverse)
 
 1. **Genotype identity = `keccak256(runtime bytes)`.** Already the on-chain checksum. Adopt. Consequence: identical bytes born twice are one genotype with two genesis events.

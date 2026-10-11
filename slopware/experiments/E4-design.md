@@ -1,6 +1,6 @@
 # E4 — design notes, before the pre-registration
 
-*2026-10-11, revised the same day after three rounds of outside review. This is a design document, not a pre-registration. Nothing here is frozen, nothing has run, no seed, hash or anchor exists. The pre-registration will be a separate document written from these notes after the artist's decisions, and only that document is signed and anchored.*
+*2026-10-11, revised the same day after three rounds of outside review, then approved by the artist the same day (§15). This is the design record, not the pre-registration. The pre-registration is `E4-after.md`, written from these notes and from the frozen decisions in §15; only that document is signed and anchored. Nothing has run.*
 
 ## 0. The question, and the series
 
@@ -74,7 +74,7 @@ Candidates and failure modes (unchanged from the first draft, summarised): raw i
 
 **Stochastic calibration (reported, not a halt).** Because E3 holds every founder's complete one-mutant fitness distribution *F_f*, the distribution of any generation-1 statistic under 64 independent draws is known exactly before E4 runs. Two statistics are frozen now:
 - *K*, the number of populations whose generation 1 contains at least one finite offspring longer than the founder. Population *i* has *p_i* = 1 − (1 − *u_i*/16,320)^64 with *u_i* from the predictor table, and *K* is **Poisson-binomial** over {*p_i*}, not binomial; its exact distribution is computed from the sealed table.
-- the best generation-1 finite offspring fitness per population, *X_i*. Its exact distribution under 64 independent draws from the founder's complete proposal distribution *F_f* (§8: 16,319 recorded placeable outcomes plus one uninstantiable, 16,320 equally probable, non-finite outcomes ranked below every finite one, "no finite offspring" the lowest category) is discrete: P(*X* ≤ *k*) = *F_f*(*k*)^64. Because it is discrete, ordinary CDF-transformed values are not uniform, so the calibration statistic is defined directly: *m_i* = *F*(*x_i*⁻) + ½[*F*(*x_i*) − *F*(*x_i*⁻)], the exact mid-probability of the observed value under its own founder's distribution, and the frozen aggregate is *M* = mean of *m_i* over all populations. Its null distribution is obtained by 10,000 simulated runs of every population's generation 1 from the frozen *F_f* tables, seeded and recorded. Observed *M* is reported against that distribution. Generation 1 is then literally 64 i.i.d. draws from a frozen distribution, and the check uses no approximation.
+- the best generation-1 finite offspring fitness per population, *X_i*. Its exact distribution under 64 independent draws from the founder's complete proposal distribution *F_f* (§8: 16,319 recorded placeable outcomes plus one uninstantiable, 16,320 equally probable, non-finite outcomes ranked below every finite one, "no finite offspring" the lowest category) is discrete: P(*X* ≤ *k*) = *F_f*(*k*)^64. Because it is discrete, ordinary CDF-transformed values are not uniform, so the calibration statistic is defined directly: *m_i* = *F*(*x_i*⁻) + ½[*F*(*x_i*) − *F*(*x_i*⁻)], the exact mid-probability of the observed value under its own founder's distribution, and the frozen aggregate is *M* = mean of *m_i* over all populations. Its null distribution is obtained by 10,000 simulated runs of every population's generation 1 from the frozen *F_f* tables, seeded and recorded. Generation 1 consists of 64 i.i.d. proposals from a frozen founder-specific distribution. *K* is evaluated against its exact Poisson-binomial reference distribution; *M* is evaluated against the Monte Carlo reference distribution produced by the pre-registered 10,000-run calibration simulation.
 Both are reported against their exact sampling distributions. An ordinary tail event is not a halt: a correct experiment lands outside a 95% interval one time in twenty. A pre-registered stringent criterion (for example *K* beyond the 1-in-10,000 tails of its exact distribution) triggers investigation before analysis, and even then the first question is the instrument, since the deterministic check will already have passed or failed.
 
 ## 7. Inference
@@ -165,7 +165,7 @@ The work uses a normal mintable aspect ratio rather than one long strip. The 88 
 
 Within each cell, generations run left to right. The pair's shared generation-0 fitness is the horizontal centreline. The 16 *P*-founded replicate trajectories extend upward from that line and the 16 *N*-founded replicate trajectories downward, one hairline per replicate. Height is log₂ of best finite fitness. A red mark records the first generation in which a replicate produces a loop-class offspring.
 
-The vertical scale is global across the entire work: one doubling occupies the same distance in every cell. No cell is autoscaled. The room each cell holds follows STEPS' axis rule: the smallest whole number of doublings at or above the largest rise anywhere in the record, identical in every cell, so the record sets the scale, nothing is clipped, and a quiet record gives a quiet picture. The horizontal scale is likewise identical: generation 0 is the left edge and generation 256 the right edge of every cell.
+The vertical scale is a pre-registered data-dependent global scale: the smallest whole number of doublings at or above the largest rise anywhere in the sealed record. The rule is frozen before execution; the record determines the resulting numerical scale; every cell then uses that same scale. One doubling occupies the same distance in every cell. Nothing is clipped or individually autoscaled, and a quiet record gives a quiet picture. The horizontal scale is likewise identical: generation 0 is the left edge and generation 256 the right edge of every cell.
 
 The grid is therefore 88 small mirrors.
 
@@ -175,7 +175,7 @@ The grid geometry, ordering, scales, orientation, line weights, loop mark and ma
 
 The master artwork is rendered at a standard mintable aspect ratio. Recommended format: **1:1 square**. The scientific record may additionally contain a larger lossless render for inspection, but the edition itself is the square composition; the inspection render is not a second artwork.
 
-A draft renderer using synthetic trajectories is produced before the run (`scripts/e4_mirror.py --mock`, exercising no adaptation, identical adaptation, early divergence then convergence, persistent divergence, one extreme finite runner and dense overlap). The artist chooses the title from that synthetic mock before seeing any E4 trajectory. After the run only the frozen data are substituted into the frozen renderer.
+A draft renderer using synthetic trajectories is produced before the run (`scripts/e4_mirror.py --mock`, exercising no adaptation, identical adaptation, early divergence then convergence, persistent divergence, one extreme finite runner and dense overlap). The artist chose the title from that synthetic mock on 2026-10-11, before any E4 trajectory exists: **AFTER**. The edition master is the 6144 × 6144 px square; an elongated inspection render (1680 × 51,624 px, one strip per pair) may sit in the scientific record and is not a second artwork. After the run only the frozen data are substituted into the frozen renderer.
 
 ## 13. Vocabulary
 
@@ -195,3 +195,21 @@ Program, genotype, founder, population, generation, selection rule, fitness as �
 10. Sign.
 11. Anchor.
 12. Run once.
+
+## 15. Frozen by the artist, 2026-10-11
+
+Approved after the third review, before any pre-registration text and before any E4 code. Not to be changed by anything seen after this point.
+
+1. Fitness F2: the longest finite run, no cap.
+2. Population size *N* = 64.
+3. Generations *G* = 256.
+4. Replicates *R* = 16 per founder.
+5. Founder outcome statistic: the mean of log₂ best finite fitness across the 16 replicates.
+6. Scope: the core matched-pair experiment only.
+7. E3 walks 1 and 2 untouched, reserved for a later independent replication.
+8. Genome length fixed at 64 bytes for E4, by constitutional amendment 2 (`ROADMAP.md`, Part X-D): variable length would introduce mutation classes absent from E3's frozen predictor.
+9. ρ = 0.3 as the smallest effect considered scientifically substantial, an interpretive reference and not a binary threshold.
+10. Artwork: the square 8 × 11 mirror composition, 88 pairs in parents.json order, *P* upward and *N* downward, the pre-registered data-dependent global scale. Title **AFTER**. Master 6144 × 6144 px.
+11. Primary analysis: Spearman(ΔA1, ΔB₂₅₆) across the 88 founder pairs.
+
+Not to be done: another arm; walks 1 or 2; unrelated controls; the distance series; a change or cap to fitness; a change to A1; a composite predictor; pair selection on ΔA1; a change to *R* after seeing trajectories; replacing Spearman; promoting A2 or A3 if A1 performs poorly; replacing A4; changing the artwork's scale or layout after seeing E4; renaming AFTER because of the result.
