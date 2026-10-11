@@ -213,3 +213,11 @@ Approved after the third review, before any pre-registration text and before any
 11. Primary analysis: Spearman(ΔA1, ΔB₂₅₆) across the 88 founder pairs.
 
 Not to be done: another arm; walks 1 or 2; unrelated controls; the distance series; a change or cap to fitness; a change to A1; a composite predictor; pair selection on ΔA1; a change to *R* after seeing trajectories; replacing Spearman; promoting A2 or A3 if A1 performs poorly; replacing A4; changing the artwork's scale or layout after seeing E4; renaming AFTER because of the result.
+
+## 16. Addendum, 2026-10-11, after the hostile review of the pre-registration
+
+The pre-registration (`E4-after.md`) departs from two sentences of these notes, both for implementation reasons found in the hostile review, neither touching §15:
+- §1 said the cache is global across the run. Workers are separate processes; the cache is per worker, a genotype executed in two workers is executed twice, and physical executions are counted per worker and summed. Nothing about reproductive weight or measurement changes.
+- §8 said the predictor table also carries E3's pair distances. `predictors.json` was sealed without them; *D*_sig per pair is in a separate file, `E4/pair-distances.json`, computed from E3's published histograms and reported descriptively; Jaccard(*M*) per pair lives only in the E3 record and is not reported in E4.
+The review's other findings (generation-1 caching semantics, smoke-test carve-out, binary outcome rules, degenerate ρ, seeded resampling with shared index sets, the *S* definition, tie-key collisions, halt semantics, the scale rule at zero rise, and wording) are specification added in the pre-registration, not changes to the design.
+

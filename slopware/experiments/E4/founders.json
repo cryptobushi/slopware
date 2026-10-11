@@ -10,11 +10,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P0",
-    "bytes": "0x7c1a36a17db4a40e1bd8eebcd85ecbf1a7758df89ce6efa783917d41638c38e43479923ea3904833c49032e1c16d735b657d147d5ed2fed8a2e1d73776149996"
+    "bytes": "0x7c1a36a17db4a40e1bd8eebcd85ecbf1a7758df89ce6efa783917d41638c38e43479923ea3904833c49032e1c16d735b657d147d5ed2fed8a2e1d73776149996",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E0.0.60",
     "bytes": "0x7cd0a53b52551b3e6478ef15fa93ad0480757acb035cabc67fc55923a74b38df03ff866c197e66484f86a2bcf35f97022d7dfd4503210978a4cf77d1996585ae",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -26,11 +28,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P1",
-    "bytes": "0x3238f1e0ee361800ed57ef29c96cfef5327c1da9c29e636656a61f14bc0b58c9b9acc80454a906104fc7050a28ba032b436c30a6e667c0f197577b1bc2ea85c8"
+    "bytes": "0x3238f1e0ee361800ed57ef29c96cfef5327c1da9c29e636656a61f14bc0b58c9b9acc80454a906104fc7050a28ba032b436c30a6e667c0f197577b1bc2ea85c8",
+    "signature": "stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E1.0.60",
     "bytes": "0x3242f10882e57f4619082d8378b15950b6f29f7a0b4279d2510899fbe691e13113a2d99908d64c3a3eef3d19fe90e80b7e943045e6e13f01684ef27e8c59ef96",
+    "signature": "stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -42,11 +46,13 @@
    "founderLife": 5,
    "P": {
     "genomeId": "P2",
-    "bytes": "0x4a5b713036eabb68643dc68ff6bcfdc6b5c1bbc348749331ece59542b3db089dce7fbb98476d048c478a38a6d4030bef86848826eaf9b53e126210c6f4031a20"
+    "bytes": "0x4a5b713036eabb68643dc68ff6bcfdc6b5c1bbc348749331ece59542b3db089dce7fbb98476d048c478a38a6d4030bef86848826eaf9b53e126210c6f4031a20",
+    "signature": "invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E2.0.60",
     "bytes": "0x4a5b7110c92a4906c48d086c3218de0d8316514f365feba1ff770427ae544c1e1a8359fb10f47c7a7df8f7f4e51634c20858aac13af96e8f89f59833478a35d2",
+    "signature": "invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -58,11 +64,13 @@
    "founderLife": 4,
    "P": {
     "genomeId": "P3",
-    "bytes": "0x7f08868bdd3ca60103d6fd67d867a0358907c687ec8243a780beea56575ec624e4325a9f797e4271eaea202492f21795b711228961f3923510d3a3022b08b700"
+    "bytes": "0x7f08868bdd3ca60103d6fd67d867a0358907c687ec8243a780beea56575ec624e4325a9f797e4271eaea202492f21795b711228961f3923510d3a3022b08b700",
+    "signature": "stack_underflow|4|SWAP16|0||0|0|0|0|0||stack_underflow|4|SWAP16|0||0|0|0|0|0||stack_underflow|4|SWAP16|0||0|0|0|0|0||stack_underflow|4|SWAP16|0||0|0|0|0|0||stack_underflow|4|SWAP16|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E3.0.60",
     "bytes": "0x7fd9cc17ca41c893ac467c9ef8bc3e8d9f80927c733cd12973eef67da85932ea00325a9f44965586ceabc2203d10417f2edd9dca09d241af5af08e17fd101835",
+    "signature": "stack_underflow|4|SWAP16|0||0|0|0|0|0||stack_underflow|4|SWAP16|0||0|0|0|0|0||stack_underflow|4|SWAP16|0||0|0|0|0|0||stack_underflow|4|SWAP16|0||0|0|0|0|0||stack_underflow|4|SWAP16|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -74,11 +82,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P4",
-    "bytes": "0x596abe6442ebef5008135a0d36b4201a69dccb308d4c3e77d98db13b2ef944d5ef09cbb7ffed47385b2dfcf8630eb702a5839a76481408ff9e84075b5cecb47a"
+    "bytes": "0x596abe6442ebef5008135a0d36b4201a69dccb308d4c3e77d98db13b2ef944d5ef09cbb7ffed47385b2dfcf8630eb702a5839a76481408ff9e84075b5cecb47a",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E4.0.60",
     "bytes": "0x5967314b36c6867406ea25255b51f8d4a2bd9a23df4ccb50f15f97ab1a0ca3576068199243a0c7386e59ed1e395b9b8fd0163f505f7e64b49edaba4cae29e3e7",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -90,11 +100,13 @@
    "founderLife": 4,
    "P": {
     "genomeId": "P5",
-    "bytes": "0x657314abe663933f49af70f17c55b34ee16eefcb4f84816882bc07cc17549be70959ecb9cbf8e4eceb5c5ca13a2fae958d554b1837ca6dd31d1173a74f204db1"
+    "bytes": "0x657314abe663933f49af70f17c55b34ee16eefcb4f84816882bc07cc17549be70959ecb9cbf8e4eceb5c5ca13a2fae958d554b1837ca6dd31d1173a74f204db1",
+    "signature": "invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E5.0.60",
     "bytes": "0x65b1de52ab04cc3f51d52ce147e83a10c5c6ea9be82ecfeb82690c2916d7d6abd32eb0c7cb2169e7642a13b92e059efa95f5191e61e367d2405b79dfe84cedaa",
+    "signature": "invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -106,11 +118,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P6",
-    "bytes": "0x7e14c554b7bf24a4ee3600280f03042edf1e1bb2c0fd23b49e02294dda84b93f44a40d6bcb61206de391644c3e1221048cfd5dbaa3db9a3d3e2f5ea18258c89c"
+    "bytes": "0x7e14c554b7bf24a4ee3600280f03042edf1e1bb2c0fd23b49e02294dda84b93f44a40d6bcb61206de391644c3e1221048cfd5dbaa3db9a3d3e2f5ea18258c89c",
+    "signature": "invalid_opcode|3|LOG4|0||0|0|0|0|0||invalid_opcode|3|LOG4|0||0|0|0|0|0||invalid_opcode|3|LOG4|0||0|0|0|0|0||invalid_opcode|3|LOG4|0||0|0|0|0|0||invalid_opcode|3|LOG4|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E6.0.60",
     "bytes": "0x7e2991c327cde7f9ea782e1a4da5a2d301441d7aa3b2c2874d8311a8be2b7abe44a423fb4180dc1c4f08a0274c9ec45172735d5dbf8659926952c73de7c01b19",
+    "signature": "invalid_opcode|3|LOG4|0||0|0|0|0|0||invalid_opcode|3|LOG4|0||0|0|0|0|0||invalid_opcode|3|LOG4|0||0|0|0|0|0||invalid_opcode|3|LOG4|0||0|0|0|0|0||invalid_opcode|3|LOG4|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -122,11 +136,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P7",
-    "bytes": "0x74108498760199ef4537e3544677ee3ac2292e6b268149f74aefc0ee3de3f481c7653ef4cbd53f0c2dd676dafd912b5918359d0482841e844112d17f22cfe227"
+    "bytes": "0x74108498760199ef4537e3544677ee3ac2292e6b268149f74aefc0ee3de3f481c7653ef4cbd53f0c2dd676dafd912b5918359d0482841e844112d17f22cfe227",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E7.0.60",
     "bytes": "0x74e9b6cfc40cf93ef008d7bf6d006cde3e293f3c5e5642eb5a6ac0694b1db56d14aa6b3899c76a00dace7fefa9412d27412b096f80f22776b614e7cfa7cf015b",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -138,11 +154,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P8",
-    "bytes": "0x36582b4d4eb5e1b876c1b1842cf043b911509a8b7fa64016427057a18c9abdd197fbc370258dcddc204ca6510acbf03974f7a35da32e9fcc89966a0ae63cb7c0"
+    "bytes": "0x36582b4d4eb5e1b876c1b1842cf043b911509a8b7fa64016427057a18c9abdd197fbc370258dcddc204ca6510acbf03974f7a35da32e9fcc89966a0ae63cb7c0",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E8.0.60",
     "bytes": "0x36462ba83a0bde8fa6fd1a89561169d9c6752370218f15658c0367f973a0442eb2d15cee8754e07f204c73b8e2c006a985e1d780791f6a1da71a2aa60938c35b",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -154,11 +172,13 @@
    "founderLife": 4,
    "P": {
     "genomeId": "P9",
-    "bytes": "0x73e17f7c0c401a2206015683bc01778cb77cb58607619f7861b80b84df55d8d6480222e6d9ee9170b75e414b4b99f29747ff5947782ea461ffdc0b64f04bf93a"
+    "bytes": "0x73e17f7c0c401a2206015683bc01778cb77cb58607619f7861b80b84df55d8d6480222e6d9ee9170b75e414b4b99f29747ff5947782ea461ffdc0b64f04bf93a",
+    "signature": "stack_underflow|4|DUP5|0||0|0|0|0|0||stack_underflow|4|DUP5|0||0|0|0|0|0||stack_underflow|4|DUP5|0||0|0|0|0|0||stack_underflow|4|DUP5|0||0|0|0|0|0||stack_underflow|4|DUP5|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E9.0.60",
     "bytes": "0x736593813428cda8569021b1fc52630faa6ae1940c61cc6361064b84ee8097ac82dcf871e829167503d868df7aaf2409784f4d0388d200a05f435a242ae8eaf0",
+    "signature": "stack_underflow|4|DUP5|0||0|0|0|0|0||stack_underflow|4|DUP5|0||0|0|0|0|0||stack_underflow|4|DUP5|0||0|0|0|0|0||stack_underflow|4|DUP5|0||0|0|0|0|0||stack_underflow|4|DUP5|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -170,11 +190,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P10",
-    "bytes": "0x583a919a01431f8d590e20bd173ae60bde5b7ceaeb09626f0937be1642bafe6ea0d86da7760cdabbdb1227885347d9f499de1aaf999e6ea5299aa2162a562d9b"
+    "bytes": "0x583a919a01431f8d590e20bd173ae60bde5b7ceaeb09626f0937be1642bafe6ea0d86da7760cdabbdb1227885347d9f499de1aaf999e6ea5299aa2162a562d9b",
+    "signature": "stack_underflow|3|SWAP2|0||0|0|0|0|0||stack_underflow|3|SWAP2|0||0|0|0|0|0||stack_underflow|3|SWAP2|0||0|0|0|0|0||stack_underflow|3|SWAP2|0||0|0|0|0|0||stack_underflow|3|SWAP2|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E10.0.60",
     "bytes": "0x583a9153dcfcc89b8b7c4b28358bda2ea64dafc3eb9e545e599d36e3cd837dc4a2c2e9ca5eaa339ff9b8a381ec702bb117ab399f4ec755260fc5035a51cbd96f",
+    "signature": "stack_underflow|3|SWAP2|0||0|0|0|0|0||stack_underflow|3|SWAP2|0||0|0|0|0|0||stack_underflow|3|SWAP2|0||0|0|0|0|0||stack_underflow|3|SWAP2|0||0|0|0|0|0||stack_underflow|3|SWAP2|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -186,11 +208,13 @@
    "founderLife": 4,
    "P": {
     "genomeId": "P11",
-    "bytes": "0x4265b8c02f80aec755ac5ad9bed8ef60cff86c61a0928b433baaf1ca352a1408b47e587d44164567c1fc5cd901be614cf630959975dca63132dc7aff1e7d857d"
+    "bytes": "0x4265b8c02f80aec755ac5ad9bed8ef60cff86c61a0928b433baaf1ca352a1408b47e587d44164567c1fc5cd901be614cf630959975dca63132dc7aff1e7d857d",
+    "signature": "invalid_opcode|4|Unknown|0||1|0|0|0|0||invalid_opcode|4|Unknown|0||1|0|0|0|0||invalid_opcode|4|Unknown|0||1|0|0|0|0||invalid_opcode|4|Unknown|0||1|0|0|0|0||invalid_opcode|4|Unknown|0||1|0|0|0|0"
    },
    "N": {
     "genomeId": "E11.0.60",
     "bytes": "0x42659bdae312ef6f55f8dbd93ddcbe41ce08f8844c1086d12d09fcaa885785812d882e078e499055d463f37c640953da16fcb4049dd11d2975e34e4324d5d513",
+    "signature": "invalid_opcode|4|Unknown|0||1|0|0|0|0||invalid_opcode|4|Unknown|0||1|0|0|0|0||invalid_opcode|4|Unknown|0||1|0|0|0|0||invalid_opcode|4|Unknown|0||1|0|0|0|0||invalid_opcode|4|Unknown|0||1|0|0|0|0",
     "hamming": 60
    }
   },
@@ -202,11 +226,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P12",
-    "bytes": "0x366282b0a1d3cbf9dc319b6bd39f4be78782cbeb6ab220049b9245e8be3d249d0f74d927480df64a3d8f14ef19225f62159671959a8ee22d05ead033fd9ebe3b"
+    "bytes": "0x366282b0a1d3cbf9dc319b6bd39f4be78782cbeb6ab220049b9245e8be3d249d0f74d927480df64a3d8f14ef19225f62159671959a8ee22d05ead033fd9ebe3b",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E12.0.60",
     "bytes": "0x5962be4f9ad36f496a1be5a281a4db0bd05d58b03497e52387286ccd31abde857753d92d9e0de6593ba2f53f7dea60b23831a38a6a82c2a4cebd81e55da5bacb",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -218,11 +244,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P13",
-    "bytes": "0x64de085e7ace50b8a25ae04d7454dba2a24a93d25338b6b9d3b8a1a02ec226c988ea52bb806c1bf7cf35314c16471cce5da3162e780fd65bbab126abf4098bdb"
+    "bytes": "0x64de085e7ace50b8a25ae04d7454dba2a24a93d25338b6b9d3b8a1a02ec226c988ea52bb806c1bf7cf35314c16471cce5da3162e780fd65bbab126abf4098bdb",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E13.0.60",
     "bytes": "0x64288d3bcc7950b81ad806c54d2fcb2ce44584bd06cbe3ccb96d393a06e43f051af319bbc1c063ad251a8eed57c93d345c34ca60bea48fd1ca2f4fe7aa4f755b",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -234,11 +262,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P14",
-    "bytes": "0x7f627025b671e07e55f706e96d92bbe8df987c7a4a84273f0d71923ad8167d883459d8a546fc4a2ada9291fc75418e0b74737babce571378fb226be40cded1df"
+    "bytes": "0x7f627025b671e07e55f706e96d92bbe8df987c7a4a84273f0d71923ad8167d883459d8a546fc4a2ada9291fc75418e0b74737babce571378fb226be40cded1df",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E14.0.60",
     "bytes": "0x7f2a2e81bc6b827a4d0bb5695539cb8a4498994ebe69695f8c06a53a1f1f68e28859aa69dc2aed6502d1b5f71ea8bb9b9412b47c3565cb7e54ee5c865fdbb32d",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -250,11 +280,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P15",
-    "bytes": "0x6eaf8f8a3624730551ef0dfbdb63790463f315f068f84c4e5b800cf0ed7d9da960e0843207b76530276550cce0a673d8d4016be9be3912ba16f19a3fd893ed7a"
+    "bytes": "0x6eaf8f8a3624730551ef0dfbdb63790463f315f068f84c4e5b800cf0ed7d9da960e0843207b76530276550cce0a673d8d4016be9be3912ba16f19a3fd893ed7a",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E15.0.60",
     "bytes": "0x6ebe362f86271226572cc42b3aadac99730bd6ad6e18c158f9bbcd89e8e3d789bfd8f4948ce1e2dfa9747bfc884820fc1fbca8e95a62f2064599b91da293687a",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -266,11 +298,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P16",
-    "bytes": "0x4366f4fb11866efd2520a37fca3fd4e05a8b0fc04db4ba0caa09bfe1ff3b3aeff96491de6a269a7cdeca50d1a61e274df8142d94a74c276df7b44feabf416683"
+    "bytes": "0x4366f4fb11866efd2520a37fca3fd4e05a8b0fc04db4ba0caa09bfe1ff3b3aeff96491de6a269a7cdeca50d1a61e274df8142d94a74c276df7b44feabf416683",
+    "signature": "other_halt|3|KECCAK256|0||0|0|0|0|0||other_halt|3|KECCAK256|0||0|0|0|0|0||other_halt|3|KECCAK256|0||0|0|0|0|0||other_halt|3|KECCAK256|0||0|0|0|0|0||other_halt|3|KECCAK256|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E16.0.60",
     "bytes": "0x43661509c14661b61c209e40bdba616e667bb57f25e3480baa0758393c8c309e1753064e8ed4dbef335723ba369a51525968a1fc2267d0c2a744d3ee2b61984f",
+    "signature": "other_halt|3|KECCAK256|0||0|0|0|0|0||other_halt|3|KECCAK256|0||0|0|0|0|0||other_halt|3|KECCAK256|0||0|0|0|0|0||other_halt|3|KECCAK256|0||0|0|0|0|0||other_halt|3|KECCAK256|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -282,11 +316,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P17",
-    "bytes": "0x7dd051366d4fddca2a74af5aae958e2317eb96d410d912b6f26486a39ce5e832ae2b06d0511b3db8a153d66059c4345eccba13e6448737b2c539677c7e929dce"
+    "bytes": "0x7dd051366d4fddca2a74af5aae958e2317eb96d410d912b6f26486a39ce5e832ae2b06d0511b3db8a153d66059c4345eccba13e6448737b2c539677c7e929dce",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E17.0.60",
     "bytes": "0x7d92551bd81dc4cc5e6eabd593705a5c5a1fc2a508d9cf5cf7e0e06afc1fba7ecc5c6467db20e039d9326f5f65c949fe1a4524d2fc1f4ad6df39f12d50b5f7ce",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -298,11 +334,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P18",
-    "bytes": "0x7440799367b1efe904853b55b09a1a37535ebfe97da677da780e58abc2095efd9c4a879892ff320055667d373f8f5c222e945f753eeae3e5ed8f9dc5f63a0ced"
+    "bytes": "0x7440799367b1efe904853b55b09a1a37535ebfe97da677da780e58abc2095efd9c4a879892ff320055667d373f8f5c222e945f753eeae3e5ed8f9dc5f63a0ced",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E18.0.60",
     "bytes": "0x74f73846cc216d09bcc3ea93d1e29084fc87d5d2f9ef46e11384457e904dc7a0e128874bd2275581c4c560cf019bda19a15abb96abff3446928f059320ed3aed",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -314,11 +352,13 @@
    "founderLife": 5,
    "P": {
     "genomeId": "P19",
-    "bytes": "0x6a511f44fca13012cad442ef427e2c2a7f419ea1646395308c5d11ff5fe12783c169fc7ef8ff84f6f0d57d51be76636025734988ab877df1c2a38479544cc609"
+    "bytes": "0x6a511f44fca13012cad442ef427e2c2a7f419ea1646395308c5d11ff5fe12783c169fc7ef8ff84f6f0d57d51be76636025734988ab877df1c2a38479544cc609",
+    "signature": "success|5|STOP|0||0|0|0|0|0||success|5|STOP|0||0|0|0|0|0||success|5|STOP|0||0|0|0|0|0||success|5|STOP|0||0|0|0|0|0||success|5|STOP|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E19.0.60",
     "bytes": "0x6ab2d785d254eb7bcb72b02a357ebec3ac2472c1c430d49bfbae8cef8d9309a3db1bbd9b5aca2d1f55369d6b4476e4fdb8e4778876f781464c1cf192a4a70612",
+    "signature": "success|5|STOP|0||0|0|0|0|0||success|5|STOP|0||0|0|0|0|0||success|5|STOP|0||0|0|0|0|0||success|5|STOP|0||0|0|0|0|0||success|5|STOP|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -330,11 +370,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P20",
-    "bytes": "0x437c99deddb370b989f96de5a43f6ff2245698082d2eaf29aaeedbffa3856df3bfaad021d0c39f863f6443eca201c59491bb810eb0507d9b6792c8e875a35ccd"
+    "bytes": "0x437c99deddb370b989f96de5a43f6ff2245698082d2eaf29aaeedbffa3856df3bfaad021d0c39f863f6443eca201c59491bb810eb0507d9b6792c8e875a35ccd",
+    "signature": "invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E20.0.60",
     "bytes": "0x437c89e009bfcc33614db72f4d390b0b8b397e992d5d2e6d229e66e5a22378f381507922a75ce4dcb5d3918468a46e3c772cb865edff92ad223f74fe437bc836",
+    "signature": "invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -346,11 +388,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P21",
-    "bytes": "0x750dfeb5a3eab107b8c3a26ce6eee5870a8868f1fe001c71cc8ead953f3538136ec895ae5f50f54038d7aa4fa3a31081f745fbe4a9db95c367a71982a5e7b397"
+    "bytes": "0x750dfeb5a3eab107b8c3a26ce6eee5870a8868f1fe001c71cc8ead953f3538136ec895ae5f50f54038d7aa4fa3a31081f745fbe4a9db95c367a71982a5e7b397",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E21.0.60",
     "bytes": "0x75f6e72829cac2114954a2ca1cc842369488efe622fa6632ae5bec38cf7adc35c6a641128a660c5e15208fc88afbf8e8f81ac2bc9f7246d2f967bd3b94e7ee21",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -362,11 +406,13 @@
    "founderLife": 6,
    "P": {
     "genomeId": "P22",
-    "bytes": "0x305a361032aa907bde25b6bb2f5e78cdf2df020100b8bf81b51c1784aba99e0b75ff033e1acb4caaa64c0496349cf7333d7683d4c85c876f9b31daaa60ebd675"
+    "bytes": "0x305a361032aa907bde25b6bb2f5e78cdf2df020100b8bf81b51c1784aba99e0b75ff033e1acb4caaa64c0496349cf7333d7683d4c85c876f9b31daaa60ebd675",
+    "signature": "invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E22.0.60",
     "bytes": "0x484236913ddc503dc18103c54b5e465bb94a1114bf6dd0562f2e9bde12b14e9034a7f2b81a639f170c296b1ebd1b535f3deb715e1072fe2979459505b4372a29",
+    "signature": "invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -378,11 +424,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P23",
-    "bytes": "0x7b3386ba3afb3383237b955f9c6b0b30ec07cf22f85f23f71bb8b436d53a08a9303575be2f8dae27a1ed09899ae651fd567062e6c54ec3c1539579d67fb7de39"
+    "bytes": "0x7b3386ba3afb3383237b955f9c6b0b30ec07cf22f85f23f71bb8b436d53a08a9303575be2f8dae27a1ed09899ae651fd567062e6c54ec3c1539579d67fb7de39",
+    "signature": "stack_underflow|3|ADDMOD|0||0|0|0|0|0||stack_underflow|3|ADDMOD|0||0|0|0|0|0||stack_underflow|3|ADDMOD|0||0|0|0|0|0||stack_underflow|3|ADDMOD|0||0|0|0|0|0||stack_underflow|3|ADDMOD|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E23.0.60",
     "bytes": "0x7b837bf544b5d8bc5392ea71b52b566683233ca18d9d13b30cac4804993a080516b2523ecd8dafb9f42e5659828c7270f39dc2457b50b614b66ee08fa4debf30",
+    "signature": "stack_underflow|3|ADDMOD|0||0|0|0|0|0||stack_underflow|3|ADDMOD|0||0|0|0|0|0||stack_underflow|3|ADDMOD|0||0|0|0|0|0||stack_underflow|3|ADDMOD|0||0|0|0|0|0||stack_underflow|3|ADDMOD|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -394,11 +442,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P24",
-    "bytes": "0x3847f93b42699703c0de46eaa67313484824acd17bacb9b589ce458f256302d21a56d13b0d82d37b50eb2fc3ccb6ba8df6ec7ca9e16462ecf9c1afd398c7e5e8"
+    "bytes": "0x3847f93b42699703c0de46eaa67313484824acd17bacb9b589ce458f256302d21a56d13b0d82d37b50eb2fc3ccb6ba8df6ec7ca9e16462ecf9c1afd398c7e5e8",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E24.0.60",
     "bytes": "0x384abac70396d753cb9962ea13d413bf0c5199b10ac79a0e76491f83d2a41d44b96c9a471af611a173fbccf6c33e2ec809e8d058bc5b626a38b8f9a8e2ee4f26",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -410,11 +460,13 @@
    "founderLife": 5,
    "P": {
     "genomeId": "P25",
-    "bytes": "0x4a75c905764ea20aed1cee949f5e466dd3ee23ed7bb5b56e027822946ef3a9315c8ad51337a24aa1fd75b02e27d68fe8bda753c22f3eaa7e875e82c9eab35e2d"
+    "bytes": "0x4a75c905764ea20aed1cee949f5e466dd3ee23ed7bb5b56e027822946ef3a9315c8ad51337a24aa1fd75b02e27d68fe8bda753c22f3eaa7e875e82c9eab35e2d",
+    "signature": "invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E25.0.60",
     "bytes": "0x4a75f82af46f3a343649e6a1a459b3aa3c07aa4b87338b5802780f2e69306105f1fbc84cd05a37a560f3ead5e6ec690be8d110219a3276455f4be57b01866f12",
+    "signature": "invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -426,11 +478,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P26",
-    "bytes": "0x3d615591ed8a6ce70397c41fc2a49637cfafbb563b0e4bb3c0f0576be459a97b60ea84ea6c429bbb273cf9b9f4d8dd31e2739a3de10e7ef8c5dddb7d32a7320b"
+    "bytes": "0x3d615591ed8a6ce70397c41fc2a49637cfafbb563b0e4bb3c0f0576be459a97b60ea84ea6c429bbb273cf9b9f4d8dd31e2739a3de10e7ef8c5dddb7d32a7320b",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E26.0.60",
     "bytes": "0x3d6145f4bb8b01aa6da4a395052a58ee7ef505d03b51c854c51d57c0dd4bcf715be0d4e08d81b243bb151dad4f5697a63cca5d9167b135bee96d1805285e8791",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -442,11 +496,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P27",
-    "bytes": "0x5a6a76fb10d047a8dbd791132cd55d64d30dfdaad238e6125cee2fbef91751cb2244941a0bb13a9f266ba19990c4e5095d7a895024b07b6fda0d430fff4263b2"
+    "bytes": "0x5a6a76fb10d047a8dbd791132cd55d64d30dfdaad238e6125cee2fbef91751cb2244941a0bb13a9f266ba19990c4e5095d7a895024b07b6fda0d430fff4263b2",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E27.0.60",
     "bytes": "0x4241fbbff19b5ad3652ebb8d51d5d167b82c324cc7b0a82179c5b13c72ac88d7fdf2ffb88ea43a9f26de316d007fe7ef97f3fa5b5e9995611220e9ba59096960",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -458,11 +514,13 @@
    "founderLife": 5,
    "P": {
     "genomeId": "P28",
-    "bytes": "0x68e3eaba3f2161c8aab91568112b2182011e137fb463357545c4a3692e4395c584803cff77f8e151e46f082b1e7d73b882c76bc762923c08413f6da3eae64bfc"
+    "bytes": "0x68e3eaba3f2161c8aab91568112b2182011e137fb463357545c4a3692e4395c584803cff77f8e151e46f082b1e7d73b882c76bc762923c08413f6da3eae64bfc",
+    "signature": "invalid_opcode|5|LOG3|0||0|0|0|0|0||invalid_opcode|5|LOG3|0||0|0|0|0|0||invalid_opcode|5|LOG3|0||0|0|0|0|0||invalid_opcode|5|LOG3|0||0|0|0|0|0||invalid_opcode|5|LOG3|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E28.0.60",
     "bytes": "0x68a208eca3848669b2694a683460a7336112ca9388630327b43aa3f97f1800afb46f0f38eb3b15295859ba5f579b4b0a84fb2ca6f593815e38af911030ce83c1",
+    "signature": "invalid_opcode|5|LOG3|0||0|0|0|0|0||invalid_opcode|5|LOG3|0||0|0|0|0|0||invalid_opcode|5|LOG3|0||0|0|0|0|0||invalid_opcode|5|LOG3|0||0|0|0|0|0||invalid_opcode|5|LOG3|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -474,11 +532,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P29",
-    "bytes": "0x3431c0467eaac0738d39566f5b411dacc5192e0b6b2141bda799b1a4b095cb6bada9036d4fe1da2e6680b9e094e88d48219c1e9ab46a0bff89e27da388ecb96c"
+    "bytes": "0x3431c0467eaac0738d39566f5b411dacc5192e0b6b2141bda799b1a4b095cb6bada9036d4fe1da2e6680b9e094e88d48219c1e9ab46a0bff89e27da388ecb96c",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E29.0.60",
     "bytes": "0x345b28bb64398aa0b63aa94b34143c1a2c364e676c2f1d52488263d7503ea7c8c910e06d2ff6f636e666f63e4b08025ff1d23232b4339a13324f51ba393c3d6c",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -490,11 +550,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P30",
-    "bytes": "0x465b0c1793bfee3effb4757ba3e8b4151538916fa8e601ed7db0bde4a5967d82551adce28c42aeb556a6eee01f813663be75318294cd3b77a332951600ee2e4f"
+    "bytes": "0x465b0c1793bfee3effb4757ba3e8b4151538916fa8e601ed7db0bde4a5967d82551adce28c42aeb556a6eee01f813663be75318294cd3b77a332951600ee2e4f",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E30.0.60",
     "bytes": "0x465bfccdb50812f2a513e56ce5d7811f7b37181d403d7c8f33cea3e4c56e693a3f5cbbc28cb7d3365ede648e6931137a2504c43944722d1dd71ced409835831a",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -506,11 +568,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P31",
-    "bytes": "0x4649d285a48dfd59e17443a2bd9860418c6403a8add77af70427109088f54e3f297356a719f689a73b6fb2e7b01db391826fe11f01b5421a3aaca8832010cf2a"
+    "bytes": "0x4649d285a48dfd59e17443a2bd9860418c6403a8add77af70427109088f54e3f297356a719f689a73b6fb2e7b01db391826fe11f01b5421a3aaca8832010cf2a",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E31.0.60",
     "bytes": "0x4836d2bd2f958988cce7f7037df4ae16037dad44428c849a700701fc88c26d3f52702b5960b9670a559abe25c38d4a4cd80fa6970dcb13123ba803569530b42a",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -522,11 +586,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P32",
-    "bytes": "0x3475feacbfd4e3a19ebcea7a2cb6fdf2ff230ab62c530d7fb62602b0a44caff550b5ca73501d2cc10e4609bca8cbafcda0f6352ca95d9afcd0986be823b53d1a"
+    "bytes": "0x3475feacbfd4e3a19ebcea7a2cb6fdf2ff230ab62c530d7fb62602b0a44caff550b5ca73501d2cc10e4609bca8cbafcda0f6352ca95d9afcd0986be823b53d1a",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E32.0.60",
     "bytes": "0x3475719c12dd39031f5a52a4f3866f557e3a923237e6a8e3b66ecd58665eb40d432aac526f1035f10fdec4b78bb7ec0e7076509e953e9973ac33e69849bc3d57",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -538,11 +604,13 @@
    "founderLife": 6,
    "P": {
     "genomeId": "P33",
-    "bytes": "0x347d625f32c3dd4e7d5a651aca2b088274663e4f8a4b58bd406d7dd7d37cf16a8001194c476d957edb5579d7eb9276d4d315e5673900aabfd5a7a5c5180c1aa0"
+    "bytes": "0x347d625f32c3dd4e7d5a651aca2b088274663e4f8a4b58bd406d7dd7d37cf16a8001194c476d957edb5579d7eb9276d4d315e5673900aabfd5a7a5c5180c1aa0",
+    "signature": "invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E33.0.60",
     "bytes": "0x347dea827db73e6f3379aa5529a65f90d444a962dc8c58ce048aa603b90cb4f2336d1d0c44054b8854107944657561da3be132da8c9c01bc8e91cc800ed1be69",
+    "signature": "invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -554,11 +622,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P34",
-    "bytes": "0x7c5d972379da6cef1f3ca8ec91b9ef43720f05858211430b05476db8465863e9e2893bf37fd460faefcf7cfa51368686a94f24bb2fd6a6e0f144a10e2a5f0e8c"
+    "bytes": "0x7c5d972379da6cef1f3ca8ec91b9ef43720f05858211430b05476db8465863e9e2893bf37fd460faefcf7cfa51368686a94f24bb2fd6a6e0f144a10e2a5f0e8c",
+    "signature": "invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E34.0.60",
     "bytes": "0x7c2a49d90eebbc5c1f41acdc16455598b172fea409927d47bb56474e20db63849f0d3ef3d52a0e3dd6eb03fefa5d5c87941e0575d22a3213adfa76f15b4d2e7a",
+    "signature": "invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0||invalid_opcode|3|RETURN|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -570,11 +640,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P35",
-    "bytes": "0x724b2dd65ce62188d5bbf87d3eb1508dc51edb7263727019f5203e11158bab197c7ef2d3326de38a489a3a7c5ee3f61a05a98c09abe42ee408b9e07aae158a6b"
+    "bytes": "0x724b2dd65ce62188d5bbf87d3eb1508dc51edb7263727019f5203e11158bab197c7ef2d3326de38a489a3a7c5ee3f61a05a98c09abe42ee408b9e07aae158a6b",
+    "signature": "invalid_opcode|3|KECCAK256|0||0|0|0|0|0||invalid_opcode|3|KECCAK256|0||0|0|0|0|0||invalid_opcode|3|KECCAK256|0||0|0|0|0|0||invalid_opcode|3|KECCAK256|0||0|0|0|0|0||invalid_opcode|3|KECCAK256|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E35.0.60",
     "bytes": "0x727deee91a53af20783eb127ef956575105684e7630c8d5dc8202c60121d9d639e8ae8a18e8de1fc1d703d615e30e360fa10b5445e6126b37d42679267ad592a",
+    "signature": "invalid_opcode|3|KECCAK256|0||0|0|0|0|0||invalid_opcode|3|KECCAK256|0||0|0|0|0|0||invalid_opcode|3|KECCAK256|0||0|0|0|0|0||invalid_opcode|3|KECCAK256|0||0|0|0|0|0||invalid_opcode|3|KECCAK256|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -586,11 +658,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P36",
-    "bytes": "0x7bbfc38f3b938a2e78d535582be2641fdefcf2f8f435ef83e3b816b7e7430c325f5c2f77d84dd74545ddbad20a87a6db12a115663a52343adf6b5c4ac3508608"
+    "bytes": "0x7bbfc38f3b938a2e78d535582be2641fdefcf2f8f435ef83e3b816b7e7430c325f5c2f77d84dd74545ddbad20a87a6db12a115663a52343adf6b5c4ac3508608",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E36.0.60",
     "bytes": "0x7b9b65e007c10a9778da3e67e385b40d4dfc08500165b0d56aa621b1ff7ce89bcb4d0122aae9a45cca1287d8a9c0a612e3d18e611b7ea7d0174d5ebcc13af0dd",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -602,11 +676,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P37",
-    "bytes": "0x6284c33b7b6da38172041f14e9667f7727b7eea7fe9c4ed4597dad5abd5e2a8e5a9953bc6ab30da382c9a1a2fb2b38c5995ef7ce6e8ffbb42ccdac3158f03c7a"
+    "bytes": "0x6284c33b7b6da38172041f14e9667f7727b7eea7fe9c4ed4597dad5abd5e2a8e5a9953bc6ab30da382c9a1a2fb2b38c5995ef7ce6e8ffbb42ccdac3158f03c7a",
+    "signature": "stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E37.0.60",
     "bytes": "0x622fb4c27b5168719022c29e711cb14aad0dc98dd367b3377f9f764ab09e79b05b991b5a2934dcd61c39fc0d972bc13740b896850d669e679b706e0805746411",
+    "signature": "stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -618,11 +694,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P38",
-    "bytes": "0x587aa0de8dd3fbebcc169a4776785851caac0495a28a54edfc2667193ebb6c5adffb36803c4a999b41e22cb20e949137c7777d9d2d84fd83a1d7798e5df507b9"
+    "bytes": "0x587aa0de8dd3fbebcc169a4776785851caac0495a28a54edfc2667193ebb6c5adffb36803c4a999b41e22cb20e949137c7777d9d2d84fd83a1d7798e5df507b9",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E38.0.60",
     "bytes": "0x587adf1e3e48ed763f0f926359cae1b380cae6fc9814fdaf4bef5837d5bbc5b3c3de1d40046dc0cfa96d8a14c5b3792c20771e881247cae36f5688fc27a2bd63",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -634,11 +712,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P39",
-    "bytes": "0x77d4cbd8f9de90059700bd08b95b1c09c437373edb2fdfc7895afe73afc92dbb16a5f2c9d12ff0e16a5ca8c1cf315a52ece6aba3bde353f92c82ed542c744c6a"
+    "bytes": "0x77d4cbd8f9de90059700bd08b95b1c09c437373edb2fdfc7895afe73afc92dbb16a5f2c9d12ff0e16a5ca8c1cf315a52ece6aba3bde353f92c82ed542c744c6a",
+    "signature": "invalid_opcode|3|INVALID|0||0|0|0|0|0||invalid_opcode|3|INVALID|0||0|0|0|0|0||invalid_opcode|3|INVALID|0||0|0|0|0|0||invalid_opcode|3|INVALID|0||0|0|0|0|0||invalid_opcode|3|INVALID|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E39.0.60",
     "bytes": "0x7714bd5a78e8ce2c6c339218544dbeaa6f851306d47a3254fa5afe818599c11845c48934b69ce64f3827f5fdcff4fc20519be9c1df9bd77e4c9d07f426a0d662",
+    "signature": "invalid_opcode|3|INVALID|0||0|0|0|0|0||invalid_opcode|3|INVALID|0||0|0|0|0|0||invalid_opcode|3|INVALID|0||0|0|0|0|0||invalid_opcode|3|INVALID|0||0|0|0|0|0||invalid_opcode|3|INVALID|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -650,11 +730,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P40",
-    "bytes": "0x4235c95eac98b9226628d679c7c86130f7566a67380f21fc8f5fd8fe467bbd5cda12b02e8c0f074ba7832780278b67a33b3c2e216d8fa248a3f00abd98183654"
+    "bytes": "0x4235c95eac98b9226628d679c7c86130f7566a67380f21fc8f5fd8fe467bbd5cda12b02e8c0f074ba7832780278b67a33b3c2e216d8fa248a3f00abd98183654",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E40.0.60",
     "bytes": "0x4235c7f7ba9a614f8bcdd18a4bc8034edff3565d2f0fea135f5e101a847579171a3d792534d1824513018bed9ee943827b271173c4e7fd30b5365c3639768ebf",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -666,11 +748,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P41",
-    "bytes": "0x5b74c8f9f83166d0e389f1d9758b1a70954ab79dcc49179a396e1d6100689974c30fb6f7ec9958e68de8505f8a9fca9865a6f5f33f048058b059c9bfc7bf0e30"
+    "bytes": "0x5b74c8f9f83166d0e389f1d9758b1a70954ab79dcc49179a396e1d6100689974c30fb6f7ec9958e68de8505f8a9fca9865a6f5f33f048058b059c9bfc7bf0e30",
+    "signature": "stack_underflow|3|SWAP11|0||0|0|0|0|0||stack_underflow|3|SWAP11|0||0|0|0|0|0||stack_underflow|3|SWAP11|0||0|0|0|0|0||stack_underflow|3|SWAP11|0||0|0|0|0|0||stack_underflow|3|SWAP11|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E41.0.60",
     "bytes": "0x5b74488d02094b23680570f0ba56cc499f3249cb9b031d9a212d0875a901b37c45eecbe48c8c1a017906c3171cbaec136ea606f4ca816208fa16dfe744dfd6a9",
+    "signature": "stack_underflow|3|SWAP11|0||0|0|0|0|0||stack_underflow|3|SWAP11|0||0|0|0|0|0||stack_underflow|3|SWAP11|0||0|0|0|0|0||stack_underflow|3|SWAP11|0||0|0|0|0|0||stack_underflow|3|SWAP11|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -682,11 +766,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P42",
-    "bytes": "0x781035bb64f54a9269d50d3078c7793825c4c5f289e7131350b26411a12c650ab24c7746bab6054cccdfd66610b8dd8cb770d5d84597b56f387d5253b81fc0f6"
+    "bytes": "0x781035bb64f54a9269d50d3078c7793825c4c5f289e7131350b26411a12c650ab24c7746bab6054cccdfd66610b8dd8cb770d5d84597b56f387d5253b81fc0f6",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E42.0.60",
     "bytes": "0x78f97402435e88d11c6672efe477489574de8c54456d9b7294b86492916629844d91f3e6027f05e3afd19039675d14ef1d510ccdfd0c017992dd3a54b240c0e4",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -698,11 +784,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P43",
-    "bytes": "0x751fd9cddf4837efc222e442b13d48b4dec109fdc177c546c6248e0a798ab648b3c614a726ebc48fe26c0e3fcccb09cd6bff4aeda6dca518be398cf7c9b69497"
+    "bytes": "0x751fd9cddf4837efc222e442b13d48b4dec109fdc177c546c6248e0a798ab648b3c614a726ebc48fe26c0e3fcccb09cd6bff4aeda6dca518be398cf7c9b69497",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E43.0.60",
     "bytes": "0x75f9a7abe91d1918759500a048a805f80240cbc08fabc546c27db117369ff1a1157884054d481e01a82e67c9a0dc61f0a7ab3d52a6d4b2e76c6244dda7cbb35f",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -714,11 +802,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P44",
-    "bytes": "0x7d6c5634ef55b57de156db6d3aa20d5b445d9089b6d8fa395376f52dc7940578b05593c9d0663a04f7162dbaede9b25536a811d0df9b892642dcdbbde44cbcb2"
+    "bytes": "0x7d6c5634ef55b57de156db6d3aa20d5b445d9089b6d8fa395376f52dc7940578b05593c9d0663a04f7162dbaede9b25536a811d0df9b892642dcdbbde44cbcb2",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E44.0.60",
     "bytes": "0x7dd236720be916e793ffbb9c1fdab1049bd6de51057a4e3379925e649a331f78b0d45a88356a3ebcae5da3046d84e51b8c7dc53844e4f20b05dc91053300ea59",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -730,11 +820,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P45",
-    "bytes": "0x74fc13acd3bc244c8497b6916674f23511eecb953a354081507f173a1ccb685adc0f4d9cf3c2ecb4a327a68cdbab7ee4f4c0ad6bcb5421b46b031962b8d89d64"
+    "bytes": "0x74fc13acd3bc244c8497b6916674f23511eecb953a354081507f173a1ccb685adc0f4d9cf3c2ecb4a327a68cdbab7ee4f4c0ad6bcb5421b46b031962b8d89d64",
+    "signature": "stack_underflow|3|DUP2|0||0|0|0|0|0||stack_underflow|3|DUP2|0||0|0|0|0|0||stack_underflow|3|DUP2|0||0|0|0|0|0||stack_underflow|3|DUP2|0||0|0|0|0|0||stack_underflow|3|DUP2|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E45.0.60",
     "bytes": "0x74f56790b7d867976288b6975255a947ba098698b0c7408132a1f13e8f59843b4027c5369bd6b403d2885c00ba9193e286caa813190f90ed96b2e9c2aa29c8f3",
+    "signature": "stack_underflow|3|DUP2|0||0|0|0|0|0||stack_underflow|3|DUP2|0||0|0|0|0|0||stack_underflow|3|DUP2|0||0|0|0|0|0||stack_underflow|3|DUP2|0||0|0|0|0|0||stack_underflow|3|DUP2|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -746,11 +838,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P46",
-    "bytes": "0x6e18e6c2420c58b91c478df9335c771280e210cad3ab167054da0f0ae6ac059a4441854987e23dd938d5dd88d683773f24ccf09d9a04e084035c3b581a47fb2b"
+    "bytes": "0x6e18e6c2420c58b91c478df9335c771280e210cad3ab167054da0f0ae6ac059a4441854987e23dd938d5dd88d683773f24ccf09d9a04e084035c3b581a47fb2b",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E46.0.60",
     "bytes": "0x6eaaa00b425b7b585bc44ec31a373bf980ab2da11bd3b200864ff632bc8f7ff3630b49c04ba8cea6d9c18efbd676b5bd0a9bd3f6ad8bb93752a656e0237b91c9",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -762,11 +856,13 @@
    "founderLife": 7,
    "P": {
     "genomeId": "P47",
-    "bytes": "0x5a66f5961d3aa2899f66b2ef2f2a08018560243016898294360f54db60d898fbf81a874046ca4305a96d92599b740325bd7b292a673cd1ccdcc65c56d7c8842d"
+    "bytes": "0x5a66f5961d3aa2899f66b2ef2f2a08018560243016898294360f54db60d898fbf81a874046ca4305a96d92599b740325bd7b292a673cd1ccdcc65c56d7c8842d",
+    "signature": "stack_underflow|7|DUP10|0||0|0|0|0|0||stack_underflow|7|DUP10|0||0|0|0|0|0||stack_underflow|7|DUP10|0||0|0|0|0|0||stack_underflow|7|DUP10|0||0|0|0|0|0||stack_underflow|7|DUP10|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E47.0.60",
     "bytes": "0x42668736a86aa46c40660cbdcf3756b8d060bc5859891a1e7a6d0f7a066d0a277bed1c1a7ddebaa68c7a26fe3cf599b760d3171e1cb2c0e314ad49714768b553",
+    "signature": "stack_underflow|7|DUP10|0||0|0|0|0|0||stack_underflow|7|DUP10|0||0|0|0|0|0||stack_underflow|7|DUP10|0||0|0|0|0|0||stack_underflow|7|DUP10|0||0|0|0|0|0||stack_underflow|7|DUP10|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -778,11 +874,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P48",
-    "bytes": "0x72b204cf35dbb98f0314afec3b4e310f3e60bd3e3287344bf1d4c0b0438cfbf61a066875d0baee8d46409f7e359b79daa7a907c27876b960283ec48782db110b"
+    "bytes": "0x72b204cf35dbb98f0314afec3b4e310f3e60bd3e3287344bf1d4c0b0438cfbf61a066875d0baee8d46409f7e359b79daa7a907c27876b960283ec48782db110b",
+    "signature": "stack_underflow|3|DUP8|0||0|0|0|0|0||stack_underflow|3|DUP8|0||0|0|0|0|0||stack_underflow|3|DUP8|0||0|0|0|0|0||stack_underflow|3|DUP8|0||0|0|0|0|0||stack_underflow|3|DUP8|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E48.0.60",
     "bytes": "0x72bad34f69a08ec6e63f32511a6b692abdd6cc39328703a432fa358f0cbd9bff0d2c76f14224b9c72ce2ace4838438be8315a4db960d70a1a4a7189e826f60e9",
+    "signature": "stack_underflow|3|DUP8|0||0|0|0|0|0||stack_underflow|3|DUP8|0||0|0|0|0|0||stack_underflow|3|DUP8|0||0|0|0|0|0||stack_underflow|3|DUP8|0||0|0|0|0|0||stack_underflow|3|DUP8|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -794,11 +892,13 @@
    "founderLife": 5,
    "P": {
     "genomeId": "P49",
-    "bytes": "0x666625a98c3f165f49806111270e97e9893df4fd082449be3d6a363ffceb030f5b4e56104f390aae5414fc2ea746912263ea2507bd274613c1d9dccda1ea72a6"
+    "bytes": "0x666625a98c3f165f49806111270e97e9893df4fd082449be3d6a363ffceb030f5b4e56104f390aae5414fc2ea746912263ea2507bd274613c1d9dccda1ea72a6",
+    "signature": "invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E49.0.60",
     "bytes": "0x66786089a5bad0fd498036c2c3d6e999902fe5680a3109cbbbc14a89dc4d8e0ff57f606f14c6ad62b6c70e189b22484e770b444ab8e297cbb8ca35b904cb6bb8",
+    "signature": "invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -810,11 +910,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P50",
-    "bytes": "0x614fcb40b36765e99677c789767e5e9325f0dd982148634489178c4e65a915e78f0181d598a3c311959ba7010fe4bf0ca0e2c3d2b38a5d8f7bab916c7b33cc12"
+    "bytes": "0x614fcb40b36765e99677c789767e5e9325f0dd982148634489178c4e65a915e78f0181d598a3c311959ba7010fe4bf0ca0e2c3d2b38a5d8f7bab916c7b33cc12",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E50.0.60",
     "bytes": "0x61d37b75ea2f5a27c1775a55612290f1af21e409d74d7583a02a0f10e82c1522097365e5ebee7b8f69bb8de0157e970875347ca1b3b252ffd64eef7f79b1b8d4",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -826,11 +928,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P51",
-    "bytes": "0x453dc2cd95ff887c91af68a897bd728cbdcdc318bfb8d0846a94a13eca47dc35dd834fea2d5325fe1e2a412faa81b971a3f25b9f775bfb01f1b15600144d9706"
+    "bytes": "0x453dc2cd95ff887c91af68a897bd728cbdcdc318bfb8d0846a94a13eca47dc35dd834fea2d5325fe1e2a412faa81b971a3f25b9f775bfb01f1b15600144d9706",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E51.0.60",
     "bytes": "0x454a279f5f2eb7adc95e682fed1c594fa16bc332ba992cbe7b69c0a26b98944203dc4f263b0bb42c0f3f70a4f7d2764fbf9f0832111c4415cc467641121b275a",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -842,11 +946,13 @@
    "founderLife": 5,
    "P": {
     "genomeId": "P52",
-    "bytes": "0x6a75ee55c14bb28adae245c371ea2ec35d452a8e8efd4dc522e281cfd8e8503450ee5b18fa96976d0c26674bdc3667f4b9e058dfa1ecf06b8a5265eb6e95b719"
+    "bytes": "0x6a75ee55c14bb28adae245c371ea2ec35d452a8e8efd4dc522e281cfd8e8503450ee5b18fa96976d0c26674bdc3667f4b9e058dfa1ecf06b8a5265eb6e95b719",
+    "signature": "invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E52.0.60",
     "bytes": "0x6a03bf99b76c323249a49f2c7131480ac3f26d4aedd31b00cd144a6d71cd7a3450e92d3fb638cc6e233c5dde3758fedad61d1077e21e6b3ae1b46359bcb761b9",
+    "signature": "invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0||invalid_opcode|5|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -858,11 +964,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P53",
-    "bytes": "0x77e71598f91fa233457594420e9199dc3a496dfd3b0a0872db6fceb34ea28871695eb8dbd4bcffdd5c43eb1ace9f9380d66e8e473e6d92c0f10e4cb0010f1e8e"
+    "bytes": "0x77e71598f91fa233457594420e9199dc3a496dfd3b0a0872db6fceb34ea28871695eb8dbd4bcffdd5c43eb1ace9f9380d66e8e473e6d92c0f10e4cb0010f1e8e",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E53.0.60",
     "bytes": "0x77d87cabb4b353ff78b4fcb2ea7c23085ff3ff38d5352b5ea65c0fb3cd1bf7514f36477dd45fb5accc08b66a166cf544538e8e7e7bf28b837a67a06ac8152ec3",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -874,11 +982,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P54",
-    "bytes": "0x4243b0051d5a09b9c439363814187412dcf069d7d19fdae8898bd5928bbc96a266d98ec023ac3cc80e64e52ba946085cf2b76e5aa186cb24144c574d8af2c30a"
+    "bytes": "0x4243b0051d5a09b9c439363814187412dcf069d7d19fdae8898bd5928bbc96a266d98ec023ac3cc80e64e52ba946085cf2b76e5aa186cb24144c574d8af2c30a",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E54.0.60",
     "bytes": "0x423dd741e5db2cc00e7a0115cc8fdbf687ed07766ed43715808ab4e66686fccf4957b18594cca3d416c7097fa98f4d492fd18a9aa12722a8145d6dbd6f432ceb",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -890,11 +1000,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P55",
-    "bytes": "0x6acb65ede7967301a499401679d88d1a5f98d3002adf6779899985de9d1f32331edf7149db1373cd29608683fb5c7d2750a7994cbb92b3b44993bda6a1c5cc6e"
+    "bytes": "0x6acb65ede7967301a499401679d88d1a5f98d3002adf6779899985de9d1f32331edf7149db1373cd29608683fb5c7d2750a7994cbb92b3b44993bda6a1c5cc6e",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E55.0.60",
     "bytes": "0x6a75c819f980a3f1dda42363792caefd5e4ac251a2876791e57f01c5ff93e028469d3427908433ba5617d3169694c58f6d72032892468b1d90d9dae50f47ccd6",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -906,11 +1018,13 @@
    "founderLife": 6,
    "P": {
     "genomeId": "P56",
-    "bytes": "0x637da399251e546ae50eb570205b4d9d5dac961199a9b9e269f81a07ea326780a11f39831b31053fbc888be42557946f40370d5130ea935372675c8c32c6c8b4"
+    "bytes": "0x637da399251e546ae50eb570205b4d9d5dac961199a9b9e269f81a07ea326780a11f39831b31053fbc888be42557946f40370d5130ea935372675c8c32c6c8b4",
+    "signature": "stack_underflow|6|SWAP10|0||0|0|0|0|0||stack_underflow|6|SWAP10|0||0|0|0|0|0||stack_underflow|6|SWAP10|0||0|0|0|0|0||stack_underflow|6|SWAP10|0||0|0|0|0|0||stack_underflow|6|SWAP10|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E56.0.60",
     "bytes": "0x63920ec78749546a409042ce5c401e96cdf9ed4199be7d4794298327d217284ad332449e59015922ddc544f064ea9dbb65879d2f48b177f24a307354adca7d71",
+    "signature": "stack_underflow|6|SWAP10|0||0|0|0|0|0||stack_underflow|6|SWAP10|0||0|0|0|0|0||stack_underflow|6|SWAP10|0||0|0|0|0|0||stack_underflow|6|SWAP10|0||0|0|0|0|0||stack_underflow|6|SWAP10|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -922,11 +1036,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P57",
-    "bytes": "0x477fe24ba7432e75a3aa8b20470a40f223d9aa0f719bc0bf5fb02e3591dbae1947acde1940c8814379ee016b185d2ab67be52ba32654b1a74b103feb6e25ae7d"
+    "bytes": "0x477fe24ba7432e75a3aa8b20470a40f223d9aa0f719bc0bf5fb02e3591dbae1947acde1940c8814379ee016b185d2ab67be52ba32654b1a74b103feb6e25ae7d",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E57.0.60",
     "bytes": "0x476d957e10104fa4a22246959c4bbf93cd87670f06c64950e3297551e3e86326b67bcf4ad1fde4e8d9209735bf2a765940c156af0cfaf3cbf5823fbb8f256044",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -938,11 +1054,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P58",
-    "bytes": "0x43652696b6f8a670993c6c6da6900d068bb1e5cdab16cbebd5eb7b8e1ad7b4018d1d6e061c0cbdaab00d0d2fcf0e8c7fb9bdc20e60e976bcaf5b165acbe27512"
+    "bytes": "0x43652696b6f8a670993c6c6da6900d068bb1e5cdab16cbebd5eb7b8e1ad7b4018d1d6e061c0cbdaab00d0d2fcf0e8c7fb9bdc20e60e976bcaf5b165acbe27512",
+    "signature": "stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E58.0.60",
     "bytes": "0x43650aac0fc726c59932fec2c2418207143d0162006e99303bd114910241f6f308e05dfa833a35e5d8cfdc086789e06fc74413528fe9aaf0d7954b09bd713578",
+    "signature": "stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0||stack_underflow|3|SWAP10|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -954,11 +1072,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P59",
-    "bytes": "0x5f58e9a096898030da5349c157d2ceaa4c63966bc134b73c89bae9e8422da98e8513fd24537fa4636a377ef0315762db23290ff9a46953fca87baef4ad9dc523"
+    "bytes": "0x5f58e9a096898030da5349c157d2ceaa4c63966bc134b73c89bae9e8422da98e8513fd24537fa4636a377ef0315762db23290ff9a46953fca87baef4ad9dc523",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E59.0.60",
     "bytes": "0x5f5121f60cf82f30970e130ffb3ee78e0302a2753a49f8a8b0b24398562d279994ceb73c22b6d63ade37ae8aa925d550fef03e508607c13656a80fa35af0793e",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -970,11 +1090,13 @@
    "founderLife": 4,
    "P": {
     "genomeId": "P60",
-    "bytes": "0x7316a70a0157393f967e15c18abc4282f6869cc6914a1b062176bf54b5fcaf8cdaea3a3c23c6503b6fb2826163da25a381e4e91f8f1e259704217b8299302dfb"
+    "bytes": "0x7316a70a0157393f967e15c18abc4282f6869cc6914a1b062176bf54b5fcaf8cdaea3a3c23c6503b6fb2826163da25a381e4e91f8f1e259704217b8299302dfb",
+    "signature": "stack_underflow|4|MOD|0||0|0|0|0|0||stack_underflow|4|MOD|0||0|0|0|0|0||stack_underflow|4|MOD|0||0|0|0|0|0||stack_underflow|4|MOD|0||0|0|0|0|0||stack_underflow|4|MOD|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E60.0.60",
     "bytes": "0x73d3aa0819cd53e26f0512d5bc586b3445ea5980014a1b066ebf2a532bd23d5709e80b8e2b1a2266c29d695f97d46b777849d2916e1f4aa88ab17a6b9f7a0ed5",
+    "signature": "stack_underflow|4|MOD|0||0|0|0|0|0||stack_underflow|4|MOD|0||0|0|0|0|0||stack_underflow|4|MOD|0||0|0|0|0|0||stack_underflow|4|MOD|0||0|0|0|0|0||stack_underflow|4|MOD|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -986,11 +1108,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P61",
-    "bytes": "0x6fb71468d060aa4d0348edd4a97e2a120e40a8f8b5aa051bc0282f093d466ab3957c9134d60ecb035e2c0fa009e851045deec48ab4d4430ee431dba0b6e1d4ee"
+    "bytes": "0x6fb71468d060aa4d0348edd4a97e2a120e40a8f8b5aa051bc0282f093d466ab3957c9134d60ecb035e2c0fa009e851045deec48ab4d4430ee431dba0b6e1d4ee",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E61.0.60",
     "bytes": "0x6fde7851bfaa0c3b1da384104eedbd2e5a41a8250baa8b620ac65e8b744da2af5600bcd5647be7495ed1dcff39d6e9d86173957450187baa4aed782018734fef",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1002,11 +1126,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P62",
-    "bytes": "0x5954c81183c94d33cdd614a796eedf6e3d1af7f9280499403a03836bac6855ed65fce6b7a57bea2e11f1fb045a04a7bed86bc84534f85a42ec0e7be9b1efbc81"
+    "bytes": "0x5954c81183c94d33cdd614a796eedf6e3d1af7f9280499403a03836bac6855ed65fce6b7a57bea2e11f1fb045a04a7bed86bc84534f85a42ec0e7be9b1efbc81",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E62.0.60",
     "bytes": "0x5979c10971c90e4fb7886998aed39e0f862b55466bf55647a1027e8a25b64b4715551aa442c97befd5dfcf5a92938d3b596be207ff767e945afdf8f381ef56e0",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1018,11 +1144,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P63",
-    "bytes": "0x5f5037bc0a247f412748a7c0ec24d5dab18d6d1bb4751c99a23778018b7ca2562d7fc4fe470775ea2818029be6d021f3cb6fd417be129b3313e6d7f58c359b3c"
+    "bytes": "0x5f5037bc0a247f412748a7c0ec24d5dab18d6d1bb4751c99a23778018b7ca2562d7fc4fe470775ea2818029be6d021f3cb6fd417be129b3313e6d7f58c359b3c",
+    "signature": "stack_underflow|3|CALLDATACOPY|0||0|0|0|0|0||stack_underflow|3|CALLDATACOPY|0||0|0|0|0|0||stack_underflow|3|CALLDATACOPY|0||0|0|0|0|0||stack_underflow|3|CALLDATACOPY|0||0|0|0|0|0||stack_underflow|3|CALLDATACOPY|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E63.0.60",
     "bytes": "0x5f5037ab6b71f21a2ba7a7b62e309da6c0d3c53a9fe6113466b307243a42c559ba5b5e45168da76d8cad246202aac5683e4b6f147137ac8616fa604b8b779433",
+    "signature": "stack_underflow|3|CALLDATACOPY|0||0|0|0|0|0||stack_underflow|3|CALLDATACOPY|0||0|0|0|0|0||stack_underflow|3|CALLDATACOPY|0||0|0|0|0|0||stack_underflow|3|CALLDATACOPY|0||0|0|0|0|0||stack_underflow|3|CALLDATACOPY|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1034,11 +1162,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P64",
-    "bytes": "0x6f5196225fa3cedf44b38aa4272be0a21e7c276d0c8594053ec2b5bbafdb8b8df330d117e276f51c2eb0c251d7fac1bdc859d36a28063918e25cbe5a261fdc49"
+    "bytes": "0x6f5196225fa3cedf44b38aa4272be0a21e7c276d0c8594053ec2b5bbafdb8b8df330d117e276f51c2eb0c251d7fac1bdc859d36a28063918e25cbe5a261fdc49",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E64.0.60",
     "bytes": "0x6fef326706a3161df8696bbcb5858bd51e3f2ac1265d93c61eab2e520414155a4a97948ca7f70c036d848c906801ea3a3009b85347db11b55adabe8b2227f978",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1050,11 +1180,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P65",
-    "bytes": "0x61f1456e6c448ee543f1d46b78661afdb5a0122195ab0545cbe78636cb3b6e1ecf062d82e9e8413a21567faa3c03f6183da244fa6083dc8f349f6e87c53071f7"
+    "bytes": "0x61f1456e6c448ee543f1d46b78661afdb5a0122195ab0545cbe78636cb3b6e1ecf062d82e9e8413a21567faa3c03f6183da244fa6083dc8f349f6e87c53071f7",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E65.0.60",
     "bytes": "0x61ed456e6ba8824f33a07642f72e081cdfa6b9d3c963cf1802ecf954aed9da1823871c53d427000929e5a31396506c180f79a6d2e0b0caf1ad6a984025f1ef74",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1066,11 +1198,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P66",
-    "bytes": "0x7bb2dfedab66f0ba9e8cf72ec2e16c25c27a2698872e8f0184779ce12e49f1aa8b8cbe0aa5484a5978a01dd8ade42407eed8c230b539c1afe183179e2f78e18b"
+    "bytes": "0x7bb2dfedab66f0ba9e8cf72ec2e16c25c27a2698872e8f0184779ce12e49f1aa8b8cbe0aa5484a5978a01dd8ade42407eed8c230b539c1afe183179e2f78e18b",
+    "signature": "stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E66.0.60",
     "bytes": "0x7beed44d6fedfb4b9eace6f5dc2fb624c7190d2d27d54e547556084e9849f146fb4dccf05f67312bfa5351efc2168570641e9c0910380d73dde06d31b2558bae",
+    "signature": "stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0||stack_underflow|3|CALL|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1082,11 +1216,13 @@
    "founderLife": 6,
    "P": {
     "genomeId": "P67",
-    "bytes": "0x63ac13e07233715b4564cd630f1aff59733dd08d32a5bafbc21017a9003904288750226874284f6758133c9524ac33d49f74c1405d56edc6fc01630d2ebd2313"
+    "bytes": "0x63ac13e07233715b4564cd630f1aff59733dd08d32a5bafbc21017a9003904288750226874284f6758133c9524ac33d49f74c1405d56edc6fc01630d2ebd2313",
+    "signature": "invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E67.0.60",
     "bytes": "0x634bc12e913371bf0cc6a04afa67d4b72af2b7c8491beedf116de1e25c3156728a36273f06984f704a0d297575976fe1af1fbb96e3fd88058e756c6521c38782",
+    "signature": "invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1098,11 +1234,13 @@
    "founderLife": 4,
    "P": {
     "genomeId": "P68",
-    "bytes": "0x47484252b06d435cdc88bc274684a78429e5d8f51e073484d714f5582ac7613e6f5463318d84280c2eb34f7d35820b1189150a31fbb77ac039282d6152c27d5b"
+    "bytes": "0x47484252b06d435cdc88bc274684a78429e5d8f51e073484d714f5582ac7613e6f5463318d84280c2eb34f7d35820b1189150a31fbb77ac039282d6152c27d5b",
+    "signature": "other_halt|4|MSTORE|0||0|0|0|0|0||other_halt|4|MSTORE|0||0|0|0|0|0||other_halt|4|MSTORE|0||0|0|0|0|0||other_halt|4|MSTORE|0||0|0|0|0|0||other_halt|4|MSTORE|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E68.0.60",
     "bytes": "0x474831523f0f905c4c624543bff5a16dc2365f8d2e125ee2c3bbec9b55139ad79863ef910f87eb35f0966ac2d17f9c4041dc57e60f52f85c9c038b57d9453d4b",
+    "signature": "other_halt|4|MSTORE|0||0|0|0|0|0||other_halt|4|MSTORE|0||0|0|0|0|0||other_halt|4|MSTORE|0||0|0|0|0|0||other_halt|4|MSTORE|0||0|0|0|0|0||other_halt|4|MSTORE|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1114,11 +1252,13 @@
    "founderLife": 4,
    "P": {
     "genomeId": "P69",
-    "bytes": "0x5a365383abed9b5b40b3d6ea5454d413ab9efb446c8ba46f96fb20fd1b3f1754eae121a9c216fc25d21cbddeb86c71ac0df73b25ac0dc8db201dfd979e0f650a"
+    "bytes": "0x5a365383abed9b5b40b3d6ea5454d413ab9efb446c8ba46f96fb20fd1b3f1754eae121a9c216fc25d21cbddeb86c71ac0df73b25ac0dc8db201dfd979e0f650a",
+    "signature": "stack_underflow|4|DUP4|0||0|0|0|0|0||stack_underflow|4|DUP4|0||0|0|0|0|0||stack_underflow|4|DUP4|0||0|0|0|0|0||stack_underflow|4|DUP4|0||0|0|0|0|0||stack_underflow|4|DUP4|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E69.0.60",
     "bytes": "0x5a3653833ec2405e50eebd6aab03919c056df546007a872f3348ac4cfc4593a0b92c81e5099c9c4528ce1ca995e3544eb46beec0843d0a4fa1bc98ef93f5f15f",
+    "signature": "stack_underflow|4|DUP4|0||0|0|0|0|0||stack_underflow|4|DUP4|0||0|0|0|0|0||stack_underflow|4|DUP4|0||0|0|0|0|0||stack_underflow|4|DUP4|0||0|0|0|0|0||stack_underflow|4|DUP4|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1130,11 +1270,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P70",
-    "bytes": "0x7427a9672f0c12744b7c8256998a60f54cade75d48bd3518f194515c89fd664b263d8a1bdd5edab903b4d0c9ab4de37c27f9d4deb19075351df453e4d4dd6520"
+    "bytes": "0x7427a9672f0c12744b7c8256998a60f54cade75d48bd3518f194515c89fd664b263d8a1bdd5edab903b4d0c9ab4de37c27f9d4deb19075351df453e4d4dd6520",
+    "signature": "stack_underflow|3|XOR|0||0|0|0|0|0||stack_underflow|3|XOR|0||0|0|0|0|0||stack_underflow|3|XOR|0||0|0|0|0|0||stack_underflow|3|XOR|0||0|0|0|0|0||stack_underflow|3|XOR|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E70.0.60",
     "bytes": "0x74152ad1edf038fa55f2e4e556c0d15606b05d623fe8351806eb27570745d6ae47c0d50a51aad0aaa15efde8366fb9318b023f9329903aedf3f91b9684e0f9f3",
+    "signature": "stack_underflow|3|XOR|0||0|0|0|0|0||stack_underflow|3|XOR|0||0|0|0|0|0||stack_underflow|3|XOR|0||0|0|0|0|0||stack_underflow|3|XOR|0||0|0|0|0|0||stack_underflow|3|XOR|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1146,11 +1288,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P71",
-    "bytes": "0x4545e43ab0ca651c457eccd1aff36e0c6eb6c454e909c5c004ce55be634a124cacdffee1accb507d10013ce74e3290bf5a39f3bfbb6968f171a6c3b7692c0aca"
+    "bytes": "0x4545e43ab0ca651c457eccd1aff36e0c6eb6c454e909c5c004ce55be634a124cacdffee1accb507d10013ce74e3290bf5a39f3bfbb6968f171a6c3b7692c0aca",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E71.0.60",
     "bytes": "0x45482d693e6e2a3645be844dcfe78c9d2acd9d3540d29f24debebf843c1025d4bc7184b3c4771a7fff49465f373202f3781893d391e43b1e8ee1c34f36909686",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1162,11 +1306,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P72",
-    "bytes": "0x7327537a6e1beeed8d6e53937e72629798caaa56e478c7a5b0343c4d18203b3b25cd33bbc2c65377ff07bde20d080e0920c59576107fb9f9837d8a2d17c3f0b4"
+    "bytes": "0x7327537a6e1beeed8d6e53937e72629798caaa56e478c7a5b0343c4d18203b3b25cd33bbc2c65377ff07bde20d080e0920c59576107fb9f9837d8a2d17c3f0b4",
+    "signature": "stack_underflow|3|MULMOD|0||0|0|0|0|0||stack_underflow|3|MULMOD|0||0|0|0|0|0||stack_underflow|3|MULMOD|0||0|0|0|0|0||stack_underflow|3|MULMOD|0||0|0|0|0|0||stack_underflow|3|MULMOD|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E72.0.60",
     "bytes": "0x7307915f21a41281d51a6340dbc73b558e385e2f9e78aa4618b93ef781741f3ba95a2e20df3a92db428b50569406f009b9b8566eafb1966925c23d64f334e6ce",
+    "signature": "stack_underflow|3|MULMOD|0||0|0|0|0|0||stack_underflow|3|MULMOD|0||0|0|0|0|0||stack_underflow|3|MULMOD|0||0|0|0|0|0||stack_underflow|3|MULMOD|0||0|0|0|0|0||stack_underflow|3|MULMOD|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1178,11 +1324,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P73",
-    "bytes": "0x661a201657d42bb0755b2d56fe11af9370b92666d8e591ef99fa8dcee28ddcc1de83d787bdbf1b209925067174436ce92a076ef40007aa89884d9d66a7bd700f"
+    "bytes": "0x661a201657d42bb0755b2d56fe11af9370b92666d8e591ef99fa8dcee28ddcc1de83d787bdbf1b209925067174436ce92a076ef40007aa89884d9d66a7bd700f",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E73.0.60",
     "bytes": "0x660f8c9c108f6bdb753f600c79cab332c0d417d92f9fe76fc5fa7df169eb8b0c13993e0687c1f8bbbf36d5bd1e8bd5e94b18dfc28ea0f73110aa263234a2376f",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1194,11 +1342,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P74",
-    "bytes": "0x7a1fdfad8599a55f90606c754895b5d03212e7276893c1914c8cd62d76edbf8ebe5f3daf5ee8886c15bdf0ea106939fb7a58b8659ba1850c41fa59b6dbf74ed1"
+    "bytes": "0x7a1fdfad8599a55f90606c754895b5d03212e7276893c1914c8cd62d76edbf8ebe5f3daf5ee8886c15bdf0ea106939fb7a58b8659ba1850c41fa59b6dbf74ed1",
+    "signature": "stack_underflow|3|SWAP12|0||0|0|0|0|0||stack_underflow|3|SWAP12|0||0|0|0|0|0||stack_underflow|3|SWAP12|0||0|0|0|0|0||stack_underflow|3|SWAP12|0||0|0|0|0|0||stack_underflow|3|SWAP12|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E74.0.60",
     "bytes": "0x7adc97d90dc42373701accadc0e61ddab2e6b58ea94108073c8aaa3f76514173de296ee1b311d19d967df06e4297e8453b68f5d69b87a3dea9f39fe352a7d741",
+    "signature": "stack_underflow|3|SWAP12|0||0|0|0|0|0||stack_underflow|3|SWAP12|0||0|0|0|0|0||stack_underflow|3|SWAP12|0||0|0|0|0|0||stack_underflow|3|SWAP12|0||0|0|0|0|0||stack_underflow|3|SWAP12|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1210,11 +1360,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P75",
-    "bytes": "0x427584a13566494f0d66849b9da034e334d38c8a1a70b41af630f9af5caf8d1148437422bba60722e73d40235c101616acad63bc25868bbfc8dacbbe34857272"
+    "bytes": "0x427584a13566494f0d66849b9da034e334d38c8a1a70b41af630f9af5caf8d1148437422bba60722e73d40235c101616acad63bc25868bbfc8dacbbe34857272",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E75.0.60",
     "bytes": "0x42324f241eade1d0114345850f9aca002bb4f0a5fa1b5675f364ecb272632acc9eedfb2b5326b998e38d82d25c91e17496adbc590fc6ab6fc81b934e8e9d29d0",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1226,11 +1378,13 @@
    "founderLife": 6,
    "P": {
     "genomeId": "P76",
-    "bytes": "0x628e5a843d1767b47340bb240600f46eb6bae18f52a980af3ee11661656e92b0d2f531228a2791d22622c7429c1534a20af0a1c07b39c4b0c2f48441a9e6e295"
+    "bytes": "0x628e5a843d1767b47340bb240600f46eb6bae18f52a980af3ee11661656e92b0d2f531228a2791d22622c7429c1534a20af0a1c07b39c4b0c2f48441a9e6e295",
+    "signature": "invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E76.0.60",
     "bytes": "0x621573873d3167aa6c40feb2c18eca78af8f901f71a3d215d1127a83e35c2a3afcd85933afcdd927f6d25009ba17806f76423fb64e2fc2ed2749288895954346",
+    "signature": "invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0||invalid_opcode|6|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1242,11 +1396,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P77",
-    "bytes": "0x643f1ba11a627d99d72ba651dc0a2859c185187103a84d2b57990f2e5e027ae4422d0633202786b3cd076c1414430b567760aacba61b874d3b573c90c0d617d0"
+    "bytes": "0x643f1ba11a627d99d72ba651dc0a2859c185187103a84d2b57990f2e5e027ae4422d0633202786b3cd076c1414430b567760aacba61b874d3b573c90c0d617d0",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E77.0.60",
     "bytes": "0x645c68a167157d401aa30b762a4e6c65feed8e8d8b497a2ea65d640ddf2b3b142c9ec6cba6cf9c803b16e8147d136127e39448717bb5bf478b66d9597f7164e1",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1258,11 +1414,13 @@
    "founderLife": 4,
    "P": {
     "genomeId": "P78",
-    "bytes": "0x763bb74e336fb9dd5402c262cdca27ca91d63e79aebf195d4a0ae23c661d2f74ba4de4f96f0e399229c72c5a7616478fae74dcb0c38643d633bc243071f90dac"
+    "bytes": "0x763bb74e336fb9dd5402c262cdca27ca91d63e79aebf195d4a0ae23c661d2f74ba4de4f96f0e399229c72c5a7616478fae74dcb0c38643d633bc243071f90dac",
+    "signature": "invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E78.0.60",
     "bytes": "0x76ca8b015513547211834862894e2bf9ad624805370da4534a154cbf37660cca42e21a6cf55d52a42783d10b2b0eaa8f95bb287132126065c2f7e9c6ddc2574d",
+    "signature": "invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1274,11 +1432,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P79",
-    "bytes": "0x446b012f34e2b390314d7b71f03994f438a9ecf6b089007f000a1762b1de461f64af2435e2e0fd1b8eed92a2e2ccb41e70eebf8e03a5e9f003f23764ca5e3dd0"
+    "bytes": "0x446b012f34e2b390314d7b71f03994f438a9ecf6b089007f000a1762b1de461f64af2435e2e0fd1b8eed92a2e2ccb41e70eebf8e03a5e9f003f23764ca5e3dd0",
+    "signature": "stack_underflow|3|SWAP5|0||0|0|0|0|0||stack_underflow|3|SWAP5|0||0|0|0|0|0||stack_underflow|3|SWAP5|0||0|0|0|0|0||stack_underflow|3|SWAP5|0||0|0|0|0|0||stack_underflow|3|SWAP5|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E79.0.60",
     "bytes": "0x446bf495d5224606f214f5d6b2fe94b0bc9820e470b2fe118242170dc454e0d1feb017ef90d4840b8483b51da26b8480de1a00c5a3d66ca84b21cc29b9ff4eb0",
+    "signature": "stack_underflow|3|SWAP5|0||0|0|0|0|0||stack_underflow|3|SWAP5|0||0|0|0|0|0||stack_underflow|3|SWAP5|0||0|0|0|0|0||stack_underflow|3|SWAP5|0||0|0|0|0|0||stack_underflow|3|SWAP5|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1290,11 +1450,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P80",
-    "bytes": "0x323fe76f52122a3a368570875671272e12fe93388f69266a36d9102c77af8bf74183ed8adbc7137b7485b6d8cf4e4b145bd96e1d34ca83112c15a5e787457807"
+    "bytes": "0x323fe76f52122a3a368570875671272e12fe93388f69266a36d9102c77af8bf74183ed8adbc7137b7485b6d8cf4e4b145bd96e1d34ca83112c15a5e787457807",
+    "signature": "invalid_opcode|3|SWAPN|0||0|0|0|0|0||invalid_opcode|3|SWAPN|0||0|0|0|0|0||invalid_opcode|3|SWAPN|0||0|0|0|0|0||invalid_opcode|3|SWAPN|0||0|0|0|0|0||invalid_opcode|3|SWAPN|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E80.0.60",
     "bytes": "0x323fe790cc81875a2f4e97fefbdab6a7e6d74b28668077c57e255c72eca3bb3dfcd478465bf07bbfcaa19cd79fd5b4dbbb05c6a0b04b1b3aa96e377787f81167",
+    "signature": "invalid_opcode|3|SWAPN|0||0|0|0|0|0||invalid_opcode|3|SWAPN|0||0|0|0|0|0||invalid_opcode|3|SWAPN|0||0|0|0|0|0||invalid_opcode|3|SWAPN|0||0|0|0|0|0||invalid_opcode|3|SWAPN|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1306,11 +1468,13 @@
    "founderLife": 4,
    "P": {
     "genomeId": "P81",
-    "bytes": "0x75ab519bbf0e0d6ac85eb19def21012da3908c1c5aee9f5b1e8a85eb840025568b7613c16aae674ba7ca71fa62d4d6c29f374971937f9823d8d499bc668d9973"
+    "bytes": "0x75ab519bbf0e0d6ac85eb19def21012da3908c1c5aee9f5b1e8a85eb840025568b7613c16aae674ba7ca71fa62d4d6c29f374971937f9823d8d499bc668d9973",
+    "signature": "stack_underflow|4|DUP11|0||0|0|0|0|0||stack_underflow|4|DUP11|0||0|0|0|0|0||stack_underflow|4|DUP11|0||0|0|0|0|0||stack_underflow|4|DUP11|0||0|0|0|0|0||stack_underflow|4|DUP11|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E81.0.60",
     "bytes": "0x759c13221eb2cf54c8591a90d9882fd905e64b3d3a791130338adf9baabbb431e325e1e5f2b30cd45899892b5a09b4fc3b2fee4f3f10b823ca2aa2e099aed75d",
+    "signature": "stack_underflow|4|DUP11|0||0|0|0|0|0||stack_underflow|4|DUP11|0||0|0|0|0|0||stack_underflow|4|DUP11|0||0|0|0|0|0||stack_underflow|4|DUP11|0||0|0|0|0|0||stack_underflow|4|DUP11|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1322,11 +1486,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P82",
-    "bytes": "0x649747d8d0df60dcf9ca78536641417ca4e79cd32b75202fc6f57cd3090fc55a9a062a9db00f7bcf87c649820ea7a189fcd7ba4c3f5e570e793d8821a8221be3"
+    "bytes": "0x649747d8d0df60dcf9ca78536641417ca4e79cd32b75202fc6f57cd3090fc55a9a062a9db00f7bcf87c649820ea7a189fcd7ba4c3f5e570e793d8821a8221be3",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E82.0.60",
     "bytes": "0x64971bc594df75dc32c8b95d1db5223cc260179b1d25c6ae8f5d5d4cc3e11de7479626af54f622893db9a356e116a53842d9a46bade50c4b3d2039de0f86db55",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1338,11 +1504,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P83",
-    "bytes": "0x6764e11b699efc06c55cf0300358defe1f94a44c4630208e06224cef57fe8dedf4ef8f0e6db71183a1c0c1b5bcf3f222a22aef2f4ef406d7137c8ea1ebe2ac41"
+    "bytes": "0x6764e11b699efc06c55cf0300358defe1f94a44c4630208e06224cef57fe8dedf4ef8f0e6db71183a1c0c1b5bcf3f222a22aef2f4ef406d7137c8ea1ebe2ac41",
+    "signature": "stack_underflow|3|CREATE|0||0|0|0|0|0||stack_underflow|3|CREATE|0||0|0|0|0|0||stack_underflow|3|CREATE|0||0|0|0|0|0||stack_underflow|3|CREATE|0||0|0|0|0|0||stack_underflow|3|CREATE|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E83.0.60",
     "bytes": "0x67bf27b1d058461ef931f0e0da33f08013336173a876819bc50e25dc6bb69b3ffeef03c7cfc588a8e74ab73f05febd3dd786fb9e4e32eac251e1c5b4960f23f4",
+    "signature": "stack_underflow|3|CREATE|0||0|0|0|0|0||stack_underflow|3|CREATE|0||0|0|0|0|0||stack_underflow|3|CREATE|0||0|0|0|0|0||stack_underflow|3|CREATE|0||0|0|0|0|0||stack_underflow|3|CREATE|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1354,11 +1522,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P84",
-    "bytes": "0x4136f9eab8a116e8891378b0d2774392f105323d57d2a1b620875b97a0073cb041ad9c8c6607f815a956ea3586d9ee8db3ce923e36f84fd3ce8ac9e0a2fcdd52"
+    "bytes": "0x4136f9eab8a116e8891378b0d2774392f105323d57d2a1b620875b97a0073cb041ad9c8c6607f815a956ea3586d9ee8db3ce923e36f84fd3ce8ac9e0a2fcdd52",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E84.0.60",
     "bytes": "0x415b0d4c8900d7a68fca259116ef8b7b94724ef9c46df39e3ec1f36a41cbaf30f4ad9cebaff201a7dd7c10daa27254e80ece18b02ea6ce5935180d238cdeb7d1",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1370,11 +1540,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P85",
-    "bytes": "0x5975ba2d34f12428adaace2b6ad3fa5d998854099b0d5cd6f5be7562070464446f0f81c0573160a97d292f65e4f5bd9b8a4d562155bf5ad41ec6e5f2ae067be0"
+    "bytes": "0x5975ba2d34f12428adaace2b6ad3fa5d998854099b0d5cd6f5be7562070464446f0f81c0573160a97d292f65e4f5bd9b8a4d562155bf5ad41ec6e5f2ae067be0",
+    "signature": "stack_underflow|3|CREATE2|0||0|0|0|0|0||stack_underflow|3|CREATE2|0||0|0|0|0|0||stack_underflow|3|CREATE2|0||0|0|0|0|0||stack_underflow|3|CREATE2|0||0|0|0|0|0||stack_underflow|3|CREATE2|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E85.0.60",
     "bytes": "0x597553fd03d15ee924f3e259d2aef0d8caa9f7a5385d7e24f5ceb52dbec9df40874b72a8235921d97da5c25c35437983e59adfec65710914570a102c2eee96d6",
+    "signature": "stack_underflow|3|CREATE2|0||0|0|0|0|0||stack_underflow|3|CREATE2|0||0|0|0|0|0||stack_underflow|3|CREATE2|0||0|0|0|0|0||stack_underflow|3|CREATE2|0||0|0|0|0|0||stack_underflow|3|CREATE2|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1386,11 +1558,13 @@
    "founderLife": 4,
    "P": {
     "genomeId": "P86",
-    "bytes": "0x780af2e720a89643c517327ecbbb16480202b637240e151022293561107bf62647ddbd7ffa50ec61cbb5bb917417af99fcea4a572e7f05a8dcdfbfab5ccc482e"
+    "bytes": "0x780af2e720a89643c517327ecbbb16480202b637240e151022293561107bf62647ddbd7ffa50ec61cbb5bb917417af99fcea4a572e7f05a8dcdfbfab5ccc482e",
+    "signature": "invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E86.0.60",
     "bytes": "0x785993992822ff0c7a7b63eae6a7b0427f1c6ef92f40ad109492356151f9eacaccca087ecb724aa9c82d8bba297d0d7b2f7f8ffdc0cde1a9fca2c81e191dc08a",
+    "signature": "invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0||invalid_opcode|4|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   },
@@ -1402,11 +1576,13 @@
    "founderLife": 3,
    "P": {
     "genomeId": "P87",
-    "bytes": "0x423bde1c6f3366afcbb910f0e9bfff66612d431219203d4ac1d4986105c96c9d38e0bf2cd525c18c9752f70152b9bb5a8fc08b32f5890d25e3835236dc665a48"
+    "bytes": "0x423bde1c6f3366afcbb910f0e9bfff66612d431219203d4ac1d4986105c96c9d38e0bf2cd525c18c9752f70152b9bb5a8fc08b32f5890d25e3835236dc665a48",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0"
    },
    "N": {
     "genomeId": "E87.0.60",
     "bytes": "0x423bde2e6fca97d22f690811c04a1b673b7b25de30720d5a63dea49f6edba92bd5d073ba88a5e9cf5521ab7d9d9d65c800e5412dcfb3ea854839f05684ba82d3",
+    "signature": "invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0||invalid_opcode|3|Unknown|0||0|0|0|0|0",
     "hamming": 60
    }
   }

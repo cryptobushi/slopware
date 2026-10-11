@@ -10,8 +10,9 @@ produced a loop-class offspring. The vertical scale is global: one doubling is t
 room per cell is the smallest whole number of doublings at or above the largest rise anywhere in the record (STEPS'
 axis rule), so nothing is autoscaled and nothing is clipped. Geometry, ordering, scales, orientation, line weights, loop
 mark and margins are fixed before the run.
-Input: {"pairs":[{"label":..., "founderLog2":..., "P":[[B_1..B_G] per replicate], "N":[...], "loopP":[g or null per rep],
-"loopN":[...]}]}. --mock draws synthetic trajectories from a toy model and makes no claim about anything.
+Input: {"pairs":[{"label":..., "founderLog2":..., "P":[[B_1..B_G] per replicate, absolute log2 values], "N":[...], "loopP":[g or null per rep],
+"loopN":[...]}]}; height drawn is B_g - founderLog2. Room per half-cell: max(1, ceil(largest rise in the record)).
+--mock draws synthetic trajectories from a toy model and makes no claim about anything.
 """
 import json, math, sys, random
 from PIL import Image, ImageDraw
@@ -45,12 +46,13 @@ if mock:
             P = [traj(0, p0=0.01, steps=(0.5,)) for _ in range(R)]; N = [traj(0, p0=0.01, steps=(0.5,)) for _ in range(R)]
         loopP = [rng.randrange(G) if rng.random() < 0.1 else None for _ in range(R)]
         loopN = [rng.randrange(G) if rng.random() < 0.1 else None for _ in range(R)]
+        P = [[f0 + v for v in t] for t in P]; N = [[f0 + v for v in t] for t in N]          # the record carries absolute log2 values
         pairs.append({"label": f"mock {i} {kind}", "founderLog2": f0, "P": P, "N": N, "loopP": loopP, "loopN": loopN})
 else:
     pairs = json.load(open(args[0]))["pairs"]
 out = args[1]
-rise = max((max(max(t) for t in pr[side]) for pr in pairs for side in ("P", "N")), default=0.0)
-D = max(1, math.ceil(rise - 1e-9))                       # doublings of room per half-cell, global
+rise = max((max(t[-1] - pr["founderLog2"] for t in pr[side]) for pr in pairs for side in ("P", "N")), default=0.0)   # B_G - B_0, non-decreasing so the maximum is at G
+D = max(1, math.ceil(rise - 1e-9))                       # doublings of room per half-cell, global, never zero
 if strip:
     W = SIZE if len(args) > 2 else 1680; M = W * 0.03; GAP = W * 0.006
     cw = W - 2 * M; PX = cw / G; UNIT = 18 * (W / 1680)       # pixels per doubling, fixed per width; room D each way
@@ -67,11 +69,12 @@ for i, pr in enumerate(pairs):
     d.line([(x0, yc), (x0 + cw, yc)], fill=(205, 205, 205), width=LW)
     for side, sgn in (("P", -1), ("N", 1)):
         for k, t in enumerate(pr[side]):
-            pts = [(x0 + g * PX, yc + sgn * t[g] * UNIT) for g in range(len(t))]
+            f0 = pr["founderLog2"]
+            pts = [(x0 + g * PX, yc + sgn * (t[g] - f0) * UNIT) for g in range(len(t))]
             d.line(pts, fill=(0, 0, 0), width=LW)
             lg = pr["loop" + side][k]
             if lg is not None:
-                x = x0 + lg * PX; y = yc + sgn * t[lg] * UNIT; m = max(1.5, W / 1024)
+                x = x0 + lg * PX; y = yc + sgn * (t[lg] - f0) * UNIT; m = max(1.5, W / 1024)
                 d.rectangle([x - m, y - m, x + m, y + m], fill=(200, 60, 30))
 img.save(out)
 print(f"{out}: {int(W)}x{int(H)} · {'strip' if strip else '8x11 grid'} · cells {cw:.0f}x{ch:.0f}px · room {D} doublings each way · {UNIT:.1f}px per doubling · {PX:.2f}px per generation")
