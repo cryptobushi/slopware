@@ -159,7 +159,23 @@ Halt for inspection (deterministic): any generation-1 field mismatch with the E3
 
 ## 12. The picture
 
-Fixed and hashed before the run; independent of the result. One strip per pair, 88 strips in parents.json order, generations left to right. From a shared baseline the *P*-founded replicates are drawn upward and the *N*-founded downward, height log₂ of the best finite fitness, one hairline per replicate, a red mark where a replicate first produced a loop-class offspring. **The vertical scale is global:** one doubling is the same height in every strip, each strip has room for sixteen doublings each way, which holds any finite run under the 1,000,000-gas ceiling above a three-instruction founder so nothing is ever clipped, the baseline is each pair's shared founder fitness, and no strip is autoscaled; STEPS already showed that global scaling can be visually quiet and honest, and that discipline is kept. The figure is a mirror: identical trajectories give symmetry, no adaptation a flat line, divergence asymmetry, convergence a strip asymmetric on the left and symmetric on the right. Orientation (*P* up, *N* down) is fixed now. A draft renderer with a synthetic mock exists (`scripts/e4_mirror.py --mock`); the mock exercises six cases, no adaptation, identical adaptation, early divergence then convergence, persistent divergence, one extreme finite runner, and many overlapping replicates, and the rendering must stay legible under all of them. The artist names the work after the synthetic mock and before any trajectory, as before; the rendering does not change after E4 is seen. Title territory noted by the reviewer, for later and not from results: consequence rather than difference.
+Fixed and hashed before the run; independent of the result.
+
+The work uses a normal mintable aspect ratio rather than one long strip. The 88 matched founder pairs are arranged as an **8 × 11 grid**, in `parents.json` order, read left to right and then top to bottom. Each cell is one pair and contains the complete 256-generation trajectory.
+
+Within each cell, generations run left to right. The pair's shared generation-0 fitness is the horizontal centreline. The 16 *P*-founded replicate trajectories extend upward from that line and the 16 *N*-founded replicate trajectories downward, one hairline per replicate. Height is log₂ of best finite fitness. A red mark records the first generation in which a replicate produces a loop-class offspring.
+
+The vertical scale is global across the entire work: one doubling occupies the same distance in every cell. No cell is autoscaled. The room each cell holds follows STEPS' axis rule: the smallest whole number of doublings at or above the largest rise anywhere in the record, identical in every cell, so the record sets the scale, nothing is clipped, and a quiet record gives a quiet picture. The horizontal scale is likewise identical: generation 0 is the left edge and generation 256 the right edge of every cell.
+
+The grid is therefore 88 small mirrors.
+
+No adaptation leaves a cell nearly empty around its centreline. Similar response from *P* and *N* produces approximate symmetry. Different response produces asymmetry. Early divergence followed by convergence changes the shape across the cell from left to right. Persistent divergence remains asymmetric at the right edge.
+
+The grid geometry, ordering, scales, orientation, line weights, loop mark and margins are fixed and hashed before the first generation. They do not change in response to the record.
+
+The master artwork is rendered at a standard mintable aspect ratio. Recommended format: **1:1 square**. The scientific record may additionally contain a larger lossless render for inspection, but the edition itself is the square composition; the inspection render is not a second artwork.
+
+A draft renderer using synthetic trajectories is produced before the run (`scripts/e4_mirror.py --mock`, exercising no adaptation, identical adaptation, early divergence then convergence, persistent divergence, one extreme finite runner and dense overlap). The artist chooses the title from that synthetic mock before seeing any E4 trajectory. After the run only the frozen data are substituted into the frozen renderer.
 
 ## 13. Vocabulary
 
@@ -173,7 +189,7 @@ Program, genotype, founder, population, generation, selection rule, fitness as �
 4. Length amendment: 64 bytes for E4, justified by the predictor — decide.
 5. Smallest effect of interest ρ = 0.3, and the stated precision — decide.
 6. Predictor extraction completed 2026-10-11 from the sealed E3 record; definition, hash and properties fixed in §8.
-7. Render the synthetic mock at print scale across the six test cases of §12; the artist names the work.
+7. Render the square synthetic mock across the six test cases of §12; the artist names the work.
 8. Write the pre-registration.
 9. Hostile-review it once.
 10. Sign.
