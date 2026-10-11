@@ -38,8 +38,7 @@ pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
 .fig{margin:2.6em auto 0;text-align:center}
 .fig img{display:block;width:100%;height:auto;border:0;margin:0 auto}
 .fig p{margin:0.8em auto 0;max-width:620px;text-align:center}
-.fig .scroll{max-height:88vh;overflow:auto;margin:0 auto;max-width:416px;border:1px solid #000}
-.fig .scroll img{width:100%}
+#somewhere{max-width:416px}
 .h{margin:2em 0 0;padding-top:1em;border-top:1px solid #000}
 .h p{margin:0.4em 0 0}
 .h .v{margin-top:0.6em}
@@ -61,7 +60,7 @@ html.manifold-scheme-light{--manifold-page--color--background:#fff;--manifold-el
 </div>
 
 <div class="c fig" id="figure">
-<div class="scroll"><img id="somewhere" alt="SOMEWHERE ELSE: one row per parent; the parent then its neutral descendants at five distances, each drawn as a walk from its bytes with a 64-cell bar beneath, one cell per byte position, inked by how many of that position's 255 one-byte changes alter behaviour" src="e3-data/somewhere.png"></div>
+<img id="somewhere" alt="SOMEWHERE ELSE: one row per parent; the parent then its neutral descendants at five distances, each drawn as a walk from its bytes with a 64-cell bar beneath, one cell per byte position, inked by how many of that position's 255 one-byte changes alter behaviour" src="e3-data/somewhere.png">
 <p class="mute" id="caption">SOMEWHERE ELSE. One row per parent, 88 rows in parents.json order. Left to right: the parent, then its first walk&#x27;s neutral descendants at 8, 16, 32, 48 and 60 bytes&#x27; distance, each drawn as a walk from its bytes with THREADS&#x27; pen: faint, the whole program; black, the part it executes; red, three or more instructions. Beneath each, a bar of 64 cells, one per byte position, inked by the fraction of that position&#x27;s 255 one-byte changes that alter what the program does. Every genome in a row does exactly the same thing. If neutral history changed nothing about what is reachable next, every bar in a row would be the same bar. Rules fixed and hashed before the run.</p>
 </div>
 

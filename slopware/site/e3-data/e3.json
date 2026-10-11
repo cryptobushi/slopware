@@ -1,7 +1,7 @@
 {
  "experiment": "E3",
  "instrument": "The instrument was exact on every pre-registered check: all 1,319 endpoints reproduced byte for byte on a second machine before any neighbourhood was evaluated, all 141 repeated neighbourhoods agreed exactly, and no placement failed.",
- "generatedAt": "2026-10-11T02:02:06+00:00",
+ "generatedAt": "2026-10-11T02:16:40+00:00",
  "caption": "SOMEWHERE ELSE. One row per parent, 88 rows in parents.json order. Left to right: the parent, then its first walk's neutral descendants at 8, 16, 32, 48 and 60 bytes' distance, each drawn as a walk from its bytes with THREADS' pen: faint, the whole program; black, the part it executes; red, three or more instructions. Beneath each, a bar of 64 cells, one per byte position, inked by the fraction of that position's 255 one-byte changes that alter what the program does. Every genome in a row does exactly the same thing. If neutral history changed nothing about what is reachable next, every bar in a row would be the same bar. Rules fixed and hashed before the run.",
  "hypotheses": [
   {
