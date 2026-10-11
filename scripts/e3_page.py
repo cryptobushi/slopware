@@ -19,7 +19,7 @@ sentences = [l.strip() for l in open(f"{S}/sentences.txt") if l.strip()] if os.p
 edition = json.load(open(f"{S}/edition.json")) if os.path.exists(f"{S}/edition.json") else None
 esc = H.escape; pct = lambda x, d=1: f"{100*x:.{d}f}%"; fmt = lambda n: f"{n:,}"; T = ["8", "16", "32", "48", "60"]
 def bm(b, d=3): return f"{b['mean']:.{d}f} ({b['ci95'][0]:.{d}f} to {b['ci95'][1]:.{d}f})" if b else "n/a"
-def series(key, d=3): return ", ".join(f"{t}: {key[t]['mean']:.{d}f}" for t in T if key.get(t))
+def series(key, d=4): return ", ".join(f"{t}: {key[t]['mean']:.{d}f}" for t in T if key.get(t))
 x1, x2, x3, x4, x5 = res["X1"], res["X2"], res["X3"], res["X4"], res["X5"]
 ref = res.get("references", {}); rep = res.get("reproducibility", {}); gate = res.get("endpoint_reproducibility", {}); hz = res["harness"]
 ds, d5 = x1["Dsig"], x1["D5"]
@@ -44,20 +44,26 @@ Hs.append({"id": "X1", "name": "neighbourhood divergence with neutral distance",
 fr = lambda t: f"{pct(x2[t]['fraction_differing'],1)} ({pct(x2[t]['ci95_parent_bootstrap'][0],1)} to {pct(x2[t]['ci95_parent_bootstrap'][1],1)})"
 Hs.append({"id": "X2", "name": "accessibility without phenotypic change",
     "registered": "For each endpoint, the set of signatures reachable in one mutation against its parent's: Jaccard(S) and Dsig. Decision rule fixed in advance: an endpoint's neighbourhood differs from its parent's if Dsig > 0 or Jaccard(S) < 1, provided the reproducibility check passed with every replicate distance exactly zero. The fraction differing, by target, with a parent-level bootstrap. No threshold on the size of the difference.",
-    "observed": f"Reproducibility check: {rep.get('exact')} of {rep.get('subset')} re-evaluated neighbourhoods agreed exactly, so the rule applies as written. Endpoints whose neighbourhood differs from the parent's: " + "; ".join(f"at {t}, {fr(t)}" for t in T if x2.get(t)) + f". Jaccard(S) by target: {series({t: x2[t]['JS'] for t in T if x2.get(t)}, 2)}.",
-    "verdict": "reported as measured; see the sentences below for the reading",
+    "observed": f"Reproducibility check: {rep.get('exact')} of {rep.get('subset')} re-evaluated neighbourhoods agreed exactly, so the rule applies as written. Endpoints whose neighbourhood differs from the parent's: " + "; ".join(f"at {t}, {fr(t)}" for t in T if x2.get(t)) + f". Jaccard(S) by target: {series({t: x2[t]['JS'] for t in T if x2.get(t)}, 3)}.",
+    "verdict": ("every endpoint differs from its parent, at every target" if all(x2[t]["fraction_differing"] == 1 for t in T if x2.get(t)) else "fraction differing by target: " + ", ".join(f"{t}: {pct(x2[t]['fraction_differing'],1)}" for t in T if x2.get(t))),
     "note": "W5 showed that neutral history enables lifespan improvements sometimes; X2 asks how much of the immediate possibility space it reshapes."})
 def x3_line(k, d, scale=1):
     return "; ".join(f"at {t}, {x3[t][k]['mean']*scale:+.{d}f} ({x3[t][k]['ci95'][0]*scale:+.{d}f} to {x3[t][k]['ci95'][1]*scale:+.{d}f})" for t in T if x3.get(t))
+def x3_verdict(k, lab):
+    ex = [(t, x3[t][k]["mean"]) for t in T if x3.get(t) and (x3[t][k]["ci95"][0] > 0 or x3[t][k]["ci95"][1] < 0)]
+    if not ex: return f"{lab} unchanged at every target"
+    signs = {("down" if v < 0 else "up") for _, v in ex}
+    where = ", ".join(t for t, _ in ex)
+    return f"{lab} {'/'.join(sorted(signs))} at target{'s' if len(ex) > 1 else ''} {where}" + (" (within a hundredth of a percentage point)" if k != "richness" and all(abs(v) < 0.0001 for _, v in ex) else "")
 Hs.append({"id": "X3", "name": "accessible variation",
     "registered": "Three quantities per genome, as paired differences endpoint minus parent, by target: adjacent variation (the fraction of children whose signature differs from the genome's), phenotypic richness (distinct child signatures), upward accessibility (the fraction of children that outlive the genome on probe A). Pre-listed readings: unchanged; changed in one direction across parents; changed without a consistent direction. No threshold.",
     "observed": f"Adjacent variation, in percentage points: {x3_line('adjacentVariation', 2, 100)}. Richness, in distinct signatures: {x3_line('richness', 1)}. Upward accessibility, in percentage points: {x3_line('upward', 3, 100)}.",
-    "verdict": "reported as measured; see the sentences below for the reading",
+    "verdict": "; ".join(x3_verdict(k, lab) for k, lab in (("adjacentVariation", "adjacent variation"), ("richness", "richness"), ("upward", "upward accessibility"))),
     "note": "The word evolvability is not used."})
 Hs.append({"id": "X4", "name": "exact against aggregate",
     "registered": "For each endpoint–parent pair, the Jaccard overlap of the exact sets of non-neutral (position, value) substitutions, reported as the difference from its exact random-subset expectation (hypergeometric), beside D5 and Dsig, by target. The question is whether exact mutational overlap declines along the targets while the aggregate accessibility distances stay comparatively small, read beside the matched references. Reported as it appears; no binary classification.",
-    "observed": f"Jaccard(M) by target: {series({t: x4[t]['JM'] for t in T if x4.get(t)})}; minus its expectation for independent random sets of the same sizes: {series({t: x4[t]['JM_minus_expected'] for t in T if x4.get(t)})}. Beside it, D5 {series({t: x4[t]['D5'] for t in T if x4.get(t)})} and Dsig {series({t: x4[t]['Dsig'] for t in T if x4.get(t)})}.",
-    "verdict": "reported as measured; see the sentences below for the reading",
+    "observed": f"Jaccard(M) by target: {series({t: x4[t]['JM'] for t in T if x4.get(t)}, 3)}; minus its expectation for independent random sets of the same sizes: {series({t: x4[t]['JM_minus_expected'] for t in T if x4.get(t)}, 3)}. Beside it, D5 {series({t: x4[t]['D5'] for t in T if x4.get(t)})} and Dsig {series({t: x4[t]['Dsig'] for t in T if x4.get(t)})}.",
+    "verdict": f"exact overlap {x4['8']['JM']['mean']:.3f} at 8 to {x4['60']['JM']['mean']:.3f} at 60 against about {x4['60']['JM']['mean']-x4['60']['JM_minus_expected']['mean']:.3f} by chance; D5 at most {max(x4[t]['D5']['mean'] for t in T if x4.get(t)):.4f}, Dsig at most {max(x4[t]['Dsig']['mean'] for t in T if x4.get(t)):.4f}",
     "note": "A Jaccard(M) far above its expectation means the two programs share their exact fragile positions; near it, they share only as much as strangers would."})
 cr = x5["children_reaching"]; hc = x5["genomes_with_child_has_code"]; ec = x5["genomes_with_entered_code_call"]
 tot = res["genomes"]["parents"] + res["genomes"]["endpoints"]

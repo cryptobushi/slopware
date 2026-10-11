@@ -62,7 +62,7 @@ Lifespan is geometric: about one in five survives each instruction. Of 256 byte 
 | `src/`, `scripts/` | the lab |
 | [`BASELINE.md`](BASELINE.md) | what the lab found before launch, reproducible from seeds |
 | [`slopware/ROADMAP.md`](slopware/ROADMAP.md) | the proposed experiment: constitution, ontology, economics, eras, scorecards, open questions |
-| [`slopware/experiments/`](slopware/experiments/) | the pre-registered experiments: [E1 neighbourhoods](slopware/experiments/E1-neighbourhoods.md) (run 2026-10-08, results inside), [E2 walks on the living](slopware/experiments/E2-walks.md) (run 2026-10-09, results inside), [E3 notes](slopware/experiments/E3-notes.md) (not a pre-registration) |
+| [`slopware/experiments/`](slopware/experiments/) | the pre-registered experiments: [E1 neighbourhoods](slopware/experiments/E1-neighbourhoods.md) (run 2026-10-08, results inside), [E2 walks on the living](slopware/experiments/E2-walks.md) (run 2026-10-09, results inside), [E3 somewhere else](slopware/experiments/E3-somewhere-else.md) (run 2026-10-10, results inside) |
 | [`slopware/editions/`](slopware/editions/) | the research editions: one artwork per experiment, minted by the keeper, with the runbook and the mainnet record |
 | [`slopware/IDEAS.md`](slopware/IDEAS.md) | ideas on hold, with where they might fit and what must be true first |
 
