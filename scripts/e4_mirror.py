@@ -1,5 +1,7 @@
 """E4 picture, draft rules (design stage; frozen in the pre-registration). Usage:
-  python3 scripts/e4_mirror.py <trajectories.json> <out.png> [size_px] [--mock]
+  python3 scripts/e4_mirror.py <trajectories.json> <out.png> [size_px] [--mock] [--strip]
+--strip: the elongated inspection render for the scientific record (one strip per pair, 88 strips, same rules, same
+global scale; width 1680 px at the default), not a second artwork.
 88 founder pairs as an 8 x 11 grid in parents.json order, left to right then top to bottom, on a 1:1 square. Each cell is
 one pair: generations left to right (0 at the left edge, 256 at the right), the pair's shared generation-0 fitness as the
 horizontal centreline, the 16 P-founded replicates drawn upward and the 16 N-founded replicates downward, one hairline
@@ -13,7 +15,7 @@ Input: {"pairs":[{"label":..., "founderLog2":..., "P":[[B_1..B_G] per replicate]
 """
 import json, math, sys, random
 from PIL import Image, ImageDraw
-args = [a for a in sys.argv[1:] if not a.startswith('--')]; mock = '--mock' in sys.argv
+args = [a for a in sys.argv[1:] if not a.startswith('--')]; mock = '--mock' in sys.argv; strip = '--strip' in sys.argv
 SIZE = int(args[2]) if len(args) > 2 else 2048
 G = 256; R = 16; COLS, ROWS = 8, 11
 if mock:
@@ -49,12 +51,17 @@ else:
 out = args[1]
 rise = max((max(max(t) for t in pr[side]) for pr in pairs for side in ("P", "N")), default=0.0)
 D = max(1, math.ceil(rise - 1e-9))                       # doublings of room per half-cell, global
-W = H = SIZE; M = SIZE * 0.04; GAP = SIZE * 0.012
-cw = (W - 2 * M - (COLS - 1) * GAP) / COLS; ch = (H - 2 * M - (ROWS - 1) * GAP) / ROWS
-UNIT = (ch / 2) / D                                      # pixels per doubling, the same in every cell
-PX = cw / G                                               # pixels per generation
-LW = max(1, round(SIZE / 2048))                           # hairline
-img = Image.new("RGB", (W, H), (255, 255, 255)); d = ImageDraw.Draw(img)
+if strip:
+    W = SIZE if len(args) > 2 else 1680; M = W * 0.03; GAP = W * 0.006
+    cw = W - 2 * M; PX = cw / G; UNIT = 18 * (W / 1680)       # pixels per doubling, fixed per width; room D each way
+    ch = 2 * D * UNIT; H = int(2 * M + 88 * ch + 87 * GAP); COLS = 1
+else:
+    W = H = SIZE; M = SIZE * 0.04; GAP = SIZE * 0.012
+    cw = (W - 2 * M - (COLS - 1) * GAP) / COLS; ch = (H - 2 * M - (ROWS - 1) * GAP) / ROWS
+    UNIT = (ch / 2) / D                                      # pixels per doubling, the same in every cell
+    PX = cw / G                                               # pixels per generation
+LW = max(1, round(W / 2048))                              # hairline
+img = Image.new("RGB", (int(W), int(H)), (255, 255, 255)); d = ImageDraw.Draw(img)
 for i, pr in enumerate(pairs):
     r, c = divmod(i, COLS); x0 = M + c * (cw + GAP); yc = M + r * (ch + GAP) + ch / 2
     d.line([(x0, yc), (x0 + cw, yc)], fill=(205, 205, 205), width=LW)
@@ -64,7 +71,7 @@ for i, pr in enumerate(pairs):
             d.line(pts, fill=(0, 0, 0), width=LW)
             lg = pr["loop" + side][k]
             if lg is not None:
-                x = x0 + lg * PX; y = yc + sgn * t[lg] * UNIT; m = max(1.5, SIZE / 1024)
+                x = x0 + lg * PX; y = yc + sgn * t[lg] * UNIT; m = max(1.5, W / 1024)
                 d.rectangle([x - m, y - m, x + m, y + m], fill=(200, 60, 30))
 img.save(out)
-print(f"{out}: {W}x{H} · 8x11 cells of {cw:.0f}x{ch:.0f}px · room {D} doublings each way · {UNIT:.1f}px per doubling · {PX:.2f}px per generation")
+print(f"{out}: {int(W)}x{int(H)} · {'strip' if strip else '8x11 grid'} · cells {cw:.0f}x{ch:.0f}px · room {D} doublings each way · {UNIT:.1f}px per doubling · {PX:.2f}px per generation")
