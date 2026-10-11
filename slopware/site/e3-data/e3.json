@@ -1,7 +1,7 @@
 {
  "experiment": "E3",
  "instrument": "The instrument was exact on every pre-registered check: all 1,319 endpoints reproduced byte for byte on a second machine before any neighbourhood was evaluated, all 141 repeated neighbourhoods agreed exactly, and no placement failed.",
- "generatedAt": "2026-10-11T01:58:17+00:00",
+ "generatedAt": "2026-10-11T02:02:06+00:00",
  "caption": "SOMEWHERE ELSE. One row per parent, 88 rows in parents.json order. Left to right: the parent, then its first walk's neutral descendants at 8, 16, 32, 48 and 60 bytes' distance, each drawn as a walk from its bytes with THREADS' pen: faint, the whole program; black, the part it executes; red, three or more instructions. Beneath each, a bar of 64 cells, one per byte position, inked by the fraction of that position's 255 one-byte changes that alter what the program does. Every genome in a row does exactly the same thing. If neutral history changed nothing about what is reachable next, every bar in a row would be the same bar. Rules fixed and hashed before the run.",
  "hypotheses": [
   {
@@ -47,7 +47,7 @@
  ],
  "sentences": [
   "A program's neutral descendants, which still do exactly what it does under the frozen measurement, do not keep exactly its immediate futures: their one-mutant neighbourhoods diverge from its own, by a little at eight bytes and by more at every target after, in step with neutral distance.",
-  "The amount of adjacent variation does not change with the travel: the share of children that behave differently, and the share that outlive the genome, are the same sixty bytes away as at home, while the exact mutations that matter slowly rearrange, their overlap still high at sixty bytes but fallen, a Jaccard of 0.996 at eight bytes and 0.925 at sixty.",
+  "The amount of adjacent variation stays approximately constant with the travel: the share of children that behave differently, and the share that outlive the genome, are the same sixty bytes away as at home, while the exact mutations that matter slowly rearrange, their overlap still high at sixty bytes but fallen, a Jaccard of 0.996 at eight bytes and 0.925 at sixty.",
   "Two programs can do the same measured thing without being in the same place: silent history does not add or remove possibility so much as rearrange which possibilities are one mutation away, changing the shape of the next step without changing the present."
  ],
  "facts": [
@@ -73,7 +73,7 @@
   ],
   [
    "cross-harness",
-   "the 88 parents' neighbourhoods under E1's harness against E3's, D5 0.012 (0.001 to 0.033), exploratory"
+   "the 88 parents' neighbourhoods under E1's harness against E3's, D5 0.012 (0.001 to 0.033), exploratory. Not a measurement floor for E3: it compares two different harness implementations, which is why it exceeds every within-E3 distance; every E3 comparison used the same fixed harness, whose pre-registered repeat evaluations agreed exactly"
   ],
   [
    "world",

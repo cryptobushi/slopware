@@ -80,7 +80,7 @@ facts = [
     ["neighbourhoods", f"{fmt(tot)} exhaustive, 16,319 placeable children each, plus {rep.get('subset', 0)} re-evaluated on separate chains for the reproducibility check"],
     ["harness", f"{fmt(hz['placement_failures'])} placement failures excluded from every statistic; {fmt(hz['detector_unavailable'])} placements with the detector transaction unavailable"],
     ["endpoint gate", f"{gate.get('identical')} of {gate.get('rerun')} endpoints identical, byte for byte, between the droplet and a second machine before any neighbourhood was evaluated"],
-    ["cross-harness", f"the 88 parents' neighbourhoods under E1's harness against E3's, D5 {bm(res.get('cross_harness_E1_vs_E3_D5'))}, exploratory"],
+    ["cross-harness", f"the 88 parents' neighbourhoods under E1's harness against E3's, D5 {bm(res.get('cross_harness_E1_vs_E3_D5'))}, exploratory. Not a measurement floor for E3: it compares two different harness implementations, which is why it exceeds every within-E3 distance; every E3 comparison used the same fixed harness, whose pre-registered repeat evaluations agreed exactly"],
     ["world", "v0, frozen as in E1 and E2; every genotype evaluated from the same clean chain state at the same address"],
     ["record root", root],
     ["pre-registration anchor", ANCHOR, f"https://etherscan.io/tx/{ANCHOR}"],
