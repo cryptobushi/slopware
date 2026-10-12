@@ -221,3 +221,5 @@ The pre-registration (`E4-after.md`) departs from two sentences of these notes, 
 - §8 said the predictor table also carries E3's pair distances. `predictors.json` was sealed without them; *D*_sig per pair is in a separate file, `E4/pair-distances.json`, computed from E3's published histograms and reported descriptively; Jaccard(*M*) per pair lives only in the E3 record and is not reported in E4.
 The review's other findings (generation-1 caching semantics, smoke-test carve-out, binary outcome rules, degenerate ρ, seeded resampling with shared index sets, the *S* definition, tie-key collisions, halt semantics, the scale rule at zero rise, and wording) are specification added in the pre-registration, not changes to the design.
 
+
+- 2026-10-11, pre-sign: the pre-registration's outcome D no longer says history "acts through" anything (no causal claim; founders were not randomly assigned histories) and outcome E states that the horizon is descriptive with unadjusted pointwise bands, not a second confirmatory test. Claim-discipline wording only; §13 above is left as written and the pre-registration's text governs.
