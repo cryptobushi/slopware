@@ -1,6 +1,6 @@
 # SLOPWARE — readings
 
-The lab's observations of every program SLOPWARE has installed, as of 2026-10-12 20:52 UTC: 926 releases read, 924 installed, 2 refused by Ethereum. Each installed program's sixty-four bytes were placed on a private copy of Ethereum and called five ways with every instruction traced. Observation, not record: the installer itself records nothing about behaviour. The siblings line comes from experiment E1 (https://slopware.fun/e1.md), the walks line from E2 (https://slopware.fun/e2.md), the descendants line from E3 (https://slopware.fun/e3.md).
+The lab's observations of every program SLOPWARE has installed, as of 2026-10-12 21:48 UTC: 927 releases read, 925 installed, 2 refused by Ethereum. Each installed program's sixty-four bytes were placed on a private copy of Ethereum and called five ways with every instruction traced. Observation, not record: the installer itself records nothing about behaviour. The siblings line comes from experiment E1 (https://slopware.fun/e1.md), the walks line from E2 (https://slopware.fun/e2.md), the descendants line from E3 (https://slopware.fun/e3.md).
 
 - 80.3% died on their first instruction (the million-program study found 78.4%)
 - longest run: 7 instructions
@@ -1862,3 +1862,5 @@ The lab's observations of every program SLOPWARE has installed, as of 2026-10-12
 **SLOPWARE 000925** · installed · program 0x17312C87335A1DD5aE17133142264dc1d345C4aA · installed by 0x5fEB3281d7E81Ea5e55AAeA96639DaaCA5d601c1 It reached to shuffle what it was holding with empty hands, and fell. Had it lived, it would have had a child. It carries 2 words from a language Ethereum will speak later: DUPN, DATALOADN. 41 of its 64 bytes are luggage. Trace: DUP11
 
 **SLOPWARE 000926** · installed · program 0xEab1b7937C2F097974f2E9bA2BB91a97775dC1d1 · installed by 0x5fEB3281d7E81Ea5e55AAeA96639DaaCA5d601c1 Its first word was not a word: 0xd5 is not an instruction. It died before its first breath. Had it lived, it would have shouted into the log and had a child at a chosen address. It carries 4 words from a language Ethereum will speak later: EXTDELEGATECALL, DATALOAD, EOFCREATE, RJUMP. 32 of its 64 bytes are luggage. Trace: Unknown
+
+**SLOPWARE 000927** · installed · program 0x50f384672ab7125Cdd3E77B4591D4d39d6C24454 · installed by 0xc2065E8C845448b6FD7a3aD168918f2BA6e9d45f It reached to do some arithmetic with empty hands, and fell. Had it lived, it would have shouted into the log and gone somewhere else. 43 of its 64 bytes are luggage. Trace: ADDMOD
