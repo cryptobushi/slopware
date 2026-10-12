@@ -10,7 +10,7 @@ randomness → bytecode → EVM → ?
 
 SLOPWARE began with random programs and asked what happens when the programmer leaves.
 
-Every section below is marked **CURRENT** (built, deployed, verified) or **PROPOSED** (design only, in [`slopware/ROADMAP.md`](slopware/ROADMAP.md)). Nothing proposed is built.
+Every section below is marked **CURRENT** (built, deployed, verified) or **PROPOSED** (design only, in [`slopware/ROADMAP.md`](slopware/ROADMAP.md)). Nothing proposed was built when this was written (2026-10-08, release 802); E1, E2 and E3 have since run and E4 is pre-registered, each in its own document under [`slopware/experiments/`](slopware/experiments/).
 
 ---
 
@@ -50,7 +50,7 @@ eth_getCode(program) == bytecode        // sixty-four bytes, nothing before, not
 
 Lifespan is geometric: about one in five survives each instruction. Of 256 byte values, 55 are instructions that need no operands.
 
-**On mainnet, at the time of writing:** 802 releases, 800 installed, 2 refused, 92 collectors. 80% died on their first instruction; three halt cleanly; the longest life is six instructions; none answers to input. The population tracks the million-program distribution. Nothing has ever been abandoned.
+**On mainnet, at the time of writing (2026-10-08):** 802 releases, 800 installed, 2 refused, 92 collectors. 80% died on their first instruction; three halt cleanly; the longest life was six instructions; none answered to input. Current counts and observations are at [slopware.fun/readings](https://slopware.fun/readings) (926 releases by 2026-10-11; the longest life is now seven instructions and one program answers differently to different input). The population tracks the million-program distribution. Nothing has ever been abandoned.
 
 **What was deliberately not built:** evolution, mutation, breeding, reproduction, behaviour on the site, other lengths, weighting, repair, filtering, retries, chosen bytes, rarity, royalties, tokens. [`FUTURE.md`](slopware/FUTURE.md) is the record of refusals, and the reason the baseline is clean.
 
@@ -72,7 +72,7 @@ Local run: `./slopware/sim.sh` for the whole system on a private chain; `cd slop
 
 ## The question after this one — PROPOSED
 
-The original question was: what happens if arbitrary bytes are treated as EVM programs? The 802 releases and the million-program study answer it for Era 0.
+The original question was: what happens if arbitrary bytes are treated as EVM programs? The first 802 releases and the million-program study answer it for Era 0.
 
 The larger question is: **what happens when arbitrary computation is given heredity, variation, an environment, selection, resources, interaction and time?** Not whether SLOPWARE is alive. Whether an open-ended, rigorously controlled experiment that begins from code nobody wrote can ever move any criterion of artificial life from *not observed* to *replicated*, without a programmer inserting the thing being looked for. Failure is a valid result and will be published as one.
 
@@ -93,11 +93,11 @@ The framework is the artificial-life analysis of computer viruses, whose central
 9. SLOPWARE never declares itself alive.
 10. Metaphor is labelled and kept out of datasets.
 11. BIRTH never closes: anyone, at any time, may introduce unrelated random bytes into whatever world exists.
-12. A fee is taken only at abiogenesis. Everything after birth belongs to the experiment. (Amendment 1, 2026-10-08: the artist may sell one research edition per pre-registered experiment, defined before results exist, generated from the sealed record, offered after publication, conferring no rights; see the roadmap, Part X-B.)
+12. A fee is taken only at abiogenesis. *(This list is abridged: rules 2 and 3 of the full text are merged here, so the fee rule is rule 13 in [`ROADMAP.md`](slopware/ROADMAP.md) Part III, which governs.)* Everything after birth belongs to the experiment. (Amendment 1, 2026-10-08: the artist may sell one research edition per pre-registered experiment, defined before results exist, generated from the sealed record, offered after publication, conferring no rights; see the roadmap, Part X-B.)
 
 ### Decisions ratified — constitution version 1, 2026-10-08
 
-Genotype identity is the keccak of the bytes. Descendant length is fixed at 64 for the first experiment only. The genesis population is every release before the block of the first mutation event. Receipts refer to releases only; descendants have no owner. Refused genomes are in the population. Facts are stated in the installer's words; biology is reserved for the readings and labelled. A stopping rule will be written before the first population experiment. Full text in [`ROADMAP.md`](slopware/ROADMAP.md), Part X-A.
+Genotype identity is the keccak of the bytes. Descendant length was fixed at 64 for the first experiment only, and is fixed at 64 for E4 by amendment 2 (Part X-D), because E4's predictor is a fixed-length neighbourhood. The genesis population is every release before the block of the first mutation event. Receipts refer to releases only; descendants have no owner. Refused genomes are in the population. Facts are stated in the installer's words; biology is reserved for the readings and labelled. The first population experiment, E4, carries its stopping rule in its pre-registration (§8). Full text in [`ROADMAP.md`](slopware/ROADMAP.md), Part X-A.
 
 ### Ontology — PROPOSED
 
@@ -109,7 +109,7 @@ SLOPWARE charges for creation. Evolution is free. The only payment is `install`;
 
 ### Criteria — PROPOSED
 
-Each criterion carries a status, **NOT OBSERVED · CANDIDATE · REPLICATED · STRONG · DISPUTED**, that changes only with linked evidence: pattern in space-time, self-reproduction (R0–R5, with the line between infrastructure copying and an organism constructing its descendant drawn in words), self-representation (S0–S4), metabolism (M0–M5, where gas paid by a caller is M0), functional environmental interaction (E0–E5), interdependence, stability under perturbation, evolution, growth. After E1 and E2 every criterion is still NOT OBSERVED except trivial pattern-in-space-time and environment sensed (E-scale E1): E1 found one replicated one-mutant that executes a `CREATE` which fails for lack of balance and then halts cleanly; E2 found persistence walks that execute `CREATE` successfully (empty accounts, the named counterfeit of construction) and call themselves. A construction row was added at E2's signing. There is no percentage.
+Each criterion carries a status, **NOT OBSERVED · CANDIDATE · REPLICATED · STRONG · DISPUTED**, that changes only with linked evidence: pattern in space-time, self-reproduction (R0–R5, with the line between infrastructure copying and an organism constructing its descendant drawn in words), self-representation (S0–S4), metabolism (M0–M5, where gas paid by a caller is M0), functional environmental interaction (E0–E5), interdependence, stability under perturbation, evolution, growth. After E1, E2 and E3 every criterion is still NOT OBSERVED except trivial pattern-in-space-time and environment sensed (E-scale E1): E1 found one replicated one-mutant that executes a `CREATE` which fails for lack of balance and then halts cleanly; E2 found persistence walks that execute `CREATE` successfully (empty accounts, the named counterfeit of construction) and call themselves. A construction row was added at E2's signing. There is no percentage.
 
 ### Roadmap — PROPOSED
 
@@ -121,7 +121,7 @@ Organisms live in private EVMs with no host, filesystem or network access. Nothi
 
 ### Unresolved
 
-Vocabulary in public; fixed or variable genotype length; refused genomes in the population; collector-initiated descent; fossilisation and fees; where the record's root hashes live; first selection regimes; the `STOP` attractor; what "the same world" means across versions; price under future gas rules; whether a swarm is ever justified; a stopping rule. All in [`ROADMAP.md`](slopware/ROADMAP.md), Part XVI.
+Vocabulary in public; collector-initiated descent; fossilisation and fees; selection regimes after E4; the `STOP` attractor; what "the same world" means across versions; price under future gas rules; whether a swarm is ever justified. Answered since the list was written: refused genomes are in the population (Part X-A), descendant length is 64 for E4 (amendment 2, Part X-D), the records' root hashes live in anchor transactions sent by the keeper on mainnet and in kept volume snapshots, and E4 carries a written stopping rule. All in [`ROADMAP.md`](slopware/ROADMAP.md), Part XVI.
 
 ---
 

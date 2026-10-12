@@ -36,10 +36,15 @@ What happened, in order, and what has to keep happening. Nothing here deploys an
 4. **Keeper liveness is operational.** Down 51 minutes with nobody else completing means abandonment and a refund.
 5. **`setPrice` is the one mutable thing**, and the gas-rule change coming to mainnet is the reason it exists.
 
+## Since launch
+
 **E1 and the first research edition (2026-10-09).** E1 ran 2026-10-08/09 (record root `bed1b583…`, anchored block 26,151,785; results in `experiments/E1-neighbourhoods.md` and at `/e1`). THREADS (E1) minted by the keeper on `0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664`, listing 20909, embedded on `/e1`. The keeper finalizes the auction after it ends (`editions/README.md`).
 
-**E2 and the second research edition (2026-10-10).** E2 ran 2026-10-09/10 (record root `15849149…`, anchored block 26,158,653; results in `experiments/E2-walks.md` and at `/e2`). STEPS (E2) minted by the keeper as token 2, listing 20931, embedded on `/e2`. THREADS (E1) auction closes 2026-10-10 11:02 ET; the keeper finalizes both auctions when they end.
+**E2 and the second research edition (2026-10-10).** E2 ran 2026-10-09/10 (record root `15849149…`, anchored block 26,158,653; results in `experiments/E2-walks.md` and at `/e2`). STEPS (E2) minted by the keeper as token 2, listing 20931, embedded on `/e2`. THREADS (E1) closed 2026-10-10 11:02 ET and was settled by the keeper (next entry); STEPS has a 0.05 ETH reserve and its 24-hour clock starts at the first bid.
 
 **THREADS (E1) settled (2026-10-10).** Winning bid 0.06 ETH (rpl.eth), finalized by the keeper, proceeds to the artist. The keeper's finalize was sent by hand thirteen minutes after the close, ahead of the watcher's next half-hourly tick; the watcher then saw the listing finalized and exited normally.
 
-**E3 and the third research edition (2026-10-11).** E3 ran 2026-10-10/11 UTC (record root `70471484…`, anchored block 26,165,780; results in `experiments/E3-somewhere-else.md` and at `/e3`). SOMEWHERE ELSE (E3) minted by the keeper as token 3, listing 20956, reserve 0.05 ETH, embedded on `/e3`. The keeper finalizes it when it ends; STEPS (E2) closes 2026-10-11 11:00 ET.
+**E3 and the third research edition (2026-10-11).** E3 ran 2026-10-10/11 UTC (record root `70471484…`, anchored block 26,165,780; results in `experiments/E3-somewhere-else.md` and at `/e3`). SOMEWHERE ELSE (E3) minted by the keeper as token 3, listing 20956, reserve 0.05 ETH, embedded on `/e3`. Both SOMEWHERE ELSE and STEPS are reserve listings whose 24-hour clock starts at the first bid; neither had a bid by 2026-10-12, and the keeper finalizes each when its clock runs out.
+
+**E4 pre-registered and running (2026-10-11/12).** E4 (`experiments/E4-after.md`, title AFTER) was designed from E3's results, reviewed three times, signed by the artist on 2026-10-11 (commit `d016850`) and anchored from the keeper in transaction `0x4b7a6bfc84ae74b687351796a1fa6e4a9e03ea9f170dfbc5152e3de397e98a8a` (block 26,173,008) before any proposal under the run seed. The first run was halted after 33 minutes when viem's default 10 MiB response cap turned long step traces into harness failures (Amendment 2); the cap was raised, the fix verified, and the run restarted from generation 0 on 2026-10-12 01:55 UTC (Amendment 3). Results, the record anchor and the edition follow when the record is sealed.
+

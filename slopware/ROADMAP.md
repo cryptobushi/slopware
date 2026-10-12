@@ -1,6 +1,6 @@
 # SLOPWARE — the experiment after the programmer leaves
 
-*A design document. Nothing in it is built. It describes what exists today, exactly, and then designs what might come next in a way that could honestly fail.*
+*A design document. When it was written (2026-10-08) nothing in it was built; E1, E2 and E3 have since run and E4 is pre-registered (Parts X-A to X-D, XI, and `experiments/`). It describes what existed then, exactly, and then designs what might come next in a way that could honestly fail.*
 
 Status of every section is marked **CURRENT** (exists, verified against the repository and the chain) or **PROPOSED** (design only).
 
@@ -76,7 +76,7 @@ A local instrument (`src/`): generate uniform random bytes, place them on a priv
 
 Lifespan is geometric and independent of length: about one program in five survives each instruction. Of 256 byte values, 55 are instructions needing no operands; a random first byte is one with probability 0.215. Everything follows from that.
 
-**On mainnet, at the time of writing: 802 releases, 800 installed, 2 refused, 92 collectors.** 80% died on their first instruction; three halt cleanly (two begin with `STOP`; one walks off the end of its code after a `TIMESTAMP`); longest life six instructions; none answers to input; one executed `SSTORE` (then died, undoing it); one died of memory appetite. The population is tracking the million-program distribution.
+**On mainnet, at the time of writing (2026-10-08): 802 releases, 800 installed, 2 refused, 92 collectors.** 80% died on their first instruction; three halt cleanly (two begin with `STOP`; one walks off the end of its code after a `TIMESTAMP`); longest life six instructions; none answers to input (by 2026-10-11, at 926 releases, the longest life is seven and one program answers to input; current figures at `slopware.fun/readings`); one executed `SSTORE` (then died, undoing it); one died of memory appetite. The population is tracking the million-program distribution.
 
 ### I.7 What was deliberately not built
 
@@ -96,11 +96,11 @@ The brief for this roadmap describes the present system in a few ways that are n
 
 4. **The word is "install," not "birth."** The contract, events, site and documents use install / release / installer / program / refused / abandoned. "Birth" and organism vocabulary were considered and rejected during the design for the catalogue. The roadmap below uses *abiogenesis* and *birth* as conceptual terms for the same act, but the on-chain and catalogue vocabulary stays. Whether the roadmap's public face adopts biological language is an open decision (see Part X).
 
-5. **The current contract cannot host heredity.** It is immutable, has no notion of parent or child, and installs only bytes the chain chose. Any heredity, mutation, or fossilisation must live in new infrastructure beside it, never in it. The 802 releases are evidence; the installer is a sealed instrument.
+5. **The current contract cannot host heredity.** It is immutable, has no notion of parent or child, and installs only bytes the chain chose. Any heredity, mutation, or fossilisation must live in new infrastructure beside it, never in it. The first 802 releases are evidence; the installer is a sealed instrument.
 
 6. **The 17 "reproductions" in the million-program study never produced a child.** The brief cites "CREATE/CREATE2 execution." Correct, with the qualifier: in every case either the creation itself failed (value larger than any balance) or the parent's halt undid it. No child program ever existed. The catalogue's wording, "executed CREATE or CREATE2; no child program resulted," is the observation; "attempted reproduction" is a reading.
 
-7. **"Hundreds" is now 800 and rising**, with 92 collectors, two refusals, and a price that has already changed once.
+7. **"Hundreds" was 800 at the time of writing and is now past 900**, with 92 collectors at the time, two refusals, and a price that has already changed once.
 
 8. **Receipts for refused releases exist.** A rejected release has a token and the 64 bytes are kept, but no program. The brief's "deployed contract is the machine" holds for installed releases only; refused releases are machines Ethereum would not let exist, and the roadmap must decide whether they are in the population (see Part X).
 
@@ -108,7 +108,7 @@ The brief for this roadmap describes the present system in a few ways that are n
 
 ---
 
-## Part III — Constitution (PROPOSED, to be ratified by the artist)
+## Part III — Constitution (version 1, ratified by the artist in Part X-A; amended in Parts X-B and X-D)
 
 1. **Original machines are immutable.** Every installer release remains exactly what the chain produced. Nothing is retrofitted into them.
 2. **Humans may design environments, not organisms.** We may provide execution, state, resources, other organisms, mutation mechanisms, environmental variation, execution opportunities, and constraints. We may not insert desired function into any genome.
@@ -763,11 +763,13 @@ A methodological rule, recorded so that it is not forgotten when the catalogue i
 |---|---|---|
 | E1 genesis population | every release requested at or before block 26,149,410: releases 1 to 803 (801 installed, 2 refused) | the population that existed when the laboratory first opened; constitution decision 3, *G* = 26,149,410 |
 | E2 experimental population | the 88 E1 parents (42 genesis, 46 control) whose probe-A lifespan was three or more, by E2's frozen eligibility rule from the sealed E1 record | frozen; must not change |
+| E3 experimental population | the 88 E2 parents and their 1,319 neutral-walk endpoints frozen at Hamming 8, 16, 32, 48 and 60, by E3's frozen rules | frozen; must not change |
+| E4 founders | 176 founders: each E2 parent paired with its walk-0 Hamming-60 endpoint from the sealed E3 record, by E4's frozen rule (`experiments/E4/founders.json`) | frozen; must not change |
 | post-E1 releases | every release requested after block 26,149,410 | generation 0, era 1; part of SLOPWARE; in no experiment yet |
 
 **Why the post-E1 releases are not added to E2.** E2 is a direct continuation of E1: its parents were chosen by a rule applied to the sealed E1 record. Adding programs born after E1 would change the meaning of that population after E2 was designed, for little scientific gain. Keeping E2 frozen preserves a clean lineage: the million-program study, then E1 on the 803 historical genesis programs, then E2 on the 88 qualifying parents. Meanwhile the installer continues, producing new unrelated generation-0 programs, preserved for future pre-registered work.
 
-**What the post-E1 releases are for.** They are candidates for future experiments, which is not decided now: a fresh replication cohort for E1's or E2's findings; a contemporary cohort for a later experiment; a comparison between historical cohorts; a population experiment; something not yet conceived. E3 is not created here and remains conditional on E2's results. Optionality is being preserved, not a result written in advance.
+**What the post-E1 releases are for.** They are candidates for future experiments, which is not decided now: a fresh replication cohort for E1's or E2's findings; a contemporary cohort for a later experiment; a comparison between historical cohorts; a population experiment; something not yet conceived. E3 was not created from these releases: it was designed after E2's results and took its parents from E2's frozen population (`experiments/E3-somewhere-else.md`); E4 likewise takes its founders from the sealed E3 record. Optionality is being preserved, not a result written in advance.
 
 **Inclusion is mechanical and pre-registered.** No later program is ever selected because it looked interesting. A future experiment states, before examining the relevant results: the exact block or release range; the eligibility criterion; the environment; the protocol; whether the cohort is confirmatory, replication or exploratory; and a stopping rule where one applies. Then every program satisfying the rule enters.
 
@@ -810,7 +812,7 @@ Proposed 2026-10-11 from the E4 design notes (`experiments/E4-design.md` §5, §
 
 *E2, [`experiments/E2-walks.md`](experiments/E2-walks.md): signed and anchored 2026-10-09, run the same day, results published 2026-10-10 at `slopware.fun/e2`. W1 not held (neutral walks rewrote every byte, executed code included, with behaviour unchanged); W2 held (persistence multiplied the median run by 7.7; 63 of 440 walks found loops); W3 the naive prefix model fails, the opcode model holds only without control flow; W4 clean halts everywhere, succeeding CREATEs of empty accounts, self-calls, no child with code; W5 half of all lengthening steps were enabled by intervening neutral drift. The reproducibility threshold was not met (51 of 176 re-run trajectories differed through instrument timeouts) and a sensitivity check reproduced every statistic. The earlier design notes for what followed are in [`experiments/E3-notes.md`](experiments/E3-notes.md).*
 
-*E3, [`experiments/E3-somewhere-else.md`](experiments/E3-somewhere-else.md): signed and anchored 2026-10-10, run the same day, results 2026-10-11 at `slopware.fun/e3`. Fresh neutral walks from the 88 E2 parents, frozen at Hamming 8, 16, 32, 48 and 60, then the exhaustive one-mutant neighbourhood of every parent and endpoint, 23 million placements, 0 harness failures, 141 of 141 re-evaluated neighbourhoods and 1,319 of 1,319 endpoints reproduced exactly. X1 divergence grows with neutral travel (Spearman 0.79) and by 60 bytes approaches, and remains below, the distance between unrelated programs with the identical signature; X2 every endpoint, even 8 bytes away, has a measurably different neighbourhood under a rule one differing child satisfies; X3 adjacent variation and upward accessibility unchanged, richness slightly down at the far targets among longer-lived parents; X4 the Jaccard overlap of the exact mutation sets falls from 0.996 to 0.925 against about 0.024 by chance while aggregate distributions shift by under 1%; X5 nothing new, the scorecard does not move. Reading (§13): neutral drift progressively changes which mutations matter while leaving the overall amount of accessible variation approximately unchanged; W5's enabling is local, not a general restructuring. E4, a population experiment with heredity, variation and disclosed selection, is the next candidate and is not pre-registered yet.*
+*E3, [`experiments/E3-somewhere-else.md`](experiments/E3-somewhere-else.md): signed and anchored 2026-10-10, run the same day, results 2026-10-11 at `slopware.fun/e3`. Fresh neutral walks from the 88 E2 parents, frozen at Hamming 8, 16, 32, 48 and 60, then the exhaustive one-mutant neighbourhood of every parent and endpoint, 23 million placements, 0 harness failures, 141 of 141 re-evaluated neighbourhoods and 1,319 of 1,319 endpoints reproduced exactly. X1 divergence grows with neutral travel (Spearman 0.79) and by 60 bytes approaches, and remains below, the distance between unrelated programs with the identical signature; X2 every endpoint, even 8 bytes away, has a measurably different neighbourhood under a rule one differing child satisfies; X3 adjacent variation and upward accessibility unchanged, richness slightly down at the far targets among longer-lived parents; X4 the Jaccard overlap of the exact mutation sets falls from 0.996 to 0.925 against about 0.024 by chance while aggregate distributions shift by under 1%; X5 nothing new, the scorecard does not move. Reading (§13): neutral drift progressively changes which mutations matter while leaving the overall amount of accessible variation approximately unchanged; W5's enabling is local, not a general restructuring. E4, a population experiment with heredity, variation and disclosed selection (`experiments/E4-after.md`), was pre-registered, signed and anchored on 2026-10-11 and runs under that document; its results are written there when its record is sealed.*
 
 *Pre-registered as [`experiments/E1-neighbourhoods.md`](experiments/E1-neighbourhoods.md) on 2026-10-08; run 2026-10-08/09; results in that document under "Results — 2026-10-09" and at `slopware.fun/e1`. H1, H2, H4 held; H3 not held as written (a counting error in the pre-registration, one opcode); H5 not held: one replicated one-mutant of a control parent executes a successful `CREATE` of an empty account.*
 
@@ -875,17 +877,17 @@ For every criterion: what counts, what does not, confounders, methodology, the r
 ## Part XVI — Open questions (deliberately unanswered)
 
 1. Does the experiment adopt biological vocabulary in public, or keep the installer's plain words and reserve biology for the readings?
-2. Is genotype length fixed at 64 for descendants?
-3. Are refused genomes in the population?
+2. Is genotype length fixed at 64 for descendants? *Answered for E4 by amendment 2 (Part X-D): 64, because its predictor is fixed-length; open for later experiments.*
+3. Are refused genomes in the population? *Answered: yes (Part X-A, decision 5).*
 4. May collectors initiate assisted descent of their own releases?
 5. Who, if anyone, may fossilise, and is there ever a fee?
-6. Where do the record's root hashes live?
+6. Where do the record's root hashes live? *Answered in practice: in anchor transactions sent by the keeper on mainnet before and after each run, and in each record's kept volume snapshot.*
 7. Which selection regimes run first, and at what population size and mutation rate?
 8. How is the `STOP` attractor handled without designing against it?
 9. What is "the same world" across versions of the harness and the EVM?
 10. When mainnet's gas rules change, does the price follow, and who decides?
 11. Is a swarm ever justified, and would compute donation become a hidden selection pressure?
-12. What would make us stop? A written stopping rule for the experiment is itself an open question.
+12. What would make us stop? A written stopping rule for the experiment is itself an open question. *E4 carries one (`experiments/E4-after.md` §8: exactly 256 generations, nothing extended, pruned or re-seeded after any trajectory is seen); whether it generalises is open.*
 
 ---
 
@@ -898,4 +900,4 @@ For every criterion: what counts, what does not, confounders, methodology, the r
 
 ---
 
-*Written 2026-10-08 at release 802, before any heredity experiment. Nothing above has been built.*
+*Written 2026-10-08 at release 802, before any heredity experiment; nothing above had been built then. E1, E2 and E3 have since run and E4 is pre-registered; Parts X-A to X-D and XI record what changed.*
