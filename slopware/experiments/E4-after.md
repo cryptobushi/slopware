@@ -160,3 +160,7 @@ Anchored from the keeper in transaction `0x4b7a6bfc84ae74b687351796a1fa6e4a9e03e
 
 **Restart.** As §6 provides, the whole run restarts from generation 0 under the same seed string `E4-2026-10-11`, the same founders, tables and world, on the same droplet class, with the fixed transport. The restart time and commit are recorded in Amendment 3 when the run starts.
 
+### Amendment 3 — 2026-10-11, restart from generation 0
+
+Restarted 2026-10-12 01:55 UTC (2026-10-11 21:55 in the artist's time zone) on the same droplet `slopware-e4` (c-32, nyc1), 32 shards over the 88 pairs, both founders, replicates 0–15, 256 generations, seed string `E4-2026-10-11`, commit `98e3881` (Amendment 2's commit; `src/e4.ts`, `src/chain.ts` and `src/probe.ts` verified by sha256 against the laptop before the start), `harnessVersion e4-2`, the same 176 tables (built before the first run from the read-only E3 copy, 0 hash mismatches, left in place), the record and log directories empty at the start, manifest rewritten with this commit and a note pointing at the discarded first run. Nothing else changed.
+
