@@ -2,7 +2,8 @@
  * E4 — after. Protocol: slopware/experiments/E4-after.md. Design: E4-design.md.
  *
  * One mode: population search from a founder under the frozen rules (§5), every genotype evaluated from the same clean
- * world state with the E3 harness code path (harnessVersion e4-1 = e3-1's placement, probes and signature, unchanged)
+ * world state with the E3 harness code path (harnessVersion e4-2: e3-1's placement, probes and signature unchanged; the RPC
+ * transport's response-body cap raised from viem's 10 MiB default so long step traces are measured, E4 Amendment 2)
  * and the retry policy of §6: a probe timeout, receipt timeout, RPC error or instrumentation exception is retried up to
  * three times after the first attempt, each from a fresh revert; a proposal that still fails is a HARNESS FAILURE,
  * recorded, never a candidate, never a phenotype, never cached.
@@ -40,7 +41,7 @@ const PORT = Number(args.port ?? 8700); const OUT = args.out ?? 'record';
 const SEED = args.seed ?? 'E4-2026-10-11';                 // the run seed string, fixed by the pre-registration (§5.7); smoke tests use 'E4-smoke'
 const G = Number(args.generations ?? 256), POP = Number(args.pop ?? 64), L = world.genomeLength ?? 64;
 const RETRIES = 3; const HF_RATE = 0.001, HF_MIN = 1000;    // §6: cumulative harness-failure rate above 0.1% after 1,000 executions halts the shard
-const HARNESS = { harnessVersion: 'e4-1', worldId: world.worldId, protocol: 'E4-after.md', genomeLength: L, seed: SEED, generations: G, pop: POP };
+const HARNESS = { harnessVersion: 'e4-2', worldId: world.worldId, protocol: 'E4-after.md', genomeLength: L, seed: SEED, generations: G, pop: POP };
 const range = (s: string) => { const [a, b] = s.split('-').map(Number); return b === undefined ? [a] : Array.from({ length: b - a + 1 }, (_, i) => a + i); };
 const PAIRS = range(args.pairs ?? '0-87'); const FOUNDER_KEYS = (args.founders ?? 'P,N').split(','); const REPS = range(args.replicates ?? '0-15');
 const hex = (b: Uint8Array) => ('0x' + Array.from(b, (x) => x.toString(16).padStart(2, '0')).join('')) as Hex;

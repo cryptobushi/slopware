@@ -28,19 +28,24 @@ export interface Chain {
   request: (method: string, params: unknown[]) => Promise<any>;
 }
 
+const MAX_RESPONSE_BODY = 256 * 1024 * 1024;
+
 export async function connect(rpc: string, keyIndex = 0): Promise<Chain> {
   const url = new URL(rpc);
   if (!LOCAL_HOSTS.has(url.hostname)) {
     throw new Error(`refusing non-local RPC ${rpc}: this explorer deploys arbitrary programs and only runs against localhost`);
   }
   // a local chain mines instantly; poll receipts fast and never wait forever
-  const pub = createPublicClient({ transport: http(rpc, { timeout: 60_000 }), pollingInterval: 25 });
+  // viem caps RPC response bodies at 10 MiB by default; a debug_traceCall step trace costs ~87 bytes per executed
+  // instruction, so a probe that runs past ~120,000 instructions (long finite runs, tight loops burning the full gas)
+  // would be rejected as an instrument error. 256 MiB is far above the ~30 MB a 1,000,000-gas trace can reach. (E4 Amendment 2)
+  const pub = createPublicClient({ transport: http(rpc, { timeout: 60_000, maxResponseBodySize: MAX_RESPONSE_BODY }), pollingInterval: 25 });
   const chainId = await pub.getChainId();
   if (chainId !== EXPECTED_CHAIN_ID) {
     throw new Error(`refusing chain id ${chainId}: expected the local development chain ${EXPECTED_CHAIN_ID}`);
   }
   const account = privateKeyToAccount(ANVIL_KEYS[keyIndex % ANVIL_KEYS.length] ?? ANVIL_KEY);
-  const wallet = createWalletClient({ account, transport: http(rpc, { timeout: 60_000 }), pollingInterval: 25 });
+  const wallet = createWalletClient({ account, transport: http(rpc, { timeout: 60_000, maxResponseBodySize: MAX_RESPONSE_BODY }), pollingInterval: 25 });
   return {
     rpc,
     pub,
