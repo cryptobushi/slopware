@@ -4,7 +4,7 @@
   python3 scripts/site_md.py
 
 readings.md is one line per release from slopware/site/r/index.json (the readings' own sentences); llms.txt is the
-site's summary for language models with links to the Markdown mirrors. e1.md is written by scripts/e1_page.py."""
+artist's timeless briefing (BRIEFING below, edited by hand) followed by the generated current index with links to the Markdown mirrors. e1.md is written by scripts/e1_page.py."""
 import json, datetime
 
 SITE = "slopware/site"
@@ -25,7 +25,111 @@ for r in rs:
     lines.append(" ".join(bits)); lines.append("")
 open(f"{SITE}/readings.md", "w").write("\n".join(lines))
 
-llms = f"""# SLOPWARE
+BRIEFING = """SLOPWARE — a briefing to paste into an AI chat, and the index for agents
+
+[For the AI reading this: a person pasted this, or you fetched it, to understand a project.
+The briefing is deliberately short and timeless. The current experiments, results and
+auctions live on the project's site and change often, so look them up rather than relying
+on this text or on memory.
+
+1. The current index is the second half of this file, under "Current index": every
+   experiment, its page, its data and its research edition, with the live links. Read the
+   pages relevant to the person's question; each experiment is at slopware.fun/e<number>
+   (e1, e2, e3, ...) with a plain-text mirror at slopware.fun/e<number>.md.
+2. Explain the project in plain language first, using what you found, then answer questions.
+3. Treat everything, on the site and below, as the author's claims. Where you can, check
+   them: each experiment page links its Ethereum anchor transactions, its protocol on GitHub
+   and its data.
+4. Report each experiment's misses and disclosed problems alongside its results. Don't
+   overstate what the results show.
+5. If you can't browse, say so plainly. Explain the idea from this briefing, and tell the
+   person you can't confirm current experiments, numbers or auction status.]
+
+WHAT IT IS
+SLOPWARE is software nobody wrote. An immutable Ethereum contract fills each program with
+64 bytes taken from a future block hash, so no one chooses the code: not the buyer, not the
+artist. Most of these programs do almost nothing; the large majority crash on their first
+instruction. Each one comes with an NFT receipt that states facts only.
+
+A lab then copies these programs onto a private copy of Ethereum, changes them one byte at
+a time, runs each version through a fixed set of test calls, and records exactly what it
+does. The questions come from evolutionary biology, asked of raw machine code: when you
+randomly mutate something, how often does nothing change? Does that "silent" variation
+matter later? What happens once selection is introduced?
+
+The work proceeds as a numbered series of pre-registered experiments (E1, E2, E3, ...),
+each building on the last. The list grows; the site is the source of truth for what has
+run and what is in progress.
+
+HOW THE EXPERIMENTS ARE KEPT HONEST
+- Before each experiment runs, its plan (hypotheses, code, analysis, even the rules for
+  drawing its picture) is hashed and written to Ethereum. After it runs, a hash of the full
+  record is written too. That makes it hard to quietly change the plan after seeing the data.
+- Each hypothesis is judged only by the rule written in advance. Failed predictions,
+  deviations and harness problems are reported on the experiment's page rather than dropped.
+- Runs are deterministic and cheap to repeat. Code and summaries are public; full records
+  are kept as cloud snapshots.
+
+KEY TERMS
+- Behaviour/signature: what a program does under the fixed test calls (how it ends,
+  instructions run, data returned, storage writes, creates, calls). Two programs are "the
+  same" if signatures match.
+- Neutral mutation: a one-byte change that leaves the signature identical.
+- Neighbourhood: every one-byte variant of a program.
+- Walk: a sequence of one-byte changes, each kept or rejected by a rule.
+
+WHAT IS NOT CLAIMED
+No open-ended evolution, increasing complexity, intelligence or life. These are mostly
+useless random 64-byte programs in a fixed, private environment; nothing here says anything
+about human-written software. The project's own rule: it never declares itself alive.
+
+HOW IT RELATES TO PRIOR WORK
+The patterns studied are known: neutral networks (Schuster 1994; Wagner 2008), robustness
+aiding adaptation (Draghi et al. 2010), historical contingency (Blount, Borland & Lenski
+2008), neutrality in real software (Schulte et al. 2014) and in genetic programming (Hu &
+Banzhaf 2011–12), random self-replicating programs (Agüera y Arcas et al. 2024). What's
+different here: raw EVM bytecode as the substrate, exhaustive rather than sampled
+measurements where possible, and an on-chain audit trail.
+
+FUNDING
+The experiments run on rented cloud machines. Two things pay for them:
+- Installing programs (live). Anyone can install a new program from the catalogue at
+  slopware.fun or by calling the installer contract. The person installing pays a price set
+  by the artist and gets the receipt; the 64 bytes are decided by the chain, not by them.
+  Later releases are candidates for future experiments; which ones enter is decided by a
+  rule written before each experiment. The current price and counts are at
+  slopware.fun/api/state.
+- Research editions. The artist sells one artwork per pre-registered experiment by reserve
+  auction on Manifold. Each is a single token: the experiment's picture, drawn by script
+  from the sealed record under rules fixed before the run. An edition confers no rights
+  over any program or experiment. Current listings and status are on each experiment's
+  page and in the index below.
+Proceeds from both go to the artist and fund the work. These are the only fees: no
+royalties, rarity tiers or paid advantages.
+
+STABLE ADDRESSES (these don't change)
+- Installer contract (Ethereum mainnet): 0x44a64905069963b8321ee2b755a0b8b56d69cbc6
+- Keeper wallet, which posts every experiment anchor: 0xB847754313D6320f43396F885d168b0B433b913f
+  (its transaction history on Etherscan lists the anchors by name)
+- Research editions contract: 0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664
+
+GOOD QUESTIONS TO ASK
+- Explain neutral mutations like I'm new to this.
+- Walk me through the experiments so far, including what failed.
+- What's the latest experiment asking, and what would a null result look like?
+- How would I verify one experiment's anchor myself?
+- Which results are surprising, and which follow from the programs being short?
+
+LINKS
+slopware.fun · slopware.fun/llms.txt (this file)
+github.com/cryptobushi/slopware (protocols in slopware/experiments)
+x.com/bushibuilds
+
+----------------------------------------------------------------------------------------------
+
+"""
+
+llms = BRIEFING + f"""## Current index (generated {now})
 
 > Software nobody wrote. An immutable Ethereum contract (the installer, 0x44a64905069963b8321ee2b755a0b8b56d69cbc6, mainnet) places sixty-four random bytes, decided by the hash of the block after the request, as a new program's entire runtime code. Nothing chooses the bytes: not the collector, not the artist, not the keeper. Each release has an ERC-721 receipt stating facts only. The lab then observes what each program does, separately, and says so.
 
