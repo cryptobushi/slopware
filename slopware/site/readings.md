@@ -1,13 +1,13 @@
 # SLOPWARE — readings
 
-The lab's observations of every program SLOPWARE has installed, as of 2026-10-12 21:48 UTC: 927 releases read, 925 installed, 2 refused by Ethereum. Each installed program's sixty-four bytes were placed on a private copy of Ethereum and called five ways with every instruction traced. Observation, not record: the installer itself records nothing about behaviour. The siblings line comes from experiment E1 (https://slopware.fun/e1.md), the walks line from E2 (https://slopware.fun/e2.md), the descendants line from E3 (https://slopware.fun/e3.md).
+The lab's observations of every program SLOPWARE has installed, as of 2026-10-13 00:45 UTC: 932 releases read, 930 installed, 2 refused by Ethereum. Each installed program's sixty-four bytes were placed on a private copy of Ethereum and called five ways with every instruction traced. Observation, not record: the installer itself records nothing about behaviour. The siblings line comes from experiment E1 (https://slopware.fun/e1.md), the walks line from E2 (https://slopware.fun/e2.md), the descendants line from E3 (https://slopware.fun/e3.md).
 
-- 80.3% died on their first instruction (the million-program study found 78.4%)
+- 80.4% died on their first instruction (the million-program study found 78.4%)
 - longest run: 7 instructions
 - 3 halted cleanly
 - 1 answered differently to different input
 - 0 returned data
-- 715 carry an instruction Ethereum does not activate yet
+- 719 carry an instruction Ethereum does not activate yet
 
 ## Every release
 
@@ -1864,3 +1864,13 @@ The lab's observations of every program SLOPWARE has installed, as of 2026-10-12
 **SLOPWARE 000926** · installed · program 0xEab1b7937C2F097974f2E9bA2BB91a97775dC1d1 · installed by 0x5fEB3281d7E81Ea5e55AAeA96639DaaCA5d601c1 Its first word was not a word: 0xd5 is not an instruction. It died before its first breath. Had it lived, it would have shouted into the log and had a child at a chosen address. It carries 4 words from a language Ethereum will speak later: EXTDELEGATECALL, DATALOAD, EOFCREATE, RJUMP. 32 of its 64 bytes are luggage. Trace: Unknown
 
 **SLOPWARE 000927** · installed · program 0x50f384672ab7125Cdd3E77B4591D4d39d6C24454 · installed by 0xc2065E8C845448b6FD7a3aD168918f2BA6e9d45f It reached to do some arithmetic with empty hands, and fell. Had it lived, it would have shouted into the log and gone somewhere else. 43 of its 64 bytes are luggage. Trace: ADDMOD
+
+**SLOPWARE 000928** · installed · program 0x8aB2aD090956abd9FBC65DB9bF42B11b880627Af · installed by 0xc2065E8C845448b6FD7a3aD168918f2BA6e9d45f It reached to shuffle what it was holding with empty hands, and fell. Had it lived, it would have made a decision, given an answer, shouted into the log, remembered something for a moment, and checked its memory. It carries one word from a language Ethereum will speak later: CALLF. Trace: SWAP14
+
+**SLOPWARE 000929** · installed · program 0xfF07E364CFBCA54d21C73FF33e8Ff43C12D96F5c · installed by 0xc2065E8C845448b6FD7a3aD168918f2BA6e9d45f Its first word, RJUMPI, is from a language Ethereum does not speak yet. It died before its first breath. Had it lived, it would have hashed something and shouted into the log. It carries 2 words from a language Ethereum will speak later: RJUMPI, RJUMPV. 44 of its 64 bytes are luggage. Trace: Unknown
+
+**SLOPWARE 000930** · installed · program 0x137d3490D3728ccDaF91086dC4b8BFB0FeFBf669 · installed by 0xc2065E8C845448b6FD7a3aD168918f2BA6e9d45f It reached to compare two things with empty hands, and fell. Had it lived, it would have remembered something for a moment. It carries 2 words from a language Ethereum will speak later: RJUMPI, EOFCREATE. 42 of its 64 bytes are luggage. Trace: SGT
+
+**SLOPWARE 000931** · installed · program 0x6158121403454C5E0f0022Cd91d985B9074E82E6 · installed by 0xc2065E8C845448b6FD7a3aD168918f2BA6e9d45f Its first word was not a word: 0x29 is not an instruction. It died before its first breath. Had it lived, it would have called someone, asked someone a question, shouted into the log, and hashed something. 37 of its 64 bytes are luggage. Trace: Unknown
+
+**SLOPWARE 000932** · installed · program 0x21Fde561B84c8A58CF922f6099522CD0ACc8bB57 · installed by 0xc2065E8C845448b6FD7a3aD168918f2BA6e9d45f Its first word was not a word: 0xcf is not an instruction. It died before its first breath. It carries one word from a language Ethereum will speak later: EXTCALL. 45 of its 64 bytes are luggage. Trace: Unknown
