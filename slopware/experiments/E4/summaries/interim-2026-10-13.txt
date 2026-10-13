@@ -1,0 +1,92 @@
+E4 INTERIM INSPECTION — 2026-10-13 01:12:39 UTC
+INTERIM / INCOMPLETE / NONRANDOMLY CENSORED
+Disclosed protocol deviation; see E4-after.md Amendment 4. Read-only. Populations final at the snapshot instant only;
+nothing substituted for unfinished populations; frozen definitions (E4-after.md §5, §7) and the frozen scripts/e4_analysis.py
+(sha256 ed3b153a74c410a28f05451c5c0041f07ea35581bf08c0231c30d1acefc90841, unchanged) run on a copy outside the record.
+The run itself was not touched.
+
+A. COMPLETENESS (at 01:12:39Z; the scan took 5 s)
+  final populations            2,673 / 2,816
+  complete P populations       1,360 / 1,408
+  complete N populations       1,313 / 1,408
+  pairs complete in all 32     81 / 88
+  pairs partly complete        4  (3, 32, 41, 84: P 16/16 in each; N 2, 11, 1, 3 of 16)
+  pairs with no complete pop   3  (4, 42, 43: not started)
+  open populations             4  (3-N-2 g183, 32-N-11 g124, 41-N-1 g218, 84-N-3 g218)
+  not started                  139
+
+B. WHAT THE 2,673 FINISHED POPULATIONS ARE DOING (descriptive only; B = log2 of best finite probe-A count)
+  B_0        min 1.585 · q1 1.585 · median 1.585 · q3 2.000 · max 2.807 · mean 1.760
+  B_256      min 2.807 · q1 4.087 · median 4.392 · q3 4.700 · max 17.002 · mean 4.577
+  B_256-B_0  min 0.485 · q1 2.222 · median 2.644 · q3 3.000 · max 15.294 · mean 2.817
+  max B_256  17.0016 = 131,219 instructions (pair 2, founder N, replicate 7; founder count 5)
+  adapted (B_256 > B_0, §5.9 / §3)   2,673 / 2,673 = 1.000 (no population unchanged)
+  loop incidence (§5.1 loop class)   populations with any loop-class offspring 126 / 2,673;
+                                     mean loop-class offspring per population P 1.353, N 1.389; total 3,664
+  note: 2,603 populations gained between 0.5 and 3.9 bits; 70 gained 7.2 to 15.3 bits.
+
+C. INTERIM MATCHED-PAIR RESULT — INTERIM / INCOMPLETE / NONRANDOMLY CENSORED
+  complete pairs n = 81 (every pair with all 16 P and all 16 N replicates at generation 256)
+  dA1 from the sealed E3 predictor table (E4/predictors.json, sha256 81075935…), shown as children (u_N - u_P; fraction = children/16,320)
+  d_256 = b_256(N) - b_256(P), mean of B_256 over the 16 replicates of each founder (§5.9)
+  pair | dA1 | d_256
+   0 |  -4 | +0.268 ||  1 |  -1 | +0.099 ||  2 | -21 | +1.230
+   5 | -32 | -0.022 ||  6 |  +3 | +0.389 ||  7 | +27 | +0.573
+   8 |  +9 | -0.213 ||  9 | +36 | -0.020 || 10 | -10 | -0.414
+  11 |  -7 | -0.135 || 12 |  +7 | +0.195 || 13 |  +6 | +0.178
+  14 | -23 | -0.587 || 15 | +11 | -0.852 || 16 | +44 | +0.349
+  17 |  +1 | -0.452 || 18 | -17 | -0.164 || 19 | -65 | -0.205
+  20 |  +8 | -0.353 || 21 |  -3 | -0.518 || 22 | +20 | -0.571
+  23 |  +3 | +0.197 || 24 |  -7 | -0.267 || 25 | +11 | -0.019
+  26 | +19 | +0.134 || 27 | -34 | -0.155 || 28 | +54 | +0.392
+  29 |  +1 | +3.513 || 30 |  +7 | -0.611 || 31 | +29 | +0.118
+  33 |  +2 | -1.114 || 34 |  +0 | -0.823 || 35 | -37 | +0.088
+  36 | -12 | -0.829 || 37 |  -6 | +0.021 || 38 | -26 | -0.072
+  39 |  +4 | +0.468 || 40 |  -1 | +0.102 || 44 | -14 | -1.383
+  45 |  -4 | +0.978 || 46 |  -5 | +0.008 || 47 | +29 | -0.224
+  48 |  -5 | +0.115 || 49 | -41 | -0.367 || 50 | +22 | -0.290
+  51 |  +8 | -0.380 || 52 | +37 | +0.010 || 53 | -24 | -0.131
+  54 |  +0 | -0.340 || 55 |  -6 | -0.039 || 56 | +54 | +0.604
+  57 |  +1 | -0.278 || 58 | +28 | +1.325 || 59 | -32 | -0.768
+  60 |  +7 | +0.198 || 61 | +25 | -0.343 || 62 | +25 | -0.354
+  63 |  +3 | +0.736 || 64 | -14 | +0.299 || 65 |  -6 | -1.752
+  66 |  +6 | +0.185 || 67 | -35 | -0.641 || 68 |  -6 | -0.294
+  69 |  -2 | -0.166 || 70 |  +4 | +0.429 || 71 |  -4 | +0.938
+  72 |  +1 | -0.023 || 73 |  +7 | +0.427 || 74 | +21 | +0.016
+  75 |  -8 | +0.803 || 76 |  +1 | -0.061 || 77 | +61 | +0.551
+  78 | +26 | -0.105 || 79 | -26 | +0.588 || 80 |  -6 | -0.074
+  81 | +28 | +0.242 || 82 |  -5 | -0.106 || 83 | -13 | -0.457
+  85 |  +8 | -0.211 || 86 |  -1 | -0.325 || 87 |  +0 | -0.316
+  dA1 range -65..+61 children, 3 exact zeros, 41 positive, 37 negative · d_256 range -1.752..+3.513, 35 positive, 46 negative, 0 zeros
+  PRIMARY Spearman rho(dA1, d_256) = 0.2364
+  pre-registered pair bootstrap (seed E4-2026-10-11-bootstrap, 10,000 resamples, n = 81, 0 undefined): [0.0187, 0.4312]
+  descriptive / interim only. No threshold is computed; the pre-registered rules of §3 are not applied to this subset.
+
+D. MISSINGNESS (operational information only; no B value of an unfinished population was read)
+  pair 3   P 16/16  N 2/16   open 3-N-2 at g183 (started 01:03Z); P took 10–22 min per population, N so far 10 min each
+  pair 32  P 16/16  N 11/16  open 32-N-11 at g124 (started 01:08Z); 12–16 min per population throughout
+  pair 41  P 16/16  N 1/16   open 41-N-1 at g218 (started 00:48Z); P took 2 h 55, 2 h 10, 4 h 08 and 5 h 25 on four replicates, 10–50 min on the rest; N rep 0 took 17 min
+  pair 84  P 16/16  N 3/16   open 84-N-3 at g218 (started 21:08Z, 4 h earlier); P took 12–17 min; N reps 0–2 took 38, 32, 15 min
+  pair 4   0/16 0/16  not started; shard 2–4 reaches it after pair 3 N
+  pair 42  0/16 0/16  not started; shard 41–43 reaches it after pair 41 N
+  pair 43  0/16 0/16  not started; shard 41–43, last
+  Why this matters: a probe-A trace costs about 87 bytes per executed instruction, so a population whose programs run long is traced
+  slowly. The unfinished populations are unfinished because their founders or their descendants execute for a long time, which is
+  what F2 rewards and B measures. The 81-pair interim result is censored on a variable related to the outcome and is not an unbiased
+  estimate of the final E4 result.
+
+E. COMPUTE DECISION (from observed throughput at 01:15Z; c-32 at $1.00/h; run started 01:55Z 2026-10-12; droplet up since ~01:11Z)
+  spent so far             about $25 (24.6 droplet-hours plus two 50 GiB volumes)
+  shard 30–32              5 populations of pair 32 N at ~13 min: ~1 h
+  shard 2–4                14 of pair 3 N at ~10 min, then 32 of pair 4 at the shard's normal 11–14 min: ~9–10 h
+  shard 82–84              13 of pair 84 N; reps 0–2 took 15–38 min, rep 3 has taken 4 h to g218: 5–50 h
+  shard 41–43              15 of pair 41 N (17 min to 5 h each, by pair 41 P's record), then 64 of pairs 42–43 at ~12 min: 17–35 h
+  remaining wall clock     most likely 17–35 h, set by shard 41–43; shard 82–84 could extend it to ~50 h
+  remaining cost           about $17–50, most likely $20–35
+  dominant                 pair 41 N and the unstarted pairs 42, 43 (one shard); then pair 84 N
+  Technical reason to stop? None found. Harness failures 0 in 2,673 populations; 171,072 generation-1 children checked against the
+  E3 tables with 0 mismatches; 0 tie-key collisions; B_g monotone (asserted per generation by the harness, no halt); the pre-registered
+  calibration checks K and M raise no investigate flag; the record tree is intact and untouched; every outcome statistic is computable.
+  A null-looking or positive-looking interim primary is not a technical reason either way.
+
+INTERIM INSPECTION COMPLETE — DO NOT EXPLORE FURTHER
