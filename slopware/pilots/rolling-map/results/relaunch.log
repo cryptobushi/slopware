@@ -1,0 +1,5 @@
+2026-10-14T02:59:18Z workers relaunched under NODE_OPTIONS=--max-old-space-size=1536 with a supervisor; interrupted arm-runs restart from zero (deterministic, resumable)
+2026-10-14T03:36:15Z re-sharded: remaining arm-runs launched one per worker, 32 at a time (slow founders had serialised 6 shards)
+2026-10-14T03:38:26Z re-shard stopped: single-arm jobs derived a smaller budget (harness bug); their files deleted; harness fixed to take --budget 16384 explicitly
+2026-10-14T03:38:48Z re-sharded (second launch, --budget 16384): remaining arm-runs launched one per worker, 32 at a time (slow founders had serialised 6 shards)
+2026-10-14T04:07:58Z stopped early on the artist's word; 1150 of 1152 arm-runs final; partial files of interrupted arm-runs removed
