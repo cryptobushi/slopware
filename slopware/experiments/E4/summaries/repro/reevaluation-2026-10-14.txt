@@ -1,0 +1,178 @@
+anvil latest block 0 timestamp 1791940647 mixHash 0x0000000000000000000000000000000000000000000000000000000000000000 baseFee 0x3b9aca00
+16-1-0 g79 s54 val 58: hashes 0x6cb1589975b17590×5(NEW) 0xbf2a3b3d378f0d49×5(RUN) · env ops NUMBER,COINBASE,SELFBALANCE,BLOCKHASH,ADDRESS,CALLVALUE,GASPRICE
+    probe 0: invalid_opcode|20|Unknown|0
+           vs stack_overflow|19|Unknown|0
+17-1-0 g213 s31 val 68: hashes 0xb4e6c2102c74df62×10(SECOND) · env ops BLOBBASEFEE,DIFFICULTY,NUMBER,ORIGIN,CHAINID,GAS
+18-0-0 g109 s41 val 219: hashes 0x328fdb9240f3f69f×5(SECOND) 0x3d43012b4c5a671e×5(RUN) · env ops TIMESTAMP,BALANCE,CHAINID,SELFBALANCE,CALLVALUE
+    probe 0: invalid_opcode|19|Unknown|0
+           vs other_halt|14|CREATE|0
+    probe 1: 0|0|0|1|0
+           vs 0|0|0|0|0
+    probe 2: invalid_opcode|19|Unknown|0
+           vs other_halt|14|CREATE|0
+    probe 3: 0|0|0|1|0
+           vs 0|0|0|0|0
+    probe 4: invalid_opcode|19|Unknown|0
+           vs other_halt|14|CREATE|0
+    probe 5: 0|0|0|1|0
+           vs 0|0|0|0|0
+    probe 6: invalid_opcode|19|Unknown|0
+           vs other_halt|14|CREATE|0
+    probe 7: 0|0|0|1|0
+           vs 0|0|0|0|0
+    probe 8: invalid_opcode|19|Unknown|0
+           vs other_halt|14|CREATE|0
+    probe 9: 0|0|0|1|0
+           vs 0|0|0|0|0
+3-1-0 g78 s45 val 98: hashes 0x6f326bcf26e550b2×5(NEW) 0xd6f677ae7833864e×5(NEW) · env ops ORIGIN,GAS,DIFFICULTY
+    probe 2: invalid_opcode|14|Unknown|0
+           vs other_halt|9|KECCAK256|0
+    probe 4: invalid_opcode|14|Unknown|0
+           vs other_halt|9|KECCAK256|0
+    probe 6: invalid_opcode|14|Unknown|0
+           vs other_halt|9|KECCAK256|0
+35-0-0 g239 s18 val 68: hashes 0x0fe08e062be3e462×10(RUN) · env ops CALLVALUE,BASEFEE,CALLER,GASPRICE,GASLIMIT,EXTCODEHASH,COINBASE,DIFFICULTY,BLOCKHASH
+40-0-0 g91 s1 val 161: hashes 0xc6ab278772d48292×10(RUN) · env ops TIMESTAMP,CHAINID
+44-0-0 g149 s1 val 30: hashes 0x8d54fc7d6c8afa7b×10(SECOND) · env ops BASEFEE,DIFFICULTY,GASPRICE
+45-1-0 g90 s34 val 8: hashes 0x5dcf11eaf104aa44×10(SECOND) · env ops BLOCKHASH,GAS,ORIGIN,TIMESTAMP
+46-1-0 g165 s4 val 68: hashes 0x0648d24f35214ce8×5(SECOND) 0xf20fa6409821de97×5(RUN) · env ops CALLVALUE,GASPRICE,DIFFICULTY,BLOBHASH
+    probe 0: success|22|STOP|0
+           vs success|21|STOP|0
+    probe 2: success|22|STOP|0
+           vs success|21|STOP|0
+    probe 4: success|22|STOP|0
+           vs success|21|STOP|0
+    probe 6: success|22|STOP|0
+           vs success|21|STOP|0
+49-1-0 g220 s37 val 40: hashes 0x1141f05270c592d8×5(RUN) 0x9bc42e0a01865713×5(SECOND) · env ops ADDRESS,DIFFICULTY,BALANCE,BLOBBASEFEE,TIMESTAMP,EXTCODEHASH
+    probe 0: success|28|STOP|0
+           vs invalid_opcode|25|LOG1|0
+    probe 1: 0|0|1|1|0
+           vs 0|0|0|1|0
+    probe 2: success|28|STOP|0
+           vs invalid_opcode|25|LOG1|0
+    probe 3: 0|0|1|1|0
+           vs 0|0|0|1|0
+    probe 4: success|28|STOP|0
+           vs invalid_opcode|25|LOG1|0
+    probe 5: 0|0|1|1|0
+           vs 0|0|0|1|0
+    probe 6: success|28|STOP|0
+           vs invalid_opcode|25|LOG1|0
+    probe 7: 0|0|1|1|0
+           vs 0|0|0|1|0
+    probe 8: success|28|STOP|0
+           vs invalid_opcode|25|LOG1|0
+    probe 9: 0|0|1|1|0
+           vs 0|0|0|1|0
+54-1-0 g120 s60 val 71: hashes 0x6a5d121a484aacb6×10(SECOND) · env ops TIMESTAMP,SELFBALANCE
+58-1-0 g136 s57 val 64: hashes 0xdd8c9c11ef2141bb×10(RUN) · env ops NUMBER,ORIGIN,COINBASE,DIFFICULTY,BLOCKHASH,GASPRICE
+59-0-0 g149 s25 val 11: hashes 0x383ee4b61c2e74c8×10(SECOND) · env ops CHAINID,TIMESTAMP,BASEFEE,SELFBALANCE
+62-0-0 g185 s33 val 164: hashes 0x3a9fc7ea060fa0b5×9(RUN) 0xfbadc45dd9e837e2×1(SECOND) · env ops BLOCKHASH,GASPRICE,CHAINID,GAS,CALLER,TIMESTAMP,GASLIMIT
+    probe 0: stack_underflow|21|DUP5|0
+           vs other_halt|20|LOG4|0
+    probe 1: 0|0|1|0|0
+           vs 0|0|0|0|0
+    probe 2: stack_underflow|21|DUP5|0
+           vs other_halt|20|LOG4|0
+    probe 3: 0|0|1|0|0
+           vs 0|0|0|0|0
+    probe 4: stack_underflow|21|DUP5|0
+           vs other_halt|20|LOG4|0
+    probe 5: 0|0|1|0|0
+           vs 0|0|0|0|0
+    probe 6: stack_underflow|21|DUP5|0
+           vs other_halt|20|LOG4|0
+    probe 7: 0|0|1|0|0
+           vs 0|0|0|0|0
+    probe 8: stack_underflow|21|DUP5|0
+           vs other_halt|20|LOG4|0
+    probe 9: 0|0|1|0|0
+           vs 0|0|0|0|0
+69-0-0 g152 s57 val 96: hashes 0x98ae95a1632a7e7b×10(SECOND) · env ops GAS,DIFFICULTY,EXTCODESIZE
+69-1-0 g201 s30 val 178: hashes 0x41072273d98bdb38×3(SECOND) 0xfca1fca5814de91e×7(RUN) · env ops GAS,ORIGIN,TIMESTAMP,BLOCKHASH,CALLER,BASEFEE,ADDRESS,CALLVALUE
+    probe 0: success|25|STOP|0
+           vs invalid_opcode|20|CREATE|0
+    probe 1: 0|0|0|1|0
+           vs 0|0|0|0|0
+    probe 2: success|25|STOP|0
+           vs invalid_opcode|20|CREATE|0
+    probe 3: 0|0|0|1|0
+           vs 0|0|0|0|0
+    probe 4: success|25|STOP|0
+           vs invalid_opcode|20|CREATE|0
+    probe 5: 0|0|0|1|0
+           vs 0|0|0|0|0
+    probe 6: success|25|STOP|0
+           vs invalid_opcode|20|CREATE|0
+    probe 7: 0|0|0|1|0
+           vs 0|0|0|0|0
+    probe 8: success|25|STOP|0
+           vs invalid_opcode|20|CREATE|0
+    probe 9: 0|0|0|1|0
+           vs 0|0|0|0|0
+70-0-0 g176 s11 val 64: hashes 0x44998fc49a676039×10(RUN) · env ops BLOBBASEFEE,BLOCKHASH
+75-0-0 g159 s5 val 164: hashes 0xeebdbf2a19499133×5(RUN) 0x48be854fdea2b6f3×5(SECOND) · env ops TIMESTAMP,ADDRESS,BLOCKHASH
+    probe 0: stack_underflow|16|LOG4|0
+           vs invalid_opcode|16|LOG4|0
+    probe 2: stack_underflow|16|LOG4|0
+           vs invalid_opcode|16|LOG4|0
+    probe 4: stack_underflow|16|LOG4|0
+           vs invalid_opcode|16|LOG4|0
+    probe 6: stack_underflow|16|LOG4|0
+           vs invalid_opcode|16|LOG4|0
+    probe 8: stack_underflow|16|LOG4|0
+           vs invalid_opcode|16|LOG4|0
+78-1-0 g117 s30 val 64: hashes 0x95d3e8562189842c×10(SECOND) · env ops BLOBBASEFEE,TIMESTAMP,CALLVALUE,BLOCKHASH
+80-1-0 g59 s3 val 11: hashes 0x318be22f1a3c6821×10(SECOND) · env ops ORIGIN,EXTCODEHASH,TIMESTAMP,GAS
+81-0-0 g221 s32 val 68: hashes 0xb1874f22b89290c7×5(RUN) 0x41072273d98bdb38×5(SECOND) · env ops ADDRESS,NUMBER,ORIGIN,DIFFICULTY,TIMESTAMP,EXTCODEHASH,CALLVALUE,BLOBHASH,BASEFEE
+    probe 0: other_halt|15|CREATE|0
+           vs success|25|STOP|0
+    probe 1: 0|0|0|0|0
+           vs 0|0|0|1|0
+    probe 2: other_halt|15|CREATE|0
+           vs success|25|STOP|0
+    probe 3: 0|0|0|0|0
+           vs 0|0|0|1|0
+    probe 4: other_halt|15|CREATE|0
+           vs success|25|STOP|0
+    probe 5: 0|0|0|0|0
+           vs 0|0|0|1|0
+    probe 6: other_halt|15|CREATE|0
+           vs success|25|STOP|0
+    probe 7: 0|0|0|0|0
+           vs 0|0|0|1|0
+    probe 8: other_halt|15|CREATE|0
+           vs success|25|STOP|0
+    probe 9: 0|0|0|0|0
+           vs 0|0|0|1|0
+83-0-0 g167 s48 val 29: hashes 0x37de8d9609b2b8ee×5(RUN) 0x7d95a9db97c03013×5(SECOND) · env ops DIFFICULTY,ADDRESS,CHAINID,EXTCODEHASH,BLOBBASEFEE,BALANCE
+    probe 0: stack_underflow|24|SUB|0
+           vs invalid_opcode|22|CREATE|0
+    probe 1: 0|0|1|1|0
+           vs 0|0|1|0|0
+    probe 2: stack_underflow|23|SUB|0
+           vs invalid_opcode|22|CREATE|0
+    probe 3: 0|0|1|1|0
+           vs 0|0|1|0|0
+    probe 4: stack_underflow|23|SUB|0
+           vs invalid_opcode|22|CREATE|0
+    probe 5: 0|0|1|1|0
+           vs 0|0|1|0|0
+    probe 6: stack_underflow|23|SUB|0
+           vs invalid_opcode|22|CREATE|0
+    probe 7: 0|0|1|1|0
+           vs 0|0|1|0|0
+    probe 8: stack_underflow|24|SUB|0
+           vs invalid_opcode|22|CREATE|0
+    probe 9: 0|0|1|1|0
+           vs 0|0|1|0|0
+83-1-0 g252 s30 val 68: hashes 0x5c07d15a717b2071×5(SECOND) 0x98a86364fbd2ed52×5(RUN) · env ops BALANCE,CHAINID,DIFFICULTY,CALLER,ORIGIN
+    probe 0: success|18|STOP|0
+           vs success|19|STOP|0
+    probe 2: success|18|STOP|0
+           vs success|19|STOP|0
+    probe 4: success|18|STOP|0
+           vs success|19|STOP|0
+    probe 6: success|18|STOP|0
+           vs success|19|STOP|0
