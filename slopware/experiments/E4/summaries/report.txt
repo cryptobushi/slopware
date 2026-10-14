@@ -1,0 +1,9 @@
+E4 analysis · 88 pairs · 2816 populations · G 256 · R 16 · outcome label D
+compute: logical 2,103,438,537 · physical 2,101,998,637 · cache hits 1,439,900 · harness failures 0 · uninstantiable 2872 · tie-key collisions 0
+PRIMARY rho(dA1, dB_256) = 0.183 [-0.026, 0.385] · reference 0.3 · pairs with dB = 0: 0 · undefined resamples 0
+SECONDARY S = 0.472 · permutation p 0.000 · fully separated pairs 0 (tie-free bound 2.93e-07, permutation p 1.0000)
+predictors A2 rho -0.058 · A3 rho 0.125 · A4 none
+calibration K 986 observed vs 978.0 expected (p_le 0.6342, p_ge 0.3809) · M 0.5022 vs null 0.5000±0.0045 [0.4833, 0.5200] · gen-1 children checked 180224
+convergence TV between P-N 0.990 · within founder 0.988 · difference 0.002 [0.00012122761119494944, 0.004359323906176009]
+loops: populations with any loop offspring 141 · founders adapted P 88 N 88 of 88 each
+horizon rho_g: g1=0.029 g2=0.217 g4=0.312 g8=0.391 g16=0.323 g32=0.421 g64=0.205 g128=0.163 g256=0.183
