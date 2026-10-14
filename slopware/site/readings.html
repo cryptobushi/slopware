@@ -127,6 +127,7 @@ function row(r) {
 ${r.sib ? `<p class="verdict sib">${esc(r.sib)}</p>` : ''}
 ${r.walk ? `<p class="verdict sib">${esc(r.walk)}</p>` : ''}
 ${r.far ? `<p class="verdict sib">${esc(r.far)}</p>` : ''}
+${r.after ? `<p class="verdict sib">${esc(r.after)}</p>` : ''}
 ${r.trace ? `<pre class="trace mute">${esc(r.trace)}</pre>` : ''}
 <button data-open="${r.id}">[ the bytes ]</button>
 <div class="more"><p class="mute">reading the bytes…</p></div>

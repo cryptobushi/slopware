@@ -22,6 +22,7 @@ for r in rs:
     if r.get("sib"): bits.append(r["sib"])
     if r.get("walk"): bits.append(r["walk"])
     if r.get("far"): bits.append(r["far"])
+    if r.get("after"): bits.append(r["after"])
     lines.append(" ".join(bits)); lines.append("")
 open(f"{SITE}/readings.md", "w").write("\n".join(lines))
 

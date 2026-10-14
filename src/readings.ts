@@ -200,10 +200,35 @@ function somewhere(r: Reading): string {
   return bits.join(' ');
 }
 
+// E4's populations, one sentence per genesis parent (E4 §12), shown once E4 is published (the lab writes summaries/sentences.txt
+// at publication; before that the line is absent). Numbers from the renderer's input, summaries/trajectories.json, in pair order.
+const E4DIR = args.e4 ?? 'slopware/experiments/E4';
+const e4: Record<number, any> = {};
+if (existsSync(`${E4DIR}/summaries/sentences.txt`) && existsSync(`${E4DIR}/summaries/trajectories.json`) && existsSync(`${E4DIR}/founders.json`) && existsSync(`${E2DIR}/parents.json`)) {
+  const parents = JSON.parse(readFileSync(`${E2DIR}/parents.json`, 'utf8')).parents as any[];
+  const byIndex: Record<number, any> = {}; for (const p of parents) byIndex[p.index] = p;
+  const founders = JSON.parse(readFileSync(`${E4DIR}/founders.json`, 'utf8')).pairs as any[];
+  const traj = JSON.parse(readFileSync(`${E4DIR}/summaries/trajectories.json`, 'utf8')).pairs as any[];
+  founders.forEach((f, q) => { const p = byIndex[f.parentIndex]; const t = traj[q]; if (!p || p.set !== 'genesis' || !t) return; e4[p.release] = t; });
+}
+function after(r: Reading): string {
+  const t = e4[r.id]; if (!t || !t.P?.length || !t.N?.length) return '';
+  const series = (x: any): number[] => (Array.isArray(x) ? x : x.B);
+  const factor = (reps: any[]) => reps.map((x) => { const s = series(x); return Math.pow(2, s[s.length - 1] - t.founderLog2); }).sort((a, b) => a - b);
+  const fp = factor(t.P), fn = factor(t.N); const med = (a: number[]) => a[Math.floor(a.length / 2)];
+  const times = (x: number) => (x >= 10 ? fmtN(Math.round(x)) : x.toFixed(1).replace(/\.0$/, ''));
+  const loops = [...(t.loopP ?? []), ...(t.loopN ?? [])].filter((g: any) => g !== null && g !== undefined).length;
+  const bits = ['In E4 the lab grew it: sixteen populations of sixty-four copies, two hundred and fifty-six generations each, one byte changed at a time, the longest finite runs kept.',
+    `By the end the middle one of its sixteen populations ran ${times(med(fp))} times as long as it does, the best ${times(fp[fp.length - 1])}; the populations of its sixty-byte descendant, which does exactly what it does, ran ${times(med(fn))} times as long, the best ${times(fn[fn.length - 1])}.`];
+  if (loops) bits.push(`${loops === 1 ? 'One' : fmtN(loops)} of the thirty-two populations produced a program that never ends; the rule left it behind.`);
+  bits.push("The populations were made by infrastructure and exist only on the lab's chain.");
+  return bits.join(' ');
+}
+
 const index = all.map((r) => ({
   id: r.id, status: r.status, program: r.program, by: r.installer, life: r.lifespan,
   clean: r.probes.some((p) => p.outcome === 'success'), dep: r.inputDependent, fut: r.future.length > 0, ret: r.probes.some((p) => p.returnDataLength > 0),
-  verdict: verdict(r), would: wouldHaveBeen(r), trace: traceLine(r), sib: siblings(r) || undefined, walk: walks(r) || undefined, far: somewhere(r) || undefined,
+  verdict: verdict(r), would: wouldHaveBeen(r), trace: traceLine(r), sib: siblings(r) || undefined, walk: walks(r) || undefined, far: somewhere(r) || undefined, after: after(r) || undefined,
 }));
 writeFileSync(join(rdir, 'index.json'), JSON.stringify({ installer: CONTRACT, chainId, generatedAt, summary, chunk: CHUNK, readings: index }, null, 0));
 const chunks = new Map<number, object[]>();
