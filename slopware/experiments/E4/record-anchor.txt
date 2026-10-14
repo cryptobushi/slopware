@@ -1,0 +1,3 @@
+SLOPWARE E4 record anchor | record root sha256 f3362bdde508ef0403a7c4e057cc03e233512c6a1c64e2c97a8efa31da3d11f7 (sha256 of the sorted sha256 manifest of 2,881 files, 13 GB) | 46,137,344 proposals · 2,816 populations · 176 founders in 88 matched pairs · 256 generations · 0 harness failures | results.json sha256 ad29bee02b9663a516c17fb6767e2266a49b5cabe78478ab1a196494b0fc2fa3 · outcome D | reproducibility subset 153 of 176 identical, Amendment 6 | repo commit fd5edc9 | sealed 2026-10-13 23:13 UTC | slopware.fun/e4
+
+tx 0x917e4cffe85cec0edaae03ebe158b0c1becb4e43957093d1c226f92eb78d8c3d · block 26187723 · from the keeper

@@ -1,0 +1,19 @@
+{
+  "text": "AFTER (E4) is the research edition for this experiment: one token, the picture above at print resolution, pinned to Arweave with metadata carrying the record root, both anchors, and the hash of the script that drew it. Its title and rules were fixed and hashed before the first proposal, and the artist saw only a synthetic mock before signing, so the picture is the record's own shape: 88 small mirrors, each pair's thirty-two populations drawn up and down from the fitness the two founders shared, on a scale the record set. Minted by the keeper on the research editions contract, offered here by reserve auction. Proceeds go to the artist and fund the work. It confers no rights over any program, release, receipt or experiment.",
+  "note": "Reserve 0.05 ETH. The auction runs 24 hours from the first bid, 10% minimum increments, extended by five minutes for a bid in the last five. Settled by Manifold's marketplace contract; the keeper finalizes it when it ends. Contract 0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664, token 4, listing 20983.",
+  "gallery": "https://gallery.manifold.xyz/listing?listingId=20983",
+  "listing": {
+    "id": 20983,
+    "network": 1,
+    "marketplace": "0x3a3548e060be10c2614d0a4cb0c03cc9093fd799",
+    "rpc": "https://ethereum-rpc.publicnode.com"
+  },
+  "contract": "0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664",
+  "tokenId": 4,
+  "image": "ar://J7ysrQyD5Jy2B7AReN2Qz6n1qarH4fQtFodT82zM6Jeo",
+  "metadata": "ar://21ZJCwgCUJLcMhnQaJrcSfN2j29276XEoBpmF2uNAKfF",
+  "mintTx": "0x4f7a60e588b9bb4ae84452874eb826506419803ce4eeea42e520b2412a90ac3a",
+  "approveTx": "0x2ea4e1ec320f4541e824c6b44594d21bc377fc63e5bc8a59d2994d7994bc89fc",
+  "listingTx": "0x4a779430cb47ef70e612bf9868c21ad7c43ab678ad7a8eca4275f578ec1bdf91",
+  "listingBlock": 26187748
+}

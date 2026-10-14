@@ -1,0 +1,126 @@
+{
+ "experiment": "E4",
+ "answer": "The answer first. Across the 88 pairs, the rank correlation between E3's predicted difference in accessibility and the observed difference in mean final log₂ best fitness is 0.18, 95% interval −0.03 to +0.39. The interval covers zero, so by the rule written in advance the prediction is read as null at generation 256; it also covers the 0.3 the design named as the smallest substantial effect, so the record neither confirms nor excludes an effect of that size. Founder identity itself matters: matched founders with identical behaviour reach different mean final fitness, S = 0.47, permutation p = 1/10,001. And the prediction is not absent everywhere: recomputed generation by generation, the correlation climbs to 0.43 around generation 31 with its band clear of zero from generation 2 to 63, then falls back. Outcome D.",
+ "instrument": "The instrument: 0 harness failures in 46,104,296 executions; all 180,224 generation-1 proposals matched E3's sealed tables; 0 tie-key collisions. The pre-registered reproducibility subset, replicate 0 of every founder re-run on a second machine before analysis, found 153 of 176 populations identical in every field of every generation and 23 not. The cause is in the harness: world v0 never froze anvil's block context, so a program that reads TIMESTAMP, PREVRANDAO or BLOCKHASH can evaluate differently on another machine, about eight proposals in a million do, and in 13 of the 176 populations that reached the selection and changed the final population. Reported in Amendment 6 of the protocol document, with the 23 genomes and their re-evaluations; by the pre-registered rule it does not void the record, and nothing in the analysis changes because of it.",
+ "generatedAt": "2026-10-14T02:28:53+00:00",
+ "caption": "AFTER. 88 pairs as an 8 × 11 grid in parents.json order, left to right then top to bottom. In each cell generations run from the left edge (0) to the right (256); the pair's shared generation-0 fitness is the horizontal centreline; the 16 populations founded from the original program are drawn upward and the 16 founded from its neutral descendant downward, one hairline each, height the population's best finite run in doublings above the founder; a red mark where a population first produced a loop-class offspring. The vertical scale is global and set by the record: 16 doublings of room each way, because one population rose 15.3. Nothing is clipped or individually scaled. Rules fixed and hashed before the run.",
+ "hypotheses": [
+  {
+   "id": "primary",
+   "name": "prediction",
+   "registered": "Spearman ρ across the 88 pairs between ΔA1, E3's difference in upward accessibility (the fraction of one-byte changes that outlive the founder), and ΔB, the difference in mean final log₂ best finite fitness over 16 replicates, N minus P in both. 95% percentile bootstrap interval from 10,000 pre-seeded resamples of the pairs. Direction stated in advance: positive. ρ = 0.3 pre-specified as the smallest substantial effect, an interpretive reference and not a threshold. Labels: primary positive if the interval excludes zero with a positive estimate; primary null if it covers zero.",
+   "observed": "ρ = 0.183, interval −0.026 to +0.385; 0 pairs with ΔB = 0; 0 undefined resamples. Leave-one-pair-out: 0.162 to 0.221. ΔB over the 88 pairs: 39 positive, 49 negative, mean 0.00, sd 0.67 doublings.",
+   "verdict": "primary null: 0.18 (−0.03 to +0.39), the interval covers zero and covers 0.3",
+   "note": "The interval is 0.41 wide, as the design notes expected at 88 pairs; what magnitudes remain compatible with the record is what it says."
+  },
+  {
+   "id": "secondary",
+   "name": "founder identity",
+   "registered": "Do matched founders produce more different outcomes than replicate stochasticity alone? S = mean over pairs of |ΔB| divided by the mean pooled within-founder standard deviation of B₂₅₆. Null: the 32 populations of each pair relabelled P/N at random, 10,000 times, pre-seeded; one-sided p. Also the number of pairs whose 16 N populations all lie strictly above or all strictly below the 16 P populations. Secondary positive if p < 0.05. This says whether founder identity matters, not whether E3 knew which way.",
+   "observed": "S = 0.472; permutation p = 1/10,001 (10,000 relabellings, none reaching the observed S). Fully separated pairs: 0 (tie-free bound on the null expectation 2.9e-07; permutation p 1.00).",
+   "verdict": "secondary positive: S = 0.47, p = 1/10,001",
+   "note": "No causal claim about history: P and N were not randomly assigned their histories."
+  },
+  {
+   "id": "tertiary",
+   "name": "the prediction horizon",
+   "registered": "ρ_g, the primary statistic recomputed at every generation from 1 to 256 with the same 10,000 index sets, drawn as one trajectory with its pointwise band; the number of pairs with ΔB_g = 0 at each g. Descriptive: no per-generation test and no derived half-life.",
+   "observed": "g1 0.03 (-0.18 to 0.23); g2 0.22 (0.02 to 0.39); g4 0.31 (0.12 to 0.48); g8 0.39 (0.21 to 0.55); g16 0.32 (0.12 to 0.51); g32 0.42 (0.23 to 0.59); g64 0.20 (-0.01 to 0.40); g128 0.16 (-0.05 to 0.37); g256 0.18 (-0.03 to 0.39). Peak 0.43 at generation 31. The band excludes zero at 62 generations, 2 to 63, and at none after. Pairs with ΔB_g = 0: 2 at g1, 1 at g2 to g4, none after.",
+   "verdict": "positive and clear of zero from generation 2 to 63, strongest around generation 31; inside the band around zero from 64 on",
+   "note": "The 256 pointwise bands are not multiplicity-adjusted; this is the pre-listed early-prediction pattern of outcome E, reported beside outcome D and not as a second test."
+  },
+  {
+   "id": "also",
+   "name": "reported, pre-specified",
+   "registered": "Secondary predictors A2 (best accessible improvement) and A3 (neutral probability), each with its interval; A4 identically zero in the frozen table, no test. Generation-1 calibration against exact reference distributions. Convergence as total variation between final signature distributions, between P and N populations and within founders. Loop-class incidence. Strata by founder lifespan and by set, descriptively. Compute counts.",
+   "observed": "A2 ρ -0.058 (-0.287 to 0.175); A3 ρ 0.125 (-0.091 to 0.336). Calibration: K 986 observed against 978.0 expected; M 0.5022 against a null of 0.5000 ± 0.0045; neither triggers investigation. Convergence: TV between P and N populations 0.990, within founder 0.988, difference 0.002 (0.0001 to 0.0044): final populations are almost disjoint in signature everywhere. Loop-class offspring appeared in 141 of 2,816 populations, 1.31 per P population and 1.46 per N. Strata, estimates only: lifespan 3 (66 pairs) ρ 0.13, S 0.52; lifespan ≥ 4 (22) ρ 0.43, S 0.35; genesis (42) ρ 0.20, S 0.44; control (46) ρ 0.19, S 0.51. Every founder adapted in the operational sense of §3: all 2,816 populations ended above their founder, median rise 2.64 doublings, maximum 15.29.",
+   "verdict": "A2 and A3 do not predict either; calibration clean; final populations almost disjoint in signature; every founder adapted",
+   "note": "Two defects of the frozen analysis script are reported in Amendment 7 and not repaired: its compute line double-counts the workers' running totals (the true counts are in the data below), and its stratum intervals reuse the 88-pair index sets by clipping, which makes them wrong; labelled exploratory intervals stand beside them in the amendment."
+  }
+ ],
+ "outcome": "Outcome D, by the list written before the run: primary null, secondary positive. Matched founder identity matters, but E3's one-mutant accessibility predictor does not explain which founder does better; the relevant difference is therefore not captured by A1. The early-prediction pattern of outcome E is present as well and is reported descriptively above.",
+ "sentences": [
+  "Two programs that do exactly the same measured thing, sixty bytes apart, do not get equally far under the same selection rule: which founder a population started from changes where it ends, by about half a within-founder standard deviation, more than relabelling the replicates can produce.",
+  "E3's map of what is one mutation away predicts the first few dozen generations and not the end: the correlation between predicted and observed differences climbs to 0.43 around generation 30 and is not distinguishable from zero by generation 256, where the interval, −0.03 to 0.39, neither confirms nor excludes the 0.3 the design called substantial.",
+  "Every one of the 2,816 populations found a longer finite run than its founder, most by two to three doublings and one by fifteen, and the final populations are almost disjoint in signature even between replicates of the same founder: founder identity sets how far a population gets, not which program it arrives at."
+ ],
+ "facts": [
+  [
+   "founders",
+   "176 in 88 matched pairs: P, an E2 parent; N, its E3 walk-0 endpoint sixty bytes away, chosen by E3's rule before any E3 result; identical frozen signature, 60 of 64 bytes different"
+  ],
+  [
+   "populations",
+   "2,816 = 176 founders × 16 replicates, 64 slots each, 256 generations, 64 proposals per generation: 46,137,344 proposals"
+  ],
+  [
+   "executions",
+   "46,104,296 physical, 32,992 cache hits, 3,300 retries, 0 harness failures, 2,872 uninstantiable (a child beginning 0xEF), 0 tie-key collisions"
+  ],
+  [
+   "generation-1 check",
+   "180,224 of 180,224 proposals matched E3's sealed child tables in signature, count and loop class"
+  ],
+  [
+   "reproducibility",
+   "replicate 0 of every founder re-run on a second machine before analysis: 153 of 176 populations identical, 23 differ; cause and the 23 genomes in Amendment 6"
+  ],
+  [
+   "world",
+   "v0, frozen as in E1 to E3: the same clean chain state at the same address for every evaluation; the block context (TIMESTAMP, PREVRANDAO, BLOCKHASH) was not frozen, disclosed in Amendment 6"
+  ],
+  [
+   "seed",
+   "E4-2026-10-11, domain-separated keccak streams for parent, position, value and tie keys; the analysis-side generators seeded from the same string"
+  ],
+  [
+   "record root",
+   "f3362bdde508ef0403a7c4e057cc03e233512c6a1c64e2c97a8efa31da3d11f7"
+  ],
+  [
+   "pre-registration anchor",
+   "0x4b7a6bfc84ae74b687351796a1fa6e4a9e03ea9f170dfbc5152e3de397e98a8a",
+   "https://etherscan.io/tx/0x4b7a6bfc84ae74b687351796a1fa6e4a9e03ea9f170dfbc5152e3de397e98a8a"
+  ],
+  [
+   "record anchor",
+   "0x917e4cffe85cec0edaae03ebe158b0c1becb4e43957093d1c226f92eb78d8c3d",
+   "https://etherscan.io/tx/0x917e4cffe85cec0edaae03ebe158b0c1becb4e43957093d1c226f92eb78d8c3d"
+  ],
+  [
+   "record",
+   "slopware-e4-record-20261013, a DigitalOcean volume snapshot of the full record (13 GB, 2,881 files); the manifest, the root, the analysis outputs and the reproducibility evidence are in the repository"
+  ],
+  [
+   "protocol",
+   "slopware/experiments/E4-after.md, signed 2026-10-11, seven dated amendments below the signature",
+   "https://github.com/cryptobushi/slopware/blob/main/slopware/experiments/E4-after.md"
+  ],
+  [
+   "analysis",
+   "scripts/e4_analysis.py, pre-specified and hashed in the anchor; scripts/e4_mirror.py for the picture, likewise; scripts/e4_repro.py for the reproducibility comparison",
+   null
+  ]
+ ],
+ "reproduce": "To check any number: fetch the snapshot, run scripts/e4_analysis.py on record/, and compare with summaries/results.json; to check the picture, run scripts/e4_mirror.py on summaries/trajectories.json; to check the reproducibility finding, run scripts/e4_repro.py on the two sets of replicate-0 records. The root hash above is the sha256 of the sorted sha256 manifest of every file in the record.",
+ "anchorTx": "0x4b7a6bfc84ae74b687351796a1fa6e4a9e03ea9f170dfbc5152e3de397e98a8a",
+ "edition": {
+  "text": "AFTER (E4) is the research edition for this experiment: one token, the picture above at print resolution, pinned to Arweave with metadata carrying the record root, both anchors, and the hash of the script that drew it. Its title and rules were fixed and hashed before the first proposal, and the artist saw only a synthetic mock before signing, so the picture is the record's own shape: 88 small mirrors, each pair's thirty-two populations drawn up and down from the fitness the two founders shared, on a scale the record set. Minted by the keeper on the research editions contract, offered here by reserve auction. Proceeds go to the artist and fund the work. It confers no rights over any program, release, receipt or experiment.",
+  "note": "Reserve 0.05 ETH. The auction runs 24 hours from the first bid, 10% minimum increments, extended by five minutes for a bid in the last five. Settled by Manifold's marketplace contract; the keeper finalizes it when it ends. Contract 0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664, token 4, listing 20983.",
+  "gallery": "https://gallery.manifold.xyz/listing?listingId=20983",
+  "listing": {
+   "id": 20983,
+   "network": 1,
+   "marketplace": "0x3a3548e060be10c2614d0a4cb0c03cc9093fd799",
+   "rpc": "https://ethereum-rpc.publicnode.com"
+  },
+  "contract": "0x55540e5bcd1b0a1e2c00de4ae55ef007bde35664",
+  "tokenId": 4,
+  "image": "ar://J7ysrQyD5Jy2B7AReN2Qz6n1qarH4fQtFodT82zM6Jeo",
+  "metadata": "ar://21ZJCwgCUJLcMhnQaJrcSfN2j29276XEoBpmF2uNAKfF",
+  "mintTx": "0x4f7a60e588b9bb4ae84452874eb826506419803ce4eeea42e520b2412a90ac3a",
+  "approveTx": "0x2ea4e1ec320f4541e824c6b44594d21bc377fc63e5bc8a59d2994d7994bc89fc",
+  "listingTx": "0x4a779430cb47ef70e612bf9868c21ad7c43ab678ad7a8eca4275f578ec1bdf91",
+  "listingBlock": 26187748
+ }
+}

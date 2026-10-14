@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" class="manifold-scheme-light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SLOPWARE — E4 after</title>
+<meta name="description" content="The fourth pre-registered experiment: 88 matched pairs of programs with identical behaviour, 2,816 populations, 256 generations of selection for the longest finite run. Does what E3 measured one mutation away predict how far each founder's populations get? Results, data, and the research edition.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SLOPWARE">
+<meta property="og:title" content="SLOPWARE — E4 after">
+<meta property="og:description" content="Two programs that do exactly the same thing, sixty bytes apart, do not get equally far under the same selection. 46 million proposals ask whether E3's map predicted it.">
+<meta property="og:url" content="https://slopware.fun/e4">
+<meta property="og:image" content="https://slopware.fun/og-e4.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SLOPWARE — E4 after">
+<meta name="twitter:description" content="Two programs that do exactly the same thing, sixty bytes apart, do not get equally far under the same selection. 46 million proposals ask whether E3's map predicted it.">
+<meta name="twitter:image" content="https://slopware.fun/og-e4.png">
+<link rel="alternate" type="text/markdown" href="e4.md" title="this page as Markdown">
+<style>
+html{-webkit-text-size-adjust:none;text-size-adjust:none}
+html,body{margin:0;padding:0;background:#fff;color:#000}
+html,body,pre,button,input{font-family:"Courier New",Courier,monospace;font-size:15px;line-height:1.3}
+h1,h2,h3{margin:0;font-size:inherit;font-weight:inherit}
+h2{margin-top:2.6em}
+p{margin:0 0 1em}
+a{color:inherit;text-decoration:underline}
+.c{max-width:860px;margin:0 auto;padding:4em 20px 1.5em;box-sizing:border-box}
+.essay{max-width:620px}
+pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.mute{color:#666}
+.red{color:#c83c1e}
+.tbl{display:grid;grid-template-columns:max-content 1fr;column-gap:1.5em;row-gap:0.15em;margin:1.3em 0}
+.tbl .n{text-align:right;white-space:nowrap}
+.tbl.facts{grid-template-columns:max-content 1fr}
+.tbl.facts .n{text-align:left;color:#666}
+.fig{margin:2.6em auto 0;text-align:center}
+.fig img{display:block;width:100%;height:auto;border:0;margin:0 auto}
+.fig p{margin:0.8em auto 0;max-width:620px;text-align:center}
+#after{max-width:820px}
+.h{margin:2em 0 0;padding-top:1em;border-top:1px solid #000}
+.h p{margin:0.4em 0 0}
+.h .v{margin-top:0.6em}
+.h .v b{font-weight:normal;text-decoration:underline}
+.sentences p{margin:0 0 0.8em}
+.lens{margin:1em 0 0;display:flex;gap:1.5em;flex-wrap:wrap;align-items:baseline}
+@media (max-width:700px){.tbl{column-gap:1em}.h{margin-top:1.6em}}
+html.manifold-scheme-light{--manifold-page--color--background:#fff;--manifold-element--color--background:#fff;--manifold-text--color--body:#000;--manifold-text--color--muted:#666;--manifold-border--color:#000;--manifold-border--radius:0;--manifold-theme--color--primary:#000;--manifold-text--color--primary:#fff;color-scheme:light}
+</style>
+</head>
+<body>
+<div class="c essay">
+<h1>E4 · after</h1>
+<p class="mute" style="margin-top:0.3em">the fourth experiment, pre-registered, run once</p>
+
+<p style="margin-top:2.6em">{{ANSWER}}</p>
+<p>E3 found that a program's neutral descendants, which still do exactly what it does under the frozen measurement, no longer have exactly its immediate futures: the one-byte changes that would alter them are not the same changes. E4 asks what follows. From each of 88 matched pairs of founders, a program and a neutral descendant of it sixty bytes away with the identical measured signature, the lab ran 16 populations of 64 for 256 generations under one rule: each generation 64 proposals, one byte changed each; the 64 longest finite runs continue; ties are broken by a seeded order; a program that runs out of gas after more than 32 instructions never continues; nothing else is rewarded. Three temporal regions: generation 0 is known, since every founder's behaviour was measured in E3; generation 1's proposal space was mapped in advance, since E3 had already measured every one-byte change of every founder, and every one of the run's 180,224 generation-1 proposals was checked against that map; generation 2 onward is unmapped.</p>
+<p>The question, the pairs, the selection rule, the seeds, the analysis, the outcome labels and the picture's rules were written down and <a id="anchor-link" href="{{ANCHOR_HREF}}">anchored on Ethereum</a> before the first proposal. Nothing below was chosen after seeing the data; where the frozen analysis script turned out to be defective, the defect is reported, not repaired.</p>
+</div>
+
+<div class="c fig" id="figure">
+<img id="after" alt="AFTER: 88 pairs as an 8 by 11 grid; in each cell 256 generations run left to right, the 16 populations founded from the original program drawn upward from the shared generation-0 fitness and the 16 from its neutral descendant downward, one hairline each, height in doublings above the founder; a red mark where a population first produced a loop-class offspring" src="e4-data/after.png">
+<p class="mute" id="caption">{{CAPTION}}</p>
+</div>
+
+<div class="c fig" id="figure2">{{FIGURE2}}</div>
+
+<div class="c essay">
+<h2>what was asked, and what the record says</h2>
+<p class="mute">One primary measurement, one secondary, one tertiary, stated before the run with their outcome labels listed in advance; none is called success. Each is read by its own rule and nothing else.</p>
+<p id="instrument">{{INSTRUMENT}}</p>
+<div id="hypotheses">{{HYPOTHESES}}</div>
+
+<h2>outcome</h2>
+<div class="sentences" id="outcome">{{OUTCOME}}</div>
+
+<h2>in three sentences</h2>
+<div class="sentences" id="sentences">{{SENTENCES}}</div>
+
+<h2 id="data">the data</h2>
+<div class="tbl facts" id="facts">{{FACTS}}</div>
+<p class="mute" id="repro">{{REPRO}}</p>
+
+{{EDITION}}
+
+<p class="mute" style="margin-top:3em">The catalogue states facts. The lab records what executed. The readings interpret. This page is the lab's. <a href="readings">readings</a> · <a href="./">catalogue</a> · as text: <a href="e4.md">e4.md</a> · <a href="llms.txt">llms.txt</a></p>
+<p class="mute" style="margin-top:3em">created by <a href="https://x.com/bushibuilds" target="_blank" rel="noopener">Bushi</a></p>
+</div>
+
+<script>
+(function () {
+'use strict';
+// Everything on this page is static HTML, written by scripts/e4_page.py from the sealed record. The only script is the
+// auction, which needs Manifold's widgets; without JavaScript the listing's facts are still in the text above it.
+const a = document.getElementById('auction'); if (!a || !a.dataset.id) return;
+const { id, network, marketplace, rpc } = a.dataset;
+const w = (name, extra = '') => `<div data-widget="${name}" data-id="${id}" data-network="${network}"${extra}></div>`;
+a.innerHTML = `<div data-widget="m-connect" data-network="${network}" data-fallback-provider="${rpc}"></div>
+<div class="lens">${w('m-listing-name')}${w('m-listing-price')}${w('m-listing-countdown')}</div>
+${w('m-listing-bid-form-rich', ` data-address="${marketplace}" data-version="2"`)}
+${w('m-listing-interactions')}`;
+for (const href of ['https://connect.manifoldxyz.dev/3.1.0/connect.css', 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.css']) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); }
+const s1 = document.createElement('script'); s1.src = 'https://connect.manifoldxyz.dev/3.1.0/connect.umd.min.js';
+s1.onload = () => { const s2 = document.createElement('script'); s2.src = 'https://marketplace.manifoldxyz.dev/3.5.18/marketplace.umd.min.js'; document.body.appendChild(s2); };
+document.body.appendChild(s1);
+})();
+</script>
+</body>
+</html>

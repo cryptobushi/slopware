@@ -1,0 +1,23 @@
+{
+  "name": "AFTER (E4)",
+  "description": "SLOPWARE research edition 4, for experiment E4 (after). 88 matched pairs of programs as an 8 × 11 grid in parents.json order: in each pair, an E2 parent and a neutral descendant of it sixty bytes away that does exactly what it does under the frozen measurement. From each founder, 16 populations of 64 ran for 256 generations under one rule, one byte changed per proposal and the 64 longest finite runs continuing. In each cell generations run from the left edge (0) to the right (256); the pair's shared generation-0 fitness is the horizontal centreline; the 16 populations founded from the parent are drawn upward and the 16 founded from its descendant downward, one hairline each, height the population's best finite run in doublings above the founder; a red mark where a population first produced a loop-class offspring. The vertical scale is global and was set by the sealed record under a rule fixed in advance: 16 doublings of room each way, because one population rose 15.3. Nothing is clipped or individually scaled. Empty cells would have meant no adaptation; there are none. Symmetry means alike response, asymmetry different response. The title and every rule were fixed and hashed in the pre-registration anchor before the first proposal; the artist saw only a synthetic mock before signing. Generated from the sealed record by scripts/e4_mirror.py. Minted by the keeper, the wallet that completes SLOPWARE's installations. It confers no rights over any program, release, receipt or experiment.",
+  "image": "__IMAGE_URI__",
+  "external_url": "https://slopware.fun/e4",
+  "attributes": [
+    { "trait_type": "series", "value": "SLOPWARE research editions" },
+    { "trait_type": "experiment", "value": "E4 after" },
+    { "trait_type": "founder pairs", "value": "88" },
+    { "trait_type": "populations", "value": "2,816" },
+    { "trait_type": "generations", "value": "256" },
+    { "trait_type": "proposals", "value": "46,137,344" },
+    { "trait_type": "arweave image", "value": "__ARWEAVE_IMAGE__" },
+    { "trait_type": "record root (sha256)", "value": "f3362bdde508ef0403a7c4e057cc03e233512c6a1c64e2c97a8efa31da3d11f7" },
+    { "trait_type": "pre-registration anchor", "value": "0x4b7a6bfc84ae74b687351796a1fa6e4a9e03ea9f170dfbc5152e3de397e98a8a" },
+    { "trait_type": "record anchor", "value": "0x917e4cffe85cec0edaae03ebe158b0c1becb4e43957093d1c226f92eb78d8c3d" },
+    { "trait_type": "script keccak256", "value": "0x144852de597ad51d96f022a5108a9e519854750d4833302270f258cd10e348de" },
+    { "trait_type": "world", "value": "v0" },
+    { "trait_type": "date", "value": "2026-10-13" },
+    { "trait_type": "print size", "value": "6144 × 6144 px" },
+    { "trait_type": "minted by", "value": "the keeper" }
+  ]
+}

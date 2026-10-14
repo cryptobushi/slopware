@@ -97,3 +97,13 @@ Everything above was run once on Sepolia with a placeholder image, by the keeper
 | finalize | tx `0x06b6c25b66af0f1a809ee5094caa9cec4e651aaa86db7c1ca5605f072ad2dda0`, 232,726 gas, called by the keeper after the end time; token 1 delivered to the bidder, the full 0.01 ETH arrived in the artist's wallet, the keeper paid only gas |
 
 Notes: the connect widget must not be given `data-app-name` without a `data-client-id`; with neither, it runs on the fallback provider. The widgets read the listing from the chain directly and fetched the token's media through Manifold's own API, so no indexing by Manifold was needed. Deploy cost 33.5M gas on Sepolia under the Amsterdam repricing; the mainnet estimate for the same bytecode is 4.79M gas, about 0.001 ETH at a 0.1 gwei base fee.
+
+## Mainnet — E4 edition, 2026-10-14
+
+| | |
+|---|---|
+| image | Arweave `J7ysrQyD5Jy2B7AReN2Qz6n1qarH4fQtFodT82zM6Jeo` (6144 × 6144 px PNG, 196,593 bytes), via Irys from the keeper |
+| metadata | Arweave `21ZJCwgCUJLcMhnQaJrcSfN2j29276XEoBpmF2uNAKfF` |
+| mint | token 4 to the keeper, tx `0x4f7a60e588b9bb4ae84452874eb826506419803ce4eeea42e520b2412a90ac3a` (block 26,187,742) |
+| listing | id 20983 on marketplace V1, tx `0x4a779430cb47ef70e612bf9868c21ad7c43ab678ad7a8eca4275f578ec1bdf91` (block 26,187,748): reserve 0.05 ETH, 24 h from first bid, 10% increments, 5-minute extension, receiver artist 100%, no referrer |
+| page | slopware.fun/e4 · Manifold Gallery https://gallery.manifold.xyz/listing?listingId=20983 |
