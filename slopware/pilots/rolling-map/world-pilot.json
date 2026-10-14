@@ -1,0 +1,41 @@
+{
+ "worldId": "0x88f5461b03132a83b9ba14c737ca88c26206dc5fab15b874b77cdd093843ef35",
+ "name": "world pilot-1 (rolling-map)",
+ "status": "PILOT world for slopware/pilots/rolling-map only. Not world v0. Not used by any pre-registered experiment. E4 and world v0 are unchanged.",
+ "basedOn": {
+  "world": "v0",
+  "worldId": "0x7d9128756067823a0cc0fdc092f9880d49be94e01f62a3d7d412389628f5b50c",
+  "changes": [
+   "genesis timestamp fixed (anvil --timestamp), so TIMESTAMP is a constant",
+   "nothing is ever mined (anvil --no-mining; the program is placed with anvil_setCode at a fixed address instead of a deployment transaction), so NUMBER is 0, PREVRANDAO is the genesis value (zero), and BLOCKHASH(0) is the hash of a fixed genesis",
+   "base fee and gas price fixed on the command line",
+   "every probe is a debug_traceCall against block 0 from the same caller with the same gas, as in world v0",
+   "placement rule kept: a program whose first byte is 0xEF is uninstantiable and is never evaluated (EIP-3541, as the installer refuses it)"
+  ]
+ },
+ "chain": "anvil",
+ "anvilVersion": "1.8.5",
+ "hardfork": "osaka",
+ "chainId": 31337,
+ "genesisTimestamp": 1700000000,
+ "noMining": true,
+ "blockGasLimit": 30000000,
+ "baseFee": 1000000000,
+ "gasPrice": 2000000000,
+ "placement": "anvil_setCode",
+ "programAddress": "0x00000000000000000000000000000000000e4000",
+ "loader": "0x604080600b6000396000f3",
+ "loaderNote": "not used for placement in this world; recorded for comparison with v0",
+ "gasPerCall": 1000000,
+ "callerKeyIndex": 9,
+ "tracer": "debug_traceCall structLogs, stack disabled",
+ "probes": {
+  "random32": "0x74202fc1f0cf1e82d41adfef7783b95b53ae00ea08259829800426779d4539b9",
+  "selector": "0x882f15b2",
+  "arg32": "0xe256d5b9896e529be99c0ed50a91c8139f0caf016157d31529762c7fd59871db",
+  "payloadSeed": "E1-world-v0"
+ },
+ "genomeLength": 64,
+ "fitness": "F2 as E4 \u00a75.1: probe-A instruction count of a finite run; probe A ending out of gas after more than 32 traced instructions is the loop class and has no fitness",
+ "determinismProof": "scripts/pilot_world_test.ts on the 23 E4 Amendment 6 genomes across fresh anvil instances; output in determinism.txt beside this file"
+}

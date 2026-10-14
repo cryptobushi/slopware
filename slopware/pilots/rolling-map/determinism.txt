@@ -1,0 +1,28 @@
+instance 1: block 0 timestamp 1700000000 hash 0xc56b8342e33b5747 mixHash 0x0000000000000000 · context program returns 0x000000000000000000000000000000000000000000000000000000006553f100…
+instance 2: block 0 timestamp 1700000000 hash 0xc56b8342e33b5747 mixHash 0x0000000000000000 · context program returns 0x000000000000000000000000000000000000000000000000000000006553f100…
+instance 3: block 0 timestamp 1700000000 hash 0xc56b8342e33b5747 mixHash 0x0000000000000000 · context program returns 0x000000000000000000000000000000000000000000000000000000006553f100…
+16-1-0: identical 0x86a347a9a55bb69c (E4 run 0xbf2a3b3d378f0d49, second 0xbf2a95ec1eb92350)
+17-1-0: identical 0x9560a68af55ea8c1 (E4 run 0x3bc62be6e5435c5d, second 0xb4e6c2102c74df62)
+18-0-0: identical 0x328fdb9240f3f69f (E4 run 0x3d43012b4c5a671e, second 0x328fdb9240f3f69f)
+3-1-0: identical 0x6f65fa8ad76777d4 (E4 run 0x336c64c13d21bdc8, second 0xb9447d7a6f470108)
+35-0-0: identical 0x0fe08e062be3e462 (E4 run 0x0fe08e062be3e462, second 0x943f92b0582b1a65)
+40-0-0: identical 0xc6ab278772d48292 (E4 run 0xc6ab278772d48292, second 0xb9084488fb768e5b)
+44-0-0: identical 0x8d54fc7d6c8afa7b (E4 run 0xb02da235f4fecc10, second 0x8d54fc7d6c8afa7b)
+45-1-0: identical 0xc95bd75d7becfdfe (E4 run 0x1b8b6d2fab38dfbc, second 0x5dcf11eaf104aa44)
+46-1-0: identical 0x0648d24f35214ce8 (E4 run 0xf20fa6409821de97, second 0x0648d24f35214ce8)
+49-1-0: identical 0x1141f05270c592d8 (E4 run 0x1141f05270c592d8, second 0x9bc42e0a01865713)
+54-1-0: identical 0x6a5d121a484aacb6 (E4 run 0xd8844e74d9cd8707, second 0x6a5d121a484aacb6)
+58-1-0: identical 0x81295e3b6148852a (E4 run 0xdd8c9c11ef2141bb, second 0x81295e3b6148852a)
+59-0-0: identical 0x383ee4b61c2e74c8 (E4 run 0x1bf50baf165c04c9, second 0x383ee4b61c2e74c8)
+62-0-0: identical 0xfbadc45dd9e837e2 (E4 run 0x3a9fc7ea060fa0b5, second 0xfbadc45dd9e837e2)
+69-0-0: identical 0x58d9f2fa7019248d (E4 run 0x58d9f2fa7019248d, second 0x98ae95a1632a7e7b)
+69-1-0: identical 0x41072273d98bdb38 (E4 run 0xfca1fca5814de91e, second 0x41072273d98bdb38)
+70-0-0: identical 0x44998fc49a676039 (E4 run 0x44998fc49a676039, second 0x3d08d5be5e2027d0)
+75-0-0: identical 0xeebdbf2a19499133 (E4 run 0xeebdbf2a19499133, second 0x48be854fdea2b6f3)
+78-1-0: identical 0xdaaf53f104b273c8 (E4 run 0x74484c3fc752e922, second 0x95d3e8562189842c)
+80-1-0: identical 0x189e06e76f355641 (E4 run 0x79854c8115d94c8a, second 0x318be22f1a3c6821)
+81-0-0: identical 0x41072273d98bdb38 (E4 run 0xb1874f22b89290c7, second 0x41072273d98bdb38)
+83-0-0: identical 0x37de8d9609b2b8ee (E4 run 0x37de8d9609b2b8ee, second 0x7d95a9db97c03013)
+83-1-0: identical 0x5c07d15a717b2071 (E4 run 0x98a86364fbd2ed52, second 0x5c07d15a717b2071)
+context program: identical return data across instances
+23 of 23 genomes identical across 3 instances × 3 evaluations · PASS

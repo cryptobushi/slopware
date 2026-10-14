@@ -8,3 +8,7 @@ slopware/site/dist/
 slopware/site/.vercel/
 slopware/site/node_modules/
 .gitcommit
+
+# pilot raw records and logs stay local (tens of MB); analysis outputs, manifests and protocols are committed
+slopware/pilots/*/results/runs/
+slopware/pilots/*/results/logs/
